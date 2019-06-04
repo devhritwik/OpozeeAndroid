@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+     <RelativeLayout
+         android:id="@+id/top_header"
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/_150sdp"
+         android:background="@color/color_primary">
+         <!--<TextView-->
+         <!--android:id="@+id/tv_header"-->
+         <!--android:layout_width="match_parent"-->
+         <!--android:layout_height="wrap_content"-->
+         <!--android:padding="@dimen/_10sdp"-->
+         <!--android:gravity="center"-->
+         <!--android:layout_marginTop="@dimen/_18sdp"-->
+         <!--android:textColor="@color/white_color"-->
+         <!--android:text="CREATE ACCOUNT"-->
+         <!--android:textSize="@dimen/_18sdp"-->
+         <!--/>-->
+         <de.hdodenhof.circleimageview.CircleImageView
+             android:id="@+id/iv_user"
+             android:layout_width="@dimen/_100sdp"
+             android:layout_height="@dimen/_100sdp"
+             android:layout_centerHorizontal="true"
+             android:layout_marginTop="@dimen/_28sdp"
+             android:layout_marginBottom="@dimen/_18sdp"
+       />
+
+
+     </RelativeLayout>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:layout_below="@id/top_header"
+            app:cardCornerRadius="@dimen/_5sdp"
+            app:cardElevation="@dimen/_2sdp">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_5sdp"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                >
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/top_header"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:layout_margin="20dp"
+                    android:weightSum="2"
+                    >
+                    <TextView
+                        android:id="@+id/tv_token_staking"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_9sdp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:textColor="@color/black_color"
+                        android:gravity="left|center_vertical"
+                        android:text="TOKEN STAKING : 0"
+                        android:drawablePadding="5dp"
+                        android:layout_marginRight="3dp"
+                        android:drawableLeft="@drawable/token_icon"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_token_balance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_9sdp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:textColor="@color/black_color"
+                        android:gravity="left|center_vertical"
+                        android:text="TOKEN BALANCE : 50"
+                        android:drawablePadding="5dp"
+                        android:layout_marginRight="3dp"
+                        android:drawableLeft="@drawable/token_icon"
+                        />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/top_header"
+                    android:gravity="center"
+                    android:layout_margin="20dp"
+                    android:weightSum="2"
+                    >
+
+                    <com.opozee.view.GradientTextView
+                        android:id="@+id/tv_total_question"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_9sdp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:textColor="@color/black_color"
+                        android:gravity="left|center_vertical"
+                        android:text="Edit Question"
+                        android:drawablePadding="5dp"
+                        android:layout_marginRight="3dp"
+                        android:drawableLeft="@mipmap/question_icon"
+                        />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black_color"
+                    android:gravity="left|center_vertical"
+                    android:text="Edit Question"
+                    android:paddingRight="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="20dp"
+                    />
+
+                <EditText
+                    android:id="@+id/edit_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_toLeftOf="@+id/iv_send"
+                    android:background="@drawable/ques_edit_bg"
+                    android:focusableInTouchMode="true"
+                    android:hint="Ask your Question....."
+                    android:padding="8dp"
+                    android:textColorHint="@color/grey"
+                    android:maxLines="6"
+                    android:minLines="6"
+                    android:gravity="left|top"
+                    android:textCursorDrawable="@null"
+                    android:textSize="14sp"/>
+
+
+                <TextView
+                    android:id="@+id/tvf_"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black_color"
+                    android:gravity="left|center_vertical"
+                    android:text="Edit Hashtags"
+                    android:paddingRight="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="20dp"
+                    />
+
+                <EditText
+                    android:id="@+id/edit_hash_tags"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/ques_edit_bg"
+                    android:focusableInTouchMode="true"
+                    android:hint="Your hashtags here...."
+                    android:padding="8dp"
+                    android:textColorHint="@color/grey"
+                    android:maxLines="6"
+                    android:gravity="left|top"
+                    android:textCursorDrawable="@null"
+                    android:textSize="14sp"/>
+
+                <Button
+                    android:id="@+id/btn_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text= "@string/save_question"
+                    android:textColor="@color/white_color"
+                    android:textSize="@dimen/_18sdp"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/fb_btn_bg"/>
+
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+    </RelativeLayout>

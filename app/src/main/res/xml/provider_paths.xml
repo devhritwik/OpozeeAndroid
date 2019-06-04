@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <external-path name="external_files" path="."/>
+</paths>
+
+<!--<external-path> with <external-files-path name="myexternalimages" path="Pictures/SpCars_album/" />-->
+
+<!--</external-path>-->

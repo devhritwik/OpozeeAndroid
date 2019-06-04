@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.SearchFragment"
+    android:focusable="false"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true">
+
+    <FrameLayout
+        android:id="@+id/edit_text_parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/search_bar_height"
+            android:textSize="@dimen/_15sdp"
+            android:textColor="@color/black_color"
+            android:background="@color/white_color"
+            android:textColorHint="@color/light_grey"
+            android:hint="@string/search_bar_hint"
+            android:id="@+id/edit_search"
+            android:paddingLeft="@dimen/search_bar_height"
+            android:paddingStart="@dimen/search_bar_height"
+            android:paddingRight="@dimen/padding_search_bar"
+            android:paddingEnd="@dimen/search_bar_height"
+            android:inputType="textNoSuggestions"
+            android:gravity="left|center"
+            android:imeActionLabel= "Search"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:focusableInTouchMode="true"
+            />
+        <ImageView
+            android:src="@drawable/search_icon"
+            android:padding="15dp"
+            android:layout_width="@dimen/search_bar_height"
+            android:layout_height="@dimen/search_bar_height" />
+    </FrameLayout>
+    <View
+        android:layout_above="@id/refreshLayout"
+        android:background="@color/light_grey"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/no_results_view"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/edit_text_parent_layout"
+        android:visibility="gone">
+
+        <TextView
+            android:text="No Questions match your search"
+            android:textColor="@color/color_primary_light"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/edit_text_parent_layout"
+        >
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height = "match_parent"
+            android:id="@+id/recyclerView"
+            android:layout_marginTop="@dimen/search_page_list_top_margin"
+            />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</RelativeLayout>

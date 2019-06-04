@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white_color"
+    app:cardCornerRadius="7dp"
+    app:cardElevation="1dp"
+    android:layout_margin="5dp">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/_5sdp"
+    android:background="@color/transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <RelativeLayout
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:id="@+id/iv_user"/>
+            <ImageView
+                android:id="@+id/iv_status"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/thumb_on"
+                android:padding="@dimen/_4sdp"
+                android:background="@drawable/white_bg"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/_6sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1"
+                android:gravity="left|center">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="user1233"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/renner"
+                    android:textColor="@color/black_color"
+                    android:id="@+id/tv_name"
+                    android:layout_marginRight="@dimen/_2sdp"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/_13sdp"
+                    android:singleLine="true"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Now"
+                    android:visibility="gone"
+                    android:textColor="@color/grey"
+                    android:id="@+id/tv_time"
+                    android:paddingRight="@dimen/_4sdp"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/renner"
+                    android:layout_marginLeft="@dimen/_2sdp"
+                    android:gravity="center_vertical|right"
+                    android:textSize="@dimen/_11sdp"
+                    android:singleLine="true"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="#@user1233"
+                android:visibility="gone"
+                android:layout_weight="0.4"
+                android:fontFamily="@font/renner"
+                android:textColor="@color/grey"
+                android:id="@+id/tv_user_name"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/_11sdp"
+                android:singleLine="true"
+                android:paddingRight="@dimen/_4sdp"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/transparent">
+
+
+
+        <TextView
+            android:id="@+id/tv_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey"
+            android:layout_toRightOf="@+id/rl_bullet"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:textSize="@dimen/_12sdp"
+            android:fontFamily="@font/renner"
+            android:background="@color/transparent"
+            android:text="Your tasker has requested for make payment"/>
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:textSize="@dimen/_10sdp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center"
+            android:layout_gravity="right"
+            android:background="@color/transparent"
+            android:text="2018/03/21 12:21"/>
+    </LinearLayout>
+
+</LinearLayout>
+</android.support.v7.widget.CardView>

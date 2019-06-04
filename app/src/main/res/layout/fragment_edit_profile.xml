@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/top_header"
+    android:fillViewport="true"
+    android:paddingBottom="@dimen/_70sdp"
+    >
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <RelativeLayout
+            android:id="@+id/top_header"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:layout_alignParentTop="true"
+            android:background="@color/color_primary">
+            <!--<TextView-->
+            <!--android:id="@+id/tv_header"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:padding="@dimen/_10sdp"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_marginTop="@dimen/_18sdp"-->
+            <!--android:textColor="@color/white_color"-->
+            <!--android:text="CREATE ACCOUNT"-->
+            <!--android:textSize="@dimen/_18sdp"-->
+            <!--/>-->
+            <RelativeLayout
+                android:id="@+id/relative_user"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:layout_marginBottom="@dimen/_18sdp">
+
+                <RelativeLayout
+                    android:layout_width="@dimen/_95sdp"
+                    android:layout_height="@dimen/_95sdp"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:background="@drawable/image_border">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/iv_user"
+                        android:layout_width="@dimen/_85sdp"
+                        android:layout_height="@dimen/_85sdp"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:src="@drawable/user" />
+
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/iv_edit"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:cropToPadding="false"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/camera" />
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative_user"
+                android:layout_marginLeft="@dimen/_45sdp"
+                android:layout_marginRight="@dimen/_45sdp"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="STEVE FERLIN"
+                android:textAllCaps="true"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/_14sdp" />
+
+            <View
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="1dp"
+                android:layout_below="@+id/tv_user_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/color_primary" />
+        </RelativeLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/top_header"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/rounded_edittext_bg"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@color/white_color"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginRight="20dp"
+                            android:text="FirstName"
+                            android:textColor="@color/stroke_color"
+                            android:textSize="@dimen/_16sdp"
+                            app:fontFamily="@font/opensans_regular" />
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/etFirstName"
+                            app:fontFamily="@font/opensans_regular"
+                            android:focusableInTouchMode="true"
+                            android:background="@null"
+                            android:textSize="@dimen/_16sdp"
+                            android:hint="Enter Firstname"
+                            android:imeOptions="actionNext"
+                            android:inputType="textEmailAddress"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:text=""
+                            />
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/divider_color"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@color/white_color"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginRight="20dp"
+                            android:text="LastName"
+                            android:textColor="@color/stroke_color"
+                            android:textSize="@dimen/_16sdp"
+                            app:fontFamily="@font/opensans_regular" />
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/etLastName"
+                            app:fontFamily="@font/opensans_regular"
+                            android:focusableInTouchMode="true"
+                            android:background="@null"
+                            android:textSize="@dimen/_16sdp"
+                            android:hint="Enter Lastname"
+                            android:imeOptions="actionNext"
+                            android:inputType="textEmailAddress"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:text=""
+                            />
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/divider_color"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@color/box_bg_color"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginRight="20dp"
+                            android:text="@string/username"
+                            android:textColor="@color/stroke_color"
+                            android:textSize="@dimen/_16sdp"
+                            app:fontFamily="@font/opensans_regular" />
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/etUsername"
+                            android:focusable="false"
+                            app:fontFamily="@font/opensans_regular"
+                            android:focusableInTouchMode="false"
+                            android:clickable="false"
+                            android:background="@null"
+                            android:textSize="@dimen/_16sdp"
+                            android:hint="Enter Username"
+                            android:imeOptions="actionNext"
+                            android:inputType="textEmailAddress"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:text=""
+                            />
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/divider_color"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@color/box_bg_color"
+                        >
+
+                        <TextView
+                            android:fontFamily="@font/opensans_regular"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text= "Email"
+                            android:textSize="@dimen/_16sdp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:textColor="@color/stroke_color"
+                            />
+
+                        <EditText
+                            android:id="@+id/etEmail"
+                            android:layout_height = "wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:focusable="false"
+                            app:fontFamily="@font/opensans_regular"
+                            android:focusableInTouchMode="false"
+                            android:clickable="false"
+                            android:textSize="@dimen/_16sdp"
+                            android:background="@null"
+                            android:hint="@string/enterEmail"
+                            android:imeOptions="actionNext"
+                            android:inputType="textEmailAddress"
+                            android:text=""
+                            />
+
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/divider_color"/>
+
+
+
+
+
+
+
+                </LinearLayout>
+
+
+                <!--<Button-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="@color/white_color"-->
+                    <!--android:textSize="@dimen/_18sdp"-->
+                    <!--android:layout_marginTop="@dimen/_20sdp"-->
+                    <!--android:layout_marginBottom="@dimen/_20sdp"-->
+                    <!--android:layout_marginRight="@dimen/_45sdp"-->
+                    <!--android:layout_marginLeft="@dimen/_45sdp"-->
+                    <!--/>-->
+
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_45sdp"
+                    android:layout_marginLeft="@dimen/_45sdp"
+                    android:background="@drawable/rounded_button_bg"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/_45sdp"
+                    android:paddingRight="@dimen/_45sdp"
+                    android:text="@string/saveprofile"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white_color"
+                    android:textSize="@dimen/_18sdp" />
+
+
+            </LinearLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:swipe="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="1dp"
+    android:background="@color/white_color"
+    app:cardBackgroundColor="@color/white_color"
+    app:cardCornerRadius="7dp"
+    app:cardElevation="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_user"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_gravity="center" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_6sdp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/_2sdp"
+                        android:layout_weight="0.5"
+                        android:fontFamily="@font/renner"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:text="user1233"
+                        android:textColor="@color/black_color"
+                        android:textSize="@dimen/_13sdp" />
+
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_2sdp"
+                        android:layout_weight="0.5"
+                        android:fontFamily="@font/renner"
+                        android:gravity="center_vertical|right"
+                        android:paddingRight="@dimen/_4sdp"
+                        android:singleLine="true"
+                        android:text="Now"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/_11sdp"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:fontFamily="@font/renner"
+                    android:gravity="center_vertical"
+                    android:paddingRight="@dimen/_4sdp"
+                    android:singleLine="true"
+                    android:text="#@user1233"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/_11sdp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/tv_question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/renner"
+                android:text="Is Today's Climate good?"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/_13sdp" />
+
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_weight="0.30"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.30"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/tv_count_likes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_14sdp"
+                        android:layout_weight="0.5"
+                        android:fontFamily="@font/renner"
+                        android:gravity="left|bottom"
+                        android:text="Yes 88%"
+                        android:textAllCaps="true"
+                        android:textColor="@color/green_color"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <TextView
+                        android:id="@+id/tv_count_dislikes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/_14sdp"
+                        android:layout_weight="0.50"
+                        android:fontFamily="@font/renner"
+                        android:gravity="right|center"
+                        android:text="No 12%"
+                        android:textAllCaps="true"
+                        android:textColor="@color/red_color"
+                        android:textSize="@dimen/_12sdp" />
+
+
+                </LinearLayout>
+
+
+                <SeekBar
+                    android:visibility="gone"
+                    android:id="@+id/seekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_5sdp"
+                    android:layout_weight="0.7"
+                    android:progressDrawable="@drawable/progress_line"
+                    android:thumb="@null" />
+
+
+                <!--<com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/_5sdp"-->
+                <!--app:rcProgress="50"-->
+                <!--app:rcSecondaryProgress="100"-->
+                <!--app:rcMax="100"-->
+                <!--app:rcRadius="5dp"-->
+                <!--app:rcBackgroundPadding="0dp"-->
+                <!--app:rcReverse="false"-->
+                <!--app:rcProgressColor="@drawable/red"-->
+                <!--app:rcSecondaryProgressColor="@drawable/green"-->
+                <!--app:rcBackgroundColor="@color/black_color"-->
+                <!--app:rcIconSrc="@drawable/red"/>-->
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
+
+

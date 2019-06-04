@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!--<color name="colorPrimary">#23B6F0</color>-->
+    <!--<color name="colorPrimaryDark">#0495CC</color>-->
+
+
+    <color name="color_primary">#546e7a</color>
+    <color name="color_primary_dark">#29434e</color>
+    <color name="color_primary_light">#819ca9</color>
+
+
+    <color name="colorPrimaryBlur">#7023B6F0</color>
+    <!--<color name="colorPrimary">#7eadb8</color>-->
+    <!--<color name="colorPrimary">#06f121</color>-->
+    <color name="colorAccent">#b6b3b3</color>
+    <color name="black_color">#000000</color>
+    <color name="white_color">#ffffff</color>
+    <color name="blur_white">#70ffffff</color>
+    <color name="hint_color">#6c6c6c</color>
+    <color name="facebook_color">#0418f5</color>
+    <!--<color name="green_color">#06f121</color>-->
+    <color name="grey_color">#b6b3b3</color>
+    <color name="grey_user">#a2a2a2</color>
+    <color name="light_grey_user">#35707070</color>
+
+    <color name="like_color">#256316</color>
+    <color name="dislike_color">#F63C44</color>
+
+    <color name = "green_color">#529125</color>
+    <color name = "red_color">#8F2525</color>
+
+    <color name="nav_back_color">#152024</color>
+
+    <color name = "top_txt_color">#0C82DC</color>
+    <color name = "stroke_color">#0FA6B3</color>
+
+    <color name="light_grey">#e3e3e3</color>
+    <color name="grey_light">#cccccc</color>
+
+    <color name="eye_grey">#6c6c6c</color>
+
+    <color name="start_color">#10B1a9</color>
+    <color name="mid_color">#86C4DB</color>
+    <color name="end_color">#0C82DC</color>
+
+    <color name="fb_start_color">#158AB5</color>
+    <color name="fb_mid_color">#1D7DAD</color>
+    <color name="fb_end_color">#2D659E</color>
+
+    <color name="google_start_color">#E05B32</color>
+    <color name="google_mid_color">#E15033</color>
+    <color name="google_end_color">#E14431</color>
+
+    <color name="twitter_start_color">#35C3F1</color>
+    <color name="twitter_mid_color">#21B8ED</color>
+    <color name="twitter_end_color">#08ACEB</color>
+
+    <color name="blue_color">#abd7f7</color>
+
+    <color name="blue_light">#dbeef5</color>
+
+
+    <color name="grey">#585757</color>
+
+    <color name="filter_bg">#3e413e</color>
+    <color name="search_hint">#46666c</color>
+    <color name="about_text">#38454f</color>
+    <color name="light_blue">#00415f</color>
+
+    <color name="red">#b5614b</color>
+
+    <color name="box_bg_color">#e5eef2</color>
+    <color name="header_color">#8db3c8</color>
+    <color name="divider_color">#e4e8e9</color>
+
+    <color name="tab_selected">#63d7ff</color>
+    <color name="tab_font">#63d7ff</color>
+
+    <color name = "skyblue_color"> </color>
+
+    <color name="blue">#5475B6</color>
+    <color name="transparent_black">#90000000</color>
+    <color name="transparent_light">#50000000</color>
+    <color name="transparent_white">#60ffffff</color>
+    <color name="transparent">#00000000</color>
+    <!--<color name="stroke_color">#9fb9c1</color>-->
+
+
+    //for user detail page
+    <color name="first_event_color">#2c4045</color>
+    <color name="first_check_in_color">#283b40</color>
+    <color name="event_color">#56818f</color>
+    <color name="check_in_color">#496d78</color>
+
+    //analysis page
+    <color name="total_color">#3c5968</color>
+
+    //belief view
+    <color name="light_green_tint">#DBF7E9</color>
+    <color name="light_Red_tint">#FDD4D4</color>
+    <color name="belief_view_positive_color">#D2F3C8</color>
+    <color name="belief_view_negative_color">#FAC7C7</color>
+
+    <color name="red_warning_text_color">#FF0000</color>
+    <color name="tag_view_bg_color">#D4D4D4</color>
+
+</resources>

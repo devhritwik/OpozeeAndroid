@@ -1,0 +1,22 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="icon_size">17dp</dimen>
+    <dimen name="fab_icon_size">40dp</dimen>
+    <dimen name="design_fab_image_size" tools:override="true">30dp</dimen>
+    <dimen name="belief_view_top_bar_height">2dp</dimen>
+    <dimen name="app_bar_height">50dp</dimen>
+    <dimen name="top_bar_book_mark_logo_size">45dp</dimen>
+    <dimen name="fab_size">56dp</dimen>
+    //Search bar
+    <dimen name="search_bar_height">55dp</dimen>
+    <dimen name="padding_search_bar">8dp</dimen>
+    <dimen name="search_page_list_top_margin">5dp</dimen>
+
+    <dimen name="add_opinion_edit_text_margin">30dp</dimen>
+    <dimen name="add_opinion_button_width">100dp</dimen>
+    <dimen name="add_opinion_button_height">50dp</dimen>
+
+    <dimen name="tag_view_padding">5dp</dimen>
+</resources>

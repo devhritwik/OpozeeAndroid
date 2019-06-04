@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_no"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginBottom="5dp"
+    app:cardElevation="10dp">
+
+
+
+    <LinearLayout
+        android:id="@+id/belief_view_main_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/belief_view_opinion_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:ellipsize="end"
+            android:fontFamily="@font/renner"
+            android:maxLines="2"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/_12sdp" />
+
+
+        <LinearLayout
+            android:id="@+id/belief_view_votes_and_user_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/belief_view_upvotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_2sdp"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/like_drawable"
+                android:drawablePadding="@dimen/_4sdp"
+                android:gravity="left|center"
+                android:singleLine="true"
+                android:text="2003"
+                android:textColor="@color/like_color"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/belief_view_downvotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_2sdp"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/dislike_drawable"
+                android:drawablePadding="@dimen/_4sdp"
+                android:gravity="left|center"
+                android:singleLine="true"
+                android:text="2003"
+                android:textColor="@color/dislike_color"
+                android:textSize="@dimen/_12sdp" />
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/beleief_view_user_image"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/_4sdp"
+                android:layout_marginRight="@dimen/_4sdp"
+                android:src="@drawable/user_drawable" />
+
+            <TextView
+                android:id="@+id/belief_view_user_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/renner"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="#@user1233"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_12sdp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</merge>
+
+
+
+
+

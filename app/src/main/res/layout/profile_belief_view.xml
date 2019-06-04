@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_yes"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="left"
+    android:layout_margin="8dp"
+    app:cardBackgroundColor="@color/white_color"
+    app:cardCornerRadius="@dimen/_5sdp"
+    app:cardElevation="1dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+    <TextView
+        android:id="@+id/profile_belief_view_question_text"
+        android:text="Im gonna ride my horse to the old town road and ride till i cant no more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:fontFamily="@font/renner"
+        android:textColor="@color/black_color"
+        android:textSize="18dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/belief_container"
+        android:background="@drawable/top_belief_view_positive_bg"
+        android:layout_below="@+id/profile_belief_view_question_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:padding="10dp">
+
+
+        <TextView
+            android:id="@+id/tv_belief_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/renner"
+            android:text="Is Todzcdaffdscfdsfs fsy's Climate good?"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/_12sdp" />
+
+
+        <LinearLayout
+            android:id="@+id/ll_yes_inner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.like.LikeButton
+                    android:id="@+id/btn_like_yes"
+                    android:layout_width="@dimen/_16sdp"
+                    android:layout_height="@dimen/_16sdp"
+                    android:layout_gravity="center"
+                    android:clickable="false"
+                    app:anim_scale_factor="2"
+                    app:circle_end_color="@color/colorAccent"
+                    app:circle_start_color="@color/color_primary"
+                    app:dots_primary_color="@color/colorAccent"
+                    app:dots_secondary_color="@color/color_primary"
+                    app:icon_size="@dimen/_13sdp"
+                    app:icon_type="Thumb"
+                    app:is_enabled="false"
+                    app:like_drawable="@drawable/thumb_on"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
+                    app:liked="false"
+                    app:unlike_drawable="@drawable/thumb_off" />
+
+                <TextView
+                    android:id="@+id/num_likes_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:fontFamily="@font/renner"
+                    android:gravity="left|center"
+                    android:singleLine="true"
+                    android:text="2003"
+                    android:textColor="@color/black_color"
+                    android:textSize="@dimen/_12sdp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_4sdp"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.like.LikeButton
+                    android:id="@+id/btn_dislike_yes"
+                    android:layout_width="@dimen/_16sdp"
+                    android:layout_height="@dimen/_16sdp"
+                    android:layout_gravity="center"
+                    android:clickable="false"
+                    app:anim_scale_factor="2"
+                    app:circle_end_color="@color/colorAccent"
+                    app:circle_start_color="@color/color_primary"
+                    app:dots_primary_color="@color/colorAccent"
+                    app:dots_secondary_color="@color/color_primary"
+                    app:icon_size="@dimen/_13sdp"
+                    app:icon_type="Thumb"
+                    app:is_enabled="false"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
+                    app:like_drawable="@drawable/dislike_thumb_on"
+                    app:liked="false"
+                    app:unlike_drawable="@drawable/dislike_thumb_off" />
+
+                <TextView
+                    android:id="@+id/num_dislikes_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:fontFamily="@font/renner"
+                    android:gravity="left|center"
+                    android:singleLine="true"
+                    android:text="2003"
+                    android:textColor="@color/black_color"
+                    android:textSize="@dimen/_12sdp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

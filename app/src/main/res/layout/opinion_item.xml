@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/card_yes"
+        app:cardElevation="1dp"
+        android:layout_gravity="left"
+        app:cardCornerRadius="@dimen/_5sdp"
+        android:background="@drawable/top_belief_view_positive_bg"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="25dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/ll_yes"
+            android:padding="10dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_2sdp"
+                >
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_opinion_yes"
+                    android:autoLink="web"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/grey"
+                    android:fontFamily="@font/renner"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:id="@+id/ll_yes_inner"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_4sdp"
+                >
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_user_yes"
+                    android:src="@drawable/user_drawable"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_marginRight="@dimen/_4sdp"
+                    android:layout_gravity="center"/>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="1"
+                        android:gravity="left|center">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="user1233"
+                            android:layout_weight="0.5"
+                            android:fontFamily="@font/renner"
+                            android:textColor="@color/black_color"
+                            android:id="@+id/tv_name_yes"
+                            android:visibility="gone"
+                            android:layout_marginRight="@dimen/_2sdp"
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/_12sdp"
+                            android:singleLine="true"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Now"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/black_color"
+                            android:id="@+id/tv_time_yes"
+                            android:layout_weight="0.5"
+                            android:textStyle="italic"
+                            android:visibility="gone"
+                            android:textSize="@dimen/_12sdp"
+                            android:singleLine="true"
+                            android:fontFamily="@font/renner"
+                            android:layout_marginLeft="@dimen/_2sdp"
+                            android:gravity="center_vertical|right"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="#@user1233"
+                            android:layout_weight="1.3"
+                            android:visibility="visible"
+                            android:fontFamily="@font/renner"
+                            android:textColor="@color/grey"
+                            android:id="@+id/tv_user_name_yes"
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/_12sdp"
+                            android:singleLine="true"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="0.7"
+                            android:gravity="right"
+                            android:weightSum="1"
+                            android:layout_marginLeft="3dp"
+                            >
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_weight="0.5"
+                                android:gravity="center">
+
+                                <com.like.LikeButton
+                                    android:id="@+id/btn_like_yes"
+                                    app:icon_type="Thumb"
+                                    app:circle_start_color="@color/color_primary"
+                                    app:like_drawable="@drawable/thumb_on"
+                                    app:unlike_drawable="@drawable/thumb_off"
+                                    app:dots_primary_color="@color/colorAccent"
+                                    app:dots_secondary_color="@color/color_primary"
+                                    app:circle_end_color="@color/colorAccent"
+                                    app:icon_size="@dimen/_13sdp"
+                                    app:liked="false"
+                                    android:clickable="true"
+                                    android:layout_width="@dimen/_16sdp"
+                                    android:layout_height="@dimen/_16sdp"
+                                    android:layout_gravity="center"
+                                    app:anim_scale_factor="2"
+                                    app:is_enabled="true"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/tv_like_yes"
+                                    android:layout_marginLeft="@dimen/_4sdp"
+                                    android:fontFamily="@font/renner"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:gravity="left|center"
+                                    android:textColor="@color/black_color"
+                                    android:text="2003"
+                                    android:singleLine="true"
+                                    />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center"
+                                android:layout_weight="0.5"
+                                android:layout_marginLeft="@dimen/_4sdp">
+                                <com.like.LikeButton
+                                    android:id="@+id/btn_dislike_yes"
+                                    app:icon_type="Thumb"
+                                    app:circle_start_color="@color/color_primary"
+                                    app:like_drawable="@drawable/dislike_thumb_on"
+                                    app:unlike_drawable="@drawable/dislike_thumb_off"
+                                    app:dots_primary_color="@color/colorAccent"
+                                    app:dots_secondary_color="@color/color_primary"
+                                    app:circle_end_color="@color/colorAccent"
+                                    app:icon_size="@dimen/_13sdp"
+                                    app:liked="false"
+                                    android:clickable="true"
+                                    android:layout_width="@dimen/_16sdp"
+                                    android:layout_height="@dimen/_16sdp"
+                                    android:layout_gravity="center"
+                                    app:anim_scale_factor="2"
+                                    app:is_enabled="true"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/tv_dislike_yes"
+                                    android:layout_marginLeft="@dimen/_4sdp"
+                                    android:fontFamily="@font/renner"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:gravity="left|center"
+                                    android:textColor="@color/black_color"
+                                    android:text="2003"
+                                    android:singleLine="true"
+                                    />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/card_no"
+        app:cardElevation="1dp"
+        app:cardCornerRadius="@dimen/_5sdp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/top_belief_view_negative_bg"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="25dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/ll_no"
+            android:layout_gravity="right"
+            android:padding="10dp"
+
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_2sdp"
+                >
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_opinion_no"
+                    android:autoLink="web"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/grey"
+                    android:fontFamily="@font/renner"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:id="@+id/ll_no_inner"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_4sdp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="1"
+                        android:gravity="left|center">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="user1233"
+                            android:layout_weight="0.5"
+                            android:fontFamily="@font/renner"
+                            android:textColor="@color/black_color"
+                            android:id="@+id/tv_name_no"
+                            android:visibility="gone"
+                            android:layout_marginRight="@dimen/_2sdp"
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/_12sdp"
+                            android:singleLine="true"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Now"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/black_color"
+                            android:id="@+id/tv_time_no"
+                            android:layout_weight="0.5"
+                            android:textStyle="italic"
+                            android:visibility="gone"
+                            android:textSize="@dimen/_12sdp"
+                            android:singleLine="true"
+                            android:fontFamily="@font/renner"
+                            android:layout_marginLeft="@dimen/_2sdp"
+                            android:gravity="center_vertical|right"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2"
+                        >
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="0.7"
+                            android:gravity="right"
+                            android:weightSum="1"
+                            android:layout_marginLeft="3dp"
+                            >
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_weight="0.5"
+                                android:gravity="center">
+
+                                <com.like.LikeButton
+                                    android:id="@+id/btn_like_no"
+                                    app:icon_type="Thumb"
+                                    app:circle_start_color="@color/color_primary"
+                                    app:like_drawable="@drawable/thumb_on"
+                                    app:unlike_drawable="@drawable/thumb_off"
+                                    app:dots_primary_color="@color/colorAccent"
+                                    app:dots_secondary_color="@color/color_primary"
+                                    app:circle_end_color="@color/colorAccent"
+                                    app:icon_size="@dimen/_13sdp"
+                                    app:liked="false"
+                                    android:clickable="true"
+                                    android:layout_width="@dimen/_16sdp"
+                                    android:layout_height="@dimen/_16sdp"
+                                    android:layout_gravity="center"
+                                    app:anim_scale_factor="2"
+                                    app:is_enabled="true"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/tv_like_no"
+                                    android:layout_marginLeft="@dimen/_4sdp"
+                                    android:fontFamily="@font/renner"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:gravity="left|center"
+                                    android:textColor="@color/black_color"
+                                    android:text="2003"
+                                    android:singleLine="true"
+                                    />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center"
+                                android:layout_weight="0.5"
+                                android:layout_marginLeft="@dimen/_4sdp">
+                                <com.like.LikeButton
+                                    android:id="@+id/btn_dislike_no"
+                                    app:icon_type="Thumb"
+                                    app:circle_start_color="@color/color_primary"
+                                    app:like_drawable="@drawable/dislike_thumb_on"
+                                    app:unlike_drawable="@drawable/dislike_thumb_off"
+                                    app:dots_primary_color="@color/colorAccent"
+                                    app:dots_secondary_color="@color/color_primary"
+                                    app:circle_end_color="@color/colorAccent"
+                                    app:icon_size="@dimen/_13sdp"
+                                    app:liked="false"
+                                    android:clickable="true"
+                                    android:layout_width="@dimen/_16sdp"
+                                    android:layout_height="@dimen/_16sdp"
+                                    android:layout_gravity="center"
+                                    app:anim_scale_factor="2"
+                                    app:is_enabled="true"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/tv_dislike_no"
+                                    android:layout_marginLeft="@dimen/_4sdp"
+                                    android:fontFamily="@font/renner"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:gravity="left|center"
+                                    android:textColor="@color/black_color"
+                                    android:text="2003"
+                                    android:singleLine="true"
+                                    />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/iv_user_no"
+                            android:src="@drawable/user_drawable"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:layout_marginLeft="@dimen/_4sdp"
+                            android:layout_marginRight="@dimen/_4sdp"
+                            android:layout_gravity="center"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="#@user1233"
+                            android:layout_weight="1.3"
+                            android:visibility="visible"
+                            android:fontFamily="@font/renner"
+                            android:textColor="@color/grey"
+                            android:id="@+id/tv_user_name_no"
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/_12sdp"
+                            android:singleLine="true"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

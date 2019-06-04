@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_height"
+        android:background="@color/color_primary"
+        android:gravity="center"
+        android:visibility="visible"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/_15sdp"
+                android:src="@mipmap/back_icon"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/iv_share"
+                android:layout_toRightOf="@+id/iv_back"
+                android:fontFamily="@font/renner"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="Question"
+                android:textAllCaps="false"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/_15sdp" />
+
+            <ImageView
+                android:id="@+id/iv_share"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/iv_favourite"
+                android:padding="@dimen/_10sdp"
+                android:src="@mipmap/iv_share"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/iv_favourite"
+                android:layout_width="@dimen/top_bar_book_mark_logo_size"
+                android:layout_height="@dimen/top_bar_book_mark_logo_size"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/bookmark_icon_empty"
+                android:visibility="visible" />
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/linear_bottom"
+        android:layout_below="@+id/toolbar"
+        android:fillViewport="true"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_margin="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/iv_user"
+                            android:layout_width="@dimen/_35sdp"
+                            android:layout_height="@dimen/_35sdp"
+                             />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_6sdp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="left|center"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <TextView
+                                    android:id="@+id/tv_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/_2sdp"
+                                    android:layout_weight="0.5"
+                                    android:fontFamily="@font/renner"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="user1233"
+                                    android:textColor="@color/black_color"
+                                    android:textSize="@dimen/_12sdp" />
+
+                                <TextView
+                                    android:id="@+id/tv_time"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:layout_weight="0.5"
+                                    android:fontFamily="@font/renner"
+                                    android:gravity="center_vertical|right"
+                                    android:paddingRight="@dimen/_4sdp"
+                                    android:singleLine="true"
+                                    android:text="Now"
+                                    android:textColor="@color/grey"
+                                    android:textSize="@dimen/_11sdp" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tv_user_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.4"
+                                android:fontFamily="@font/renner"
+                                android:gravity="center_vertical"
+                                android:singleLine="true"
+                                android:text="#@user1233"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/_11sdp" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_2sdp"
+                        android:layout_weight="0.2"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_question"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:layout_marginBottom="@dimen/_3sdp"
+                            android:fontFamily="@font/renner"
+                            android:text="Is Today's Climate good?"
+                            android:textColor="@color/black_color"
+                            android:textSize="@dimen/_13sdp" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.30"
+                                android:orientation="vertical"
+                                android:weightSum="1">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal"
+                                    android:weightSum="1">
+
+                                    <TextView
+                                        android:id="@+id/tv_count_likes"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/_11sdp"
+                                        android:layout_weight="0.5"
+                                        android:fontFamily="@font/renner"
+                                        android:gravity="right|bottom"
+                                        android:text="Yes 88%"
+                                        android:textAllCaps="false"
+                                        android:textColor="@color/grey_color"
+                                        android:textSize="@dimen/_12sdp" />
+
+                                    <TextView
+                                        android:id="@+id/tv_count_dislikes"
+                                        android:layout_width="@dimen/_1sdp"
+                                        android:layout_height="@dimen/_1sdp"
+                                        android:layout_marginRight="@dimen/_14sdp"
+                                        android:layout_weight="0.50"
+                                        android:fontFamily="@font/renner"
+                                        android:gravity="left|center"
+                                        android:text="No 12%"
+                                        android:textAllCaps="true"
+                                        android:textColor="@color/red_color"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:visibility="invisible" />
+
+
+                                </LinearLayout>
+
+
+                                <SeekBar
+                                    android:id="@+id/seekBar"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_weight="1"
+                                    android:progressDrawable="@drawable/progress_line"
+                                    android:thumb="@null" />
+
+
+                                <!--<com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="@dimen/_5sdp"-->
+                                <!--app:rcProgress="50"-->
+                                <!--app:rcSecondaryProgress="100"-->
+                                <!--app:rcMax="100"-->
+                                <!--app:rcRadius="5dp"-->
+                                <!--app:rcBackgroundPadding="0dp"-->
+                                <!--app:rcReverse="false"-->
+                                <!--app:rcProgressColor="@drawable/red"-->
+                                <!--app:rcSecondaryProgressColor="@drawable/green"-->
+                                <!--app:rcBackgroundColor="@color/black_color"-->
+                                <!--app:rcIconSrc="@drawable/red"/>-->
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:layout_height="wrap_content">
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/question_details_tag_container"
+                    android:layout_width="wrap_content"
+                    app:flexWrap="wrap"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.flexbox.FlexboxLayout>
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/question_details_opinion_recycle_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/send_message_layout"
+                android:layout_below="@id/linear"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp" />
+
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_opinion_fab"
+        android:layout_width="@dimen/fab_size"
+        android:layout_height="@dimen/fab_size"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/_25sdp"
+        android:src="@mipmap/add_icon"
+        android:tint="@color/white_color"
+        app:backgroundTint="@color/color_primary_dark"
+        app:elevation="@dimen/_10sdp"
+        app:rippleColor="@color/grey_light" />
+
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/linear_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:id="@+id/send_message_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/light_grey"
+            android:focusableInTouchMode="true"
+            android:padding="3dp"
+            android:visibility="gone">
+
+
+            <EditText
+                android:id="@+id/edit_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toLeftOf="@+id/iv_send"
+                android:background="@drawable/edit_bg"
+                android:focusableInTouchMode="true"
+                android:gravity="left|top"
+                android:hint="Your Opinion"
+                android:maxLines="6"
+                android:minLines="3"
+                android:padding="8dp"
+                android:textColorHint="@color/grey"
+                android:textCursorDrawable="@null"
+                android:textSize="14sp" />
+
+
+            <ImageView
+                android:id="@+id/iv_send"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@null"
+                android:gravity="center"
+                android:padding="15dp"
+                android:src="@mipmap/send"
+
+                android:tint="@color/color_primary" />
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_yes_no"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginRight="3dp"
+            android:layout_weight="0.5"
+            android:background="@color/white_color"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/_10sdp"
+            android:visibility="gone"
+            android:weightSum="1"
+
+            >
+
+            <Button
+                android:id="@+id/btn_yes"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_2sdp"
+                android:layout_weight="0.5"
+                android:background="@drawable/yes_drawable"
+                android:gravity="center"
+                android:text="YES"
+                android:textColor="@color/home_color" />
+
+            <Button
+                android:id="@+id/btn_no"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_2sdp"
+                android:layout_weight="0.5"
+                android:background="@drawable/no_drawable"
+                android:gravity="center"
+                android:text="NO"
+                android:textColor="@color/home_color" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

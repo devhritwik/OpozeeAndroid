@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/profile_fragment_nested_scrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/top_header"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:id="@+id/profile_fragment_parent_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_70sdp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/top_header"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:background="@color/color_primary">
+            <!--<TextView-->
+            <!--android:id="@+id/tv_header"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:padding="@dimen/_10sdp"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_marginTop="@dimen/_18sdp"-->
+            <!--android:textColor="@color/white_color"-->
+            <!--android:text="CREATE ACCOUNT"-->
+            <!--android:textSize="@dimen/_18sdp"-->
+            <!--/>-->
+            <RelativeLayout
+                android:id="@+id/relative_user"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:layout_marginBottom="@dimen/_18sdp">
+
+                <RelativeLayout
+                    android:layout_width="@dimen/_95sdp"
+                    android:layout_height="@dimen/_95sdp"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:background="@drawable/image_border">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/iv_user"
+                        android:layout_width="@dimen/_85sdp"
+                        android:layout_height="@dimen/_85sdp"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:src="@drawable/user" />
+
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/iv_edit"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/camer_bg"
+                    android:cropToPadding="false"
+                    android:padding="@dimen/_10sdp"
+                    android:src="@mipmap/pencil"
+                    android:tint="@color/white_color" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative_user"
+                android:layout_marginLeft="@dimen/_45sdp"
+                android:layout_marginRight="@dimen/_45sdp"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="STEVE FERLIN"
+                android:textAllCaps="true"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/_14sdp" />
+
+            <View
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="1dp"
+                android:layout_below="@+id/tv_user_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/color_primary" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/token_info_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/top_header"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/top_header"
+                android:layout_margin="20dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+
+                <TextView
+                    android:id="@+id/tv_total_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/question_icon"
+                    android:drawablePadding="5dp"
+                    android:gravity="left|center_vertical"
+                    android:text="QUESTION POSTED : 50"
+                    android:textColor="@color/black_color"
+                    android:textSize="@dimen/_9sdp" />
+
+
+                <TextView
+                    android:id="@+id/profile_fragment_belief_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/belief_icon"
+                    android:drawablePadding="5dp"
+                    android:gravity="left|center_vertical"
+                    android:text="Beliefs Posted : 5000"
+                    android:textColor="@color/black_color"
+                    android:textSize="@dimen/_9sdp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/top_header"
+                android:layout_margin="20dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+                <ImageView
+                    android:src="@drawable/thumb_off"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+
+                <TextView
+                    android:id="@+id/tv_likes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:gravity="left|center_vertical"
+                    android:text="2340"
+                    android:textColor="@color/black_color"
+                    android:textSize="@dimen/_9sdp" />
+
+                <ImageView
+                    android:src="@drawable/thumb_off"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+
+
+                <TextView
+                    android:id="@+id/tv_dislikes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:gravity="left|center_vertical"
+                    android:text="50"
+                    android:textColor="@color/black_color"
+                    android:textSize="@dimen/_9sdp" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/profile_tabs_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/token_info_layout"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/profile_tab_questions"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/user_profile_tabs_selected_bg"
+                android:gravity="center_horizontal|bottom"
+                android:paddingBottom="10dp"
+                android:text="@string/questions"
+                android:textColor="@color/color_primary"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/profile_tab_beliefs"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/user_profile_tabs_unselected_bg"
+                android:gravity="center_horizontal|bottom"
+                android:paddingBottom="10dp"
+
+                android:text="@string/beliefs"
+                android:textColor="@color/color_primary"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_below="@+id/profile_tabs_container"
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>

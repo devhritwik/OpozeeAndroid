@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:layout_below="@id/top_header"
+            app:cardCornerRadius="@dimen/_5sdp"
+            app:cardElevation="@dimen/_2sdp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_5sdp"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            >
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/top_header"
+                android:gravity="center"
+                android:layout_margin="20dp"
+                android:weightSum="2"
+                />
+
+            <TextView
+                android:id="@+id/tv_"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_12sdp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:textColor="@color/black_color"
+                android:gravity="left|center_vertical"
+                android:text="Add Question"
+                android:paddingRight="20dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginTop="20dp"
+                />
+
+            <EditText
+                android:id="@+id/edit_question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="10dp"
+                android:layout_toLeftOf="@+id/iv_send"
+                android:background="@drawable/ques_edit_bg"
+                android:focusableInTouchMode="true"
+                android:hint="Ask your Question....."
+                android:padding="8dp"
+                android:textColorHint="@color/grey"
+                android:maxLines="6"
+                android:minLines="6"
+                android:gravity="left|top"
+                android:textCursorDrawable="@null"
+                android:textSize="14sp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="@drawable/ques_edit_bg"
+                android:textColor="@color/black_color"
+                android:gravity="center"
+                android:layout_marginTop="20dp">
+                <com.pchmn.materialchips.views.ScrollViewMaxHeight
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fillViewport="true"
+                    android:layout_toLeftOf="@+id/iv_add_users"
+                    >
+                <com.pchmn.materialchips.ChipsInput
+                    android:id="@+id/chips_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hint="Tagged Users"
+                    app:hintColor="@color/grey"
+                    app:textColor="@color/grey"
+                    android:visibility="gone"
+                    android:layout_centerVertical="true"
+                    app:chip_labelColor="@color/grey"
+                    app:chip_hasAvatarIcon="true"
+                    app:chip_backgroundColor="@color/light_grey"
+                    app:chip_deletable="true"
+                    app:chip_deleteIconColor="@color/grey"
+                    android:textSize="@dimen/_12sdp"
+                    android:text=""
+                    android:paddingRight="@dimen/_5sdp"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:background="@null"
+                    android:focusable="true"
+                    app:maxRows="3"
+                    android:focusableInTouchMode="true"
+                    app:chip_detailed_textColor="@color/grey"
+                    app:chip_detailed_backgroundColor="@color/color_primary"
+                    app:chip_detailed_deleteIconColor="@color/white_color"
+                    app:filterable_list_backgroundColor="@color/white_color"
+                    app:filterable_list_textColor="@color/grey" />
+                </com.pchmn.materialchips.views.ScrollViewMaxHeight>
+                <ImageView
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:id="@+id/iv_add_users"
+                    android:src="@drawable/plus"
+                    android:padding="@dimen/_10sdp"
+                    android:visibility="gone"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="right|center_vertical"
+                    android:gravity="center"
+                    android:fontFamily="@font/renner"
+                    android:textSize="@dimen/_16sdp"/>
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/tvf_"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_12sdp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:textColor="@color/black_color"
+                android:gravity="left|center_vertical"
+                android:text="Add Hashtags"
+                android:paddingRight="20dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginTop="20dp"
+                />
+
+            <EditText
+                android:id="@+id/edit_hash_tags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/ques_edit_bg"
+                android:focusableInTouchMode="true"
+                android:hint="Your hashtags here...."
+                android:padding="8dp"
+                android:textColorHint="@color/grey"
+                android:maxLines="6"
+                android:gravity="left|top"
+                android:textCursorDrawable="@null"
+                android:textSize="14sp"/>
+
+            <Button
+                android:id="@+id/btn_post"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text= "Post"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/_18sdp"
+                android:layout_margin="20dp"
+                android:background="@drawable/post_question_button_bg"/>
+
+
+        </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+    </RelativeLayout>
