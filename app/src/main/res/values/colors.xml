@@ -61,6 +61,10 @@
 
     <color name="blue_light">#dbeef5</color>
 
+    <color name="blue_dark">#007bff</color>
+
+    <color name="bluebackground">#ccc</color>
+
 
     <color name="grey">#585757</color>
 

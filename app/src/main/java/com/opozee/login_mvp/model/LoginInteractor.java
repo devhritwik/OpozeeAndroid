@@ -5,6 +5,7 @@ import com.opozee.pojo.LoginResponse;
 
 public interface LoginInteractor {
     void login(LoginParams params, OnLoginFinishListener mListener);
+    void loginemail(String data,OnLoginFinishListener mListener);
 
     interface OnLoginFinishListener
     {

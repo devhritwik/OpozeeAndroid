@@ -36,7 +36,7 @@ public class QuestionDetailInteractorImpl implements QuestionDetailInteractor {
 
             @Override
             public void onFailure(Call<QuestionDetailResponse> call, Throwable t) {
-                mListener.onFailure("Request Failed, Please try again");
+                mListener.onFailure("Request Failed, Please try again 15");
             }
         });
 

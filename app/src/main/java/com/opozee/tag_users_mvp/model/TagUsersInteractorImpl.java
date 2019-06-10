@@ -48,7 +48,7 @@ public class TagUsersInteractorImpl implements TagUsersInteractor{
 
             @Override
             public void onFailure(Call<TagUsersResponse> call, Throwable t) {
-                mListener.onFailure("Request Failed, Please try again");
+                mListener.onFailure("Request Failed, Please try again 7");
             }
         });
     }
@@ -79,7 +79,7 @@ public class TagUsersInteractorImpl implements TagUsersInteractor{
 
             @Override
             public void onFailure(Call<TagUsersResponse> call, Throwable t) {
-                mListener.onFailure("Request Failed, Please try again");
+                mListener.onFailure("Request Failed, Please try again 8");
             }
         });
     }

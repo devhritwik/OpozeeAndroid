@@ -36,7 +36,7 @@ public class AddOpinionInteractorImpl implements AddOpinionInteractor {
 
             @Override
             public void onFailure(Call<OpinionResponse> call, Throwable t) {
-                mListener.onFailure("Request Failed, Please try again");
+                mListener.onFailure("Request Failed, Please try again 9");
             }
         });
     }

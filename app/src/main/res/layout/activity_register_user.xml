@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.RegisterUserActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/iv_registerLogo"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:src="@drawable/opozee_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tl_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:paddingLeft="15dp"
+            android:paddingBottom="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_registerLogo">
+
+            <EditText
+                android:id="@+id/et_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/black_color"
+                android:hint="UserName"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:maxLength="15"
+                android:textColor="@color/black_color"
+                android:textColorHint="@color/black_color"
+                android:textSize="20dp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tl_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:paddingLeft="15dp"
+            android:paddingBottom="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tl_username">
+
+            <EditText
+                android:id="@+id/et_emailregister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/black_color"
+                android:hint="Email"
+                android:maxLength="15"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/black_color"
+                android:textColorHint="@color/black_color"
+                android:textSize="20dp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tl_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:paddingLeft="15dp"
+            android:paddingBottom="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tl_email">
+
+            <EditText
+                android:id="@+id/et_passwordregister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/black_color"
+                android:hint="Password"
+                android:maxLength="15"
+                android:maxLines="1"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColor="@color/black_color"
+                android:textColorHint="@color/black_color"
+                android:textSize="20dp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tl_refferalcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:paddingLeft="15dp"
+            android:paddingBottom="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tl_password">
+
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/black_color"
+                android:hint="@string/refferalcode"
+                android:maxLength="15"
+                android:maxLines="1"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColor="@color/black_color"
+                android:textColorHint="@color/black_color"
+                android:textSize="20dp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <Button
+        android:id="@+id/btn_register"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:background="@drawable/button_background"
+        android:text="Register"
+        android:textColor="@color/white_color"
+        app:layout_constraintEnd_toEndOf="@+id/tl_refferalcode"
+        app:layout_constraintStart_toStartOf="@+id/tl_refferalcode"
+        app:layout_constraintTop_toBottomOf="@+id/tl_refferalcode" />
+
+
+        <TextView
+            android:id="@+id/tv_canel_register"
+            android:layout_width="wrap_content"
+            android:layout_height="23dp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:text="@string/text_cancel"
+            android:textColor="@color/blue_dark"
+            android:textSize="@dimen/_15sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:padding="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_register"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/_25sdp"/>
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_username"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/_15sdp"-->
+            <!--android:layout_marginTop="@dimen/_30sdp"-->
+            <!--android:text="@string/text_username"-->
+            <!--android:textColor="@color/black_color"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/iv_registerLogo" />-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/et_username"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="@dimen/_10sdp"-->
+            <!--android:layout_marginRight="@dimen/_15sdp"-->
+            <!--android:background="@drawable/register_background"-->
+            <!--android:maxLines="1"-->
+            <!--android:padding="@dimen/_8sdp"-->
+            <!--android:singleLine="true"-->
+            <!--android:textSize="@dimen/_13sdp"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="@+id/tv_username"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/tv_username" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_emailregister"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/_15sdp"-->
+            <!--android:layout_marginTop="@dimen/_15sdp"-->
+            <!--android:text="@string/text_email"-->
+            <!--android:textColor="@color/black_color"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/et_username" />-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/et_emailRegister"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="@dimen/_10sdp"-->
+            <!--android:layout_marginRight="@dimen/_15sdp"-->
+            <!--android:background="@drawable/register_background"-->
+            <!--android:maxLines="1"-->
+            <!--android:padding="@dimen/_8sdp"-->
+            <!--android:singleLine="true"-->
+            <!--android:textSize="@dimen/_13sdp"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="@+id/tv_emailregister"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/tv_emailregister" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_passwordregister"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/_15sdp"-->
+            <!--android:layout_marginTop="@dimen/_15sdp"-->
+            <!--android:text="@string/text_password"-->
+            <!--android:textColor="@color/black_color"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/et_emailRegister" />-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/et_passwordRegister"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="@dimen/_10sdp"-->
+            <!--android:layout_marginRight="@dimen/_15sdp"-->
+            <!--android:background="@drawable/register_background"-->
+            <!--android:maxLines="1"-->
+            <!--android:padding="@dimen/_8sdp"-->
+            <!--android:singleLine="true"-->
+            <!--android:textSize="@dimen/_13sdp"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="@+id/tv_passwordregister"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/tv_passwordregister" />-->
+
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_refferalcode"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/_15sdp"-->
+            <!--android:layout_marginTop="@dimen/_15sdp"-->
+            <!--android:text="@string/refferalcode"-->
+            <!--android:textColor="@color/black_color"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/et_passwordRegister" />-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/et_refferalcode"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="@dimen/_10sdp"-->
+            <!--android:layout_marginRight="@dimen/_15sdp"-->
+            <!--android:background="@drawable/register_background"-->
+            <!--android:maxLines="1"-->
+            <!--android:padding="@dimen/_8sdp"-->
+            <!--android:singleLine="true"-->
+            <!--android:textSize="@dimen/_13sdp"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="@+id/tv_refferalcode"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/tv_refferalcode" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/btn_register"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="@dimen/_30sdp"-->
+            <!--android:background="@drawable/button_background"-->
+            <!--android:text="Register"-->
+            <!--android:textColor="@color/white_color"-->
+            <!--app:layout_constraintEnd_toEndOf="@+id/et_refferalcode"-->
+            <!--app:layout_constraintStart_toStartOf="@+id/et_refferalcode"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/et_refferalcode" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="@dimen/_15sdp"-->
+            <!--android:text="@string/text_cancel"-->
+            <!--android:textColor="@color/blue_dark"-->
+            <!--android:textSize="@dimen/_15sdp"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/btn_register" />-->
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

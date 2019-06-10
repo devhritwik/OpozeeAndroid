@@ -1,5 +1,7 @@
 package com.opozee.profile_mvp.model;
 
+import android.util.Log;
+
 import com.opozee.params.ProfileParams;
 import com.opozee.pojo.ProfileResponse;
 import com.opozee.retrofit_api.ServiceGenerator;
@@ -53,7 +55,7 @@ public class ProfileInteractorImpl implements ProfileInteractor {
         req.enqueue(new Callback<ProfileResponse>() {
             @Override
             public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
-
+                Log.d("Profile_Log",response.toString());
                 if (response.isSuccessful()) {
                     if (response.body().getResponse().getCode() == 0 ) {
                         ProfileResponse LoginSignupResponse = response.body();
@@ -74,7 +76,8 @@ public class ProfileInteractorImpl implements ProfileInteractor {
 
             @Override
             public void onFailure(Call<ProfileResponse> call, Throwable t) {
-                mListener.onFailure("Request Failed, Please try again");
+                Log.d("Response=",t.toString());
+                mListener.onFailure("Request Failed, Please try again 3");
             }
         });
 
@@ -106,7 +109,8 @@ public class ProfileInteractorImpl implements ProfileInteractor {
 
             @Override
             public void onFailure(Call<ProfileResponse> call, Throwable t) {
-                mListener.onFailure("Request Failed, Please try again");
+                Log.d("RequestError=","4="+t.toString());
+                mListener.onFailure("Request Failed, Please try again 4");
             }
         });
 

@@ -2,6 +2,7 @@ package com.opozee.social_login;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -86,7 +87,9 @@ public class FBLogin {
                                                     email = "";
 
 //                                                Utils.saveFacebookId(facebookID, activity);
-                                                ((LoginActivity)activity).receiveFBData(email, facebookID, picture.toString(), name);
+                                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                                    ((LoginActivity)activity).receiveFBData(email, facebookID, picture.toString(), name);
+                                                }
 
                                             } else {
                                                 Toast.makeText(activity, activity.getString(R.string.message_fb_error), Toast.LENGTH_SHORT).show();

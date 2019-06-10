@@ -46,7 +46,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="user1233"
                         android:layout_weight="0.5"
                         android:fontFamily="@font/renner"
                         android:textColor="@color/black_color"
@@ -110,7 +109,7 @@
                 android:textSize="@dimen/_13sdp"
                 android:textColor="@color/black_color"
                 android:fontFamily="@font/renner"
-                android:text="Is Today's Climate good?"
+
                 />
 
 

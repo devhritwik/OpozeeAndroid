@@ -8,4 +8,6 @@ public interface LoginPresenter {
     void attachView(LoginView lView, LoginInteractorImpl loginInteractor);
     void dettachView();
     void loginUser(LoginParams params);
+    void loginUserEmail(String data);
+
 }

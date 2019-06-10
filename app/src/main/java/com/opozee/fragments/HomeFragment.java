@@ -174,8 +174,11 @@ public class HomeFragment extends Fragment implements PostedQuestionsView {
 
     @Override
     public void onSuccess(PostedQuestionsResponse response) {
+        Log.d("HomeQuestionLog=",""+response.getResponse());
+        Log.d("HomeQuestionLog=",""+response);
         if(response.getResponse().getAllUserQuestions().getPostQuestionDetail() != null)
             if(response.getResponse().getAllUserQuestions().getPostQuestionDetail().size() > 0) {
+                Log.d("HomeQuestionLog=",response.getResponse().getAllUserQuestions().getPostQuestionDetail().toString());
                 questionsList.addAll(response.getResponse().getAllUserQuestions().getPostQuestionDetail());
                 mAdapter.notifyDataSetChanged();
                 isRefreshed = false;

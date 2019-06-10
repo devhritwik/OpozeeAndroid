@@ -41,4 +41,10 @@ public class LoginPresenterImpl implements LoginPresenter, LoginInteractor.OnLog
         lView.showProgress();
         lInteractor.login(params, this);
     }
+
+    @Override
+    public void loginUserEmail(String data) {
+        lView.showProgress();
+        lInteractor.loginemail(data, this);
+    }
 }

@@ -3,10 +3,13 @@ package com.opozee.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,7 +27,11 @@ import com.opozee.utils.ImageLoaderFromDevice;
 import com.opozee.utils.Utils;
 import com.squareup.picasso.Picasso;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,26 +41,26 @@ import permission.auron.com.marshmallowpermissionhelper.ActivityManagePermission
 import permission.auron.com.marshmallowpermissionhelper.PermissionResult;
 import permission.auron.com.marshmallowpermissionhelper.PermissionUtils;
 
-public class EditProfileActivity extends ActivityManagePermission implements ProfileView{
+public class EditProfileActivity extends ActivityManagePermission implements ProfileView {
 
-        @BindView(R.id.iv_user)
-        CircleImageView iv_user;
-        @BindView(R.id.iv_edit)
-        ImageView iv_edit;
-        @BindView(R.id.tv_user_name)
-        TextView tv_user_name;
+    @BindView(R.id.iv_user)
+    CircleImageView iv_user;
+    @BindView(R.id.iv_edit)
+    ImageView iv_edit;
+    @BindView(R.id.tv_user_name)
+    TextView tv_user_name;
 
-        @BindView(R.id.log_out_button)
-        TextView mLogOutButton;
+    @BindView(R.id.log_out_button)
+    TextView mLogOutButton;
 
-        @BindView(R.id.etFirstName)
-        EditText etFirstName;
-        @BindView(R.id.etLastName)
-        EditText etLastName;
+    @BindView(R.id.etFirstName)
+    EditText etFirstName;
+    @BindView(R.id.etLastName)
+    EditText etLastName;
 
-        private ProfilePresenterImpl mPresenter;
-        private ImageLoaderFromDevice imageLoader;
-        private File mSelectedImageFile;
+    private ProfilePresenterImpl mPresenter;
+    private ImageLoaderFromDevice imageLoader;
+    private File mSelectedImageFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +86,7 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
     }
 
     @OnClick(R.id.log_out_button)
-    public void onLogoutClick()
-    {
+    public void onLogoutClick() {
         logoutAlert();
     }
 
@@ -93,7 +99,7 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
                         dialogInterface.dismiss();
                         AppSP.getInstance(getApplicationContext()).clear();
                         Intent intent = new Intent(EditProfileActivity.this, LoginActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         finish();
                     }
@@ -108,9 +114,6 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
     }
 
 
-
-
-
     private void getProfile() {
         if (Utils.isNetworkAvail(EditProfileActivity.this)) {
             mPresenter.profile(getParams());
@@ -120,102 +123,99 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
 
     }
 
-        private ProfileParams getParams() {
+    private ProfileParams getParams() {
         ProfileParams params = new ProfileParams();
         params.setType(AppGlobal.TYPE_GET_PROFILE);
         params.setUser_id(Utils.getLoggedInUserId(EditProfileActivity.this));
         return params;
     }
 
-        private void setProfile() {
+    private void setProfile() {
         mPresenter = new ProfilePresenterImpl();
         mPresenter.attachView(this, new ProfileInteractorImpl());
     }
 
-        @OnClick(R.id.btnSave)
-        public void onSaveClick()
-        {
-            editProfile();
-        }
+    @OnClick(R.id.btnSave)
+    public void onSaveClick() {
+        editProfile();
+    }
 
-        @OnClick(R.id.iv_edit)
-        public void onEditClick()
-        {
-            permissionDialog();
-        }
+    @OnClick(R.id.iv_edit)
+    public void onEditClick() {
+//            permissionDialog();
+        imageLoader.selectImage();
+    }
 
-        @Override
-        public void showProgress() {
-        if(Utils.mProgressDialog == null)
+    @Override
+    public void showProgress() {
+        if (Utils.mProgressDialog == null)
             Utils.showProgress(EditProfileActivity.this);
     }
 
-        @Override
-        public void hideProgress() {
-        if(Utils.mProgressDialog != null)
+    @Override
+    public void hideProgress() {
+        if (Utils.mProgressDialog != null)
             Utils.dismissProgress();
     }
 
-        @Override
-        public void onFirstNameError(String error) {
+    @Override
+    public void onFirstNameError(String error) {
         etFirstName.requestFocus();
         etFirstName.setError(error);
     }
 
-        @Override
-        public void onLastNameError(String error) {
+    @Override
+    public void onLastNameError(String error) {
         etLastName.requestFocus();
         etLastName.setError(error);
     }
 
-        @Override
-        public void onSuccess(ProfileResponse response) {
-        if(response.getResponse().getType() == AppGlobal.TYPE_GET_PROFILE) {
+    @Override
+    public void onSuccess(ProfileResponse response) {
+        if (response.getResponse().getType() == AppGlobal.TYPE_GET_PROFILE) {
             //after getting data update the UI
             updateUI(response);
-        }
-        else
-        {
-            Utils.showCustomToast(EditProfileActivity.this,"Profile Updated Successfully");
+        } else {
+            Utils.showCustomToast(EditProfileActivity.this, "Profile Updated Successfully");
             //updateUI after the updation of the profile
             getProfile();
         }
 
     }
 
-        @Override
-        public void onFailure(String error) {
-        Utils.showCustomToast(EditProfileActivity.this,error);
+    @Override
+    public void onFailure(String error) {
+        Utils.showCustomToast(EditProfileActivity.this, error);
     }
 
-        private void updateUI(ProfileResponse response) {
-        tv_user_name.setText(Utils.capitalize(response.getResponse().getUserProfile().getFirstName() + " " +  response.getResponse().getUserProfile().getLastName()));
+    private void updateUI(ProfileResponse response) {
+//        tv_user_name.setText(Utils.capitalize(response.getResponse().getUserProfile().getFirstName() + " " +  response.getResponse().getUserProfile().getLastName()));
+        tv_user_name.setText(Utils.capitalize(response.getResponse().getUserProfile().getUserName()));
 //        etEmail.setText(Utils.capitalize(response.getResponse().getUserProfile().getEmail()));
         etFirstName.setText(Utils.capitalize(response.getResponse().getUserProfile().getFirstName()));
         etLastName.setText(response.getResponse().getUserProfile().getLastName());
 //        etUsername.setText("@"+response.getResponse().getUserProfile().getUserName().replace(" ", "").toLowerCase());
 
-            String imageURL = response.getResponse().getUserProfile().getImageURL();
-            String defaultURL = "http://23.111.138.246:8021/Content/Upload/ProfileImage/oposee-profile.png";
+        String imageURL = response.getResponse().getUserProfile().getImageURL();
+        String defaultURL = "http://23.111.138.246:8021/Content/Upload/ProfileImage/oposee-profile.png";
 
-            String url = imageURL == null || imageURL.length() == 0 || imageURL.equals("")? defaultURL : imageURL;
-            Picasso.get()
-                    .load(url)
-                    .placeholder(R.drawable.user)
-                    .error(R.drawable.user)
-                    .into(iv_user);
+        String url = imageURL == null || imageURL.length() == 0 || imageURL.equals("") ? defaultURL : imageURL;
+        Picasso.get()
+                .load(url)
+                .placeholder(R.drawable.user)
+                .error(R.drawable.user)
+                .into(iv_user);
 
     }
 
 
     @OnClick(R.id.iv_back)
-    void onBackClick()
-    {
+    void onBackClick() {
         finish();
     }
 
-        ////////////////////STARTING///////////////Profile picture updations code////////////////////////
-        private void permissionDialog() {
+    ////////////////////STARTING///////////////Profile picture updations code////////////////////////
+    private void permissionDialog() {
         askCompactPermissions(new String[]{PermissionUtils.Manifest_CAMERA, PermissionUtils.Manifest_WRITE_EXTERNAL_STORAGE, PermissionUtils.Manifest_READ_EXTERNAL_STORAGE}, new PermissionResult() {
             @Override
             public void permissionGranted() {
@@ -233,22 +233,59 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
         });
     }
 
-        @Override
-        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             imageLoader.onActivityResult(requestCode, data, iv_user);
             if (imageLoader.mIsImageSelected) {
                 Bitmap bitmap = imageLoader.getmBitmap();
-                mSelectedImageFile = Utils.savebitmap(bitmap, EditProfileActivity.this.getExternalCacheDir().getAbsolutePath());
+//                mSelectedImageFile = Utils.savebitmap(bitmap, EditProfileActivity.this.getExternalCacheDir().getAbsolutePath());
+
+                String filepath = storeImage(bitmap, Utils.getLoggedInUserId(EditProfileActivity.this));
+                File file = new File(filepath);
+                mSelectedImageFile = file;
+                Log.d("ImageBitmap=", mSelectedImageFile.toString());
 //                mSelectedImageFile = new File(imageLoader.getOutput().getPath());
 
             }
         }
     }
 
-        //send data to update profile
-        private void editProfile() {
+    public String storeImage(Bitmap imageData, String filename) {
+        // get path to external storage (SD card)
+
+        File sdIconStorageDir = null;
+        String filepath = "";
+
+        sdIconStorageDir = new File(Environment.getExternalStorageDirectory()
+                .getAbsolutePath() + "/myAppDir/");
+        // create storage directories, if they don't exist
+        if (!sdIconStorageDir.exists()) {
+            sdIconStorageDir.mkdirs();
+        }
+        try {
+            filepath = sdIconStorageDir.toString() + File.separator + filename;
+            FileOutputStream fileOutputStream = new FileOutputStream(filepath);
+            BufferedOutputStream bos = new BufferedOutputStream(fileOutputStream);
+            //Toast.makeText(m_cont, "Image Saved at----" + filePath, Toast.LENGTH_LONG).show();
+            // choose another format if PNG doesn't suit you
+            imageData.compress(Bitmap.CompressFormat.PNG, 100, bos);
+            bos.flush();
+            bos.close();
+
+        } catch (FileNotFoundException e) {
+            Log.w("TAG", "Error saving image file: " + e.getMessage());
+            return filepath;
+        } catch (IOException e) {
+            Log.w("TAG", "Error saving image file: " + e.getMessage());
+            return filepath;
+        }
+        return filepath;
+    }
+
+    //send data to update profile
+    private void editProfile() {
         if (Utils.isNetworkAvail(EditProfileActivity.this)) {
             mPresenter.profile(getEditProfileParams());
         } else {
@@ -257,8 +294,8 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
 
     }
 
-        //get the params for the edit profile
-        private ProfileParams getEditProfileParams() {
+    //get the params for the edit profile
+    private ProfileParams getEditProfileParams() {
         ProfileParams params = new ProfileParams();
         params.setType(AppGlobal.TYPE_PROFILE_UPDATE);
         params.setFirstName(etFirstName.getText().toString());
@@ -268,5 +305,5 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
         return params;
     }
 
-    }
+}
 

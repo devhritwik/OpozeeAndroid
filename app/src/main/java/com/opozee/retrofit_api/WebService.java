@@ -21,6 +21,7 @@ import com.opozee.pojo.ProfileResponse;
 import com.opozee.pojo.QuestionDetailResponse;
 import com.opozee.pojo.SearchQuestionResponse;
 import com.opozee.pojo.TagUsersResponse;
+import com.opozee.pojo.loginemail.LoginEmail;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -59,6 +61,10 @@ public interface WebService {
     @POST(WebUrl.USER_LOGIN_URL)
     @Headers({WebUrl.AUTHORIZATION_HEADER})
     Call<LoginResponse> loginUser(@Body LoginParams params);
+
+    //LoginAPI//
+    @POST("Login")
+    Call<List<LoginEmail>> loginemailuser(@Header("Content-Type") String Content, @Body String data );
 
     @POST(WebUrl.POST_QUESTION_URL)
     @Headers({WebUrl.AUTHORIZATION_HEADER})

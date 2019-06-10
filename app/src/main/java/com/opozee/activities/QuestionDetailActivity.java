@@ -474,7 +474,7 @@ public class QuestionDetailActivity extends AppCompatActivity implements Questio
             mQuestionText =fromServerUnicodeDecoded;
             tv_question.setText(Html.fromHtml(fromServerUnicodeDecoded.trim()));
             tv_user_name.setText("@" + response.getResponse().getAllOpinion().getPostQuestionDetail().getOwnerUserName().replace(" ", "").toLowerCase());
-            tv_name.setText(Utils.capitalize(response.getResponse().getAllOpinion().getPostQuestionDetail().getName()));
+            tv_name.setText(Utils.capitalize(response.getResponse().getAllOpinion().getPostQuestionDetail().getOwnerUserName()));
             final JSONObject jsonObject  = new JSONObject();
             try {
                 jsonObject.putOpt("ProfileOpened", response.getResponse().getAllOpinion().getPostQuestionDetail().getOwnerUserName());
@@ -527,8 +527,12 @@ public class QuestionDetailActivity extends AppCompatActivity implements Questio
             Log.e("TIME SPLIT ", " " + timeArr[0]);
             String time = Utils.convertESTToLocalTime(timeArr[0]).replace("-", " at ");
             tv_time.setText(time);
+if(response.getResponse().getAllOpinion().getPostQuestionDetail().getUserImage()!=null){
+    if(response.getResponse().getAllOpinion().getPostQuestionDetail().getUserImage().trim().length()>0){
+        Picasso.get().load(response.getResponse().getAllOpinion().getPostQuestionDetail().getUserImage()).into(iv_user);
+    }
+}
 
-            Picasso.get().load(response.getResponse().getAllOpinion().getPostQuestionDetail().getUserImage()).into(iv_user);
 
             int yesCount = response.getResponse().getAllOpinion().getPostQuestionDetail().getYesCount() != null ? response.getResponse().getAllOpinion().getPostQuestionDetail().getYesCount() : 0;
             int noCount = response.getResponse().getAllOpinion().getPostQuestionDetail().getNoCount() != null ? response.getResponse().getAllOpinion().getPostQuestionDetail().getNoCount() : 0;

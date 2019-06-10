@@ -151,7 +151,7 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
 
 
         holder.tv_user_name.setText("@"+usersList.get(position).getOwnerUserName().replace(" ", "").toLowerCase());
-        holder.tv_name.setText(Utils.capitalize(usersList.get(position).getName()));
+        holder.tv_name.setText(Utils.capitalize(usersList.get(position).getOwnerUserName()));
 
 
 

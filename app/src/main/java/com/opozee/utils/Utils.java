@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.opozee.R;
 import com.opozee.pojo.LoginResponse;
 import com.opozee.pojo.ProfileResponse;
+import com.opozee.pojo.loginemail.LoginEmail;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -177,6 +178,19 @@ public class Utils {
         sp.savePreferences(AppGlobal.IS_LOGGED_IN, true);
 //        sp.savePreferences(AppGlobal.UserRole, userProfile.getResponse().getUserData().getUserRole());
         sp.savePreferences(AppGlobal.Photo, userData.getImageURL());
+    }
+
+    public static void saveemailuserdata(Context context,LoginEmail loginEmail){
+        AppSP sp = AppSP.getInstance(context);
+
+        sp.savePreferences(AppGlobal.USER_ID, Integer.parseInt(loginEmail.getData().getId()));
+        sp.savePreferences(AppGlobal.Email, loginEmail.getData().getEmail());
+        sp.savePreferences(AppGlobal.UserName, loginEmail.getData().getUserName());
+        sp.savePreferences(AppGlobal.FirstName,"");
+        sp.savePreferences(AppGlobal.LastName, "");
+        sp.savePreferences(AppGlobal.IS_LOGGED_IN, true);
+//        sp.savePreferences(AppGlobal.UserRole, userProfile.getResponse().getUserData().getUserRole());
+        sp.savePreferences(AppGlobal.Photo, loginEmail.getData().getImageURL());
     }
 
     //for customToast

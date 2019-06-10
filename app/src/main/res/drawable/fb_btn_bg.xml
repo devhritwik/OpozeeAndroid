@@ -12,7 +12,7 @@
                 android:endColor="@color/fb_end_color"
                 android:startColor="@color/fb_start_color"
                 />
-            <corners android:radius="60dp" />
+            <corners android:radius="@dimen/_5sdp" />
         </shape>
     </item>
 
@@ -25,7 +25,7 @@
                 android:endColor="@color/end_color"
                 android:startColor="@color/start_color"
                 />
-            <corners android:radius="60dp" />
+            <corners android:radius="@dimen/_5sdp" />
         </shape>
     </item>
 

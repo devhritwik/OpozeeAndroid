@@ -131,7 +131,6 @@
                                     android:fontFamily="@font/renner"
                                     android:gravity="center_vertical"
                                     android:singleLine="true"
-                                    android:text="user1233"
                                     android:textColor="@color/black_color"
                                     android:textSize="@dimen/_12sdp" />
 
@@ -158,7 +157,6 @@
                                 android:fontFamily="@font/renner"
                                 android:gravity="center_vertical"
                                 android:singleLine="true"
-                                android:text="#@user1233"
                                 android:textColor="@color/grey"
                                 android:textSize="@dimen/_11sdp" />
 
@@ -182,7 +180,6 @@
                             android:layout_marginTop="@dimen/_3sdp"
                             android:layout_marginBottom="@dimen/_3sdp"
                             android:fontFamily="@font/renner"
-                            android:text="Is Today's Climate good?"
                             android:textColor="@color/black_color"
                             android:textSize="@dimen/_13sdp" />
 

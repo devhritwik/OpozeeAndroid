@@ -303,7 +303,8 @@ public class ProfileFragment extends Fragment implements ProfileView, PostedQues
     }
 
     private void updateUI(ProfileResponse response) {
-        tv_user_name.setText(Utils.capitalize(response.getResponse().getUserProfile().getFirstName() + " " +  response.getResponse().getUserProfile().getLastName()));
+//        tv_user_name.setText(Utils.capitalize(response.getResponse().getUserProfile().getFirstName() + " " +  response.getResponse().getUserProfile().getLastName()));
+        tv_user_name.setText(Utils.capitalize(response.getResponse().getUserProfile().getUserName()));
 
 
         mUserName = response.getResponse().getUserProfile().getUserName();
