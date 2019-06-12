@@ -2,9 +2,18 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_questions"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+
+    <View
+        android:id="@+id/view_reaction"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="@dimen/_20sdp"></View>
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -71,6 +80,7 @@
     </android.support.v7.widget.Toolbar>
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nv_data"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/linear_bottom"
@@ -134,19 +144,38 @@
                                     android:textColor="@color/black_color"
                                     android:textSize="@dimen/_12sdp" />
 
-                                <TextView
-                                    android:id="@+id/tv_time"
+                                <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
-                                    android:layout_weight="0.5"
-                                    android:fontFamily="@font/renner"
-                                    android:gravity="center_vertical|right"
-                                    android:paddingRight="@dimen/_4sdp"
-                                    android:singleLine="true"
-                                    android:text="Now"
-                                    android:textColor="@color/grey"
-                                    android:textSize="@dimen/_11sdp" />
+                                    android:orientation="vertical"
+                                    android:layout_weight="0.5">
+                                    <TextView
+                                        android:id="@+id/tv_time"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/_2sdp"
+                                        android:fontFamily="@font/renner"
+                                        android:gravity="center_vertical|right"
+                                        android:paddingRight="@dimen/_4sdp"
+                                        android:singleLine="true"
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/_11sdp"
+                                        android:visibility="visible" />
+
+                                    <TextView
+                                        android:id="@+id/tv_reaction"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/_2sdp"
+                                        android:fontFamily="@font/renner"
+                                        android:gravity="center_vertical|right"
+                                        android:paddingRight="@dimen/_4sdp"
+                                        android:singleLine="true"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/_11sdp"
+                                        android:visibility="visible" />
+                                </LinearLayout>
                             </LinearLayout>
 
                             <TextView

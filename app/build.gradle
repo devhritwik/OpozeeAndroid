@@ -79,6 +79,7 @@ dependencies {
     implementation 'me.biubiubiu.justifytext:library:1.1'
     implementation 'com.github.armcha:SpaceNavigationView:1.6.0'
     implementation 'com.github.pchmn:MaterialChipsInput:1.0.8'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
 
     //
     //    // Add dependency

@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.opozee.OpozeeActivity;
 import com.opozee.R;
 import com.opozee.utils.AppGlobal;
 import com.opozee.utils.AppSP;
@@ -27,8 +28,8 @@ import com.opozee.utils.AppSP;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SplashActivity extends AppCompatActivity {
-    private static final String TAG = SplashActivity.class.getSimpleName() ;
+public class SplashActivity extends OpozeeActivity {
+    private static final String TAG = "Token_Get_Log" ;
     @BindView(R.id.main_relative)
     RelativeLayout main_relative;
     private AppSP appSP;
@@ -96,9 +97,10 @@ public class SplashActivity extends AppCompatActivity {
                             // Log and toast
                             String msg = getString(R.string.msg_token_fmt, token);
                             Log.d(TAG, msg);
-                            Toast.makeText(SplashActivity.this, msg, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(SplashActivity.this, msg, Toast.LENGTH_SHORT).show();
                         }
                     });
+
             // [END retrieve_current_token]
     }
 

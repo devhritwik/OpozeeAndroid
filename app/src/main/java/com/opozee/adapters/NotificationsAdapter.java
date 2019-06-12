@@ -133,10 +133,30 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
         String fromServerUnicodeDecoded = StringEscapeUtils.unescapeJava(usersList.get(position).getMessage());
         holder.tv_notification.setText(fromServerUnicodeDecoded);
 
+//        String timeArr[] = usersList.get(position).getCreationDate().replace("T", " ").split("/.");
+//        Log.e("TIME SPLIT ", " " + timeArr[0]);
+//        String time = Utils.convertESTToLocalTime(timeArr[0]).replace("-", " at ");
+
         String timeArr[] = usersList.get(position).getCreationDate().replace("T", " ").split("/.");
         Log.e("TIME SPLIT ", " " + timeArr[0]);
         String time = Utils.convertESTToLocalTime(timeArr[0]).replace("-", " at ");
-        holder.tv_date.setText(time);
+        String conertdate = timeArr[0].replace("ll", "");
+
+        String timeexact = Utils.getlocaltime(conertdate);
+        Long date = Utils.convertdatestring(timeexact);
+        String timeago = Utils.getTimeAgo(date);
+
+//            Log.d("TimeFormat_Log",time);
+//            Log.d("TimeFormat_Log","conertdate="+conertdate);
+//            Log.d("TimeFormat_Log","Long="+date);
+//            Log.d("TimeFormat_Log","timeago="+timeago);
+//            Log.d("TimeFormat_Log","Date="+timeexact);
+        if (timeago != null) {
+            holder.tv_date.setText(timeago);
+        }
+
+
+//        holder.tv_date.setText(time);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

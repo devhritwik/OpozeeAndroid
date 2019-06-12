@@ -92,7 +92,7 @@
                 </RelativeLayout>
 
                 <ImageView
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:id="@+id/iv_edit"
                     android:layout_width="@dimen/_45sdp"
                     android:layout_height="@dimen/_45sdp"
@@ -140,84 +140,113 @@
                 android:focusableInTouchMode="true"
                 android:orientation="vertical">
 
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/rounded_edittext_bg"
-                    >
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:background="@color/white_color"
-                        >
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginTop="12dp"
-                            android:layout_marginRight="20dp"
-                            android:text="@string/first_name"
-                            android:textColor="@color/stroke_color"
-                            android:textSize="@dimen/_16sdp" />
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:id="@+id/etFirstName"
-                            android:hint="First Name"
-                            android:focusableInTouchMode="true"
-                            android:imeOptions="actionNext"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:text=""
-                            />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:background="@color/white_color"
-                        >
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginTop="12dp"
-                            android:layout_marginRight="20dp"
-                            android:text="@string/last_name"
-                            android:textColor="@color/stroke_color"
-                            android:textSize="@dimen/_16sdp"
-                            />
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/etLastName"
-                            android:layout_marginTop="10dp"
-                            android:focusableInTouchMode="true"
-                            android:hint="Last Name"
-                            android:imeOptions="actionNext"
-                            android:inputType="textEmailAddress"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:text=""
-                            />
-
-                    </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_15sdp">
 
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/divider_color"/>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tl_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="@dimen/_15sdp"
+        android:paddingLeft="@dimen/_15sdp"
+        android:paddingBottom="15dp">
+
+        <EditText
+            android:id="@+id/et_edit_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/black_color"
+            android:hint="@string/text_username"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/black_color"
+            android:textColorHint="@color/black_color"
+            android:textSize="@dimen/_15sdp" />
+
+    </android.support.design.widget.TextInputLayout>
+
+</LinearLayout>
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:background="@drawable/rounded_edittext_bg"-->
+                    <!--&gt;-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="vertical"-->
+                        <!--android:background="@color/white_color"-->
+                        <!--&gt;-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="20dp"-->
+                            <!--android:layout_marginTop="12dp"-->
+                            <!--android:layout_marginRight="20dp"-->
+                            <!--android:text="@string/first_name"-->
+                            <!--android:textColor="@color/stroke_color"-->
+                            <!--android:textSize="@dimen/_16sdp" />-->
+                        <!--<EditText-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginTop="10dp"-->
+                            <!--android:id="@+id/etFirstName"-->
+                            <!--android:hint="First Name"-->
+                            <!--android:focusableInTouchMode="true"-->
+                            <!--android:imeOptions="actionNext"-->
+                            <!--android:layout_marginLeft="20dp"-->
+                            <!--android:layout_marginRight="20dp"-->
+                            <!--android:text=""-->
+                            <!--/>-->
+
+                    <!--</LinearLayout>-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="vertical"-->
+                        <!--android:background="@color/white_color"-->
+                        <!--&gt;-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="20dp"-->
+                            <!--android:layout_marginTop="12dp"-->
+                            <!--android:layout_marginRight="20dp"-->
+                            <!--android:text="@string/last_name"-->
+                            <!--android:textColor="@color/stroke_color"-->
+                            <!--android:textSize="@dimen/_16sdp"-->
+                            <!--/>-->
+                        <!--<EditText-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:id="@+id/etLastName"-->
+                            <!--android:layout_marginTop="10dp"-->
+                            <!--android:focusableInTouchMode="true"-->
+                            <!--android:hint="Last Name"-->
+                            <!--android:imeOptions="actionNext"-->
+                            <!--android:inputType="textEmailAddress"-->
+                            <!--android:layout_marginLeft="20dp"-->
+                            <!--android:layout_marginRight="20dp"-->
+                            <!--android:text=""-->
+                            <!--/>-->
+
+                    <!--</LinearLayout>-->
+
+
+                    <!--<View-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="1dp"-->
+                        <!--android:background="@color/divider_color"/>-->
 
 
 
@@ -225,7 +254,7 @@
 
 
 
-                </LinearLayout>
+                <!--</LinearLayout>-->
 
 
                 <!--<Button-->
@@ -244,31 +273,26 @@
                     android:id="@+id/btnSave"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginBottom="@dimen/_20sdp"
                     android:layout_marginRight="@dimen/_45sdp"
                     android:layout_marginLeft="@dimen/_45sdp"
                     android:background="@drawable/post_question_button_bg"
                     android:gravity="center"
-                    android:paddingLeft="@dimen/_45sdp"
-                    android:paddingRight="@dimen/_45sdp"
-                    android:layout_gravity="bottom"
                     android:text="@string/saveprofile"
-                    android:textColor="@color/white_color"
-                    android:textSize="@dimen/_18sdp" />
+                    android:textColor="@color/white_color"/>
 
                 <TextView
                     android:id="@+id/log_out_button"
                     android:layout_gravity="center"
                     android:gravity="center|bottom"
                     android:text="Log Out"
-                    android:textSize="20dp"
+                    android:textSize="@dimen/_15sdp"
                     android:textStyle="bold"
+                   android:padding="@dimen/_15sdp"
                     android:textColor="@color/red"
-
                     android:layout_marginBottom="10dp"
                     android:layout_width="wrap_content"
-
                     android:layout_height="wrap_content" />
 
             </LinearLayout>

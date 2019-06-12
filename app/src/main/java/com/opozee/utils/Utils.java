@@ -29,8 +29,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.TimeZone;
@@ -402,6 +404,20 @@ public class Utils {
 
     }
 
+    public static long convertdatestring(String strtime){
+//        String givenDateString = "Tue Apr 23 16:08:28 GMT+05:30 2013";
+//        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date mDate = sdf.parse(strtime);
+            long timeInMilliseconds = mDate.getTime();
+            System.out.println("Date in milli :: " + timeInMilliseconds);
+        return timeInMilliseconds;
+        } catch (ParseException e) {
+            Log.d("TimeFormat_Log","Exception="+e.toString());
+          return 0;
+        }
+    }
     public static String convertESTToLocalTime(String strTime)
     {
 
@@ -412,6 +428,7 @@ public class Utils {
         System.out.println(tz.getDisplayName());
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         format.setTimeZone(tz);
+        Log.d("TimeFormat_Log","Method="+tz);
         Date d1 = null;
 
         try {
@@ -473,6 +490,22 @@ public class Utils {
             Log.e("exception", e.getMessage());
         }
         return d1;
+
+    }
+
+    public static String getlocaltime(String dates){
+//        String dateStr = "Jul 16, 2013 12:08:59 AM";
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+        df.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date date = null;
+        try {
+            date = df.parse(dates);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        df.setTimeZone(TimeZone.getDefault());
+        String formattedDate = df.format(date);
+        return formattedDate;
 
     }
 

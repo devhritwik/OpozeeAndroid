@@ -7,7 +7,17 @@ public class ProfileParams {
     String firstName;
     String lastName;
     String user_id;
+    String userName;
     File profilePic;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     int type;
 
     public int getType() {

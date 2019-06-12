@@ -86,6 +86,19 @@ public class QuestionDetailResponse {
         @Expose
         private Boolean isAgree;
 
+        @SerializedName("CheckVisibility")
+        @Expose
+        private Boolean ischecked;
+
+
+        public Boolean getIschecked() {
+            return ischecked;
+        }
+
+        public void setIschecked(Boolean ischecked) {
+            this.ischecked = ischecked;
+        }
+
         public Integer getId() {
             return id;
         }
@@ -237,6 +250,29 @@ public class QuestionDetailResponse {
         @SerializedName("NoCount")
         @Expose
         private Integer noCount;
+
+        @SerializedName("ReactionSum")
+        @Expose
+        private String reactiontime;
+        @SerializedName("LastActivityTime")
+        @Expose
+
+        private String lastactivitytime;
+        public String getReactiontime() {
+            return reactiontime;
+        }
+
+        public void setReactiontime(String reactiontime) {
+            this.reactiontime = reactiontime;
+        }
+
+        public String getLastactivitytime() {
+            return lastactivitytime;
+        }
+
+        public void setLastactivitytime(String lastactivitytime) {
+            this.lastactivitytime = lastactivitytime;
+        }
 
         public Integer getYesCount() {
             return yesCount;

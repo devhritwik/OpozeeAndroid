@@ -29,7 +29,8 @@ public interface WebUrl {
     public static final String GET_QUESTION_DETAIL_URL = "GetAllOpinion";
     public static final String USER_LOGIN_URL = "signinthirdparty";
     public static final String POST_QUESTION_URL = "PostQuestion";
-    public static final String GET_ALL_QUESTION_URL = "GetAllPosts";
+//    public static final String GET_ALL_QUESTION_URL = "GetAllPosts";
+    public static final String GET_ALL_QUESTION_URL = "GetAllPostsMobile";
     public static final String DELETE_QUESTION_URL = "DeleteQuestion";
     public static final String GET_ALL_USERS_URL = "GetAllUsers";
     public static final String GET_ALL_TAGGED_USERS_URL = "GetAllTaggedUsers";

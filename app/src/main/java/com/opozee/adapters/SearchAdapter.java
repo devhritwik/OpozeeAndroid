@@ -86,7 +86,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
-        holder.tv_name.setText(Utils.capitalize(usersList.get(position).getName()));
+        holder.tv_name.setText(Utils.capitalize(usersList.get(position).getOwnerUserName()));
 
         holder.tv_user_name.setText("@"+usersList.get(position).getOwnerUserName().replace(" ", "").toLowerCase());
 

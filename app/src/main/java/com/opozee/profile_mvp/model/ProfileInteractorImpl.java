@@ -24,18 +24,18 @@ public class ProfileInteractorImpl implements ProfileInteractor {
             getProfile(params, mListener);
         }
         else if(params.getType() == AppGlobal.TYPE_PROFILE_UPDATE){
-            if(params.getFirstName() == null || params.getFirstName().length() == 0)
-            {
-                mListener.onFirstNameError("Please enter your firstname");
-            }
-            else if(params.getLastName() == null || params.getLastName().length() == 0)
-            {
-                mListener.onLastNameError("Please enter your lastname");
-            }
-            else
-            {
+//            if(params.getFirstName() == null || params.getFirstName().length() == 0)
+//            {
+//                mListener.onFirstNameError("Please enter your firstname");
+//            }
+//            else if(params.getLastName() == null || params.getLastName().length() == 0)
+//            {
+//                mListener.onLastNameError("Please enter your lastname");
+//            }
+//            else
+//            {
                 updateProfile(params, mListener);
-            }
+//            }
 
         }
     }
@@ -46,16 +46,33 @@ public class ProfileInteractorImpl implements ProfileInteractor {
         RequestBody firstNameBody = RequestBody.create(MediaType.parse("text/plain"), params.getFirstName());
         RequestBody userIdBody = RequestBody.create(MediaType.parse("text/plain"), params.getUser_id());
         RequestBody lastNameBody = RequestBody.create(MediaType.parse("text/plain"), params.getLastName());
+        RequestBody UserName = RequestBody.create(MediaType.parse("text/plain"), params.getUserName());
         WebService webService = (WebService) ServiceGenerator.createService(WebService.class);
         if (params.getProfilePic() != null) {
-            req = webService.editProfile(MultipartBody.Part.createFormData(AppGlobal.KEY_USER_PROFILE_PIC, params.getProfilePic().getName(), RequestBody.create(MediaType.parse("image/*"), params.getProfilePic())), userIdBody, firstNameBody, lastNameBody);
+
+            RequestBody fileReqBody = RequestBody.create(MediaType.parse("image/*"), params.getProfilePic());
+            MultipartBody.Part part = MultipartBody.Part.createFormData("upload", params.getProfilePic().getName(), fileReqBody);
+//            RequestBody description = RequestBody.create(MediaType.parse("text/plain"), "image-type");
+         Log.d("ImageBitmap=",fileReqBody.toString());
+         Log.d("ImageBitmap=",part.toString());
+         Log.d("ImageBitmap=",""+params.getProfilePic());
+         Log.d("ImageBitmap=",""+params.getProfilePic().getName());
+         Log.d("ImageBitmap=",""+params.getProfilePic());
+//            req = webService.editProfile(MultipartBody.Part.createFormData(AppGlobal.KEY_USER_PROFILE_PIC, params.getProfilePic().getName(), RequestBody.create(MediaType.parse("image/*"), params.getProfilePic())), userIdBody, firstNameBody, lastNameBody);
+            req = webService.editProfile(part, userIdBody, firstNameBody, lastNameBody,UserName);
         } else {
-            req = webService.editProfile(null, userIdBody, firstNameBody, lastNameBody);
+            req = webService.editProfile(null, userIdBody, firstNameBody, lastNameBody,UserName);
         }
         req.enqueue(new Callback<ProfileResponse>() {
             @Override
             public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
-                Log.d("Profile_Log",response.toString());
+                Log.d("Profile_Log",""+response.body().toString());
+                Log.d("Profile_Log",""+response);
+                Log.d("Profile_Log",""+response.body().getResponse().getCode());
+                Log.d("Profile_Log",""+response.body().getResponse().getStatus());
+                Log.d("Profile_Log",""+response.body().getResponse().getStatus());
+                Log.d("Profile_Log",""+response);
+                Log.d("Profile_Log",""+response.body().getResponse());
                 if (response.isSuccessful()) {
                     if (response.body().getResponse().getCode() == 0 ) {
                         ProfileResponse LoginSignupResponse = response.body();

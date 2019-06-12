@@ -53,14 +53,15 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
     @BindView(R.id.log_out_button)
     TextView mLogOutButton;
 
-    @BindView(R.id.etFirstName)
-    EditText etFirstName;
-    @BindView(R.id.etLastName)
-    EditText etLastName;
+//    @BindView(R.id.etFirstName)
+//    EditText etFirstName;
+//    @BindView(R.id.etLastName)
+//    EditText etLastName;
 
     private ProfilePresenterImpl mPresenter;
     private ImageLoaderFromDevice imageLoader;
     private File mSelectedImageFile;
+    EditText et_username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +71,7 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
         //add the whole view to the butterknife
         ButterKnife.bind(this);
 
+        et_username=findViewById(R.id.et_edit_username);
         //initialize the imageLoader class to make interface for getting the profile pic using camera or gallery
         imageLoader = new ImageLoaderFromDevice(EditProfileActivity.this);
 
@@ -137,7 +139,15 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
 
     @OnClick(R.id.btnSave)
     public void onSaveClick() {
-        editProfile();
+        if(et_username!=null){
+            if(et_username.getText().toString().trim().length()>0){
+                editProfile();
+            }else{
+                et_username.setError("Username is empty");
+                et_username.requestFocus();
+            }
+        }
+
     }
 
     @OnClick(R.id.iv_edit)
@@ -160,14 +170,14 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
 
     @Override
     public void onFirstNameError(String error) {
-        etFirstName.requestFocus();
-        etFirstName.setError(error);
+//        etFirstName.requestFocus();
+//        etFirstName.setError(error);
     }
 
     @Override
     public void onLastNameError(String error) {
-        etLastName.requestFocus();
-        etLastName.setError(error);
+//        etLastName.requestFocus();
+//        etLastName.setError(error);
     }
 
     @Override
@@ -191,9 +201,10 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
     private void updateUI(ProfileResponse response) {
 //        tv_user_name.setText(Utils.capitalize(response.getResponse().getUserProfile().getFirstName() + " " +  response.getResponse().getUserProfile().getLastName()));
         tv_user_name.setText(Utils.capitalize(response.getResponse().getUserProfile().getUserName()));
+        et_username.setText(response.getResponse().getUserProfile().getUserName());
 //        etEmail.setText(Utils.capitalize(response.getResponse().getUserProfile().getEmail()));
-        etFirstName.setText(Utils.capitalize(response.getResponse().getUserProfile().getFirstName()));
-        etLastName.setText(response.getResponse().getUserProfile().getLastName());
+//        etFirstName.setText(Utils.capitalize(response.getResponse().getUserProfile().getFirstName()));
+//        etLastName.setText(response.getResponse().getUserProfile().getLastName());
 //        etUsername.setText("@"+response.getResponse().getUserProfile().getUserName().replace(" ", "").toLowerCase());
 
         String imageURL = response.getResponse().getUserProfile().getImageURL();
@@ -270,7 +281,7 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
             BufferedOutputStream bos = new BufferedOutputStream(fileOutputStream);
             //Toast.makeText(m_cont, "Image Saved at----" + filePath, Toast.LENGTH_LONG).show();
             // choose another format if PNG doesn't suit you
-            imageData.compress(Bitmap.CompressFormat.PNG, 100, bos);
+            imageData.compress(Bitmap.CompressFormat.JPEG, 100, bos);
             bos.flush();
             bos.close();
 
@@ -298,8 +309,9 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
     private ProfileParams getEditProfileParams() {
         ProfileParams params = new ProfileParams();
         params.setType(AppGlobal.TYPE_PROFILE_UPDATE);
-        params.setFirstName(etFirstName.getText().toString());
-        params.setLastName(etLastName.getText().toString());
+        params.setUserName(et_username.getText().toString());
+        params.setFirstName("");
+        params.setLastName("");
         params.setProfilePic(mSelectedImageFile);
         params.setUser_id(Utils.getLoggedInUserId(EditProfileActivity.this));
         return params;

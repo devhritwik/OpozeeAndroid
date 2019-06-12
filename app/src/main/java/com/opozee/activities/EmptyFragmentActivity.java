@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.opozee.OpozeeActivity;
 import com.opozee.R;
 import com.opozee.fragments.TagSeachFragment;
 
@@ -20,7 +21,7 @@ import butterknife.OnClick;
  *      and set the title with bundle arguments
  */
 
-public class EmptyFragmentActivity extends AppCompatActivity {
+public class EmptyFragmentActivity extends OpozeeActivity {
 
     public static final String EMPTY_FRAGMENT_ACTIVITY_TITLE_ARGUMENT = "EmptyActivityTitleArgument";
     private TagSeachFragment mSearchFragment;

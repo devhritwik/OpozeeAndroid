@@ -5,9 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.opozee.OpozeeActivity;
 import com.opozee.R;
 
-public class RegisterUserActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterUserActivity extends OpozeeActivity implements View.OnClickListener {
 TextView tv_cancel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

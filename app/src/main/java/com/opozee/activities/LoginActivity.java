@@ -3,6 +3,7 @@ package com.opozee.activities;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnEditorAction;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,6 +47,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.opozee.OpozeeActivity;
 import com.opozee.R;
 import com.opozee.WebRequest;
 import com.opozee.application.QuestionnaireApplication;
@@ -70,7 +72,7 @@ import org.json.JSONObject;
 import java.security.MessageDigest;
 import java.util.List;
 
-public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, LoginView, View.OnClickListener {
+public class LoginActivity extends OpozeeActivity implements GoogleApiClient.OnConnectionFailedListener, LoginView, View.OnClickListener {
 
     @BindView(R.id.btn_fb)
     Button btn_fb;
@@ -213,7 +215,33 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 });
         // [END retrieve_current_token]
     }
+    @OnEditorAction(R.id.et_password)
+    boolean onEditorAction()
+    {
+        if (et_email != null && et_password != null) {
+            String email = et_email.getText().toString();
+            String password = et_password.getText().toString();
 
+            if (email.length() > 0) {
+                if (isEmailValid(email)) {
+                    if (password.length() > 0) {
+                        loginUseremail(email, password);
+                    } else {
+                        et_password.requestFocus();
+                        et_password.setError("Password is required");
+                    }
+                } else {
+                    et_email.requestFocus();
+                    et_email.setError("Invalid Email");
+                }
+            } else {
+                et_email.requestFocus();
+                et_email.setError("Email is required");
+            }
+        }
+
+        return false;
+    }
     private void setPresenter() {
         mPresenter = new LoginPresenterImpl();
         mPresenter.attachView(this, new LoginInteractorImpl());
@@ -227,6 +255,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
         return result;
     }
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

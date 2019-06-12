@@ -7,11 +7,13 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
@@ -31,6 +33,7 @@ import android.widget.Toast;
 
 
 import com.google.android.flexbox.FlexboxLayout;
+import com.opozee.OpozeeActivity;
 import com.opozee.R;
 import com.opozee.adapters.OpinionAdapter;
 import com.opozee.application.QuestionnaireApplication;
@@ -63,6 +66,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,7 +80,7 @@ import static com.opozee.activities.EmptyFragmentActivity.EMPTY_FRAGMENT_ACTIVIT
 import static com.opozee.fragments.ProfileFragment.PROFILE_FRAGMENG_ARGUEMENT_USER_ID;
 import static com.opozee.fragments.TagSeachFragment.SEARCH_TAG_ARGUMENT;
 
-public class QuestionDetailActivity extends AppCompatActivity implements QuestionDetailView, BookMarkView, LikeDislikeView, ProfileView {
+public class QuestionDetailActivity extends OpozeeActivity implements QuestionDetailView, BookMarkView, LikeDislikeView, ProfileView {
 
     @BindView(R.id.question_details_opinion_recycle_view)
     RecyclerView recyclerView;
@@ -121,7 +125,10 @@ public class QuestionDetailActivity extends AppCompatActivity implements Questio
     public TextView tv_count_dislikes;
     @BindView(R.id.add_opinion_fab)
     public FloatingActionButton mAddOpinionFAB;
+    @BindView(R.id.tv_reaction)
+    public TextView tv_reaction;
 
+    public RelativeLayout rl_questions;
 
     private final Object lock = new Object();
 
@@ -137,13 +144,18 @@ public class QuestionDetailActivity extends AppCompatActivity implements Questio
     private boolean mIsBookmarked;
     private String mQuestionText;
     private int mQuestionId;
-
+    public static View view_reaction;
+    public LinearLayout linear;
+public Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_detail);
-
+        rl_questions = findViewById(R.id.rl_questions);
+        view_reaction = findViewById(R.id.view_reaction);
+        linear=findViewById(R.id.linear);
+        toolbar=findViewById(R.id.toolbar);
         ButterKnife.bind(this);
         seekBar.setEnabled(false);
         id = getIntent().getIntExtra("id", 0);
@@ -161,8 +173,51 @@ public class QuestionDetailActivity extends AppCompatActivity implements Questio
         //setupYesNoButtonMode();
         setupAddingOpinionInterface();
 
+        linear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(OpinionAdapter.ViewHolder.ll_subreation.getVisibility()==View.VISIBLE){
+//                    OpinionAdapter.ViewHolder.ll_subreation.setVisibility(View.GONE);
+                }
+                if(OpinionAdapter.ViewHolder.ll_subreation_no.getVisibility()==View.VISIBLE){
+//                    OpinionAdapter.ViewHolder.ll_subreation_no.setVisibility(View.GONE);
+                }
+            }
+        });
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(OpinionAdapter.ViewHolder.ll_subreation.getVisibility()==View.VISIBLE){
+//                    OpinionAdapter.ViewHolder.ll_subreation.setVisibility(View.GONE);
 
-        
+                }
+                if(OpinionAdapter.ViewHolder.ll_subreation_no.getVisibility()==View.VISIBLE){
+//                    OpinionAdapter.ViewHolder.ll_subreation_no.setVisibility(View.GONE);
+                }
+            }
+        });
+
+//        rl_questions.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(getApplicationContext(), "test visibility", Toast.LENGTH_SHORT).show();
+//                if(OpinionAdapter.ViewHolder.ll_subreation.getVisibility()==View.VISIBLE){
+//                    OpinionAdapter.ViewHolder.ll_subreation.setVisibility(View.GONE);
+//                }
+//            }
+//        });
+//        view_reaction.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(QuestionDetailActivity.this, "Check testing", Toast.LENGTH_SHORT).show();
+//                if (OpinionAdapter.ViewHolder.ll_subreation.getVisibility() == View.VISIBLE) {
+//                    OpinionAdapter.ViewHolder.ll_subreation.setVisibility(View.GONE);
+//                    view_reaction.setVisibility(View.GONE);
+//                }
+//            }
+//        });
+
+
     }
 
     private void getProfile() {
@@ -197,7 +252,7 @@ public class QuestionDetailActivity extends AppCompatActivity implements Questio
 
     @Override
     public void onSuccess(ProfileResponse response) {
-        if(response.getResponse().getType() == AppGlobal.TYPE_GET_PROFILE) {
+        if (response.getResponse().getType() == AppGlobal.TYPE_GET_PROFILE) {
             //after getting data update the UI
             tokens = response.getResponse().getUserProfile().getBalanceToken();
         }
@@ -210,12 +265,10 @@ public class QuestionDetailActivity extends AppCompatActivity implements Questio
     }
 
     @OnClick(R.id.iv_back)
-    void onBackClick()
-    {
-        if(from == null)
+    void onBackClick() {
+        if (from == null)
             finish();
-        else if(from.equals("notification"))
-        {
+        else if (from.equals("notification")) {
             Intent i = new Intent(QuestionDetailActivity.this, HomeActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
@@ -223,13 +276,13 @@ public class QuestionDetailActivity extends AppCompatActivity implements Questio
         }
     }
 
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(from == null)
+        if (from == null)
             super.onBackPressed();
-        else if(from.equals("notification"))
-        {
+        else if (from.equals("notification")) {
             Intent i = new Intent(QuestionDetailActivity.this, HomeActivity.class);
             i.putExtra("from", "DetailActivity");
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -239,8 +292,7 @@ public class QuestionDetailActivity extends AppCompatActivity implements Questio
     }
 
     @OnClick(R.id.iv_share)
-    void onShareClick()
-    {
+    void onShareClick() {
         final String appPackageName = getPackageName();
 
         Map<String, String> map = new HashMap<>();
@@ -255,8 +307,7 @@ public class QuestionDetailActivity extends AppCompatActivity implements Questio
     }
 
     @OnClick(R.id.iv_favourite)
-    void onFavouriteClick()
-    {
+    void onFavouriteClick() {
         synchronized (lock) {
             if (mIsBookmarked) {
                 bookMarkQuestion(false);
@@ -333,7 +384,9 @@ public class QuestionDetailActivity extends AppCompatActivity implements Questio
         mLikeDislikePresenter.attachView(this, new LikeDislikeInteractorImpl());
 
     }
+
     //like dislike opinion
+//    LikeDislikeOpinion
     public void likeDislike(int commentStatus, int opinionId) {
         if (Utils.isNetworkAvail(QuestionDetailActivity.this)) {
             mLikeDislikePresenter.dislike(getParams(commentStatus, opinionId));
@@ -400,13 +453,13 @@ public class QuestionDetailActivity extends AppCompatActivity implements Questio
 
     @Override
     public void showProgress() {
-        if(Utils.mProgressDialog == null)
+        if (Utils.mProgressDialog == null)
             Utils.showProgress(QuestionDetailActivity.this);
     }
 
     @Override
     public void hideProgress() {
-        if(Utils.mProgressDialog != null)
+        if (Utils.mProgressDialog != null)
             Utils.dismissProgress();
     }
 
@@ -450,8 +503,7 @@ public class QuestionDetailActivity extends AppCompatActivity implements Questio
             @Override
             public void onAnimationEnd(Animation animation) {
                 view.setVisibility(visibilityStatus);
-                if(view instanceof LinearLayout)
-                {
+                if (view instanceof LinearLayout) {
                     slideUpVisibility(QuestionDetailActivity.this, send_message_layout, View.VISIBLE);
                 }
 
@@ -467,15 +519,15 @@ public class QuestionDetailActivity extends AppCompatActivity implements Questio
     }
 
     private void setUI(final QuestionDetailResponse response) {
-        if(response.getResponse().getAllOpinion().getPostQuestionDetail() != null) {
+        if (response.getResponse().getAllOpinion().getPostQuestionDetail() != null) {
             this.response = response;
             mQuestionId = response.getResponse().getAllOpinion().getPostQuestionDetail().getId();
             String fromServerUnicodeDecoded = StringEscapeUtils.unescapeJava(response.getResponse().getAllOpinion().getPostQuestionDetail().getQuestion());
-            mQuestionText =fromServerUnicodeDecoded;
+            mQuestionText = fromServerUnicodeDecoded;
             tv_question.setText(Html.fromHtml(fromServerUnicodeDecoded.trim()));
             tv_user_name.setText("@" + response.getResponse().getAllOpinion().getPostQuestionDetail().getOwnerUserName().replace(" ", "").toLowerCase());
             tv_name.setText(Utils.capitalize(response.getResponse().getAllOpinion().getPostQuestionDetail().getOwnerUserName()));
-            final JSONObject jsonObject  = new JSONObject();
+            final JSONObject jsonObject = new JSONObject();
             try {
                 jsonObject.putOpt("ProfileOpened", response.getResponse().getAllOpinion().getPostQuestionDetail().getOwnerUserName());
             } catch (JSONException e) {
@@ -487,7 +539,7 @@ public class QuestionDetailActivity extends AppCompatActivity implements Questio
                     QuestionnaireApplication.getMixpanelApi().track("Profile Opened", jsonObject);
                     int userId = response.getResponse().getAllOpinion().getPostQuestionDetail().getOwnerUserID();
                     Intent intent = new Intent(QuestionDetailActivity.this, ProfileActivity.class);
-                    intent.putExtra(PROFILE_FRAGMENG_ARGUEMENT_USER_ID , userId);
+                    intent.putExtra(PROFILE_FRAGMENG_ARGUEMENT_USER_ID, userId);
                     startActivity(intent);
                 }
             });
@@ -497,7 +549,7 @@ public class QuestionDetailActivity extends AppCompatActivity implements Questio
                     QuestionnaireApplication.getMixpanelApi().track("Profile Opened", jsonObject);
                     int userId = response.getResponse().getAllOpinion().getPostQuestionDetail().getOwnerUserID();
                     Intent intent = new Intent(QuestionDetailActivity.this, ProfileActivity.class);
-                    intent.putExtra(PROFILE_FRAGMENG_ARGUEMENT_USER_ID , userId);
+                    intent.putExtra(PROFILE_FRAGMENG_ARGUEMENT_USER_ID, userId);
                     startActivity(intent);
                 }
             });
@@ -506,7 +558,7 @@ public class QuestionDetailActivity extends AppCompatActivity implements Questio
             String tagString = response.getResponse().getAllOpinion().getPostQuestionDetail().getHashTags();
             tagString = tagString.replace(",", "");
             String[] tags = tagString.split("#");
-            for (String tag : tags){
+            for (String tag : tags) {
                 View currTagView = generateTagView(tag);
                 if (currTagView != null)
                     mTagsContainer.addView(currTagView);
@@ -523,15 +575,33 @@ public class QuestionDetailActivity extends AppCompatActivity implements Questio
 
 
             //below all the four lines are used to get the date in MMM dd yy at HH:mm format
+            Log.d("TimeFormat_Log", response.getResponse().getAllOpinion().getPostQuestionDetail().getCreationDate());
             String timeArr[] = response.getResponse().getAllOpinion().getPostQuestionDetail().getCreationDate().replace("T", " ").split("/.");
             Log.e("TIME SPLIT ", " " + timeArr[0]);
             String time = Utils.convertESTToLocalTime(timeArr[0]).replace("-", " at ");
-            tv_time.setText(time);
-if(response.getResponse().getAllOpinion().getPostQuestionDetail().getUserImage()!=null){
-    if(response.getResponse().getAllOpinion().getPostQuestionDetail().getUserImage().trim().length()>0){
-        Picasso.get().load(response.getResponse().getAllOpinion().getPostQuestionDetail().getUserImage()).into(iv_user);
-    }
-}
+            String conertdate = timeArr[0].replace("ll", "");
+
+            String timeexact = Utils.getlocaltime(conertdate);
+            Long date = Utils.convertdatestring(timeexact);
+            String timeago = Utils.getTimeAgo(date);
+
+//            Log.d("TimeFormat_Log",time);
+//            Log.d("TimeFormat_Log","conertdate="+conertdate);
+//            Log.d("TimeFormat_Log","Long="+date);
+//            Log.d("TimeFormat_Log","timeago="+timeago);
+//            Log.d("TimeFormat_Log","Date="+timeexact);
+            if (timeago != null) {
+                tv_time.setText(timeago);
+            }
+            if (response.getResponse().getAllOpinion().getPostQuestionDetail().getReactiontime() != null) {
+                tv_reaction.setText("Reaction : " + response.getResponse().getAllOpinion().getPostQuestionDetail().getReactiontime());
+            }
+//            if(response.getResponse().getAllOpinion().getPostQuestionDetail().get)
+            if (response.getResponse().getAllOpinion().getPostQuestionDetail().getUserImage() != null) {
+                if (response.getResponse().getAllOpinion().getPostQuestionDetail().getUserImage().trim().length() > 0) {
+                    Picasso.get().load(response.getResponse().getAllOpinion().getPostQuestionDetail().getUserImage()).into(iv_user);
+                }
+            }
 
 
             int yesCount = response.getResponse().getAllOpinion().getPostQuestionDetail().getYesCount() != null ? response.getResponse().getAllOpinion().getPostQuestionDetail().getYesCount() : 0;
@@ -549,19 +619,16 @@ if(response.getResponse().getAllOpinion().getPostQuestionDetail().getUserImage()
         // dislike span
         int dislikes_percentage = ((dislikes * 100 / total));
 
-        Log.e("Dislikes >>", "  "  +  dislikes +  "    " + dislikes_percentage);
+        Log.e("Dislikes >>", "  " + dislikes + "    " + dislikes_percentage);
         // like span
-        int likes_percentage = (likes  * 100 / total);
-        Log.e("likes >>", "  "  +  likes +  "    " + likes_percentage);
+        int likes_percentage = (likes * 100 / total);
+        Log.e("likes >>", "  " + likes + "    " + likes_percentage);
 
-        if(dislikes == 0 && likes == 0)
-        {
+        if (dislikes == 0 && likes == 0) {
             seekBar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_bg));
             seekBar.setSecondaryProgress(0);
             seekBar.invalidate();
-        }
-        else
-        {
+        } else {
             seekBar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_line));
 //            seekBar.setProgress(dislikes_percentage);
             seekBar.setSecondaryProgress(likes_percentage);
@@ -569,7 +636,7 @@ if(response.getResponse().getAllOpinion().getPostQuestionDetail().getUserImage()
         }
 
         tv_count_dislikes.setText("No " + dislikes_percentage + "%");
-        tv_count_likes.setText( likes_percentage + "% Yes");
+        tv_count_likes.setText(likes_percentage + "% Yes");
 
 
     }
@@ -618,17 +685,16 @@ if(response.getResponse().getAllOpinion().getPostQuestionDetail().getUserImage()
         Utils.showCustomToast(QuestionDetailActivity.this, error);
     }
 
-    public void hideKeyBoard()
-    {
+    public void hideKeyBoard() {
         // Check if no view has focus:
         View view = this.getCurrentFocus();
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 
-    private void setupYesNoMode(){
+    private void setupYesNoMode() {
         linear_yes_no.setVisibility(View.VISIBLE);
 
         btn_no.setOnClickListener(new View.OnClickListener() {
@@ -655,11 +721,11 @@ if(response.getResponse().getAllOpinion().getPostQuestionDetail().getUserImage()
     }
 
 
-    private void setupAddingOpinionInterface(){
+    private void setupAddingOpinionInterface() {
         linear_yes_no.setVisibility(View.GONE);
         mAddOpinionFAB.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 DialogFragment dialogFragment = new AddOpinionDialogFragment();
                 dialogFragment.show(getSupportFragmentManager(), "AddOpinionDialogFragment");
             }
@@ -667,11 +733,11 @@ if(response.getResponse().getAllOpinion().getPostQuestionDetail().getUserImage()
 
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
-    public void refresh(){
+    public void refresh() {
         getDetail();
     }
 
@@ -687,7 +753,7 @@ if(response.getResponse().getAllOpinion().getPostQuestionDetail().getUserImage()
         tagView.setBackground(getResources().getDrawable(R.drawable.tag_view_bg));
         FlexboxLayout.LayoutParams params = new FlexboxLayout.LayoutParams(FlexboxLayout.LayoutParams.WRAP_CONTENT,
                 FlexboxLayout.LayoutParams.WRAP_CONTENT);
-        params.bottomMargin  = padding;
+        params.bottomMargin = padding;
         params.leftMargin = padding;
         params.rightMargin = padding;
         tagView.setLayoutParams(params);
@@ -696,7 +762,7 @@ if(response.getResponse().getAllOpinion().getPostQuestionDetail().getUserImage()
             @Override
             public void onClick(View v) {
                 Map<String, String> map = new HashMap<>();
-                map.put("Tag" , tag);
+                map.put("Tag", tag);
                 QuestionnaireApplication.getMixpanelApi().track("Tag Clicked", new JSONObject(map));
                 Intent intent = new Intent(QuestionDetailActivity.this, EmptyFragmentActivity.class);
                 Bundle bundle = new Bundle();

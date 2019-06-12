@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
+import com.opozee.OpozeeActivity;
 import com.opozee.R;
 import com.opozee.fragments.ProfileFragment;
 
@@ -14,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends OpozeeActivity {
 
     private ProfileFragment profileFragment;
 

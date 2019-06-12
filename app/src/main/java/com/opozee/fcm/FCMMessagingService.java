@@ -200,22 +200,33 @@ public class FCMMessagingService extends FirebaseMessagingService {
      *
      */
     private void sendNotification(String message, int question_icon, Intent i) {
+        Log.d(TAG,"message="+message);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, i,
                 PendingIntent.FLAG_ONE_SHOT);
 
         String channelId = getString(R.string.default_notification_channel_id);
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder =
-                new NotificationCompat.Builder(this, channelId)
-                        .setSmallIcon(R.mipmap.question_icon)
-                        .setPriority(Notification.PRIORITY_HIGH)
-                        .setContentTitle(getString(R.string.fcm_message))
-                        .setContentText(message)
-                        .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
-                        .setAutoCancel(true)
-                        .setSound(defaultSoundUri)
-                        .setContentIntent(pendingIntent);
+        NotificationCompat.Builder notificationBuilder =null;
+if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O) {
+    notificationBuilder = new NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.mipmap.question_icon)
+            .setPriority(Notification.PRIORITY_HIGH)
+            .setContentTitle(getString(R.string.fcm_message))
+            .setContentText(message)
+            .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
+            .setAutoCancel(true)
+            .setSound(defaultSoundUri)
+            .setContentIntent(pendingIntent);
+}else{
+    notificationBuilder = new NotificationCompat.Builder(this)
+            .setSmallIcon(R.mipmap.question_icon)
+            .setContentTitle(getString(R.string.fcm_message))
+            .setContentText(message)
+            .setAutoCancel(true)
+            .setSound(defaultSoundUri)
+            .setContentIntent(pendingIntent);
+}
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

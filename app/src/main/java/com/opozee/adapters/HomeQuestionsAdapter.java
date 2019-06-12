@@ -82,6 +82,9 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
         @BindView(R.id.best_against_view)
         QuestionListTopBeliefView bestAgainstView;
 
+        @BindView(R.id.tv_reaction)
+        public TextView tv_reaction;
+
         public ViewHolder(View v) {
             super(v);
 
@@ -122,7 +125,36 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
         holder.tv_question.setText(Html.fromHtml(fromServerUnicodeDecoded.trim()));
         //holder.tv_question.setText(fromServerUnicodeDecoded.trim());
 
-//        holder.tv_time.setText(Utils.getTimeAgo(Utils.convertESTToLocalTime(usersList.get(position).getCreationDate()).getTime(), mContext));
+        Log.d("TimeFormat_Log",usersList.get(position).getCreationDate());
+        String timeArr[] = usersList.get(position).getCreationDate().replace("T", " ").split("/.");
+        Log.e("TIME SPLIT ", " " + timeArr[0]);
+        String time = Utils.convertESTToLocalTime(timeArr[0]).replace("-", " at ");
+        String conertdate=timeArr[0].replace("ll","");
+
+        String timeexact=Utils.getlocaltime(conertdate);
+        Long date=Utils.convertdatestring(timeexact);
+        String timeago=Utils.getTimeAgo(date);
+
+        Log.d("TimeFormat_Log",time);
+        Log.d("TimeFormat_Log","conertdate="+conertdate);
+        Log.d("TimeFormat_Log","Long="+date);
+        Log.d("TimeFormat_Log","timeago="+timeago);
+        Log.d("TimeFormat_Log","Date="+timeexact);
+        if(timeago!=null) {
+            holder.tv_time.setText(timeago);
+        }
+//        Log.d("Home_Log",usersList.get(position).getActivitytime());
+//        Log.d("Home_Log",usersList.get(position).getReactionsum());
+        if(usersList.get(position).getReactionsum()!=null){
+            holder.tv_reaction.setText("Reactions :"+usersList.get(position).getReactionsum());
+        }else{
+            holder.tv_reaction.setText("Reactions :"+"0");
+        }
+        if(usersList.get(position).getActivitytime()!=null){
+
+        }
+
+//        holder.tv_time.setText(Utils.getTimeAgo(Utils.convertESTToLocalTime(usersList.get(position).getCreationDate()), mContext));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

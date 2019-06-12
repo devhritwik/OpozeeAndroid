@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
+import com.opozee.OpozeeActivity;
 import com.opozee.R;
 import com.opozee.application.QuestionnaireApplication;
 import com.opozee.fragments.FavouriteFragment;
@@ -48,7 +49,7 @@ import butterknife.OnClick;
 
 import static com.opozee.fragments.ProfileFragment.PROFILE_FRAGMENG_ARGUEMENT_USER_ID;
 
-public class HomeActivity extends AppCompatActivity implements ProfileView {
+public class HomeActivity extends OpozeeActivity implements ProfileView {
 
 
     private ProfilePresenter mProfilePresenter;
@@ -94,9 +95,9 @@ public class HomeActivity extends AppCompatActivity implements ProfileView {
 
         getLastFragment(last_frag);
 
-
+Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
         createNotificationChannel();
-        mTokenCountView.setText("30");
+//        mTokenCountView.setText("30");
 
 
 
@@ -220,10 +221,8 @@ public class HomeActivity extends AppCompatActivity implements ProfileView {
             // Create channel to show notifications.
             String channelId  = getString(R.string.default_notification_channel_id);
             String channelName = getString(R.string.default_notification_channel_name);
-            NotificationManager notificationManager =
-                    getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(new NotificationChannel(channelId,
-                    channelName, NotificationManager.IMPORTANCE_HIGH));
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH));
         }
     }
 
@@ -478,6 +477,7 @@ public class HomeActivity extends AppCompatActivity implements ProfileView {
 
     @Override
     public void onSuccess(ProfileResponse response) {
+        Log.d("CountHome_Log","Token="+response.getResponse().getUserProfile().getBalanceToken());
         mTokenCountView.setText(Integer.toString(response.getResponse().getUserProfile().getBalanceToken()));
 
     }

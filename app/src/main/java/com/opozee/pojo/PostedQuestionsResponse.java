@@ -100,9 +100,35 @@ public class PostedQuestionsResponse {
         @SerializedName("YesCount")
         @Expose
         private Integer yesCount;
+
         @SerializedName("NoCount")
         @Expose
         private Integer noCount;
+
+
+        @SerializedName("ReactionSum")
+        @Expose
+        private String reactionsum;
+
+        @SerializedName("LastActivityTime")
+        @Expose
+        private String activitytime;
+
+        public String getActivitytime() {
+            return activitytime;
+        }
+
+        public void setActivitytime(String activitytime) {
+            this.activitytime = activitytime;
+        }
+
+        public String getReactionsum() {
+            return reactionsum;
+        }
+
+        public void setReactionsum(String reactionsum) {
+            this.reactionsum = reactionsum;
+        }
 
         public Integer getYesCount() {
             return yesCount;

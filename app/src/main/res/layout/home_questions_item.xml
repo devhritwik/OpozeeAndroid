@@ -50,25 +50,42 @@
                         android:layout_weight="0.5"
                         android:fontFamily="@font/renner"
                         android:gravity="center_vertical"
-                        android:singleLine="true"
-                        android:text="user1233"
                         android:textColor="@color/grey"
                         android:textSize="@dimen/_11sdp" />
 
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="0.5">
                     <TextView
                         android:id="@+id/tv_time"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_2sdp"
-                        android:layout_weight="0.5"
                         android:fontFamily="@font/renner"
                         android:gravity="center_vertical|right"
                         android:paddingRight="@dimen/_4sdp"
                         android:singleLine="true"
-                        android:text="Now"
                         android:textColor="@color/grey"
                         android:textSize="@dimen/_11sdp"
-                        android:visibility="gone" />
+                        android:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/tv_reaction"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_2sdp"
+                            android:fontFamily="@font/renner"
+                            android:gravity="center_vertical|right"
+                            android:paddingRight="@dimen/_4sdp"
+                            android:singleLine="true"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/_11sdp"
+                            android:visibility="visible" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <TextView

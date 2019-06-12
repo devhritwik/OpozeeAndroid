@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.opozee.OpozeeActivity;
 import com.opozee.R;
 import com.opozee.adapters.UserPostsAdapter;
 import com.opozee.delete_post_mvp.model.DeleteInteractorImpl;
@@ -40,47 +41,46 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class UserQuestionPostsActivity extends AppCompatActivity implements PostedQuestionsView, DeleteView {
+public class UserQuestionPostsActivity extends OpozeeActivity implements PostedQuestionsView, DeleteView {
 
-        @BindView(R.id.iv_back)
-        public ImageView iv_back;
+    @BindView(R.id.iv_back)
+    public ImageView iv_back;
     @BindView(R.id.tv_title)
     public TextView tv_title;
-        @BindView(R.id.recyclerView)
-        RecyclerView recyclerView;
-        @BindView(R.id.root_layout)
-        ScrollView root_layout;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
+    @BindView(R.id.root_layout)
+    ScrollView root_layout;
     @BindView(R.id.btn_add_post)
     FloatingActionButton btn_add_post;
-        @BindView(R.id.refreshLayout)
-        SmartRefreshLayout refreshLayout;
-        private PostedQuestionsPresenterImpl mPresenter;
-        private DeletePresenterImpl mDeletePresenter;
-
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout refreshLayout;
+    private PostedQuestionsPresenterImpl mPresenter;
+    private DeletePresenterImpl mDeletePresenter;
 
 
     private int pageIndex = 1;
     private int pageSize = 10;
     private boolean isLastPage = false;
     private boolean isRefreshed = false;
-    private List< PostedQuestionsResponse.PostQuestionDetail> questionsList = new ArrayList<>();
+    private List<PostedQuestionsResponse.PostQuestionDetail> questionsList = new ArrayList<>();
     private UserPostsAdapter mAdapter;
 
     private Fragment fr;
 
     @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_user_question_posts);
-            ButterKnife.bind(this);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_user_question_posts);
+        ButterKnife.bind(this);
 
 //set scroll listener for fab visibility
         setScrollListener();
 
-            setPresenter();
+        setPresenter();
 
-            //get all the questions
-            getQuestions();
+        //get all the questions
+        getQuestions();
         //set refresh listeners
         setRefreshListener();
 
@@ -115,7 +115,7 @@ public class UserQuestionPostsActivity extends AppCompatActivity implements Post
     }
 
     private void setRefreshListener() {
-        refreshLayout.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener(){
+        refreshLayout.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
                 isLastPage = true;
@@ -129,14 +129,13 @@ public class UserQuestionPostsActivity extends AppCompatActivity implements Post
                 isRefreshed = true;
                 pageIndex = 1;
                 questionsList.clear();
-                if(mAdapter != null)
+                if (mAdapter != null)
                     mAdapter.notifyDataSetChanged();
                 getQuestions();
                 refreshlayout.finishRefresh(2000/*,false*/);
             }
         });
     }
-
 
 
     private void getQuestions() {
@@ -148,33 +147,11 @@ public class UserQuestionPostsActivity extends AppCompatActivity implements Post
     }
 
 
-        @OnClick(R.id.iv_back)
-        void onBackClick()
-        {
-            if(fr == null)
-            {
-                finish();
-            }
-            else if(fr instanceof EditPostFragment || fr instanceof PostQuestionFragment)
-            {
-                fr = null;
-
-                refreshLayout.setVisibility(View.VISIBLE);
-                iv_back.setVisibility(View.VISIBLE);
-                root_layout.setVisibility(View.GONE);
-                tv_title.setText("USER POSTS");
-            }
-
-        }
-
-    @Override
-    public void onBackPressed() {
-        if(fr == null)
-        {
+    @OnClick(R.id.iv_back)
+    void onBackClick() {
+        if (fr == null) {
             finish();
-        }
-        else if(fr instanceof EditPostFragment || fr instanceof PostQuestionFragment)
-        {
+        } else if (fr instanceof EditPostFragment || fr instanceof PostQuestionFragment) {
             fr = null;
 
             refreshLayout.setVisibility(View.VISIBLE);
@@ -182,45 +159,53 @@ public class UserQuestionPostsActivity extends AppCompatActivity implements Post
             root_layout.setVisibility(View.GONE);
             tv_title.setText("USER POSTS");
         }
-        else
-        {
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (fr == null) {
+            finish();
+        } else if (fr instanceof EditPostFragment || fr instanceof PostQuestionFragment) {
+            fr = null;
+
+            refreshLayout.setVisibility(View.VISIBLE);
+            iv_back.setVisibility(View.VISIBLE);
+            root_layout.setVisibility(View.GONE);
+            tv_title.setText("USER POSTS");
+        } else {
             super.onBackPressed();
         }
 
     }
 
     //setPresenter to attach the view to the model
-        void setPresenter()
-        {
-            mPresenter = new PostedQuestionsPresenterImpl();
-            mPresenter.attachView(this, new PostedQuestionsInteractorImpl());
+    void setPresenter() {
+        mPresenter = new PostedQuestionsPresenterImpl();
+        mPresenter.attachView(this, new PostedQuestionsInteractorImpl());
 
-            //set Presenter for delete post
-            mDeletePresenter = new DeletePresenterImpl();
-            mDeletePresenter.attachView(this, new DeleteInteractorImpl());
+        //set Presenter for delete post
+        mDeletePresenter = new DeletePresenterImpl();
+        mDeletePresenter.attachView(this, new DeleteInteractorImpl());
 
-        }
-
+    }
 
 
     @SuppressLint("RestrictedApi")
     public void loadFragment(Fragment fr, String backStack) {
         this.fr = fr;
 
-        if(fr instanceof EditPostFragment) {
+        if (fr instanceof EditPostFragment) {
             refreshLayout.setVisibility(View.GONE);
             iv_back.setVisibility(View.VISIBLE);
             root_layout.setVisibility(View.VISIBLE);
             tv_title.setText("EDIT POST");
-        }
-        else if(fr instanceof PostQuestionFragment)
-        {
+        } else if (fr instanceof PostQuestionFragment) {
             refreshLayout.setVisibility(View.GONE);
             iv_back.setVisibility(View.VISIBLE);
             root_layout.setVisibility(View.VISIBLE);
             tv_title.setText("POST QUESTION");
         }
-
 
 
         FragmentManager fm = getSupportFragmentManager();
@@ -236,7 +221,7 @@ public class UserQuestionPostsActivity extends AppCompatActivity implements Post
     }
 
 
-        public void setAdapter() {
+    public void setAdapter() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(UserQuestionPostsActivity.this, LinearLayoutManager.VERTICAL, false);
         mAdapter = new UserPostsAdapter(UserQuestionPostsActivity.this, questionsList);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -246,23 +231,23 @@ public class UserQuestionPostsActivity extends AppCompatActivity implements Post
 
     @Override
     public void showProgress() {
-        if(!isRefreshed && !isLastPage)
-            if(Utils.mProgressDialog == null)
+        if (!isRefreshed && !isLastPage)
+            if (Utils.mProgressDialog == null)
                 Utils.showProgress(UserQuestionPostsActivity.this);
     }
 
     @Override
     public void hideProgress() {
-        if(!isRefreshed && !isLastPage)
-            if(Utils.mProgressDialog != null)
+        if (!isRefreshed && !isLastPage)
+            if (Utils.mProgressDialog != null)
                 Utils.dismissProgress();
     }
 
 
     @Override
     public void onSuccess(PostedQuestionsResponse response) {
-        if(response.getResponse().getAllUserQuestions().getPostQuestionDetail() != null)
-            if(response.getResponse().getAllUserQuestions().getPostQuestionDetail().size() > 0) {
+        if (response.getResponse().getAllUserQuestions().getPostQuestionDetail() != null)
+            if (response.getResponse().getAllUserQuestions().getPostQuestionDetail().size() > 0) {
                 questionsList.addAll(response.getResponse().getAllUserQuestions().getPostQuestionDetail());
 
                 mAdapter.notifyDataSetChanged();
@@ -271,26 +256,25 @@ public class UserQuestionPostsActivity extends AppCompatActivity implements Post
             }
     }
 
-        @Override
-        public void onSuccess(DeletePostResponse response) {
-        Utils.showCustomToast(UserQuestionPostsActivity.this,"Post deleted successfully");
+    @Override
+    public void onSuccess(DeletePostResponse response) {
+        Utils.showCustomToast(UserQuestionPostsActivity.this, "Post deleted successfully");
         getQuestions();
     }
 
-        @Override
-        public void onFailure(String error) {
+    @Override
+    public void onFailure(String error) {
         Utils.showCustomToast(UserQuestionPostsActivity.this, error);
     }
 
-        public void deletePost(Integer id) {
+    public void deletePost(Integer id) {
         DeletePostParams params = new DeletePostParams();
         params.setQuestId(id);
         mDeletePresenter.deletePost(params);
     }
 
     @OnClick(R.id.btn_add_post)
-    public void fabOnClick()
-    {
+    public void fabOnClick() {
         btn_add_post.hide();
         loadFragment(new PostQuestionFragment(), "");
     }
