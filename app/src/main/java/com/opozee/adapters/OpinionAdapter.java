@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,14 +42,14 @@ import static com.opozee.fragments.ProfileFragment.PROFILE_FRAGMENG_ARGUEMENT_US
 
 public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHolder> {
 
-    List<QuestionDetailResponse.Comment> usersList;
+    private List<QuestionDetailResponse.Comment> usersList;
     private Context mContext;
     private QuestionDetailResponse.Comment userData;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
 
         @BindView(R.id.iv_user_yes)
@@ -107,8 +108,8 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
         public ImageView iv_dislike_no;
 
 
-        public static LinearLayout ll_subreation, ll_subreation_no;
-        public static LinearLayout ll_likeGif, ll_factualGif, ll_smileyGif, ll_wowGif, ll_sadGif, ll_angryGif;
+        public LinearLayout ll_subreation, ll_subreation_no;
+        public LinearLayout ll_likeGif, ll_factualGif, ll_smileyGif, ll_wowGif, ll_sadGif, ll_angryGif;
 
         @BindView(R.id.ll_questionsView)
         public LinearLayout ll_questionView;
@@ -116,8 +117,10 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
         @BindView(R.id.iv_likeSub)
         public ImageView iv_likeSub;
 
-        public GifImageView gif_like, gif_factual, gif_smiley;
+        public GifImageView gif_like, gif_factual, gif_smiley, gif_wow, gif_angry;
+        public ImageView iv_sad;
 
+        public TextView tv_like,tv_factual,tv_smily,tv_wow,tv_sad,tv_angry;
 
 //        @BindView(R.id.btn_like_yes)
 //        public LikeButton btn_like_yes;
@@ -145,13 +148,216 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
             gif_factual = v.findViewById(R.id.iv_factual);
             gif_smiley = v.findViewById(R.id.iv_smiley);
 
-            ll_likeGif.setVisibility(View.GONE);
-            ll_factualGif.setVisibility(View.GONE);
-            ll_smileyGif.setVisibility(View.GONE);
+            gif_wow = v.findViewById(R.id.iv_wow);
+            iv_sad = v.findViewById(R.id.iv_sad);
+            gif_angry = v.findViewById(R.id.iv_angry);
+
+            tv_like=v.findViewById(R.id.tv_likeGif);
+            tv_factual=v.findViewById(R.id.tv_factual);
+            tv_smily=v.findViewById(R.id.tv_smiley);
+            tv_wow=v.findViewById(R.id.tv_wow);
+            tv_sad=v.findViewById(R.id.tv_sad);
+            tv_angry=v.findViewById(R.id.tv_angry);
+
+//            ll_likeGif.setVisibility(View.GONE);
+//            ll_factualGif.setVisibility(View.GONE);
+//            ll_smileyGif.setVisibility(View.GONE);
 
 
         }
+
+        void bind(final int position) {
+            final QuestionDetailResponse.Comment item = usersList.get(position);
+//            mTextView.setText(item.getText());
+
+
+            ll_like.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+//                    if (item.getLikes()) {
+////                        iv_like.setImageResource(R.drawable.thumb_off);
+////                        ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId());
+//                    } else {
+
+                        for (QuestionDetailResponse.Comment item1 : usersList) {
+                            item1.setIschecked(false);
+                        }
+                        item.setCode(0);
+                        item.setIschecked(true);
+
+                        notifyDataSetChanged();
+
+//                    }
+                }
+            });
+
+
+            ll_dislike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    if (item.getDisLikes()) {
+////                        iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
+////                        ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId());
+//                    }
+//                    else {
+                        for (QuestionDetailResponse.Comment item1 : usersList) {
+                            item1.setIschecked(false);
+                        }
+                        item.setIschecked(true);
+                        item.setCode(1);
+
+                        notifyDataSetChanged();
+//                    }
+                }
+            });
+
+            ll_like_yes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+//                    if (item.getLikes()) {
+////                        iv_like_yes.setImageResource(R.drawable.thumb_off);
+////                        ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId());
+//                    }
+//                    else {
+                        for (QuestionDetailResponse.Comment item1 : usersList) {
+                            item1.setIschecked(false);
+                        }
+                        item.setCode(2);
+                        item.setIschecked(true);
+
+                        notifyDataSetChanged();
+//                        iv_like_yes.setImageResource(R.drawable.thumb_on);
+//                        ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId());
+//                    }
+                }
+            });
+
+            ll_dislike_no.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+//                    if (item.getDisLikes()) {
+////                        iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
+////                        ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId());
+//                    }
+//                    else {
+                        for (QuestionDetailResponse.Comment item1 : usersList) {
+                            item1.setIschecked(false);
+                        }
+                        item.setCode(3);
+                        item.setIschecked(true);
+                        notifyDataSetChanged();
+
+//                    }
+//
+                }
+            });
+
+            ll_questionView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    for (QuestionDetailResponse.Comment item1 : usersList) {
+                        item1.setIschecked(false);
+                    }
+
+                    notifyDataSetChanged();
+                }
+            });
+
+
+            if (item.getIschecked() != null) {
+                if (item.getIschecked()) {
+
+                    switch (item.getCode()) {
+                        case 0:
+
+                            gif_like.setImageResource(R.drawable.noresizelike);
+                            gif_factual.setImageResource(R.drawable.noresizefactual);
+                            gif_smiley.setImageResource(R.drawable.noresizefunny);
+
+                            if (ll_likeGif.getVisibility() == View.VISIBLE) {
+                                ll_likeGif.setVisibility(View.INVISIBLE);
+                                ll_factualGif.setVisibility(View.INVISIBLE);
+                                ll_smileyGif.setVisibility(View.INVISIBLE);
+                            } else {
+                                ll_likeGif.setVisibility(View.VISIBLE);
+                                ll_factualGif.setVisibility(View.VISIBLE);
+                                ll_smileyGif.setVisibility(View.VISIBLE);
+                            }
+
+                            break;
+                        case 1:
+                            gif_like.setImageResource(R.drawable.noresizewows);
+                            gif_factual.setImageResource(R.drawable.noresizesad);
+                            gif_smiley.setImageResource(R.drawable.noresizeangry);
+
+                            if (ll_likeGif.getVisibility() == View.VISIBLE) {
+                                ll_likeGif.setVisibility(View.INVISIBLE);
+                                ll_factualGif.setVisibility(View.INVISIBLE);
+                                ll_smileyGif.setVisibility(View.INVISIBLE);
+                            } else {
+                                ll_likeGif.setVisibility(View.VISIBLE);
+                                ll_factualGif.setVisibility(View.VISIBLE);
+                                ll_smileyGif.setVisibility(View.VISIBLE);
+                            }
+
+
+                            break;
+                        case 2:
+
+                            gif_wow.setImageResource(R.drawable.noresizelike);
+                            iv_sad.setImageResource(R.drawable.noresizefactual);
+                            gif_angry.setImageResource(R.drawable.noresizefunny);
+
+                            if (ll_wowGif.getVisibility() == View.VISIBLE) {
+                                ll_subreation_no.setVisibility(View.GONE);
+                                ll_wowGif.setVisibility(View.INVISIBLE);
+                                ll_sadGif.setVisibility(View.INVISIBLE);
+                                ll_angryGif.setVisibility(View.INVISIBLE);
+                            } else {
+                                ll_subreation_no.setVisibility(View.VISIBLE);
+                                ll_wowGif.setVisibility(View.VISIBLE);
+                                ll_sadGif.setVisibility(View.VISIBLE);
+                                ll_angryGif.setVisibility(View.VISIBLE);
+                            }
+
+
+                            break;
+                        case 3:
+
+                            gif_wow.setImageResource(R.drawable.noresizewows);
+                            iv_sad.setImageResource(R.drawable.noresizesad);
+                            gif_angry.setImageResource(R.drawable.noresizeangry);
+
+                            if (ll_wowGif.getVisibility() == View.VISIBLE) {
+                                ll_subreation_no.setVisibility(View.GONE);
+                                ll_wowGif.setVisibility(View.INVISIBLE);
+                                ll_sadGif.setVisibility(View.INVISIBLE);
+                                ll_angryGif.setVisibility(View.INVISIBLE);
+                            } else {
+                                ll_subreation_no.setVisibility(View.VISIBLE);
+                                ll_wowGif.setVisibility(View.VISIBLE);
+                                ll_sadGif.setVisibility(View.VISIBLE);
+                                ll_angryGif.setVisibility(View.VISIBLE);
+                            }
+                            break;
+                    }
+
+
+                } else {
+                    ll_likeGif.setVisibility(View.INVISIBLE);
+                    ll_factualGif.setVisibility(View.INVISIBLE);
+                    ll_smileyGif.setVisibility(View.INVISIBLE);
+
+                    ll_wowGif.setVisibility(View.INVISIBLE);
+                    ll_sadGif.setVisibility(View.INVISIBLE);
+                    ll_angryGif.setVisibility(View.INVISIBLE);
+
+                    ll_subreation_no.setVisibility(View.GONE);
+                }
+            }
+        }
     }
+
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public OpinionAdapter(Context mContext, List<QuestionDetailResponse.Comment> usersList) {
@@ -163,8 +369,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
 
     // Create new views (invoked by the layout manager)
     @Override
-    public OpinionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                        int viewType) {
+    public OpinionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view-
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.opinion_item, parent, false);
@@ -176,42 +381,15 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        holder.bind(position);
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-//        holder.ll_subreation.setVisibility(View.GONE);
-//        holder.ll_subreation_no.setVisibility(View.GONE);
 
-//        for(int k=0;k<usersList.size();k++){
-            if (usersList.get(position).getIschecked() != null) {
-                if (usersList.get(position).getIschecked() == true) {
-
-                        holder.ll_likeGif.setVisibility(View.VISIBLE);
-                        holder.ll_factualGif.setVisibility(View.VISIBLE);
-                        holder.ll_smileyGif.setVisibility(View.VISIBLE);
-
-                }else{
-                    holder.ll_likeGif.setVisibility(View.GONE);
-                    holder.ll_factualGif.setVisibility(View.GONE);
-                     holder.ll_smileyGif.setVisibility(View.GONE);
-                }
-            } else {
-                holder.ll_likeGif.setVisibility(View.GONE);
-                holder.ll_factualGif.setVisibility(View.GONE);
-                holder.ll_smileyGif.setVisibility(View.GONE);
-            }
-//        }
 
         View.OnClickListener openProfile = new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
-                if (holder.ll_subreation.getVisibility() == View.VISIBLE) {
-//                    holder.ll_subreation.setVisibility(View.GONE);
-                }
-                if (holder.ll_subreation_no.getVisibility() == View.VISIBLE) {
-//                    holder.ll_subreation.setVisibility(View.GONE);
-                }
 
 
                 Map<String, String> map = new HashMap<>();
@@ -272,86 +450,203 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                 holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
 //                holder.btn_dislike_yes.setLiked(false);
             }
+
+            if(usersList.get(position).getCode()==0){
+                if(usersList.get(position).getLikesthought()!=null){
+                    holder.tv_like.setText(usersList.get(position).getLikesthought());
+                }
+
+                if(usersList.get(position).getLikesfactual()!=null){
+                    holder.tv_factual.setText(usersList.get(position).getLikesfactual());
+                }
+
+                if(usersList.get(position).getLikesfunny()!=null){
+                    holder.tv_smily.setText(usersList.get(position).getLikesfunny());
+                }
+            }else if(usersList.get(position).getCode()==1){
+                if(usersList.get(position).getDislikenomaterial()!=null){
+                    holder.tv_like.setText(usersList.get(position).getDislikenomaterial());
+                }
+
+                if(usersList.get(position).getDislikefakenewscount()!=null){
+                    holder.tv_factual.setText(usersList.get(position).getDislikefakenewscount());
+                }
+
+                if(usersList.get(position).getDislikebiasedcount()!=null){
+                    holder.tv_smily.setText(usersList.get(position).getDislikebiasedcount());
+                }
+            }
+
+
             if (!String.valueOf(usersList.get(position).getCommentedUserId()).equals(Utils.getLoggedInUserId(mContext))) {
-                holder.ll_like.setOnClickListener(new View.OnClickListener() {
+
+                holder.ll_likeGif.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (usersList.get(position).getLikes()) {
-                            holder.iv_like.setImageResource(R.drawable.thumb_off);
-                            ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId());
-                        } else {
-//                            QuestionDetailActivity.view_reaction.setVisibility(View.VISIBLE);
 
-//                            holder.gif_like.setImageResource(R.drawable.facebookresizee);
-//                            holder.gif_factual.setImageResource(R.drawable.factualresizes);
-//                            holder.gif_smiley.setImageResource(R.drawable.haharesize);
-//                            holder.ll_likeGif.setVisibility(View.VISIBLE);
-//                            holder.ll_factualGif.setVisibility(View.VISIBLE);
-//                            holder.ll_smileyGif.setVisibility(View.VISIBLE);
-//                            Toast.makeText(mContext, "Touch", Toast.LENGTH_SHORT).show();
-//
-//                            holder.ll_subreation_no.setVisibility(View.GONE);
-//                            holder.ll_subreation.setVisibility(View.VISIBLE);
-
-//                            holder.iv_like.setImageResource(R.drawable.thumb_on);
-//                            ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId());
-                        }
-                    }
-                });
-
-                holder.ll_dislike.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (usersList.get(position).getDisLikes()) {
-                            holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
-                            ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId());
-                        } else {
-                            for(int i=0;i<usersList.size();i++){
-                                if(usersList.get(i).getIschecked()!=null) {
-                                    if (usersList.get(i).getIschecked() == true) {
-                                        usersList.get(i).setIschecked(false);
-                                        notifyItemChanged(i);
-                                    } else if (i==position){
-                                        usersList.get(position).setIschecked(true);
-                                        notifyItemChanged(position);
-                                    }
-                                }else if(i==position){
-                                    usersList.get(position).setIschecked(true);
-                                    notifyItemChanged(position);
-                                }
-//                                usersList.get(i).setIschecked(false);
-//                                notifyItemChanged(i);
-//                                holder.ll_likeGif.setVisibility(View.GONE);
-//                                holder.ll_factualGif.setVisibility(View.GONE);
-//                                holder.ll_smileyGif.setVisibility(View.GONE);
+                        if (usersList.get(position).getCode() == 0) {
+                            if (usersList.get(position).getLikes()) {
+                                holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 1);
+                            } else {
+                                holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 1);
                             }
 
-//                             if(usersList.get(position).getIschecked()==true) {
-//                                holder.ll_likeGif.setVisibility(View.VISIBLE);
-//                                holder.ll_factualGif.setVisibility(View.VISIBLE);
-//                                holder.ll_smileyGif.setVisibility(View.VISIBLE);
-//                                notifyItemChanged(position);
-//                            }
-//                            }
+                        } else if (usersList.get(position).getCode() == 1) {
+                            if (usersList.get(position).getDisLikes()) {
+                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
+                                ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 4);
+                            } else {
+                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_on);
+                                ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 4);
+                            }
 
+                        }
 
-//                            holder.gif_like.setImageResource(R.drawable.wowresize);
-//                            holder.gif_factual.setImageResource(R.drawable.factualresizes);
-//                            holder.gif_smiley.setImageResource(R.drawable.angryresize);
-//
-//                            holder.ll_subreation_no.setVisibility(View.GONE);
-//                            holder.ll_subreation.setVisibility(View.VISIBLE);
-//                            holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_on);
-//                            ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId());
+                    }
+                });
+
+                holder.ll_factualGif.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (usersList.get(position).getCode() == 0) {
+                            if (usersList.get(position).getLikes()) {
+                                holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 2);
+                            } else {
+                                holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 2);
+                            }
+
+                        } else if (usersList.get(position).getCode() == 1) {
+                            if (usersList.get(position).getDisLikes()) {
+                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
+                                ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 5);
+                            } else {
+                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_on);
+                                ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 5);
+                            }
+
                         }
                     }
                 });
-                holder.iv_likeSub.setOnClickListener(new View.OnClickListener() {
+
+                holder.ll_smileyGif.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(mContext, "Test Ok", Toast.LENGTH_SHORT).show();
+                        if (usersList.get(position).getCode() == 0) {
+                            if (usersList.get(position).getLikes()) {
+                                holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 3);
+                            } else {
+                                holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 3);
+                            }
+
+                        } else if (usersList.get(position).getCode() == 1) {
+                            if (usersList.get(position).getDisLikes()) {
+                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
+                                ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 6);
+                            } else {
+                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_on);
+                                ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 6);
+                            }
+
+                        }
                     }
                 });
+
+
+//                holder.ll_like.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        if (usersList.get(position).getLikes()) {
+//                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+//                            ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId());
+//                        }
+//                        else {
+////                            QuestionDetailActivity.view_reaction.setVisibility(View.VISIBLE);
+//
+////                            holder.gif_like.setImageResource(R.drawable.facebookresizee);
+////                            holder.gif_factual.setImageResource(R.drawable.factualresizes);
+////                            holder.gif_smiley.setImageResource(R.drawable.haharesize);
+////                            holder.ll_likeGif.setVisibility(View.VISIBLE);
+////                            holder.ll_factualGif.setVisibility(View.VISIBLE);
+////                            holder.ll_smileyGif.setVisibility(View.VISIBLE);
+////                            Toast.makeText(mContext, "Touch", Toast.LENGTH_SHORT).show();
+////
+////                            holder.ll_subreation_no.setVisibility(View.GONE);
+////                            holder.ll_subreation.setVisibility(View.VISIBLE);
+//
+////                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+////                            ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId());
+//                        }
+//                    }
+//                });
+
+//                holder.ll_dislike.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        if (usersList.get(position).getDisLikes()) {
+//                            holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
+//                            ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId());
+//                        } else {
+//
+////                            holder.ll_likeGif.setVisibility(View.VISIBLE);
+////                                holder.ll_factualGif.setVisibility(View.VISIBLE);
+////                                holder.ll_smileyGif.setVisibility(View.VISIBLE);
+//////
+////                            for (int i = 0; i < usersList.size(); i++) {
+////                                usersList.get(i).setIschecked(false);
+////                                if(i==position){
+////                                    usersList.get(i).setIschecked(true);
+////                                }else{
+////                                    usersList.get(i).setIschecked(false);
+////                                }
+//
+//
+////                                if(usersList.get(i).getIschecked()!=null) {
+////                                    if (usersList.get(i).getIschecked() == true) {
+////                                        usersList.get(i).setIschecked(false);
+//////                                        notifyItemChanged(i);
+////                                    } else if (i==position){
+////                                        usersList.get(position).setIschecked(true);
+//////                                        notifyItemChanged(position);
+////                                    }
+////                                }
+////                                else if(i==position){
+////                                    usersList.get(position).setIschecked(true);
+//////                                    notifyItemChanged(position);
+////                                }
+////                                usersList.get(i).setIschecked(false);
+////                                notifyItemChanged(i);
+////                                holder.ll_likeGif.setVisibility(View.GONE);
+////                                holder.ll_factualGif.setVisibility(View.GONE);
+////                                holder.ll_smileyGif.setVisibility(View.GONE);
+////                            }
+////                            QuestionDetailActivity.updatedata(usersList, position);
+////                             if(usersList.get(position).getIschecked()==true) {
+////                                holder.ll_likeGif.setVisibility(View.VISIBLE);
+////                                holder.ll_factualGif.setVisibility(View.VISIBLE);
+////                                holder.ll_smileyGif.setVisibility(View.VISIBLE);
+////                                notifyItemChanged(position);
+////                            }
+////                            }
+//
+//
+////                            holder.gif_like.setImageResource(R.drawable.wowresize);
+////                            holder.gif_factual.setImageResource(R.drawable.factualresizes);
+////                            holder.gif_smiley.setImageResource(R.drawable.angryresize);
+////
+////                            holder.ll_subreation_no.setVisibility(View.GONE);
+////                            holder.ll_subreation.setVisibility(View.VISIBLE);
+////                            holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_on);
+////                            ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId());
+//                        }
+//                    }
+//                });
+
 
 //                holder.btn_dislike_yes.setOnLongClickListener(new View.OnLongClickListener() {
 //                    @Override
@@ -467,39 +762,149 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
 //                holder.btn_dislike_no.setLiked(false);
                 holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_off);
             }
+
+            Log.d("CheckResponse=",usersList.get(position).getLikesthought());
+            Log.d("CheckResponse=",usersList.get(position).getLikesfactual());
+            Log.d("CheckResponse=",usersList.get(position).getLikesfunny());
+            if(usersList.get(position).getCode()==2){
+                Log.d("CheckResponse=",usersList.get(position).getLikesthought());
+                Log.d("CheckResponse=",usersList.get(position).getLikesfactual());
+                Log.d("CheckResponse=",usersList.get(position).getLikesfunny());
+                if(usersList.get(position).getLikesthought()!=null){
+                    holder.tv_wow.setText(usersList.get(position).getLikesthought());
+                }
+
+                if(usersList.get(position).getLikesfactual()!=null){
+                    holder.tv_sad.setText(usersList.get(position).getLikesfactual());
+                }
+
+                if(usersList.get(position).getLikesfunny()!=null){
+                    holder.tv_angry.setText(usersList.get(position).getLikesfunny());
+                }
+            }else if(usersList.get(position).getCode()==3){
+                if(usersList.get(position).getDislikenomaterial()!=null){
+                    holder.tv_wow.setText(usersList.get(position).getDislikenomaterial());
+                }
+
+                if(usersList.get(position).getDislikefakenewscount()!=null){
+                    holder.tv_sad.setText(usersList.get(position).getDislikefakenewscount());
+                }
+
+                if(usersList.get(position).getDislikebiasedcount()!=null){
+                    holder.tv_angry.setText(usersList.get(position).getDislikebiasedcount());
+                }
+            }
+
+
+
+
             if (!String.valueOf(usersList.get(position).getCommentedUserId()).equals(Utils.getLoggedInUserId(mContext))) {
 
-                holder.ll_like_yes.setOnClickListener(new View.OnClickListener() {
+                holder.ll_wowGif.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (usersList.get(position).getLikes()) {
-                            holder.iv_like_yes.setImageResource(R.drawable.thumb_off);
-                            ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId());
-                        } else {
-//                            holder.ll_subreation_no.setVisibility(View.VISIBLE);
-//                            holder.ll_subreation.setVisibility(View.VISIBLE);
-                            holder.iv_like_yes.setImageResource(R.drawable.thumb_on);
-                            ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId());
+                        if (usersList.get(position).getCode() == 2) {
+                            if (usersList.get(position).getLikes()) {
+                                holder.iv_like_yes.setImageResource(R.drawable.thumb_off);
+                                ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 1);
+                            } else {
+                                holder.iv_like_yes.setImageResource(R.drawable.thumb_on);
+                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 1);
+                            }
+
+                        } else if (usersList.get(position).getCode() == 3) {
+                            if (usersList.get(position).getDisLikes()) {
+                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_off);
+                                ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 4);
+                            } else {
+                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_on);
+                                ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 4);
+                            }
+
                         }
                     }
-
-
                 });
-                holder.ll_dislike_no.setOnClickListener(new View.OnClickListener() {
+
+                holder.ll_sadGif.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (usersList.get(position).getDisLikes()) {
-                            holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
-                            ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId());
-                        } else {
-//                            holder.ll_subreation.setVisibility(View.GONE);
-//                            holder.ll_subreation_no.setVisibility(View.VISIBLE);
-                            holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_on);
-                            ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId());
+                        if (usersList.get(position).getCode() == 2) {
+                            if (usersList.get(position).getLikes()) {
+                                holder.iv_like_yes.setImageResource(R.drawable.thumb_off);
+                                ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 2);
+                            } else {
+                                holder.iv_like_yes.setImageResource(R.drawable.thumb_on);
+                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 2);
+                            }
+
+                        } else if (usersList.get(position).getCode() == 3) {
+                            if (usersList.get(position).getDisLikes()) {
+                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_off);
+                                ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 5);
+                            } else {
+                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_on);
+                                ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 5);
+                            }
+
                         }
+                    }
+                });
+                holder.ll_angryGif.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (usersList.get(position).getCode() == 2) {
+                            if (usersList.get(position).getLikes()) {
+                                holder.iv_like_yes.setImageResource(R.drawable.thumb_off);
+                                ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 3);
+                            } else {
+                                holder.iv_like_yes.setImageResource(R.drawable.thumb_on);
+                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 3);
+                            }
+
+                        } else if (usersList.get(position).getCode() == 3) {
+                            if (usersList.get(position).getDisLikes()) {
+                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_off);
+                                ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 6);
+                            } else {
+                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_on);
+                                ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 6);
+                            }
+
+                        }
+                    }
+                });
+
+//                holder.ll_like_yes.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        if (usersList.get(position).getLikes()) {
+//                            holder.iv_like_yes.setImageResource(R.drawable.thumb_off);
+//                            ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId());
+//                        } else {
+////                            holder.ll_subreation_no.setVisibility(View.VISIBLE);
+////                            holder.ll_subreation.setVisibility(View.VISIBLE);
+//                            holder.iv_like_yes.setImageResource(R.drawable.thumb_on);
+//                            ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId());
+//                        }
+//                    }
 //
-                    }
-                });
+//
+//                });
+//                holder.ll_dislike_no.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        if (usersList.get(position).getDisLikes()) {
+//                            holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
+//                            ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId());
+//                        } else {
+////                            holder.ll_subreation.setVisibility(View.GONE);
+////                            holder.ll_subreation_no.setVisibility(View.VISIBLE);
+//                            holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_on);
+//                            ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId());
+//                        }
+////
+//                    }
+//                });
 //                holder.btn_dislike_no.setOnLikeListener(new OnLikeListener() {
 //                    @Override
 //                    public void liked(LikeButton likeButton) {

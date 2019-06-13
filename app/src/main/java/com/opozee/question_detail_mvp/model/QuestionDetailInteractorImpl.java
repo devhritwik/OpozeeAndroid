@@ -1,5 +1,7 @@
 package com.opozee.question_detail_mvp.model;
 
+import android.util.Log;
+
 import com.opozee.params.QuestionDetailParams;
 import com.opozee.pojo.QuestionDetailResponse;
 import com.opozee.retrofit_api.WebServiceFactory;
@@ -11,6 +13,9 @@ import retrofit2.Response;
 public class QuestionDetailInteractorImpl implements QuestionDetailInteractor {
     @Override
     public void getQuestionDetail(QuestionDetailParams params, final OnDetailFinishListener mListener) {
+        Log.d("QuestionDetail=",params.getQuestionId());
+        Log.d("QuestionDetail=",params.getUserid());
+
         Call<QuestionDetailResponse> call = WebServiceFactory.getInstance().getQuestionDetail(params.getQuestionId(), params.getUserid(), 1, 15);
 
         call.enqueue(new Callback<QuestionDetailResponse>() {

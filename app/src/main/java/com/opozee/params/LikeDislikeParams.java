@@ -15,6 +15,19 @@ public class LikeDislikeParams implements Serializable {
     int commentStatus;
     @SerializedName("questId")
     int questId;
+    @SerializedName("ReactionType")
+    int reactiontype;
+
+    public int getReactiontype() {
+        return reactiontype;
+    }
+
+    public void setReactiontype(int reactiontype) {
+        this.reactiontype = reactiontype;
+    }
+
+
+
 
     public int getQuestId() {
         return questId;

@@ -97,6 +97,13 @@ public class ProfileFragment extends Fragment implements ProfileView, PostedQues
     @BindView(R.id.profile_tab_beliefs)
     TextView mBeliefTabView;
 
+    @BindView(R.id.profile_tab_followers)
+    TextView mFollowersView;
+
+    @BindView(R.id.profile_tab_following)
+    TextView mFollowingView;
+
+
     private ProfilePresenterImpl mProfilePresenter;
     private int pageIndex = 1;
     private int pageSize = 1000;
@@ -110,13 +117,16 @@ public class ProfileFragment extends Fragment implements ProfileView, PostedQues
 
 
     private enum TabMode{
-        Questions, Beliefs
+        Questions, Beliefs,Followers,Following
     }
 
     TabMode mCurrTabMode;
 
     private List< PostedQuestionsResponse.PostQuestionDetail> questionsList = new ArrayList<>();
     private List<Belief> mBeliefList = new ArrayList<>();
+    private List<String > followerslist = new ArrayList<>();
+    private List<String> followinglist = new ArrayList<>();
+
     public ProfileFragment() {
         // Required empty public constructor
         Log.d(TAG, "CONSTRUCTOR");
@@ -166,6 +176,8 @@ public class ProfileFragment extends Fragment implements ProfileView, PostedQues
         getProfile();
         getQuestions();
         getBeliefs();
+        getFollowers();
+        getFollowing();
         setTab(TabMode.Questions);
         mQuestionTabView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,8 +206,46 @@ public class ProfileFragment extends Fragment implements ProfileView, PostedQues
                 setTab(TabMode.Beliefs);
             }
         });
+
+        mFollowersView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.putOpt("Followers", mUserName);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                QuestionnaireApplication.getMixpanelApi().track("Followers clicked Profile Fragment" , jsonObject);
+                setTab(TabMode.Questions);
+                setTab(TabMode.Beliefs);
+                setTab(TabMode.Followers);
+
+            }
+        });
+
+        mFollowingView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.putOpt("Following", mUserName);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                QuestionnaireApplication.getMixpanelApi().track("Following clicked Profile Fragment" , jsonObject);
+                setTab(TabMode.Questions);
+                setTab(TabMode.Beliefs);
+                setTab(TabMode.Followers);
+                setTab(TabMode.Following);
+            }
+        });
     }
 
+    private void getFollowers() {
+    }
+    private void getFollowing() {
+    }
     private void getProfile() {
         if (Utils.isNetworkAvail(getActivity())) {
             mProfilePresenter.profile(getParams());
@@ -343,23 +393,46 @@ public class ProfileFragment extends Fragment implements ProfileView, PostedQues
             if (mCurrTabMode == TabMode.Questions)
                     return; // do nothing
             else {
-                mQuestionTabView.setBackground(getResources().getDrawable(R.drawable.user_profile_tabs_selected_bg));
-                mBeliefTabView.setBackground(getResources().getDrawable(R.drawable.user_profile_tabs_unselected_bg));
+                mQuestionTabView.setBackground(getResources().getDrawable(R.drawable.textview_question_background));
+                mBeliefTabView.setBackground(getResources().getDrawable(R.drawable.textview_belief_un));
+                mFollowersView.setBackground(getResources().getDrawable(R.drawable.textview_followers_un));
+                mFollowingView.setBackground(getResources().getDrawable(R.drawable.textview_following_un));
                 recyclerView.setAdapter(mAdapter);
 
             }
 
-        } else {
+        } else if(tabMode==TabMode.Beliefs) {
             if (mCurrTabMode == TabMode.Beliefs)
                 return; // do nothing
             else {
 
-                mBeliefTabView.setBackground(getResources().getDrawable(R.drawable.user_profile_tabs_selected_bg));
-                mQuestionTabView.setBackground(getResources().getDrawable(R.drawable.user_profile_tabs_unselected_bg));
+                mBeliefTabView.setBackground(getResources().getDrawable(R.drawable.textview_belief_background));
+                mQuestionTabView.setBackground(getResources().getDrawable(R.drawable.textview_question_un));
+                mFollowersView.setBackground(getResources().getDrawable(R.drawable.textview_followers_un));
+                mFollowingView.setBackground(getResources().getDrawable(R.drawable.textview_following_un));
                 recyclerView.setAdapter(mBeliefsAdapter);
                 for (Belief b : mBeliefList){
                     Log.d(TAG, b.getQuestionText());
                 }
+            }
+        }else if(tabMode==TabMode.Followers){
+            if(mCurrTabMode==TabMode.Followers){
+                return;
+            }else{
+                mFollowersView.setBackground(getResources().getDrawable(R.drawable.textview_followers_background));
+                mQuestionTabView.setBackground(getResources().getDrawable(R.drawable.textview_question_un));
+                mBeliefTabView.setBackground(getResources().getDrawable(R.drawable.textview_belief_un));
+                mFollowingView.setBackground(getResources().getDrawable(R.drawable.textview_following_un));
+//                recyclerView.setAdapter(mBeliefsAdapter);
+            }
+        }else if (tabMode==TabMode.Following){
+            if(mCurrTabMode==TabMode.Following){
+                return;
+            }else {
+                mFollowingView.setBackground(getResources().getDrawable(R.drawable.textview_following_background));
+                mQuestionTabView.setBackground(getResources().getDrawable(R.drawable.textview_question_un));
+                mBeliefTabView.setBackground(getResources().getDrawable(R.drawable.textview_belief_un));
+                mFollowersView.setBackground(getResources().getDrawable(R.drawable.textview_followers_un));
             }
         }
     }

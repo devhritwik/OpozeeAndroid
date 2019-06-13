@@ -84,6 +84,8 @@
     <string name="text_username">User Name</string>
     <string name="refferalcode">Referral Code (Optional)</string>
     <string name="text_cancel">Cancel</string>
+    <string name="followers">Followers()</string>
+    <string name="following">Followings()</string>
 
 
 </resources>

@@ -90,6 +90,90 @@ public class QuestionDetailResponse {
         @Expose
         private Boolean ischecked;
 
+        @SerializedName("LikesThoughtfullCount")
+        @Expose
+        private String likesthought;
+
+        @SerializedName("LikesFactualCount")
+        @Expose
+        private String likesfactual;
+
+        @SerializedName("LikesFunnyCount")
+        @Expose
+        private String likesfunny;
+
+        @SerializedName("DislikesNoMaterialCount")
+        @Expose
+        private String dislikenomaterial;
+
+        @SerializedName("DislikesFakeNewsCount")
+        @Expose
+        private String dislikefakenewscount;
+
+        @SerializedName("DislikesBiasedCount")
+        @Expose
+        private String dislikebiasedcount;
+
+        public String getLikesthought() {
+            return likesthought;
+        }
+
+        public void setLikesthought(String likesthought) {
+            this.likesthought = likesthought;
+        }
+
+        public String getLikesfactual() {
+            return likesfactual;
+        }
+
+        public void setLikesfactual(String likesfactual) {
+            this.likesfactual = likesfactual;
+        }
+
+        public String getLikesfunny() {
+            return likesfunny;
+        }
+
+        public void setLikesfunny(String likesfunny) {
+            this.likesfunny = likesfunny;
+        }
+
+        public String getDislikenomaterial() {
+            return dislikenomaterial;
+        }
+
+        public void setDislikenomaterial(String dislikenomaterial) {
+            this.dislikenomaterial = dislikenomaterial;
+        }
+
+        public String getDislikefakenewscount() {
+            return dislikefakenewscount;
+        }
+
+        public void setDislikefakenewscount(String dislikefakenewscount) {
+            this.dislikefakenewscount = dislikefakenewscount;
+        }
+
+        public String getDislikebiasedcount() {
+            return dislikebiasedcount;
+        }
+
+        public void setDislikebiasedcount(String dislikebiasedcount) {
+            this.dislikebiasedcount = dislikebiasedcount;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public void setCode(int code) {
+            this.code = code;
+        }
+
+        @SerializedName("code")
+        @Expose
+        private int code;
+
 
         public Boolean getIschecked() {
             return ischecked;

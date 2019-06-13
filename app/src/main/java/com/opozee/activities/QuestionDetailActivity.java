@@ -66,6 +66,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -146,7 +147,9 @@ public class QuestionDetailActivity extends OpozeeActivity implements QuestionDe
     private int mQuestionId;
     public static View view_reaction;
     public LinearLayout linear;
-public Toolbar toolbar;
+    public Toolbar toolbar;
+    public static OpinionAdapter ticketNumber;
+    public List<QuestionDetailResponse.Comment> commentList=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,8 +157,8 @@ public Toolbar toolbar;
         setContentView(R.layout.activity_question_detail);
         rl_questions = findViewById(R.id.rl_questions);
         view_reaction = findViewById(R.id.view_reaction);
-        linear=findViewById(R.id.linear);
-        toolbar=findViewById(R.id.toolbar);
+        linear = findViewById(R.id.linear);
+        toolbar = findViewById(R.id.toolbar);
         ButterKnife.bind(this);
         seekBar.setEnabled(false);
         id = getIntent().getIntExtra("id", 0);
@@ -176,24 +179,31 @@ public Toolbar toolbar;
         linear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(OpinionAdapter.ViewHolder.ll_subreation.getVisibility()==View.VISIBLE){
-//                    OpinionAdapter.ViewHolder.ll_subreation.setVisibility(View.GONE);
+                if(commentList.size()>0) {
+                    for (int i = 0; i < commentList.size(); i++) {
+                        commentList.get(i).setIschecked(false);
+                        if(ticketNumber!=null) {
+                            ticketNumber.notifyDataSetChanged();
+                        }
+                    }
                 }
-                if(OpinionAdapter.ViewHolder.ll_subreation_no.getVisibility()==View.VISIBLE){
-//                    OpinionAdapter.ViewHolder.ll_subreation_no.setVisibility(View.GONE);
-                }
+//                for (QuestionDetailResponse.Comment item1 : usersList) {
+//                    item1.setIschecked(false);
+//                }
             }
         });
         toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(OpinionAdapter.ViewHolder.ll_subreation.getVisibility()==View.VISIBLE){
-//                    OpinionAdapter.ViewHolder.ll_subreation.setVisibility(View.GONE);
+                if(commentList.size()>0) {
+                    for (int i = 0; i < commentList.size(); i++) {
+                        commentList.get(i).setIschecked(false);
+                        if(ticketNumber!=null) {
+                            ticketNumber.notifyDataSetChanged();
+                        }
+                    }
+                }
 
-                }
-                if(OpinionAdapter.ViewHolder.ll_subreation_no.getVisibility()==View.VISIBLE){
-//                    OpinionAdapter.ViewHolder.ll_subreation_no.setVisibility(View.GONE);
-                }
             }
         });
 
@@ -387,9 +397,22 @@ public Toolbar toolbar;
 
     //like dislike opinion
 //    LikeDislikeOpinion
-    public void likeDislike(int commentStatus, int opinionId) {
+    public void likeDislike(int commentStatus, int opinionId,int reactiontype) {
+        if(commentList.size()>0) {
+            for (int i = 0; i < commentList.size(); i++) {
+                commentList.get(i).setIschecked(false);
+                if(ticketNumber!=null) {
+                    ticketNumber.notifyDataSetChanged();
+                }
+            }
+        }
+
         if (Utils.isNetworkAvail(QuestionDetailActivity.this)) {
-            mLikeDislikePresenter.dislike(getParams(commentStatus, opinionId));
+            Log.d("Data_Log",""+commentStatus);
+            Log.d("Data_Log",""+opinionId);
+            Log.d("Data_Log",""+reactiontype);
+
+            mLikeDislikePresenter.dislike(getParams(commentStatus, opinionId,reactiontype));
         } else {
             Utils.showCustomToast(QuestionDetailActivity.this, getString(R.string.internet_alert));
         }
@@ -418,19 +441,21 @@ public Toolbar toolbar;
     }
 
     //get likedislike params
-    private LikeDislikeParams getParams(int commentStatus, int opinionId) {
+    private LikeDislikeParams getParams(int commentStatus, int opinionId,int reactiontype) {
         LikeDislikeParams params = new LikeDislikeParams();
         params.setId(0);
         params.setQuestId(id);
         params.setCommentedId(opinionId);
         params.setCommentedUserId(Integer.parseInt(Utils.getLoggedInUserId(QuestionDetailActivity.this)));
         params.setCommentStatus(commentStatus);
+        params.setReactiontype(reactiontype);
         return params;
     }
 
     public void setAdapter(List<QuestionDetailResponse.Comment> homeList) {
+        commentList=homeList;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(QuestionDetailActivity.this, LinearLayoutManager.VERTICAL, false);
-        OpinionAdapter ticketNumber = new OpinionAdapter(QuestionDetailActivity.this, homeList);
+        ticketNumber = new OpinionAdapter(QuestionDetailActivity.this, homeList);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(ticketNumber);
     }
@@ -775,6 +800,12 @@ public Toolbar toolbar;
 
 
         return tagView;
+    }
+
+    public static void updatedata(List<QuestionDetailResponse.Comment> usersList, int position) {
+        usersList.get(position).setIschecked(true);
+        ticketNumber.notifyItemChanged(position);
+
     }
 
 }
