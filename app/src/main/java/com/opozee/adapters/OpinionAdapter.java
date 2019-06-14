@@ -1,15 +1,20 @@
 package com.opozee.adapters;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -121,6 +126,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
         public ImageView iv_sad;
 
         public TextView tv_like,tv_factual,tv_smily,tv_wow,tv_sad,tv_angry;
+//        public LinearLayout ll_slide1,ll_slide2,ll_slide_3,ll_subreactionsliding,ll_yes_inner;
 
 //        @BindView(R.id.btn_like_yes)
 //        public LikeButton btn_like_yes;
@@ -158,6 +164,12 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
             tv_wow=v.findViewById(R.id.tv_wow);
             tv_sad=v.findViewById(R.id.tv_sad);
             tv_angry=v.findViewById(R.id.tv_angry);
+
+//            ll_slide1=v.findViewById(R.id.ll_slide1);
+//            ll_slide2=v.findViewById(R.id.ll_slide2);
+//            ll_slide_3=v.findViewById(R.id.ll_slide3);
+//            ll_subreactionsliding=v.findViewById(R.id.ll_subreactionsliding);
+//            ll_yes_inner=v.findViewById(R.id.ll_yes_inner);
 
 //            ll_likeGif.setVisibility(View.GONE);
 //            ll_factualGif.setVisibility(View.GONE);
@@ -275,10 +287,14 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                             gif_smiley.setImageResource(R.drawable.noresizefunny);
 
                             if (ll_likeGif.getVisibility() == View.VISIBLE) {
+//                                ll_subreactionsliding.setVisibility(View.GONE);
+//                                ll_yes_inner.setVisibility(View.VISIBLE);
                                 ll_likeGif.setVisibility(View.INVISIBLE);
                                 ll_factualGif.setVisibility(View.INVISIBLE);
                                 ll_smileyGif.setVisibility(View.INVISIBLE);
                             } else {
+//                                ll_yes_inner.setVisibility(View.GONE);
+//                                ll_subreactionsliding.setVisibility(View.VISIBLE);
                                 ll_likeGif.setVisibility(View.VISIBLE);
                                 ll_factualGif.setVisibility(View.VISIBLE);
                                 ll_smileyGif.setVisibility(View.VISIBLE);
@@ -291,10 +307,14 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                             gif_smiley.setImageResource(R.drawable.noresizeangry);
 
                             if (ll_likeGif.getVisibility() == View.VISIBLE) {
+//                                ll_yes_inner.setVisibility(View.VISIBLE);
+//                                ll_subreactionsliding.setVisibility(View.GONE);
                                 ll_likeGif.setVisibility(View.INVISIBLE);
                                 ll_factualGif.setVisibility(View.INVISIBLE);
                                 ll_smileyGif.setVisibility(View.INVISIBLE);
                             } else {
+//                                ll_yes_inner.setVisibility(View.GONE);
+//                                ll_subreactionsliding.setVisibility(View.VISIBLE);
                                 ll_likeGif.setVisibility(View.VISIBLE);
                                 ll_factualGif.setVisibility(View.VISIBLE);
                                 ll_smileyGif.setVisibility(View.VISIBLE);
@@ -353,6 +373,12 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                     ll_angryGif.setVisibility(View.INVISIBLE);
 
                     ll_subreation_no.setVisibility(View.GONE);
+//                    ll_subreactionsliding.setVisibility(View.GONE);
+//                    ll_yes_inner.setVisibility(View.VISIBLE);
+
+//                    gif_like.setAnimation(null);
+//                    gif_factual.setAnimation(null);
+//                    gif_smiley.setAnimation(null);
                 }
             }
         }
@@ -479,6 +505,111 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
 
 
             if (!String.valueOf(usersList.get(position).getCommentedUserId()).equals(Utils.getLoggedInUserId(mContext))) {
+                final Animation animZoomIn = AnimationUtils.loadAnimation(mContext,R.anim.zoomin);
+
+
+//                holder.ll_slide1.setOnTouchListener(new View.OnTouchListener() {
+//                    @Override
+//                    public boolean onTouch(View view, MotionEvent motionEvent) {
+//                        Toast.makeText(mContext, "ontouchlike", Toast.LENGTH_SHORT).show();
+//                        int X = (int) motionEvent.getX();
+//                        int Y = (int) motionEvent.getY();
+//                        int eventaction = motionEvent.getAction();
+//
+//                        switch (eventaction) {
+//                            case MotionEvent.ACTION_DOWN:
+////
+//                        holder.gif_like.startAnimation(animZoomIn);
+//                                break;
+//
+//                            case MotionEvent.ACTION_MOVE:
+////                                Toast.makeText(mContext, "MOVE "+"X: "+X+" Y: "+Y, Toast.LENGTH_SHORT).show();
+//                                holder.gif_like.startAnimation(animZoomIn);
+//                                break;
+//
+//                            case MotionEvent.ACTION_UP:
+////                                Toast.makeText(mContext, "ACTION_UP "+"X: "+X+" Y: "+Y, Toast.LENGTH_SHORT).show();
+//                                holder.gif_like.startAnimation(animZoomIn);
+//                                break;
+//                                default:
+//                                    holder.gif_like.setAnimation(null);
+//                                    break;
+//                        }
+//                        return true;
+//                    }
+//                });
+//
+//
+//
+//                holder.ll_slide2.setOnTouchListener(new View.OnTouchListener() {
+//                    @Override
+//                    public boolean onTouch(View view, MotionEvent motionEvent) {
+//                        Toast.makeText(mContext, "ontouchlike", Toast.LENGTH_SHORT).show();
+//                        int X = (int) motionEvent.getX();
+//                        int Y = (int) motionEvent.getY();
+//                        int eventaction = motionEvent.getAction();
+//
+//                        switch (eventaction) {
+//                            case MotionEvent.ACTION_DOWN:
+////
+//                                holder.gif_factual.startAnimation(animZoomIn);
+//                                break;
+//
+//                            case MotionEvent.ACTION_MOVE:
+////                                Toast.makeText(mContext, "MOVE "+"X: "+X+" Y: "+Y, Toast.LENGTH_SHORT).show();
+//                                holder.gif_factual.startAnimation(animZoomIn);
+//                                break;
+//
+//                            case MotionEvent.ACTION_UP:
+////                                Toast.makeText(mContext, "ACTION_UP "+"X: "+X+" Y: "+Y, Toast.LENGTH_SHORT).show();
+//                                holder.gif_factual.startAnimation(animZoomIn);
+//                                break;
+//                            default:
+//                                holder.gif_factual.setAnimation(null);
+//                                break;
+//                        }
+//                        return true;
+//                    }
+//                });
+//
+//
+//
+//                holder.ll_slide_3.setOnTouchListener(new View.OnTouchListener() {
+//                    @Override
+//                    public boolean onTouch(View view, MotionEvent motionEvent) {
+//                        Toast.makeText(mContext, "ontouchlike", Toast.LENGTH_SHORT).show();
+//                        int X = (int) motionEvent.getX();
+//                        int Y = (int) motionEvent.getY();
+//                        int eventaction = motionEvent.getAction();
+//
+//                        switch (eventaction) {
+//                            case MotionEvent.ACTION_DOWN:
+////
+//                                holder.gif_smiley.startAnimation(animZoomIn);
+//                                break;
+//
+//                            case MotionEvent.ACTION_MOVE:
+////                                Toast.makeText(mContext, "MOVE "+"X: "+X+" Y: "+Y, Toast.LENGTH_SHORT).show();
+//                                holder.gif_smiley.startAnimation(animZoomIn);
+//                                break;
+//
+//                            case MotionEvent.ACTION_UP:
+////                                Toast.makeText(mContext, "ACTION_UP "+"X: "+X+" Y: "+Y, Toast.LENGTH_SHORT).show();
+//                                holder.gif_smiley.startAnimation(animZoomIn);
+//                                break;
+//                            default:
+//                                holder.gif_smiley.setAnimation(null);
+//                                break;
+//                        }
+//                        return true;
+//                    }
+//                });
+
+
+
+
+
+
 
                 holder.ll_likeGif.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -871,6 +1002,8 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                             }
 
                         }
+
+
                     }
                 });
 

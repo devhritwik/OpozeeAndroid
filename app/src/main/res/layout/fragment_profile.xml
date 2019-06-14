@@ -17,7 +17,7 @@
         <RelativeLayout
             android:id="@+id/top_header"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_200sdp"
+            android:layout_height="@dimen/_220sdp"
             android:background="@color/color_primary">
             <!--<TextView-->
             <!--android:id="@+id/tv_header"-->
@@ -83,13 +83,29 @@
                 android:textColor="@color/white_color"
                 android:textSize="@dimen/_14sdp" />
 
+
+
+
             <View
+                android:id="@+id/view_profile"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="1dp"
                 android:layout_below="@+id/tv_user_name"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@color/color_primary" />
+
+
+            <Button
+                android:id="@+id/btn_followersProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:textColor="@color/white_color"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/view_profile"
+                android:visibility="visible"
+                android:background="@drawable/follower_background_button"/>
         </RelativeLayout>
 
 

@@ -89,7 +89,7 @@ public interface WebService {
     //user profile
     @GET(WebUrl.GET_PROFILE_URL)
     @Headers({WebUrl.AUTHORIZATION_HEADER})
-    Call<ProfileResponse> getUserProfile(@Query("userid") String userID);
+    Call<ProfileResponse> getUserProfile(@Query("userid") String owneruserID,@Query("viewUserId") String viewuserid );
 
     @Multipart
     @POST(WebUrl.UPDATE_PROFILE_URL)

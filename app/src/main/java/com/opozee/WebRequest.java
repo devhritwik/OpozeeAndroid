@@ -5,7 +5,11 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.opozee.pojo.follower_pojo.Following;
+import com.opozee.pojo.getmyfollowers.GetFollower;
+import com.opozee.pojo.getmyfollowing_pojo.GetFollowing;
 import com.opozee.pojo.loginemail.LoginEmail;
+import com.opozee.pojo.unfollow_pojo.UnFollow;
 import com.opozee.retrofit_api.WebUrl;
 
 import java.util.List;
@@ -78,7 +82,17 @@ public class WebRequest {
         @POST("Login")
         Call<LoginEmail> loginemailuser(@Header("Content-Type") String Content, @Body String data );
 
+        @POST("Following")
+        Call<Following> followuser(@Header("Content-Type") String Content, @Body String data );
 
+        @POST("GetMyFollowers")
+        Call<GetFollower> getallfollowers(@Header("Content-Type") String Content, @Body String data );
+
+        @POST("GetMyFollowing")
+        Call<GetFollowing> getallfollowing(@Header("Content-Type") String Content, @Body String data );
+
+        @POST("UnfollowUser")
+        Call<UnFollow> unfollowuser(@Header("Content-Type") String Content, @Body String data );
 
     }
 }

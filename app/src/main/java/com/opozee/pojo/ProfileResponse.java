@@ -102,6 +102,45 @@ public class ProfileResponse {
         @Expose
         private Integer totalDislikes;
 
+        @SerializedName("HasFollowed")
+        @Expose
+        private String hasfollowed;
+
+        public String getFollowers() {
+            return followers;
+        }
+
+        public void setFollowers(String followers) {
+            this.followers = followers;
+        }
+
+        public String getFollowings() {
+            return followings;
+        }
+
+        public void setFollowings(String followings) {
+            this.followings = followings;
+        }
+
+        @SerializedName("Followers")
+        @Expose
+        private String followers;
+
+        @SerializedName("Followings")
+        @Expose
+        private String followings;
+
+
+        public String getHasfollowed() {
+            return hasfollowed;
+        }
+
+        public void setHasfollowed(String hasfollowed) {
+            this.hasfollowed = hasfollowed;
+        }
+
+
+
         public Integer getUserID() {
             return userID;
         }

@@ -8,6 +8,16 @@ public class ProfileParams {
     String lastName;
     String user_id;
     String userName;
+    String viewuserid;
+
+    public String getViewuserid() {
+        return viewuserid;
+    }
+
+    public void setViewuserid(String viewuserid) {
+        this.viewuserid = viewuserid;
+    }
+
     File profilePic;
 
     public String getUserName() {

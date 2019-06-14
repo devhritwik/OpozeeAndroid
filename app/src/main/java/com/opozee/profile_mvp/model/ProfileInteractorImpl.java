@@ -101,7 +101,7 @@ public class ProfileInteractorImpl implements ProfileInteractor {
     }
 
     private void getProfile(ProfileParams params, final OnProfileFinishListener mListener) {
-        Call<ProfileResponse> call = WebServiceFactory.getInstance().getUserProfile(params.getUser_id());
+        Call<ProfileResponse> call = WebServiceFactory.getInstance().getUserProfile(params.getUser_id(),params.getViewuserid());
 
         call.enqueue(new Callback<ProfileResponse>() {
             @Override
@@ -109,7 +109,11 @@ public class ProfileInteractorImpl implements ProfileInteractor {
 
                 if (response.isSuccessful()) {
                     if (response.body().getResponse().getCode() == 0 ) {
+
                         ProfileResponse LoginSignupResponse = response.body();
+                        Log.d("Userprofile",""+LoginSignupResponse);
+                        Log.d("Userprofile",""+response.body());
+                        Log.d("Userprofile","hasfollowed="+LoginSignupResponse.getResponse().getUserProfile().getHasfollowed());
                         if (LoginSignupResponse != null) {
                             response.body().getResponse().setType(AppGlobal.TYPE_GET_PROFILE);
 
