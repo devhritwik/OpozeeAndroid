@@ -4,17 +4,21 @@ package com.opozee.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,6 +27,7 @@ import android.widget.Toast;
 
 import com.like.LikeButton;
 import com.like.OnLikeListener;
+import com.opozee.OnSwipeTouchListener;
 import com.opozee.R;
 import com.opozee.activities.ProfileActivity;
 import com.opozee.activities.QuestionDetailActivity;
@@ -42,6 +47,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import pl.droidsonroids.gif.GifImageView;
+import ro.andreidobrescu.emojilike.Emoji;
+import ro.andreidobrescu.emojilike.EmojiConfig;
+import ro.andreidobrescu.emojilike.EmojiLikeTouchDetector;
+import ro.andreidobrescu.emojilike.EmojiLikeView;
+import ro.andreidobrescu.emojilike.IActivityWithEmoji;
+import ro.andreidobrescu.emojilike.OnEmojiSelectedListener;
+
 
 import static com.opozee.fragments.ProfileFragment.PROFILE_FRAGMENG_ARGUEMENT_USER_ID;
 
@@ -50,6 +62,14 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
     private List<QuestionDetailResponse.Comment> usersList;
     private Context mContext;
     private QuestionDetailResponse.Comment userData;
+
+//    private Rect boundary;
+//    private int index;
+//    private boolean[] flags;
+//    private boolean isReversed;
+//
+//    private GestureDetector mDetector;
+
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -116,16 +136,20 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
         public LinearLayout ll_subreation, ll_subreation_no;
         public LinearLayout ll_likeGif, ll_factualGif, ll_smileyGif, ll_wowGif, ll_sadGif, ll_angryGif;
 
-        @BindView(R.id.ll_questionsView)
-        public LinearLayout ll_questionView;
+//        @BindView(R.id.ll_questionsView)
+//        public LinearLayout ll_questionView;
 
-        @BindView(R.id.iv_likeSub)
-        public ImageView iv_likeSub;
+//        @BindView(R.id.iv_likeSub)
+//        public ImageView iv_likeSub;
 
-        public GifImageView gif_like, gif_factual, gif_smiley, gif_wow, gif_angry;
-        public ImageView iv_sad;
+//        public GifImageView gif_like, gif_factual, gif_smiley, gif_wow, gif_angry;
+//        public ImageView iv_sad;
+//
+//        public TextView tv_like, tv_factual, tv_smily, tv_wow, tv_sad, tv_angry;
 
-        public TextView tv_like,tv_factual,tv_smily,tv_wow,tv_sad,tv_angry;
+        public TextView textView;
+        public ImageView likeButton;
+        public EmojiLikeView emojiView_like,emojiView_dislike,emojiView_like_yes,emojiView_dislike_no;
 //        public LinearLayout ll_slide1,ll_slide2,ll_slide_3,ll_subreactionsliding,ll_yes_inner;
 
 //        @BindView(R.id.btn_like_yes)
@@ -143,27 +167,36 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
             ButterKnife.bind(this, v);
             ll_subreation = v.findViewById(R.id.ll_subreation1);
             ll_subreation_no = v.findViewById(R.id.ll_subreation_no1);
-            ll_likeGif = v.findViewById(R.id.ll_likeGif);
-            ll_factualGif = v.findViewById(R.id.ll_factual_gif);
-            ll_smileyGif = v.findViewById(R.id.smileyGif);
+//            ll_likeGif = v.findViewById(R.id.ll_likeGif);
+//            ll_factualGif = v.findViewById(R.id.ll_factual_gif);
+//            ll_smileyGif = v.findViewById(R.id.smileyGif);
             ll_wowGif = v.findViewById(R.id.ll_wowGif);
             ll_sadGif = v.findViewById(R.id.ll_sadGif);
             ll_angryGif = v.findViewById(R.id.ll_angryGif);
 
-            gif_like = v.findViewById(R.id.iv_likeSub);
-            gif_factual = v.findViewById(R.id.iv_factual);
-            gif_smiley = v.findViewById(R.id.iv_smiley);
 
-            gif_wow = v.findViewById(R.id.iv_wow);
-            iv_sad = v.findViewById(R.id.iv_sad);
-            gif_angry = v.findViewById(R.id.iv_angry);
 
-            tv_like=v.findViewById(R.id.tv_likeGif);
-            tv_factual=v.findViewById(R.id.tv_factual);
-            tv_smily=v.findViewById(R.id.tv_smiley);
-            tv_wow=v.findViewById(R.id.tv_wow);
-            tv_sad=v.findViewById(R.id.tv_sad);
-            tv_angry=v.findViewById(R.id.tv_angry);
+//            gif_like = v.findViewById(R.id.iv_likeSub);
+//            gif_factual = v.findViewById(R.id.iv_factual);
+//            gif_smiley = v.findViewById(R.id.iv_smiley);
+
+//            gif_wow = v.findViewById(R.id.iv_wow);
+//            iv_sad = v.findViewById(R.id.iv_sad);
+//            gif_angry = v.findViewById(R.id.iv_angry);
+//
+//            tv_like = v.findViewById(R.id.tv_likeGif);
+//            tv_factual = v.findViewById(R.id.tv_factual);
+//            tv_smily = v.findViewById(R.id.tv_smiley);
+//            tv_wow = v.findViewById(R.id.tv_wow);
+//            tv_sad = v.findViewById(R.id.tv_sad);
+//            tv_angry = v.findViewById(R.id.tv_angry);
+
+            textView=(TextView)itemView.findViewById(R.id.textView);
+            likeButton=(ImageView)itemView.findViewById(R.id.likeButton);
+            emojiView_like=(EmojiLikeView)itemView.findViewById(R.id.emojiView);
+            emojiView_dislike=(EmojiLikeView)itemView.findViewById(R.id.emojiView_dislike);
+            emojiView_like_yes=(EmojiLikeView)itemView.findViewById(R.id.emojiView_like_yes);
+            emojiView_dislike_no=(EmojiLikeView)itemView.findViewById(R.id.emojiView_dislike_no);
 
 //            ll_slide1=v.findViewById(R.id.ll_slide1);
 //            ll_slide2=v.findViewById(R.id.ll_slide2);
@@ -176,211 +209,232 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
 //            ll_smileyGif.setVisibility(View.GONE);
 
 
+
+
         }
 
         void bind(final int position) {
-            final QuestionDetailResponse.Comment item = usersList.get(position);
-//            mTextView.setText(item.getText());
-
-
-            ll_like.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-//                    if (item.getLikes()) {
-////                        iv_like.setImageResource(R.drawable.thumb_off);
-////                        ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId());
-//                    } else {
-
-                        for (QuestionDetailResponse.Comment item1 : usersList) {
-                            item1.setIschecked(false);
-                        }
-                        item.setCode(0);
-                        item.setIschecked(true);
-
-                        notifyDataSetChanged();
-
+//            final QuestionDetailResponse.Comment item = usersList.get(position);
+////            mTextView.setText(item.getText());
+//
+//
+////            ll_like.setOnClickListener(new View.OnClickListener() {
+////                @Override
+////                public void onClick(View view) {
+//////                    if (item.getLikes()) {
+////////                        iv_like.setImageResource(R.drawable.thumb_off);
+////////                        ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId());
+//////                    } else {
+////
+////                        for (QuestionDetailResponse.Comment item1 : usersList) {
+////                            item1.setIschecked(false);
+////                        }
+////                        item.setCode(0);
+////                        item.setIschecked(true);
+////
+////                        notifyDataSetChanged();
+////
+//////                    }
+////                }
+////            });
+//
+//
+//            ll_like.setOnLongClickListener(new View.OnLongClickListener() {
+//                @Override
+//                public boolean onLongClick(View view) {
+//                    for (QuestionDetailResponse.Comment item1 : usersList) {
+//                        item1.setIschecked(false);
 //                    }
-                }
-            });
-
-
-            ll_dislike.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                    if (item.getDisLikes()) {
-////                        iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
-////                        ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId());
+//                    item.setCode(0);
+//                    item.setIschecked(true);
+//
+//                    notifyDataSetChanged();
+//                    Toast.makeText(mContext, "Long click", Toast.LENGTH_SHORT).show();
+//                    return true;
+//                }
+//            });
+//
+//            ll_dislike.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+////                    if (item.getDisLikes()) {
+//////                        iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
+//////                        ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId());
+////                    }
+////                    else {
+//                    for (QuestionDetailResponse.Comment item1 : usersList) {
+//                        item1.setIschecked(false);
 //                    }
-//                    else {
-                        for (QuestionDetailResponse.Comment item1 : usersList) {
-                            item1.setIschecked(false);
-                        }
-                        item.setIschecked(true);
-                        item.setCode(1);
-
-                        notifyDataSetChanged();
+//                    item.setIschecked(true);
+//                    item.setCode(1);
+//
+//                    notifyDataSetChanged();
+////                    }
+//                }
+//            });
+//
+//            ll_like_yes.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+////                    if (item.getLikes()) {
+//////                        iv_like_yes.setImageResource(R.drawable.thumb_off);
+//////                        ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId());
+////                    }
+////                    else {
+//                    for (QuestionDetailResponse.Comment item1 : usersList) {
+//                        item1.setIschecked(false);
 //                    }
-                }
-            });
-
-            ll_like_yes.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-//                    if (item.getLikes()) {
-////                        iv_like_yes.setImageResource(R.drawable.thumb_off);
-////                        ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId());
+//                    item.setCode(2);
+//                    item.setIschecked(true);
+//
+//                    notifyDataSetChanged();
+////                        iv_like_yes.setImageResource(R.drawable.thumb_on);
+////                        ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId());
+////                    }
+//                }
+//            });
+//
+//            ll_dislike_no.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+////                    if (item.getDisLikes()) {
+//////                        iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
+//////                        ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId());
+////                    }
+////                    else {
+//                    for (QuestionDetailResponse.Comment item1 : usersList) {
+//                        item1.setIschecked(false);
 //                    }
-//                    else {
-                        for (QuestionDetailResponse.Comment item1 : usersList) {
-                            item1.setIschecked(false);
-                        }
-                        item.setCode(2);
-                        item.setIschecked(true);
-
-                        notifyDataSetChanged();
-//                        iv_like_yes.setImageResource(R.drawable.thumb_on);
-//                        ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId());
-//                    }
-                }
-            });
-
-            ll_dislike_no.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-//                    if (item.getDisLikes()) {
-////                        iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
-////                        ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId());
-//                    }
-//                    else {
-                        for (QuestionDetailResponse.Comment item1 : usersList) {
-                            item1.setIschecked(false);
-                        }
-                        item.setCode(3);
-                        item.setIschecked(true);
-                        notifyDataSetChanged();
-
+//                    item.setCode(3);
+//                    item.setIschecked(true);
+//                    notifyDataSetChanged();
+//
+////                    }
+////
+//                }
+//            });
+//
+////            ll_questionView.setOnClickListener(new View.OnClickListener() {
+////                @Override
+////                public void onClick(View view) {
+////                    for (QuestionDetailResponse.Comment item1 : usersList) {
+////                        item1.setIschecked(false);
+////                    }
+////
+////                    notifyDataSetChanged();
+////                }
+////            });
+//
+//
+//            if (item.getIschecked() != null) {
+//                if (item.getIschecked()) {
+//
+//                    switch (item.getCode()) {
+//                        case 0:
+//
+//                            gif_like.setImageResource(R.drawable.noresizelike);
+//                            gif_factual.setImageResource(R.drawable.noresizefactual);
+//                            gif_smiley.setImageResource(R.drawable.noresizefunny);
+//
+//                            if (ll_likeGif.getVisibility() == View.VISIBLE) {
+////                                ll_subreactionsliding.setVisibility(View.GONE);
+////                                ll_yes_inner.setVisibility(View.VISIBLE);
+//                                ll_likeGif.setVisibility(View.INVISIBLE);
+//                                ll_factualGif.setVisibility(View.INVISIBLE);
+//                                ll_smileyGif.setVisibility(View.INVISIBLE);
+//                            } else {
+////                                ll_yes_inner.setVisibility(View.GONE);
+////                                ll_subreactionsliding.setVisibility(View.VISIBLE);
+//
+//                                ll_likeGif.setVisibility(View.VISIBLE);
+//                                ll_factualGif.setVisibility(View.VISIBLE);
+//                                ll_smileyGif.setVisibility(View.VISIBLE);
+//
+//                            }
+//
+//
+//                            break;
+//                        case 1:
+//                            gif_like.setImageResource(R.drawable.noresizewows);
+//                            gif_factual.setImageResource(R.drawable.noresizesad);
+//                            gif_smiley.setImageResource(R.drawable.noresizeangry);
+//
+//                            if (ll_likeGif.getVisibility() == View.VISIBLE) {
+////                                ll_yes_inner.setVisibility(View.VISIBLE);
+////                                ll_subreactionsliding.setVisibility(View.GONE);
+//                                ll_likeGif.setVisibility(View.INVISIBLE);
+//                                ll_factualGif.setVisibility(View.INVISIBLE);
+//                                ll_smileyGif.setVisibility(View.INVISIBLE);
+//                            } else {
+////                                ll_yes_inner.setVisibility(View.GONE);
+////                                ll_subreactionsliding.setVisibility(View.VISIBLE);
+//                                ll_likeGif.setVisibility(View.VISIBLE);
+//                                ll_factualGif.setVisibility(View.VISIBLE);
+//                                ll_smileyGif.setVisibility(View.VISIBLE);
+//                            }
+//
+//
+//                            break;
+//                        case 2:
+//
+//                            gif_wow.setImageResource(R.drawable.noresizelike);
+//                            iv_sad.setImageResource(R.drawable.noresizefactual);
+//                            gif_angry.setImageResource(R.drawable.noresizefunny);
+//
+//                            if (ll_wowGif.getVisibility() == View.VISIBLE) {
+//                                ll_subreation_no.setVisibility(View.GONE);
+//                                ll_wowGif.setVisibility(View.INVISIBLE);
+//                                ll_sadGif.setVisibility(View.INVISIBLE);
+//                                ll_angryGif.setVisibility(View.INVISIBLE);
+//                            } else {
+//                                ll_subreation_no.setVisibility(View.VISIBLE);
+//                                ll_wowGif.setVisibility(View.VISIBLE);
+//                                ll_sadGif.setVisibility(View.VISIBLE);
+//                                ll_angryGif.setVisibility(View.VISIBLE);
+//                            }
+//
+//
+//                            break;
+//                        case 3:
+//
+//                            gif_wow.setImageResource(R.drawable.noresizewows);
+//                            iv_sad.setImageResource(R.drawable.noresizesad);
+//                            gif_angry.setImageResource(R.drawable.noresizeangry);
+//
+//                            if (ll_wowGif.getVisibility() == View.VISIBLE) {
+//                                ll_subreation_no.setVisibility(View.GONE);
+//                                ll_wowGif.setVisibility(View.INVISIBLE);
+//                                ll_sadGif.setVisibility(View.INVISIBLE);
+//                                ll_angryGif.setVisibility(View.INVISIBLE);
+//                            } else {
+//                                ll_subreation_no.setVisibility(View.VISIBLE);
+//                                ll_wowGif.setVisibility(View.VISIBLE);
+//                                ll_sadGif.setVisibility(View.VISIBLE);
+//                                ll_angryGif.setVisibility(View.VISIBLE);
+//                            }
+//                            break;
 //                    }
 //
-                }
-            });
-
-            ll_questionView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    for (QuestionDetailResponse.Comment item1 : usersList) {
-                        item1.setIschecked(false);
-                    }
-
-                    notifyDataSetChanged();
-                }
-            });
-
-
-            if (item.getIschecked() != null) {
-                if (item.getIschecked()) {
-
-                    switch (item.getCode()) {
-                        case 0:
-
-                            gif_like.setImageResource(R.drawable.noresizelike);
-                            gif_factual.setImageResource(R.drawable.noresizefactual);
-                            gif_smiley.setImageResource(R.drawable.noresizefunny);
-
-                            if (ll_likeGif.getVisibility() == View.VISIBLE) {
-//                                ll_subreactionsliding.setVisibility(View.GONE);
-//                                ll_yes_inner.setVisibility(View.VISIBLE);
-                                ll_likeGif.setVisibility(View.INVISIBLE);
-                                ll_factualGif.setVisibility(View.INVISIBLE);
-                                ll_smileyGif.setVisibility(View.INVISIBLE);
-                            } else {
-//                                ll_yes_inner.setVisibility(View.GONE);
-//                                ll_subreactionsliding.setVisibility(View.VISIBLE);
-                                ll_likeGif.setVisibility(View.VISIBLE);
-                                ll_factualGif.setVisibility(View.VISIBLE);
-                                ll_smileyGif.setVisibility(View.VISIBLE);
-                            }
-
-                            break;
-                        case 1:
-                            gif_like.setImageResource(R.drawable.noresizewows);
-                            gif_factual.setImageResource(R.drawable.noresizesad);
-                            gif_smiley.setImageResource(R.drawable.noresizeangry);
-
-                            if (ll_likeGif.getVisibility() == View.VISIBLE) {
-//                                ll_yes_inner.setVisibility(View.VISIBLE);
-//                                ll_subreactionsliding.setVisibility(View.GONE);
-                                ll_likeGif.setVisibility(View.INVISIBLE);
-                                ll_factualGif.setVisibility(View.INVISIBLE);
-                                ll_smileyGif.setVisibility(View.INVISIBLE);
-                            } else {
-//                                ll_yes_inner.setVisibility(View.GONE);
-//                                ll_subreactionsliding.setVisibility(View.VISIBLE);
-                                ll_likeGif.setVisibility(View.VISIBLE);
-                                ll_factualGif.setVisibility(View.VISIBLE);
-                                ll_smileyGif.setVisibility(View.VISIBLE);
-                            }
-
-
-                            break;
-                        case 2:
-
-                            gif_wow.setImageResource(R.drawable.noresizelike);
-                            iv_sad.setImageResource(R.drawable.noresizefactual);
-                            gif_angry.setImageResource(R.drawable.noresizefunny);
-
-                            if (ll_wowGif.getVisibility() == View.VISIBLE) {
-                                ll_subreation_no.setVisibility(View.GONE);
-                                ll_wowGif.setVisibility(View.INVISIBLE);
-                                ll_sadGif.setVisibility(View.INVISIBLE);
-                                ll_angryGif.setVisibility(View.INVISIBLE);
-                            } else {
-                                ll_subreation_no.setVisibility(View.VISIBLE);
-                                ll_wowGif.setVisibility(View.VISIBLE);
-                                ll_sadGif.setVisibility(View.VISIBLE);
-                                ll_angryGif.setVisibility(View.VISIBLE);
-                            }
-
-
-                            break;
-                        case 3:
-
-                            gif_wow.setImageResource(R.drawable.noresizewows);
-                            iv_sad.setImageResource(R.drawable.noresizesad);
-                            gif_angry.setImageResource(R.drawable.noresizeangry);
-
-                            if (ll_wowGif.getVisibility() == View.VISIBLE) {
-                                ll_subreation_no.setVisibility(View.GONE);
-                                ll_wowGif.setVisibility(View.INVISIBLE);
-                                ll_sadGif.setVisibility(View.INVISIBLE);
-                                ll_angryGif.setVisibility(View.INVISIBLE);
-                            } else {
-                                ll_subreation_no.setVisibility(View.VISIBLE);
-                                ll_wowGif.setVisibility(View.VISIBLE);
-                                ll_sadGif.setVisibility(View.VISIBLE);
-                                ll_angryGif.setVisibility(View.VISIBLE);
-                            }
-                            break;
-                    }
-
-
-                } else {
-                    ll_likeGif.setVisibility(View.INVISIBLE);
-                    ll_factualGif.setVisibility(View.INVISIBLE);
-                    ll_smileyGif.setVisibility(View.INVISIBLE);
-
-                    ll_wowGif.setVisibility(View.INVISIBLE);
-                    ll_sadGif.setVisibility(View.INVISIBLE);
-                    ll_angryGif.setVisibility(View.INVISIBLE);
-
-                    ll_subreation_no.setVisibility(View.GONE);
-//                    ll_subreactionsliding.setVisibility(View.GONE);
-//                    ll_yes_inner.setVisibility(View.VISIBLE);
-
-//                    gif_like.setAnimation(null);
-//                    gif_factual.setAnimation(null);
-//                    gif_smiley.setAnimation(null);
-                }
-            }
+//
+//                } else {
+//
+//                    ll_likeGif.setVisibility(View.INVISIBLE);
+//                    ll_factualGif.setVisibility(View.INVISIBLE);
+//                    ll_smileyGif.setVisibility(View.INVISIBLE);
+//
+//                    ll_wowGif.setVisibility(View.INVISIBLE);
+//                    ll_sadGif.setVisibility(View.INVISIBLE);
+//                    ll_angryGif.setVisibility(View.INVISIBLE);
+//
+//                    ll_subreation_no.setVisibility(View.GONE);
+////                    ll_subreactionsliding.setVisibility(View.GONE);
+////                    ll_yes_inner.setVisibility(View.VISIBLE);
+//
+////                    gif_like.setAnimation(null);
+////                    gif_factual.setAnimation(null);
+////                    gif_smiley.setAnimation(null);
+//                }
+//            }
         }
     }
 
@@ -391,6 +445,9 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
         this.mContext = mContext;
         this.usersList = usersList;
 
+//        mDetector = new GestureDetector(mContext, new MyGestureListener());
+
+
     }
 
     // Create new views (invoked by the layout manager)
@@ -398,7 +455,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
     public OpinionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view-
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.opinion_item, parent, false);
+                .inflate(R.layout.opinion_item_new, parent, false);
         // set the view's size, margins, paddings and layout parameters
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -427,6 +484,21 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                 OpinionAdapter.this.mContext.startActivity(intent);
             }
         };
+
+//        View.OnTouchListener touchListener = new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                // pass the events to the gesture detector
+//                // a return value of true means the detector is handling it
+//                // a return value of false means the detector didn't
+//                // recognize the event
+//                return mDetector.onTouchEvent(event);
+//
+//            }
+//        };
+
+
+
 
 
         boolean isYesNo = usersList.get(position).getIsAgree();
@@ -461,6 +533,10 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
 //                Comment = 4
 
 
+
+
+
+
             if (usersList.get(position).getLikes()) {
                 holder.iv_like.setImageResource(R.drawable.thumb_on);
 //                holder.btn_like_yes.setLiked(true);
@@ -477,35 +553,139 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
 //                holder.btn_dislike_yes.setLiked(false);
             }
 
-            if(usersList.get(position).getCode()==0){
-                if(usersList.get(position).getLikesthought()!=null){
-                    holder.tv_like.setText(usersList.get(position).getLikesthought());
-                }
-
-                if(usersList.get(position).getLikesfactual()!=null){
-                    holder.tv_factual.setText(usersList.get(position).getLikesfactual());
-                }
-
-                if(usersList.get(position).getLikesfunny()!=null){
-                    holder.tv_smily.setText(usersList.get(position).getLikesfunny());
-                }
-            }else if(usersList.get(position).getCode()==1){
-                if(usersList.get(position).getDislikenomaterial()!=null){
-                    holder.tv_like.setText(usersList.get(position).getDislikenomaterial());
-                }
-
-                if(usersList.get(position).getDislikefakenewscount()!=null){
-                    holder.tv_factual.setText(usersList.get(position).getDislikefakenewscount());
-                }
-
-                if(usersList.get(position).getDislikebiasedcount()!=null){
-                    holder.tv_smily.setText(usersList.get(position).getDislikebiasedcount());
-                }
-            }
+//            if (usersList.get(position).getCode() == 0) {
+//                if (usersList.get(position).getLikesthought() != null) {
+//                    holder.tv_like.setText(usersList.get(position).getLikesthought());
+//                }
+//
+//                if (usersList.get(position).getLikesfactual() != null) {
+//                    holder.tv_factual.setText(usersList.get(position).getLikesfactual());
+//                }
+//
+//                if (usersList.get(position).getLikesfunny() != null) {
+//                    holder.tv_smily.setText(usersList.get(position).getLikesfunny());
+//                }
+//            } else if (usersList.get(position).getCode() == 1) {
+//                if (usersList.get(position).getDislikenomaterial() != null) {
+//                    holder.tv_like.setText(usersList.get(position).getDislikenomaterial());
+//                }
+//
+//                if (usersList.get(position).getDislikefakenewscount() != null) {
+//                    holder.tv_factual.setText(usersList.get(position).getDislikefakenewscount());
+//                }
+//
+//                if (usersList.get(position).getDislikebiasedcount() != null) {
+//                    holder.tv_smily.setText(usersList.get(position).getDislikebiasedcount());
+//                }
+//            }
 
 
             if (!String.valueOf(usersList.get(position).getCommentedUserId()).equals(Utils.getLoggedInUserId(mContext))) {
-                final Animation animZoomIn = AnimationUtils.loadAnimation(mContext,R.anim.zoomin);
+
+
+
+
+                EmojiConfig.with(mContext)
+                        .on(holder.ll_like)
+                        .open(holder.emojiView_like)
+                        .addEmoji(new Emoji(R.drawable.noresizelike, "Like", position))
+                        .addEmoji(new Emoji(R.drawable.noresizefactual, "Factual", position))
+                        .addEmoji(new Emoji(R.drawable.noresizefunny, "Funny", position))
+
+                        .setOnEmojiSelectedListener(new OnEmojiSelectedListener() {
+                            @Override
+                            public void onEmojiSelected(Emoji emoji) {
+                               String data=emoji.getDescription();
+                               switch(data){
+                                   case "Like":
+                                       if (usersList.get(position).getLikes()) {
+                                holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 1);
+                            }else{
+                                           holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 1);
+                                       }
+                                       break;
+                                   case "Factual":
+                                       if (usersList.get(position).getLikes()) {
+                                           holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                           ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 2);
+                                       }else{
+                                           holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 2);
+                                       }
+                                           break;
+                                   case "Funny":
+                                       if (usersList.get(position).getLikes()) {
+                                           holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                           ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 3);
+                                       }else{
+                                           holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 3);
+                                       }
+                                       break;
+                               }
+
+
+                            }
+                        })
+
+                        .setEmojiViewInAnimation((AnimationSet) AnimationUtils.loadAnimation(mContext, R.anim.in_animation))
+                        .setEmojiViewOutAnimation((AnimationSet) AnimationUtils.loadAnimation(mContext, R.anim.out_animation))
+                        .setBackgroundImage(R.drawable.background_drawable)
+                        .setup();
+
+
+
+                EmojiConfig.with(mContext)
+                        .on(holder.ll_dislike)
+                        .open(holder.emojiView_dislike)
+                        .addEmoji(new Emoji(R.drawable.noresizewows, "Wow", position))
+                        .addEmoji(new Emoji(R.drawable.noresizesad, "Sad", position))
+                        .addEmoji(new Emoji(R.drawable.noresizeangry, "Angry", position))
+
+                        .setOnEmojiSelectedListener(new OnEmojiSelectedListener() {
+                            @Override
+                            public void onEmojiSelected(Emoji emoji) {
+                                String data=emoji.getDescription();
+                                switch(data){
+                                    case "Wow":
+                                        if (usersList.get(position).getDisLikes()) {
+                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 4);
+                                        }else{
+                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                            ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 4);
+                                        }
+                                        break;
+                                    case "Sad":
+                                        if (usersList.get(position).getDisLikes()) {
+                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 5);
+                                        }else{
+                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                            ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 5);
+                                        }
+                                        break;
+                                    case "Angry":
+                                        if (usersList.get(position).getDisLikes()) {
+                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 6);
+                                        }else{
+                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                            ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 6);
+                                        }
+                                        break;
+                                }
+                            }
+                        })
+
+                        .setEmojiViewInAnimation((AnimationSet) AnimationUtils.loadAnimation(mContext, R.anim.in_animation))
+                        .setEmojiViewOutAnimation((AnimationSet) AnimationUtils.loadAnimation(mContext, R.anim.out_animation))
+                        .setBackgroundImage(R.drawable.background_drawable)
+                        .setup();
+
+//holder.tv_like_yes.setOnTouchListener(touchListener);
 
 
 //                holder.ll_slide1.setOnTouchListener(new View.OnTouchListener() {
@@ -606,87 +786,100 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
 //                });
 
 
+//                holder.ll_subreation.setOnTouchListener(new View.OnTouchListener() {
+//                    @Override
+//                    public boolean onTouch(View view, MotionEvent motionEvent) {
+//                        LinearLayout layout = (LinearLayout) view;
+//                        Toast.makeText(mContext, "Testin", Toast.LENGTH_SHORT).show();
+//                        for (int i = 0; i < layout.getChildCount(); i++) {
+//
+//                            View view1 = layout.getChildAt(i);
+//                            Rect outRect = new Rect(view.getLeft(), view.getTop(), view.getRight(), view.getBottom());
+//                            if (outRect.contains((int) motionEvent.getX(), (int) motionEvent.getY())) {
+//                                Toast.makeText(mContext, "index =" + i, Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                        return false;
+//                    }
+//                });
 
 
-
-
-
-                holder.ll_likeGif.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        if (usersList.get(position).getCode() == 0) {
-                            if (usersList.get(position).getLikes()) {
-                                holder.iv_like.setImageResource(R.drawable.thumb_off);
-                                ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 1);
-                            } else {
-                                holder.iv_like.setImageResource(R.drawable.thumb_on);
-                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 1);
-                            }
-
-                        } else if (usersList.get(position).getCode() == 1) {
-                            if (usersList.get(position).getDisLikes()) {
-                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
-                                ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 4);
-                            } else {
-                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_on);
-                                ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 4);
-                            }
-
-                        }
-
-                    }
-                });
-
-                holder.ll_factualGif.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (usersList.get(position).getCode() == 0) {
-                            if (usersList.get(position).getLikes()) {
-                                holder.iv_like.setImageResource(R.drawable.thumb_off);
-                                ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 2);
-                            } else {
-                                holder.iv_like.setImageResource(R.drawable.thumb_on);
-                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 2);
-                            }
-
-                        } else if (usersList.get(position).getCode() == 1) {
-                            if (usersList.get(position).getDisLikes()) {
-                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
-                                ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 5);
-                            } else {
-                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_on);
-                                ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 5);
-                            }
-
-                        }
-                    }
-                });
-
-                holder.ll_smileyGif.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (usersList.get(position).getCode() == 0) {
-                            if (usersList.get(position).getLikes()) {
-                                holder.iv_like.setImageResource(R.drawable.thumb_off);
-                                ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 3);
-                            } else {
-                                holder.iv_like.setImageResource(R.drawable.thumb_on);
-                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 3);
-                            }
-
-                        } else if (usersList.get(position).getCode() == 1) {
-                            if (usersList.get(position).getDisLikes()) {
-                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
-                                ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 6);
-                            } else {
-                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_on);
-                                ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 6);
-                            }
-
-                        }
-                    }
-                });
+//                holder.ll_likeGif.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//
+//                        if (usersList.get(position).getCode() == 0) {
+//                            if (usersList.get(position).getLikes()) {
+//                                holder.iv_like.setImageResource(R.drawable.thumb_off);
+//                                ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 1);
+//                            } else {
+//                                holder.iv_like.setImageResource(R.drawable.thumb_on);
+//                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 1);
+//                            }
+//
+//                        } else if (usersList.get(position).getCode() == 1) {
+//                            if (usersList.get(position).getDisLikes()) {
+//                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
+//                                ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 4);
+//                            } else {
+//                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_on);
+//                                ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 4);
+//                            }
+//
+//                        }
+//
+//                    }
+//                });
+//
+//                holder.ll_factualGif.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        if (usersList.get(position).getCode() == 0) {
+//                            if (usersList.get(position).getLikes()) {
+//                                holder.iv_like.setImageResource(R.drawable.thumb_off);
+//                                ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 2);
+//                            } else {
+//                                holder.iv_like.setImageResource(R.drawable.thumb_on);
+//                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 2);
+//                            }
+//
+//                        } else if (usersList.get(position).getCode() == 1) {
+//                            if (usersList.get(position).getDisLikes()) {
+//                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
+//                                ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 5);
+//                            } else {
+//                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_on);
+//                                ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 5);
+//                            }
+//
+//                        }
+//                    }
+//                });
+//
+//                holder.ll_smileyGif.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        if (usersList.get(position).getCode() == 0) {
+//                            if (usersList.get(position).getLikes()) {
+//                                holder.iv_like.setImageResource(R.drawable.thumb_off);
+//                                ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 3);
+//                            } else {
+//                                holder.iv_like.setImageResource(R.drawable.thumb_on);
+//                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 3);
+//                            }
+//
+//                        } else if (usersList.get(position).getCode() == 1) {
+//                            if (usersList.get(position).getDisLikes()) {
+//                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
+//                                ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 6);
+//                            } else {
+//                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_on);
+//                                ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 6);
+//                            }
+//
+//                        }
+//                    }
+//                });
 
 
 //                holder.ll_like.setOnClickListener(new View.OnClickListener() {
@@ -822,6 +1015,8 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
 //                    }
 //                });
             } else {
+
+
 //                holder.btn_like_yes.setEnabled(false);
 //                holder.btn_dislike_yes.setEnabled(false);
                 holder.ll_like.setOnClickListener(new View.OnClickListener() {
@@ -894,118 +1089,219 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                 holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_off);
             }
 
-            Log.d("CheckResponse=",usersList.get(position).getLikesthought());
-            Log.d("CheckResponse=",usersList.get(position).getLikesfactual());
-            Log.d("CheckResponse=",usersList.get(position).getLikesfunny());
-            if(usersList.get(position).getCode()==2){
-                Log.d("CheckResponse=",usersList.get(position).getLikesthought());
-                Log.d("CheckResponse=",usersList.get(position).getLikesfactual());
-                Log.d("CheckResponse=",usersList.get(position).getLikesfunny());
-                if(usersList.get(position).getLikesthought()!=null){
-                    holder.tv_wow.setText(usersList.get(position).getLikesthought());
-                }
-
-                if(usersList.get(position).getLikesfactual()!=null){
-                    holder.tv_sad.setText(usersList.get(position).getLikesfactual());
-                }
-
-                if(usersList.get(position).getLikesfunny()!=null){
-                    holder.tv_angry.setText(usersList.get(position).getLikesfunny());
-                }
-            }else if(usersList.get(position).getCode()==3){
-                if(usersList.get(position).getDislikenomaterial()!=null){
-                    holder.tv_wow.setText(usersList.get(position).getDislikenomaterial());
-                }
-
-                if(usersList.get(position).getDislikefakenewscount()!=null){
-                    holder.tv_sad.setText(usersList.get(position).getDislikefakenewscount());
-                }
-
-                if(usersList.get(position).getDislikebiasedcount()!=null){
-                    holder.tv_angry.setText(usersList.get(position).getDislikebiasedcount());
-                }
-            }
-
-
+//            Log.d("CheckResponse=", usersList.get(position).getLikesthought());
+//            Log.d("CheckResponse=", usersList.get(position).getLikesfactual());
+//            Log.d("CheckResponse=", usersList.get(position).getLikesfunny());
+//            if (usersList.get(position).getCode() == 2) {
+//                Log.d("CheckResponse=", usersList.get(position).getLikesthought());
+//                Log.d("CheckResponse=", usersList.get(position).getLikesfactual());
+//                Log.d("CheckResponse=", usersList.get(position).getLikesfunny());
+//                if (usersList.get(position).getLikesthought() != null) {
+//                    holder.tv_wow.setText(usersList.get(position).getLikesthought());
+//                }
+//
+//                if (usersList.get(position).getLikesfactual() != null) {
+//                    holder.tv_sad.setText(usersList.get(position).getLikesfactual());
+//                }
+//
+//                if (usersList.get(position).getLikesfunny() != null) {
+//                    holder.tv_angry.setText(usersList.get(position).getLikesfunny());
+//                }
+//            } else if (usersList.get(position).getCode() == 3) {
+//                if (usersList.get(position).getDislikenomaterial() != null) {
+//                    holder.tv_wow.setText(usersList.get(position).getDislikenomaterial());
+//                }
+//
+//                if (usersList.get(position).getDislikefakenewscount() != null) {
+//                    holder.tv_sad.setText(usersList.get(position).getDislikefakenewscount());
+//                }
+//
+//                if (usersList.get(position).getDislikebiasedcount() != null) {
+//                    holder.tv_angry.setText(usersList.get(position).getDislikebiasedcount());
+//                }
+//            }
 
 
             if (!String.valueOf(usersList.get(position).getCommentedUserId()).equals(Utils.getLoggedInUserId(mContext))) {
 
-                holder.ll_wowGif.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (usersList.get(position).getCode() == 2) {
-                            if (usersList.get(position).getLikes()) {
-                                holder.iv_like_yes.setImageResource(R.drawable.thumb_off);
-                                ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 1);
-                            } else {
-                                holder.iv_like_yes.setImageResource(R.drawable.thumb_on);
-                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 1);
+
+                EmojiConfig.with(mContext)
+                        .on(holder.ll_like_yes)
+                        .open(holder.emojiView_like_yes)
+                        .addEmoji(new Emoji(R.drawable.noresizelike, "Like", position))
+                        .addEmoji(new Emoji(R.drawable.noresizefactual, "Factual", position))
+                        .addEmoji(new Emoji(R.drawable.noresizefunny, "Funny", position))
+
+                        .setOnEmojiSelectedListener(new OnEmojiSelectedListener() {
+                            @Override
+                            public void onEmojiSelected(Emoji emoji) {
+                                String data=emoji.getDescription();
+                                switch(data){
+                                    case "Like":
+                                        if (usersList.get(position).getLikes()) {
+                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 1);
+                                        }else{
+                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                            ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 1);
+                                        }
+                                        break;
+                                    case "Factual":
+                                        if (usersList.get(position).getLikes()) {
+                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 2);
+                                        }else{
+                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                            ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 2);
+                                        }
+                                        break;
+                                    case "Funny":
+                                        if (usersList.get(position).getLikes()) {
+                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 3);
+                                        }else{
+                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                            ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 3);
+                                        }
+                                        break;
+                                }
+
+
                             }
+                        })
 
-                        } else if (usersList.get(position).getCode() == 3) {
-                            if (usersList.get(position).getDisLikes()) {
-                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_off);
-                                ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 4);
-                            } else {
-                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_on);
-                                ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 4);
+                        .setEmojiViewInAnimation((AnimationSet) AnimationUtils.loadAnimation(mContext, R.anim.in_animation))
+                        .setEmojiViewOutAnimation((AnimationSet) AnimationUtils.loadAnimation(mContext, R.anim.out_animation))
+                        .setBackgroundImage(R.drawable.background_drawable)
+                        .setup();
+
+
+
+                EmojiConfig.with(mContext)
+                        .on(holder.ll_dislike_no)
+                        .open(holder.emojiView_dislike_no)
+                        .addEmoji(new Emoji(R.drawable.noresizewows, "Wow", position))
+                        .addEmoji(new Emoji(R.drawable.noresizesad, "Sad", position))
+                        .addEmoji(new Emoji(R.drawable.noresizeangry, "Angry", position))
+
+                        .setOnEmojiSelectedListener(new OnEmojiSelectedListener() {
+                            @Override
+                            public void onEmojiSelected(Emoji emoji) {
+                                String data=emoji.getDescription();
+                                switch(data){
+                                    case "Wow":
+                                        if (usersList.get(position).getDisLikes()) {
+                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 4);
+                                        }else{
+                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                            ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 4);
+                                        }
+                                        break;
+                                    case "Sad":
+                                        if (usersList.get(position).getDisLikes()) {
+                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 5);
+                                        }else{
+                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                            ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 5);
+                                        }
+                                        break;
+                                    case "Angry":
+                                        if (usersList.get(position).getDisLikes()) {
+                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 6);
+                                        }else{
+                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                            ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 6);
+                                        }
+                                        break;
+                                }
                             }
+                        })
 
-                        }
-                    }
-                });
-
-                holder.ll_sadGif.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (usersList.get(position).getCode() == 2) {
-                            if (usersList.get(position).getLikes()) {
-                                holder.iv_like_yes.setImageResource(R.drawable.thumb_off);
-                                ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 2);
-                            } else {
-                                holder.iv_like_yes.setImageResource(R.drawable.thumb_on);
-                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 2);
-                            }
-
-                        } else if (usersList.get(position).getCode() == 3) {
-                            if (usersList.get(position).getDisLikes()) {
-                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_off);
-                                ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 5);
-                            } else {
-                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_on);
-                                ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 5);
-                            }
-
-                        }
-                    }
-                });
-                holder.ll_angryGif.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (usersList.get(position).getCode() == 2) {
-                            if (usersList.get(position).getLikes()) {
-                                holder.iv_like_yes.setImageResource(R.drawable.thumb_off);
-                                ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 3);
-                            } else {
-                                holder.iv_like_yes.setImageResource(R.drawable.thumb_on);
-                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 3);
-                            }
-
-                        } else if (usersList.get(position).getCode() == 3) {
-                            if (usersList.get(position).getDisLikes()) {
-                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_off);
-                                ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 6);
-                            } else {
-                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_on);
-                                ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 6);
-                            }
-
-                        }
+                        .setEmojiViewInAnimation((AnimationSet) AnimationUtils.loadAnimation(mContext, R.anim.in_animation))
+                        .setEmojiViewOutAnimation((AnimationSet) AnimationUtils.loadAnimation(mContext, R.anim.out_animation))
+                        .setBackgroundImage(R.drawable.background_drawable)
+                        .setup();
 
 
-                    }
-                });
+
+//                holder.ll_wowGif.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        if (usersList.get(position).getCode() == 2) {
+//                            if (usersList.get(position).getLikes()) {
+//                                holder.iv_like_yes.setImageResource(R.drawable.thumb_off);
+//                                ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 1);
+//                            } else {
+//                                holder.iv_like_yes.setImageResource(R.drawable.thumb_on);
+//                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 1);
+//                            }
+//
+//                        } else if (usersList.get(position).getCode() == 3) {
+//                            if (usersList.get(position).getDisLikes()) {
+//                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_off);
+//                                ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 4);
+//                            } else {
+//                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_on);
+//                                ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 4);
+//                            }
+//
+//                        }
+//                    }
+//                });
+
+//                holder.ll_sadGif.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        if (usersList.get(position).getCode() == 2) {
+//                            if (usersList.get(position).getLikes()) {
+//                                holder.iv_like_yes.setImageResource(R.drawable.thumb_off);
+//                                ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 2);
+//                            } else {
+//                                holder.iv_like_yes.setImageResource(R.drawable.thumb_on);
+//                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 2);
+//                            }
+//
+//                        } else if (usersList.get(position).getCode() == 3) {
+//                            if (usersList.get(position).getDisLikes()) {
+//                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_off);
+//                                ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 5);
+//                            } else {
+//                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_on);
+//                                ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 5);
+//                            }
+//
+//                        }
+//                    }
+//                });
+//                holder.ll_angryGif.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        if (usersList.get(position).getCode() == 2) {
+//                            if (usersList.get(position).getLikes()) {
+//                                holder.iv_like_yes.setImageResource(R.drawable.thumb_off);
+//                                ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 3);
+//                            } else {
+//                                holder.iv_like_yes.setImageResource(R.drawable.thumb_on);
+//                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 3);
+//                            }
+//
+//                        } else if (usersList.get(position).getCode() == 3) {
+//                            if (usersList.get(position).getDisLikes()) {
+//                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_off);
+//                                ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 6);
+//                            } else {
+//                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_on);
+//                                ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 6);
+//                            }
+//
+//                        }
+//
+//
+//                    }
+//                });
 
 //                holder.ll_like_yes.setOnClickListener(new View.OnClickListener() {
 //                    @Override
@@ -1093,6 +1389,122 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
         }
 
     }
+
+    public boolean onTouch(View v, MotionEvent event) {
+        LinearLayout layout = (LinearLayout) v;
+
+        for (int i = 0; i < layout.getChildCount(); i++) {
+
+            View view = layout.getChildAt(i);
+            Rect outRect = new Rect(view.getLeft(), view.getTop(), view.getRight(), view.getBottom());
+            if (outRect.contains((int) event.getX(), (int) event.getY())) {
+                // over a View
+            }
+        }
+        return false;
+    }
+
+
+//    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+//
+//        private static final int SWIPE_DISTANCE_THRESHOLD = 1;
+//        private static final int SWIPE_VELOCITY_THRESHOLD = 1;
+//
+//        @Override
+//        public boolean onDown(MotionEvent event) {
+//            Log.d("TAG", "onDown: ");
+//
+//            // don't return false here or else none of the other
+//            // gestures will work
+//            return true;
+//        }
+//
+//        @Override
+//        public boolean onSingleTapConfirmed(MotionEvent e) {
+//            Log.i("TAG", "onSingleTapConfirmed: ");
+//            return true;
+//        }
+//
+//
+//        @Override
+//        public boolean onDoubleTap(MotionEvent e) {
+//            Log.i("TAG", "onDoubleTap: ");
+//            return true;
+//        }
+//
+//        @Override
+//        public boolean onScroll(MotionEvent e1, MotionEvent e2,
+//                                float distanceX, float distanceY) {
+//            Log.i("TAG", "onScroll: ");
+//            return true;
+//        }
+//
+//        @Override
+//        public boolean onFling(MotionEvent event1, MotionEvent event2,
+//                               float velocityX, float velocityY) {
+//            float distanceX = event2.getX() - event1.getX();
+//            float distanceY = event2.getY() - event1.getY();
+//            if (Math.abs(distanceX) > Math.abs(distanceY) && Math.abs(distanceX) > SWIPE_DISTANCE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+//                if (distanceX > 0)
+//                    onSwipeRight();
+//                else
+//                    onSwipeLeft();
+//                return true;
+//            }
+//            return false;
+//        }
+//
+//        public void onSwipeRight() {
+//
+//        }
+//
+//        public void onSwipeLeft() {
+//        }
+//    }
+
+
+//    private void Process(float x, float y)
+//    {
+//        index = -1;
+//
+//        x = x - getX();
+//        y = y - getY();
+//        // if touch within the icon
+//        if (boundary.contains((int) x, (int) y))
+//        {
+//            // get the index in list
+//            index = (int) Math.floor(x / (getWidth() / flags.length));
+//
+//            if (index == -1 || index >= flags.length)
+//                return;
+//            // enlarge
+//            if (!flags[index])
+//            {
+//                // avoid duplicate
+//                flags[index] = true;
+//                View v = ((LinearLayout) getChildAt(0)).getChildAt(index);
+//                v.animate().translationY(isReversed ? v.getHeight() : -v.getHeight())
+//                        .scaleX(2).scaleY(2).setDuration(150)
+//                        .setStartDelay(0).setInterpolator(null).start();
+//            }
+//        }
+//
+//        // reduce any enlarged icon
+//        for (int i = 0; i < flags.length; i++)
+//        {
+//            // don't reduce the current icon
+//            if (i == index)
+//                continue;
+//
+//            if (flags[i])
+//            {
+//                flags[i] = false;
+//                View v = ((LinearLayout) mContext.getChildAt(0)).getChildAt(i);
+//                v.animate().translationY(0).scaleX(1).scaleY(1).setDuration(150)
+//                        .setStartDelay(0).setInterpolator(null).start();
+//            }
+//        }
+//    }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override

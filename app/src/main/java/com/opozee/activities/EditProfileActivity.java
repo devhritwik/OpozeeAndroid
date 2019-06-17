@@ -129,6 +129,7 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
         ProfileParams params = new ProfileParams();
         params.setType(AppGlobal.TYPE_GET_PROFILE);
         params.setUser_id(Utils.getLoggedInUserId(EditProfileActivity.this));
+        params.setViewuserid(Utils.getLoggedInUserId(EditProfileActivity.this));
         return params;
     }
 

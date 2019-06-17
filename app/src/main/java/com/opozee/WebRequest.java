@@ -6,6 +6,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.opozee.pojo.follower_pojo.Following;
+import com.opozee.pojo.getallhashtags.GetAllTags;
 import com.opozee.pojo.getmyfollowers.GetFollower;
 import com.opozee.pojo.getmyfollowing_pojo.GetFollowing;
 import com.opozee.pojo.loginemail.LoginEmail;
@@ -93,6 +94,9 @@ public class WebRequest {
 
         @POST("UnfollowUser")
         Call<UnFollow> unfollowuser(@Header("Content-Type") String Content, @Body String data );
+
+        @GET("GetPopularHashTags")
+        Call<GetAllTags> getalltags();
 
     }
 }

@@ -3,6 +3,7 @@ package com.opozee.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,10 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.opozee.R;
+import com.opozee.WebRequest;
 import com.opozee.activities.HomeActivity;
+import com.opozee.adapters.GetTagsAdapter;
 import com.opozee.adapters.HomeQuestionsAdapter;
+import com.opozee.model.GetTagsModel;
 import com.opozee.params.PostedQuestionsParams;
 import com.opozee.pojo.PostedQuestionsResponse;
+import com.opozee.pojo.getallhashtags.GetAllTags;
 import com.opozee.posted_questions_mvp.model.PostedQuestionsInteractorImpl;
 import com.opozee.posted_questions_mvp.presenter.PostedQuestionsPresenterImpl;
 import com.opozee.posted_questions_mvp.view.PostedQuestionsView;
@@ -28,6 +33,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class HomeFragment extends Fragment implements PostedQuestionsView {
@@ -46,7 +54,13 @@ public class HomeFragment extends Fragment implements PostedQuestionsView {
     private boolean isLoading = false;
     private boolean isLastPage = false;
     private boolean isRefreshed = false;
-
+    public static WebRequest webRequest;
+    WebRequest.APIInterface apiInterface;
+    retrofit2.Call<GetAllTags> getAllTagsCall;
+    GetAllTags getAllTags;
+public RecyclerView rv_tags;
+public GetTagsAdapter getTagsAdapter;
+public ArrayList<GetTagsModel> getTagsModelist;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -59,6 +73,15 @@ public class HomeFragment extends Fragment implements PostedQuestionsView {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, rootView);
+        webRequest=WebRequest.getSingleton(getActivity());
+//        rv_tags=rootView.findViewById(R.id.rv_tags);
+//        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
+//        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//        rv_tags.setLayoutManager(linearLayoutManager);
+//        rv_tags.setItemAnimator(new DefaultItemAnimator());
+
+
+//        getalltags();
         Log.e("onCreateView", "onCreateView");
 
         //set scroll listener for fab visibility
@@ -76,6 +99,38 @@ public class HomeFragment extends Fragment implements PostedQuestionsView {
         getQuestions();
         return rootView;
     }
+
+//    private void getalltags() {
+//        getAllTagsCall=webRequest.apiInterface.getalltags();
+//        getAllTagsCall.enqueue(new Callback<GetAllTags>() {
+//            @Override
+//            public void onResponse(Call<GetAllTags> call, Response<GetAllTags> response) {
+//                if(response!=null){
+//                    GetAllTags getAllTags=response.body();
+//                    int code=Integer.parseInt(getAllTags.getSuccess());
+//                    switch (code){
+//                        case 200:
+//                            for(int i=0;i<getAllTags.getData().size();i++){
+//                                GetTagsModel getTagsModel=new GetTagsModel();
+//                                getTagsModelist.add(getTagsModel);
+//
+//                            }
+//getTagsAdapter=new GetTagsAdapter(getActivity(),getTagsModelist);
+//                            rv_tags.setAdapter(getTagsAdapter);
+//                            break;
+//                            default:
+//                                break;
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<GetAllTags> call, Throwable t) {
+//
+//            }
+//        });
+//
+//    }
 
     @Override
     public void onResume() {

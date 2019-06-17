@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,6 +40,7 @@ import com.opozee.profile_mvp.model.ProfileInteractorImpl;
 import com.opozee.profile_mvp.presenter.ProfilePresenter;
 import com.opozee.profile_mvp.presenter.ProfilePresenterImpl;
 import com.opozee.profile_mvp.view.ProfileView;
+import com.opozee.testing.TestingActivity;
 import com.opozee.utils.AppGlobal;
 import com.opozee.utils.AppSP;
 import com.opozee.utils.Utils;
@@ -46,6 +48,11 @@ import com.opozee.utils.Utils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ro.andreidobrescu.emojilike.Emoji;
+import ro.andreidobrescu.emojilike.EmojiConfig;
+import ro.andreidobrescu.emojilike.EmojiLikeTouchDetector;
+import ro.andreidobrescu.emojilike.IActivityWithEmoji;
+import ro.andreidobrescu.emojilike.OnEmojiSelectedListener;
 
 import static com.opozee.fragments.ProfileFragment.PROFILE_FRAGMENG_ARGUEMENT_USER_ID;
 
@@ -71,12 +78,14 @@ public class HomeActivity extends OpozeeActivity implements ProfileView {
     public FloatingActionButton btn_add_post;
     @BindView(R.id.app_bar_token_count)
     TextView mTokenCountView;
-
+    EmojiLikeTouchDetector emojiLikeTouchDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        emojiLikeTouchDetector=new EmojiLikeTouchDetector();
 
         ButterKnife.bind(this);
         mProfilePresenter = new ProfilePresenterImpl();
@@ -450,6 +459,7 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
         params.setType(AppGlobal.TYPE_GET_PROFILE);
         // params.setUser_id(Utils.getLoggedInUserId(getActivity()));
         params.setUser_id(Utils.getLoggedInUserId(this));
+        params.setViewuserid(Utils.getLoggedInUserId(this));
         return params;
     }
     @Override
@@ -486,4 +496,18 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
     public void onFailure(String error) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
+
+
+
+//    @OnClick(R.id.fragmentDemo)
+//    public void fragmentDemo ()
+//    {
+//        Intent i=new Intent(this, FragmentActivitySample.class);
+//        startActivity(i);
+//    }
+
+
+
+
+
 }

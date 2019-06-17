@@ -99,6 +99,7 @@ public class PostQuestionFragment extends Fragment implements PostQuestionView, 
         ProfileParams params = new ProfileParams();
         params.setType(AppGlobal.TYPE_GET_PROFILE);
         params.setUser_id(Utils.getLoggedInUserId(getActivity()));
+        params.setViewuserid(Utils.getLoggedInUserId(getActivity()));
         return params;
     }
 

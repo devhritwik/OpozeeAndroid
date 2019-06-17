@@ -76,12 +76,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+import ro.andreidobrescu.emojilike.ActivityWithEmoji;
+import ro.andreidobrescu.emojilike.EmojiLikeTouchDetector;
 
 import static com.opozee.activities.EmptyFragmentActivity.EMPTY_FRAGMENT_ACTIVITY_TITLE_ARGUMENT;
 import static com.opozee.fragments.ProfileFragment.PROFILE_FRAGMENG_ARGUEMENT_USER_ID;
 import static com.opozee.fragments.TagSeachFragment.SEARCH_TAG_ARGUMENT;
 
-public class QuestionDetailActivity extends OpozeeActivity implements QuestionDetailView, BookMarkView, LikeDislikeView, ProfileView {
+public class QuestionDetailActivity extends ActivityWithEmoji implements QuestionDetailView, BookMarkView, LikeDislikeView, ProfileView {
 
     @BindView(R.id.question_details_opinion_recycle_view)
     RecyclerView recyclerView;
@@ -151,10 +153,12 @@ public class QuestionDetailActivity extends OpozeeActivity implements QuestionDe
     public static OpinionAdapter ticketNumber;
     public List<QuestionDetailResponse.Comment> commentList=new ArrayList<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_detail);
+
         rl_questions = findViewById(R.id.rl_questions);
         view_reaction = findViewById(R.id.view_reaction);
         linear = findViewById(R.id.linear);
@@ -243,6 +247,7 @@ public class QuestionDetailActivity extends OpozeeActivity implements QuestionDe
         ProfileParams params = new ProfileParams();
         params.setType(AppGlobal.TYPE_GET_PROFILE);
         params.setUser_id(Utils.getLoggedInUserId(this));
+        params.setViewuserid(Utils.getLoggedInUserId(this));
         return params;
     }
 
@@ -398,14 +403,14 @@ public class QuestionDetailActivity extends OpozeeActivity implements QuestionDe
     //like dislike opinion
 //    LikeDislikeOpinion
     public void likeDislike(int commentStatus, int opinionId,int reactiontype) {
-        if(commentList.size()>0) {
-            for (int i = 0; i < commentList.size(); i++) {
-                commentList.get(i).setIschecked(false);
-                if(ticketNumber!=null) {
-                    ticketNumber.notifyDataSetChanged();
-                }
-            }
-        }
+//        if(commentList.size()>0) {
+//            for (int i = 0; i < commentList.size(); i++) {
+//                commentList.get(i).setIschecked(false);
+//                if(ticketNumber!=null) {
+//                    ticketNumber.notifyDataSetChanged();
+//                }
+//            }
+//        }
 
         if (Utils.isNetworkAvail(QuestionDetailActivity.this)) {
             Log.d("Data_Log",""+commentStatus);
