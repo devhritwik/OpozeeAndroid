@@ -1,41 +1,39 @@
-package com.opozee.adapters;
+package com.opozee.searchadapter;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
-        import android.app.Activity;
-        import android.content.Intent;
-        import android.support.v7.widget.RecyclerView;
-        import android.text.Html;
-        import android.util.Log;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.SeekBar;
-        import android.widget.TextView;
+import com.opozee.R;
+import com.opozee.activities.QuestionDetailActivity;
+import com.opozee.application.QuestionnaireApplication;
+import com.opozee.pojo.PostedQuestionsResponse;
+import com.opozee.utils.AppGlobal;
+import com.opozee.utils.Utils;
+import com.opozee.view.QuestionListTopBeliefView;
+import com.squareup.picasso.Picasso;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.json.JSONObject;
 
-        import com.opozee.R;
-        import com.opozee.activities.QuestionDetailActivity;
-        import com.opozee.application.QuestionnaireApplication;
-        import com.opozee.pojo.PostedQuestionsResponse;
-        import com.opozee.utils.AppGlobal;
-        import com.opozee.utils.Utils;
-        import com.opozee.view.QuestionListTopBeliefView;
-        import com.squareup.picasso.Picasso;
+import java.util.HashMap;
+import java.util.List;
 
-        import org.apache.commons.lang3.StringEscapeUtils;
-        import org.json.JSONObject;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
-        import java.util.HashMap;
-        import java.util.List;
+public class AllSearchAdapter extends RecyclerView.Adapter<AllSearchAdapter.ViewHolder>  {
 
-        import butterknife.BindView;
-        import butterknife.ButterKnife;
-        import de.hdodenhof.circleimageview.CircleImageView;
-
-public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdapter.ViewHolder>  {
-
-    List<PostedQuestionsResponse.PostQuestionDetail> usersList;
-    private Activity mContext;
+        List<PostedQuestionsResponse.PostQuestionDetail> usersList;
+private Activity mContext;
 //    private PostedQuestionsResponse.PostQuestionDetail userData;
 //    private Random random;
 //    private final int VIEW_TYPE_ITEM = 0;
@@ -46,55 +44,55 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
 //    private int lastVisibleItem, totalItemCount;
 
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
+// Provide a reference to the views for each data item
+// Complex data items may need more than one view per item, and
+// you provide access to all the views for a data item in a view holder
+public static class ViewHolder extends RecyclerView.ViewHolder {
+    // each data item is just a string in this case
 
-        @BindView(R.id.iv_user)
-        CircleImageView iv_user;
+    @BindView(R.id.iv_user)
+    CircleImageView iv_user;
 
-        @BindView(R.id.tv_name)
-        public TextView tv_name;
+    @BindView(R.id.tv_name)
+    public TextView tv_name;
 
-        @BindView(R.id.tv_user_name)
-        public TextView tv_user_name;
+    @BindView(R.id.tv_user_name)
+    public TextView tv_user_name;
 
-        @BindView(R.id.tv_time)
-        public TextView tv_time;
+    @BindView(R.id.tv_time)
+    public TextView tv_time;
 
-        @BindView(R.id.tv_question)
-        TextView tv_question;
+    @BindView(R.id.tv_question)
+    TextView tv_question;
 
-        @BindView(R.id.tv_count_likes)
-        public TextView tv_count_likes;
+    @BindView(R.id.tv_count_likes)
+    public TextView tv_count_likes;
 
-        @BindView(R.id.tv_count_dislikes)
-        public TextView tv_count_dislikes;
+    @BindView(R.id.tv_count_dislikes)
+    public TextView tv_count_dislikes;
 
-        @BindView(R.id.seekBar)
-        public SeekBar seekBar;
+    @BindView(R.id.seekBar)
+    public SeekBar seekBar;
 
-        @BindView(R.id.best_supporting_view)
-        QuestionListTopBeliefView bestSupportingView;
+    @BindView(R.id.best_supporting_view)
+    QuestionListTopBeliefView bestSupportingView;
 
-        @BindView(R.id.best_against_view)
-        QuestionListTopBeliefView bestAgainstView;
+    @BindView(R.id.best_against_view)
+    QuestionListTopBeliefView bestAgainstView;
 
-        @BindView(R.id.tv_reaction)
-        public TextView tv_reaction;
+    @BindView(R.id.tv_reaction)
+    public TextView tv_reaction;
 
-        public ViewHolder(View v) {
-            super(v);
+    public ViewHolder(View v) {
+        super(v);
 
-            ButterKnife.bind(this, v);
-            seekBar.setEnabled(false);
-        }
+        ButterKnife.bind(this, v);
+        seekBar.setEnabled(false);
     }
+}
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public HomeQuestionsAdapter(Activity mContext, List<PostedQuestionsResponse.PostQuestionDetail> usersList) {
+    public AllSearchAdapter(Activity mContext, List<PostedQuestionsResponse.PostQuestionDetail> usersList) {
 
         this.mContext = mContext;
         this.usersList = usersList;
@@ -102,21 +100,21 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
     }
     // Create new views (invoked by the layout manager)
     @Override
-    public HomeQuestionsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AllSearchAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-            // create a new view-
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.home_questions_item, parent, false);
-            // set the view's size, margins, paddings and layout parameters
-            ViewHolder vh = new ViewHolder(v);
-            return vh;
+        // create a new view-
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.home_questions_item, parent, false);
+        // set the view's size, margins, paddings and layout parameters
+        ViewHolder vh = new ViewHolder(v);
+        return vh;
 
     }
 
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(HomeQuestionsAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(AllSearchAdapter.ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
@@ -215,7 +213,7 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
         int noCount = usersList.get(position).getNoCount() != null ? usersList.get(position).getNoCount() : 0;
 
 
-        initDataToSeekbar(holder.seekBar, holder.tv_count_likes, holder.tv_count_dislikes,yesCount, noCount);
+//        initDataToSeekbar(holder.seekBar, holder.tv_count_likes, holder.tv_count_dislikes,yesCount, noCount);
 
     }
 
@@ -255,7 +253,7 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        Log.d("Size==",""+usersList.size());
+        Log.d("Size==SearchAdapter",""+usersList.size());
         return usersList == null ? 0 : usersList.size();
     }
 }

@@ -60,13 +60,22 @@ public class PostedQuestionsInteractorImpl implements PostedQuestionsInteractor 
     }
 
     private void getAllPosts(PostedQuestionsParams params, final OnPostedQuestionsFinishListener mListener) {
-        Call<PostedQuestionsResponse> call = WebServiceFactory.getInstance().getAllQuestions(params.getUser_id(), params.getPageIndex(), params.getPageSize(),1);
+
+        if(params.getSearchtext()!=null){
+            if(params.getSearchtext().trim().length()<=0){
+                params.setSearchtext("All");
+            }
+        }else{
+            params.setSearchtext("All");
+        }
+        Call<PostedQuestionsResponse> call = WebServiceFactory.getInstance().getAllQuestions(params.getUser_id(), params.getPageIndex(), params.getPageSize(),1,params.getSearchtext());
 
         call.enqueue(new Callback<PostedQuestionsResponse>() {
             @Override
             public void onResponse(Call<PostedQuestionsResponse> call, Response<PostedQuestionsResponse> response) {
 
                 if (response.isSuccessful()) {
+
                     if (response.body().getResponse().getCode() == 0 ) {
                         PostedQuestionsResponse LoginSignupResponse = response.body();
                         if (LoginSignupResponse != null) {

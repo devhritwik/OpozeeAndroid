@@ -591,6 +591,11 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                         .addEmoji(new Emoji(R.drawable.noresizelike, "Like", position))
                         .addEmoji(new Emoji(R.drawable.noresizefactual, "Factual", position))
                         .addEmoji(new Emoji(R.drawable.noresizefunny, "Funny", position))
+//                        .setEmojiViewMarginRight(0)
+//                        .setEmojiViewMarginLeft(0)
+//                        .setUnselectedEmojiMarginLeft(0)
+//                        .setUnselectedEmojiMarginRight(0)
+
 
                         .setOnEmojiSelectedListener(new OnEmojiSelectedListener() {
                             @Override

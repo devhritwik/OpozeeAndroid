@@ -217,7 +217,8 @@ public class PostQuestionFragment extends Fragment implements PostQuestionView, 
         Utils.showCustomToast(getActivity(), "Question posted successfully");
         if(getActivity() instanceof HomeActivity)
         {
-            ((HomeActivity)getActivity()).getLastFragment(AppGlobal.HOMEFRAG);
+//            ((HomeActivity)getActivity()).getLastFragment(AppGlobal.HOMEFRAG);
+            ((HomeActivity)getActivity()).refresh();
         }
         else
         {

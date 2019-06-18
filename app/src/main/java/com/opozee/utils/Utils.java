@@ -236,11 +236,15 @@ public class Utils {
         mProgressDialog.show();
     }
     public static void dismissProgress() {
-        if (mProgressDialog != null) {
-            if (mProgressDialog.isShowing()) {
-                mProgressDialog.dismiss();
-                mProgressDialog = null;
+        try {
+            if (mProgressDialog != null) {
+                if (mProgressDialog.isShowing()) {
+                    mProgressDialog.dismiss();
+                    mProgressDialog = null;
+                }
             }
+        }catch (Exception e){
+
         }
     }
 

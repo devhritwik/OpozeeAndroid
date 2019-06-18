@@ -76,7 +76,7 @@ public interface WebService {
 
     @GET(WebUrl.GET_ALL_QUESTION_URL)
     @Headers({WebUrl.AUTHORIZATION_HEADER})
-    Call<PostedQuestionsResponse> getAllQuestions(@Query("UserID") String userID, @Query("Pageindex") int Pageindex, @Query("Pagesize") int Pagesize,@Query("Sort") int sort);
+    Call<PostedQuestionsResponse> getAllQuestions(@Query("UserID") String userID, @Query("Pageindex") int Pageindex, @Query("Pagesize") int Pagesize,@Query("Sort") int sort,@Query("Search") String search);
 
     @GET(WebUrl.GET_ALL_NOTIFICATIONS_URL)
     @Headers({WebUrl.AUTHORIZATION_HEADER})

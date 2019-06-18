@@ -30,6 +30,7 @@ import com.opozee.R;
 import com.opozee.application.QuestionnaireApplication;
 import com.opozee.fragments.FavouriteFragment;
 import com.opozee.fragments.HomeFragment;
+import com.opozee.fragments.HomeNewFragment;
 import com.opozee.fragments.NotificationsFragment;
 import com.opozee.fragments.PostQuestionFragment;
 import com.opozee.fragments.ProfileFragment;
@@ -113,6 +114,10 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
         handleData();
     }
 
+    public void refresh(){
+        finish();
+        startActivity(getIntent());
+    }
     public void getLastFragment(int last_frag) {
         if (currFrag == last_frag) return;
 
@@ -131,7 +136,8 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
                 spaceNavView.setVisibility(View.VISIBLE);
                 iv_back.setVisibility(View.INVISIBLE);
                 //show fragment
-                loadFragment(new HomeFragment());
+//                loadFragment(new HomeFragment());
+                loadFragment(new HomeNewFragment());
                 QuestionnaireApplication.getMixpanelApi().track("Question List Fragment on HomeActivity");
                 break;
 
@@ -239,8 +245,9 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
         spaceNavView.setSpaceOnClickListener(new SpaceOnClickListener() {
             @Override
             public void onCentreButtonClick() {
-                getLastFragment(AppGlobal.HOMEFRAG);
-
+//                getLastFragment(AppGlobal.HOMEFRAG);
+                finish();
+                startActivity(getIntent());
             }
 
             @Override
@@ -358,7 +365,9 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
             if (fr instanceof PostQuestionFragment || fr instanceof NotificationsFragment || fr instanceof ProfileFragment
                     || fr instanceof SearchFragment || fr instanceof FavouriteFragment) {
                 Log.e("onBackPressed", " ONBACK Pressed");
-                getLastFragment(AppGlobal.HOMEFRAG);
+//                getLastFragment(AppGlobal.HOMEFRAG);
+                finish();
+                startActivity(getIntent());
             } else {
                 exitAlert();
             }
@@ -375,7 +384,9 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
         if(from != null)
            if(from.equals("DetailActivity"))
         {
-            getLastFragment(AppGlobal.HOMEFRAG);
+//            getLastFragment(AppGlobal.HOMEFRAG);
+            finish();
+            startActivity(getIntent());
         }
 
     }
@@ -394,7 +405,8 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
             if (fr instanceof PostQuestionFragment || fr instanceof NotificationsFragment || fr instanceof ProfileFragment
                     || fr instanceof SearchFragment || fr instanceof FavouriteFragment) {
                 Log.e("onBackPressed", " ONBACK Pressed");
-                getLastFragment(AppGlobal.HOMEFRAG);
+//                getLastFragment(AppGlobal.HOMEFRAG);
+
             } else {
                 exitAlert();
             }

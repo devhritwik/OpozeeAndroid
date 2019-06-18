@@ -4,6 +4,17 @@ public class PostedQuestionsParams {
     String user_id;
     int pageIndex;
     int pageSize;
+    String searchtext;
+
+    public String getSearchtext() {
+        return searchtext;
+    }
+
+    public void setSearchtext(String searchtext) {
+        this.searchtext = searchtext;
+    }
+
+
 
     public int getPageIndex() {
         return pageIndex;
