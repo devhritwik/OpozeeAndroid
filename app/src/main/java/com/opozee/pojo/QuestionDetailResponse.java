@@ -114,6 +114,18 @@ public class QuestionDetailResponse {
         @Expose
         private String dislikebiasedcount;
 
+        public int getSubreation() {
+            return subreation;
+        }
+
+        public void setSubreation(int subreation) {
+            this.subreation = subreation;
+        }
+
+        @SerializedName("SubReaction")
+        @Expose
+        private int subreation;
+
         public String getLikesthought() {
             return likesthought;
         }

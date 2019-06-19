@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_questionsView"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/ll_questionsView">
+    android:layout_height="wrap_content">
 
 
     <android.support.v7.widget.CardView
@@ -11,9 +12,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
+        android:layout_marginLeft="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginRight="25dp"
-        android:layout_marginLeft="@dimen/_5sdp"
         android:background="@drawable/top_belief_view_positive_bg"
         app:cardCornerRadius="@dimen/_5sdp"
         app:cardElevation="1dp"
@@ -31,7 +32,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:layout_weight="1"
                 android:autoLink="web"
                 android:fontFamily="@font/renner"
@@ -43,49 +44,68 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
+            <!--<LinearLayout-->
+            <!--android:id="@+id/ll_subreation_dislike"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/_70sdp"-->
+            <!--android:autoLink="web"-->
+            <!--android:visibility="visible"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:elevation="@dimen/_40sdp"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/ll_yes_inner" >-->
 
-            <LinearLayout
-                android:id="@+id/ll_subreation_dislike"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_70sdp"
-                android:autoLink="web"
-                android:visibility="visible"
-                android:orientation="horizontal"
-                android:elevation="@dimen/_40sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/ll_yes_inner" >
+            <!--<ro.andreidobrescu.emojilike.EmojiLikeView-->
+            <!--android:id="@+id/emojiView_dislike"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/_70sdp"-->
+            <!--android:layout_alignBottom="@+id/likeButton" />-->
 
-                <ro.andreidobrescu.emojilike.EmojiLikeView
-                    android:id="@+id/emojiView_dislike"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_70sdp"
-                    android:layout_alignBottom="@+id/likeButton" />
-
-            </LinearLayout>
-
+            <!--</LinearLayout>-->
 
 
+            <com.opozee.emojilike.EmojiLikeView
+                android:id="@+id/emojiView_dislike"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:elevation="@dimen/_50sdp"
+                app:layout_constraintBottom_toTopOf="@+id/ll_yes_inner"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-            <LinearLayout
-                android:id="@+id/ll_subreation1"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_70sdp"
-                android:autoLink="web"
-                android:visibility="visible"
-                android:orientation="horizontal"
-                android:elevation="@dimen/_40sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/ll_yes_inner">
 
-                <ro.andreidobrescu.emojilike.EmojiLikeView
-                    android:id="@+id/emojiView"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_70sdp"
-                    android:layout_alignBottom="@+id/likeButton" />
+            <!--<LinearLayout-->
+            <!--android:id="@+id/ll_subreation1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/_70sdp"-->
+            <!--android:autoLink="web"-->
+            <!--android:visibility="visible"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:elevation="@dimen/_40sdp"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/ll_yes_inner">-->
 
-            </LinearLayout>
+            <!--<ro.andreidobrescu.emojilike.EmojiLikeView-->
+            <!--android:id="@+id/emojiView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/_70sdp"-->
+            <!--android:layout_alignBottom="@+id/likeButton"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/ll_yes_inner"/>-->
+
+            <!--</LinearLayout>-->
+            <com.opozee.emojilike.EmojiLikeView
+                android:id="@+id/emojiView"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/_50sdp"
+                android:layout_alignBottom="@+id/likeButton"
+                app:layout_constraintBottom_toTopOf="@+id/ll_yes_inner"
+                app:layout_constraintStart_toStartOf="@+id/emojiView_dislike" />
+
 
 
 
@@ -93,9 +113,9 @@
                 android:id="@+id/ll_yes_inner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/_35sdp"
                 android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_35sdp"
+                android:orientation="horizontal"
                 android:paddingBottom="@dimen/_15sdp"
                 app:layout_constraintTop_toBottomOf="@+id/tv_opinion_yes">
 
@@ -289,14 +309,15 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_25sdp"
         android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginRight="@dimen/_5sdp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/top_belief_view_negative_bg"
         app:cardCornerRadius="@dimen/_5sdp"
         app:cardElevation="1dp"
-        app:layout_constraintTop_toBottomOf="@+id/card_yes"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="@dimen/_5sdp"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_yes">
+
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -305,143 +326,164 @@
                 android:id="@+id/tv_opinion_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autoLink="web"
-                android:textSize="@dimen/_12sdp"
-                android:textColor="@color/grey"
-                android:fontFamily="@font/renner"
-                android:layout_weight="1"
-                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginLeft="@dimen/_10sdp"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="@dimen/_10sdp" />
-
-            <LinearLayout
-                android:id="@+id/ll_subreation_no1"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_70sdp"
-                android:visibility="visible"
-                android:orientation="horizontal"
-                android:elevation="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_weight="1"
+                android:autoLink="web"
+                android:fontFamily="@font/renner"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_12sdp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--<LinearLayout-->
+            <!--android:id="@+id/ll_subreation_no1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/_70sdp"-->
+            <!--android:visibility="visible"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:elevation="@dimen/_40sdp"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/ll_no">-->
+
+
+            <!--<ro.andreidobrescu.emojilike.EmojiLikeView-->
+            <!--android:id="@+id/emojiView_like_yes"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/_70sdp"-->
+            <!--android:layout_alignBottom="@+id/likeButton"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/ll_no"/>-->
+
+
+            <!--</LinearLayout>-->
+
+
+            <!--<LinearLayout-->
+            <!--android:id="@+id/ll_subreation_dislike_no"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/_70sdp"-->
+            <!--android:visibility="visible"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:elevation="@dimen/_40sdp"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/ll_no">-->
+
+
+            <!--<ro.andreidobrescu.emojilike.EmojiLikeView-->
+            <!--android:id="@+id/emojiView_dislike_no"-->
+            <!--android:layout_width="@dimen/_200sdp"-->
+            <!--android:layout_height="@dimen/_70sdp"-->
+            <!--android:layout_alignBottom="@+id/likeButton"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/ll_no"/>-->
+
+
+            <!--</LinearLayout>-->
+
+
+            <com.opozee.emojilike.EmojiLikeView
+                android:id="@+id/emojiView_like_yes"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/_50sdp"
+                android:layout_alignBottom="@+id/likeButton"
+                app:layout_constraintBottom_toTopOf="@+id/ll_no"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.opozee.emojilike.EmojiLikeView
+                android:id="@+id/emojiView_dislike_no"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/_50sdp"
+                android:layout_alignBottom="@+id/likeButton"
+                app:layout_constraintBottom_toTopOf="@+id/ll_no"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/ll_no">
-
-
-                <ro.andreidobrescu.emojilike.EmojiLikeView
-                    android:id="@+id/emojiView_like_yes"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_70sdp"
-                    android:layout_alignBottom="@+id/likeButton"
-                    android:layout_marginBottom="10dp"/>
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/ll_subreation_dislike_no"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_70sdp"
-                android:visibility="visible"
-                android:orientation="horizontal"
-                android:elevation="@dimen/_40sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/ll_no">
-
-
-                <ro.andreidobrescu.emojilike.EmojiLikeView
-                    android:id="@+id/emojiView_dislike_no"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_70sdp"
-                    android:layout_alignBottom="@+id/likeButton"
-                    android:layout_marginBottom="10dp"/>
-
-
-            </LinearLayout>
-
+                app:layout_constraintStart_toStartOf="parent" />
 
 
             <LinearLayout
                 android:id="@+id/ll_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@+id/tv_opinion_no"
                 android:layout_marginTop="@dimen/_35sdp"
+                android:orientation="vertical"
                 android:paddingBottom="@dimen/_15sdp"
-                >
+                app:layout_constraintTop_toBottomOf="@+id/tv_opinion_no">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="left|center"
                     android:orientation="horizontal"
-                    android:weightSum="1"
-                    android:gravity="left|center">
+                    android:weightSum="1">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="user1233"
-                        android:layout_weight="0.5"
-                        android:fontFamily="@font/renner"
-                        android:textColor="@color/black_color"
                         android:id="@+id/tv_name_no"
-                        android:visibility="gone"
-                        android:layout_marginRight="@dimen/_2sdp"
-                        android:gravity="center_vertical"
-                        android:textSize="@dimen/_12sdp"
-                        android:singleLine="true"
-                        />
-
-                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Now"
-                        android:layout_gravity="center_vertical"
-                        android:textColor="@color/black_color"
-                        android:id="@+id/tv_time_no"
+                        android:layout_marginRight="@dimen/_2sdp"
                         android:layout_weight="0.5"
-                        android:textStyle="italic"
-                        android:visibility="gone"
-                        android:textSize="@dimen/_12sdp"
-                        android:singleLine="true"
                         android:fontFamily="@font/renner"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:text="user1233"
+                        android:textColor="@color/black_color"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tv_time_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/_2sdp"
+                        android:layout_weight="0.5"
+                        android:fontFamily="@font/renner"
                         android:gravity="center_vertical|right"
-                        />
+                        android:singleLine="true"
+                        android:text="Now"
+                        android:textColor="@color/black_color"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="italic"
+                        android:visibility="gone" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="2"
-                    >
+                    android:weightSum="2">
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
+                        android:layout_marginLeft="3dp"
                         android:layout_weight="0.7"
                         android:gravity="right"
-                        android:weightSum="1"
-                        android:layout_marginLeft="3dp"
-                        >
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
                         <LinearLayout
                             android:id="@+id/ll_like_yes"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
                             android:layout_weight="0.5"
-                            android:gravity="center">
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
                             <ImageView
                                 android:id="@+id/iv_like_yes"
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="@dimen/_20sdp"
-                                android:src="@drawable/thumb_off"
-                                />
+                                android:src="@drawable/thumb_off" />
 
                             <!--<com.like.LikeButton-->
                             <!--android:id="@+id/btn_like_no"-->
@@ -463,32 +505,32 @@
                             <!--/>-->
 
                             <TextView
+                                android:id="@+id/tv_like_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/tv_like_no"
                                 android:layout_marginLeft="@dimen/_4sdp"
                                 android:fontFamily="@font/renner"
-                                android:textSize="@dimen/_12sdp"
                                 android:gravity="left|center"
-                                android:textColor="@color/black_color"
-                                android:text="2003"
                                 android:singleLine="true"
-                                />
+                                android:text="2003"
+                                android:textColor="@color/black_color"
+                                android:textSize="@dimen/_12sdp" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/ll_dislike_no"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center"
+                            android:layout_marginLeft="@dimen/_4sdp"
                             android:layout_weight="0.5"
-                            android:layout_marginLeft="@dimen/_4sdp">
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
                             <ImageView
                                 android:id="@+id/iv_dislike_no"
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="@dimen/_20sdp"
-                                android:src="@drawable/dislike_thumb_off"/>
+                                android:src="@drawable/dislike_thumb_off" />
                             <!--<com.like.LikeButton-->
                             <!--android:id="@+id/btn_dislike_no"-->
                             <!--app:icon_type="Thumb"-->
@@ -509,46 +551,43 @@
                             <!--/>-->
 
                             <TextView
+                                android:id="@+id/tv_dislike_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/tv_dislike_no"
                                 android:layout_marginLeft="@dimen/_4sdp"
                                 android:fontFamily="@font/renner"
-                                android:textSize="@dimen/_12sdp"
                                 android:gravity="left|center"
-                                android:textColor="@color/black_color"
-                                android:text="2003"
                                 android:singleLine="true"
-                                />
+                                android:text="2003"
+                                android:textColor="@color/black_color"
+                                android:textSize="@dimen/_12sdp" />
 
                         </LinearLayout>
                     </LinearLayout>
+
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/iv_user_no"
-                        android:src="@drawable/user_drawable"
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_15sdp"
+                        android:layout_gravity="center"
                         android:layout_marginLeft="@dimen/_4sdp"
                         android:layout_marginRight="@dimen/_4sdp"
-                        android:layout_gravity="center"/>
+                        android:src="@drawable/user_drawable" />
+
                     <TextView
+                        android:id="@+id/tv_user_name_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="#@user1233"
                         android:layout_weight="1.3"
-                        android:visibility="visible"
                         android:fontFamily="@font/renner"
-                        android:textColor="@color/grey"
-                        android:id="@+id/tv_user_name_no"
                         android:gravity="center_vertical"
-                        android:textSize="@dimen/_12sdp"
                         android:singleLine="true"
-                        />
+                        android:text="#@user1233"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="visible" />
                 </LinearLayout>
             </LinearLayout>
-
-
-
 
 
         </android.support.constraint.ConstraintLayout>

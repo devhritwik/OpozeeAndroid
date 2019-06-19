@@ -1,6 +1,7 @@
 package com.opozee.fragments;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -100,6 +101,11 @@ public class HomeNewFragment extends Fragment {
     }
 
     private ArrayList<GetTagsModel> getAllTags() {
+        final ProgressDialog progressDialog=new ProgressDialog(getActivity());
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("Loading");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         getAllTagsCall = webRequest.apiInterface.getalltags();
         getAllTagsCall.enqueue(new Callback<GetAllTags>() {
             @Override
@@ -137,10 +143,12 @@ public class HomeNewFragment extends Fragment {
                                 }
                             });
                             createViewPager(viewPager);
+                            progressDialog.dismiss();
 //                            getTagsAdapter = new GetTagsAdapter(getActivity(), getTagsModelist);
 //                            rv_tags.setAdapter(getTagsAdapter);
                             break;
                         default:
+                            progressDialog.dismiss();
                             break;
                     }
                 }
@@ -148,7 +156,7 @@ public class HomeNewFragment extends Fragment {
 
             @Override
             public void onFailure(Call<GetAllTags> call, Throwable t) {
-
+                progressDialog.dismiss();
             }
         });
         return getTagsModelist;

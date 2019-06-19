@@ -23,6 +23,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
+        <activity android:name=".testing.ReactionButton"></activity>
         <activity android:name=".testing.MainTestActivity">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
@@ -30,9 +31,7 @@
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
-        <activity android:name=".testing.TestingActivity">
-
-        </activity>
+        <activity android:name=".testing.TestingActivity"></activity>
         <activity android:name=".OpozeeActivity" />
         <activity android:name=".activities.RegisterUserActivity" />
         <activity

@@ -83,7 +83,7 @@ import static com.opozee.activities.EmptyFragmentActivity.EMPTY_FRAGMENT_ACTIVIT
 import static com.opozee.fragments.ProfileFragment.PROFILE_FRAGMENG_ARGUEMENT_USER_ID;
 import static com.opozee.fragments.TagSeachFragment.SEARCH_TAG_ARGUMENT;
 
-public class QuestionDetailActivity extends ActivityWithEmoji implements QuestionDetailView, BookMarkView, LikeDislikeView, ProfileView {
+public class QuestionDetailActivity extends  com.opozee.emojilike.ActivityWithEmoji implements QuestionDetailView, BookMarkView, LikeDislikeView, ProfileView {
 
     @BindView(R.id.question_details_opinion_recycle_view)
     RecyclerView recyclerView;
@@ -180,36 +180,36 @@ public class QuestionDetailActivity extends ActivityWithEmoji implements Questio
         //setupYesNoButtonMode();
         setupAddingOpinionInterface();
 
-        linear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(commentList.size()>0) {
-                    for (int i = 0; i < commentList.size(); i++) {
-                        commentList.get(i).setIschecked(false);
-                        if(ticketNumber!=null) {
-                            ticketNumber.notifyDataSetChanged();
-                        }
-                    }
-                }
-//                for (QuestionDetailResponse.Comment item1 : usersList) {
-//                    item1.setIschecked(false);
+//        linear.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(commentList.size()>0) {
+//                    for (int i = 0; i < commentList.size(); i++) {
+//                        commentList.get(i).setIschecked(false);
+//                        if(ticketNumber!=null) {
+//                            ticketNumber.notifyDataSetChanged();
+//                        }
+//                    }
 //                }
-            }
-        });
-        toolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(commentList.size()>0) {
-                    for (int i = 0; i < commentList.size(); i++) {
-                        commentList.get(i).setIschecked(false);
-                        if(ticketNumber!=null) {
-                            ticketNumber.notifyDataSetChanged();
-                        }
-                    }
-                }
-
-            }
-        });
+////                for (QuestionDetailResponse.Comment item1 : usersList) {
+////                    item1.setIschecked(false);
+////                }
+//            }
+//        });
+//        toolbar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(commentList.size()>0) {
+//                    for (int i = 0; i < commentList.size(); i++) {
+//                        commentList.get(i).setIschecked(false);
+//                        if(ticketNumber!=null) {
+//                            ticketNumber.notifyDataSetChanged();
+//                        }
+//                    }
+//                }
+//
+//            }
+//        });
 
 //        rl_questions.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -495,7 +495,8 @@ public class QuestionDetailActivity extends ActivityWithEmoji implements Questio
 
     @Override
     public void onSuccess(LikeDislikeResponse response) {
-        getDetailWithoutShowingLoading();
+        //dont Update the data (If uppdate data uncomment following line)
+//        getDetailWithoutShowingLoading();
         //Do nothing
     }
 

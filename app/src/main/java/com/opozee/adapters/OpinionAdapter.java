@@ -47,12 +47,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import pl.droidsonroids.gif.GifImageView;
-import ro.andreidobrescu.emojilike.Emoji;
-import ro.andreidobrescu.emojilike.EmojiConfig;
-import ro.andreidobrescu.emojilike.EmojiLikeTouchDetector;
-import ro.andreidobrescu.emojilike.EmojiLikeView;
-import ro.andreidobrescu.emojilike.IActivityWithEmoji;
-import ro.andreidobrescu.emojilike.OnEmojiSelectedListener;
+
+import com.opozee.emojilike.Emoji;
+import com.opozee.emojilike.EmojiConfig;
+import com.opozee.emojilike.EmojiLikeTouchDetector;
+import com.opozee.emojilike.EmojiLikeView;
+import com.opozee.emojilike.IActivityWithEmoji;
+import com.opozee.emojilike.OnEmojiSelectedListener;
 
 
 import static com.opozee.fragments.ProfileFragment.PROFILE_FRAGMENG_ARGUEMENT_USER_ID;
@@ -149,7 +150,9 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
 
         public TextView textView;
         public ImageView likeButton;
-        public EmojiLikeView emojiView_like,emojiView_dislike,emojiView_like_yes,emojiView_dislike_no;
+        //        public EmojiLikeView emojiView_like,emojiView_dislike,emojiView_like_yes,emojiView_dislike_no;
+//        public EmojiLikeView emojiView_like,emojiView_like_yes,emojiView_dislike_no;
+        public com.opozee.emojilike.EmojiLikeView emojiView_dislike, emojiView_like, emojiView_like_yes, emojiView_dislike_no;
 //        public LinearLayout ll_slide1,ll_slide2,ll_slide_3,ll_subreactionsliding,ll_yes_inner;
 
 //        @BindView(R.id.btn_like_yes)
@@ -175,7 +178,6 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
             ll_angryGif = v.findViewById(R.id.ll_angryGif);
 
 
-
 //            gif_like = v.findViewById(R.id.iv_likeSub);
 //            gif_factual = v.findViewById(R.id.iv_factual);
 //            gif_smiley = v.findViewById(R.id.iv_smiley);
@@ -191,13 +193,13 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
 //            tv_sad = v.findViewById(R.id.tv_sad);
 //            tv_angry = v.findViewById(R.id.tv_angry);
 
-            textView=(TextView)itemView.findViewById(R.id.textView);
-            likeButton=(ImageView)itemView.findViewById(R.id.likeButton);
-            emojiView_like=(EmojiLikeView)itemView.findViewById(R.id.emojiView);
-            emojiView_dislike=(EmojiLikeView)itemView.findViewById(R.id.emojiView_dislike);
-            emojiView_like_yes=(EmojiLikeView)itemView.findViewById(R.id.emojiView_like_yes);
-            emojiView_dislike_no=(EmojiLikeView)itemView.findViewById(R.id.emojiView_dislike_no);
+            textView = (TextView) itemView.findViewById(R.id.textView);
+            likeButton = (ImageView) itemView.findViewById(R.id.likeButton);
+            emojiView_like = (EmojiLikeView) itemView.findViewById(R.id.emojiView);
+            emojiView_like_yes = (EmojiLikeView) itemView.findViewById(R.id.emojiView_like_yes);
+            emojiView_dislike_no = (EmojiLikeView) itemView.findViewById(R.id.emojiView_dislike_no);
 
+            emojiView_dislike = (com.opozee.emojilike.EmojiLikeView) itemView.findViewById(R.id.emojiView_dislike);
 //            ll_slide1=v.findViewById(R.id.ll_slide1);
 //            ll_slide2=v.findViewById(R.id.ll_slide2);
 //            ll_slide_3=v.findViewById(R.id.ll_slide3);
@@ -207,8 +209,6 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
 //            ll_likeGif.setVisibility(View.GONE);
 //            ll_factualGif.setVisibility(View.GONE);
 //            ll_smileyGif.setVisibility(View.GONE);
-
-
 
 
         }
@@ -498,9 +498,6 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
 //        };
 
 
-
-
-
         boolean isYesNo = usersList.get(position).getIsAgree();
 
         if (isYesNo) {
@@ -533,10 +530,6 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
 //                Comment = 4
 
 
-
-
-
-
             if (usersList.get(position).getLikes()) {
                 holder.iv_like.setImageResource(R.drawable.thumb_on);
 //                holder.btn_like_yes.setLiked(true);
@@ -551,6 +544,33 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
             } else {
                 holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
 //                holder.btn_dislike_yes.setLiked(false);
+            }
+
+            switch (usersList.get(position).getSubreation()){
+                case 1:
+                    holder.iv_like.setImageResource(R.drawable.resizelike);
+                    break;
+                case 2:
+                    holder.iv_like.setImageResource(R.drawable.resizefactual);
+                    break;
+                case 3:
+                    holder.iv_like.setImageResource(R.drawable.resizefunny);
+                    break;
+                case 4:
+                    holder.iv_dislike.setImageResource(R.drawable.resizewow);
+                    break;
+                case 5:
+                    holder.iv_dislike.setImageResource(R.drawable.resizesad);
+                    break;
+                case 6:
+                    holder.iv_dislike.setImageResource(R.drawable.reseizeangry);
+                    break;
+                    default:
+                        holder.iv_like.setImageResource(R.drawable.thumb_off);
+                        holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
+                        break;
+
+
             }
 
 //            if (usersList.get(position).getCode() == 0) {
@@ -583,14 +603,12 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
             if (!String.valueOf(usersList.get(position).getCommentedUserId()).equals(Utils.getLoggedInUserId(mContext))) {
 
 
-
-
                 EmojiConfig.with(mContext)
                         .on(holder.ll_like)
                         .open(holder.emojiView_like)
-                        .addEmoji(new Emoji(R.drawable.noresizelike, "Like", position))
-                        .addEmoji(new Emoji(R.drawable.noresizefactual, "Factual", position))
-                        .addEmoji(new Emoji(R.drawable.noresizefunny, "Funny", position))
+                        .addEmoji(new Emoji(R.drawable.resizelike, "Like", position))
+                        .addEmoji(new Emoji(R.drawable.resizefactual, "Factual", position))
+                        .addEmoji(new Emoji(R.drawable.resizefunny, "Funny", position))
 //                        .setEmojiViewMarginRight(0)
 //                        .setEmojiViewMarginLeft(0)
 //                        .setUnselectedEmojiMarginLeft(0)
@@ -600,36 +618,101 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                         .setOnEmojiSelectedListener(new OnEmojiSelectedListener() {
                             @Override
                             public void onEmojiSelected(Emoji emoji) {
-                               String data=emoji.getDescription();
-                               switch(data){
-                                   case "Like":
-                                       if (usersList.get(position).getLikes()) {
-                                holder.iv_like.setImageResource(R.drawable.thumb_off);
-                                ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 1);
-                            }else{
-                                           holder.iv_like.setImageResource(R.drawable.thumb_on);
-                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 1);
-                                       }
-                                       break;
-                                   case "Factual":
-                                       if (usersList.get(position).getLikes()) {
-                                           holder.iv_like.setImageResource(R.drawable.thumb_off);
-                                           ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 2);
-                                       }else{
-                                           holder.iv_like.setImageResource(R.drawable.thumb_on);
-                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 2);
-                                       }
-                                           break;
-                                   case "Funny":
-                                       if (usersList.get(position).getLikes()) {
-                                           holder.iv_like.setImageResource(R.drawable.thumb_off);
-                                           ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 3);
-                                       }else{
-                                           holder.iv_like.setImageResource(R.drawable.thumb_on);
-                                ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 3);
-                                       }
-                                       break;
-                               }
+                                String data = emoji.getDescription();
+                                switch (data) {
+                                    case "Like":
+                                        if (usersList.get(position).getLikes()) {
+                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            int count = usersList.get(position).getLikesCount() - 1;
+                                            if (count >= 0) {
+                                                holder.tv_like_yes.setText(Utils.format(count));
+                                                usersList.get(position).setLikesCount(count);
+                                            }
+                                            usersList.get(position).setLikes(false);
+
+                                            ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 1);
+                                        } else {
+                                            holder.iv_like.setImageResource(R.drawable.resizelike);
+                                            int count = usersList.get(position).getLikesCount() + 1;
+                                            holder.tv_like_yes.setText(Utils.format(count));
+                                            usersList.get(position).setLikesCount(count);
+                                            if (usersList.get(position).getDisLikes()) {
+                                                int dislikecount = usersList.get(position).getDislikesCount() - 1;
+                                                if (dislikecount >= 0) {
+                                                    usersList.get(position).setDislikesCount(dislikecount);
+                                                    holder.tv_dislike_yes.setText(Utils.format(dislikecount));
+                                                }
+                                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
+                                            }
+
+                                            usersList.get(position).setLikes(true);
+                                            usersList.get(position).setDisLikes(false);
+
+
+                                            ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 1);
+                                        }
+                                        break;
+                                    case "Factual":
+                                        if (usersList.get(position).getLikes()) {
+                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            int count = usersList.get(position).getLikesCount() - 1;
+                                            if (count >= 0) {
+                                                holder.tv_like_yes.setText(Utils.format(count));
+                                                usersList.get(position).setLikesCount(count);
+                                            }
+                                            usersList.get(position).setLikes(false);
+
+                                            ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 2);
+                                        } else {
+                                            holder.iv_like.setImageResource(R.drawable.resizefactual);
+                                            int count = usersList.get(position).getLikesCount() + 1;
+                                            holder.tv_like_yes.setText(Utils.format(count));
+                                            usersList.get(position).setLikesCount(count);
+                                            if (usersList.get(position).getDisLikes()) {
+                                                int dislikecount = usersList.get(position).getDislikesCount() - 1;
+                                                if (dislikecount >= 0) {
+                                                    usersList.get(position).setDislikesCount(dislikecount);
+                                                    holder.tv_dislike_yes.setText(Utils.format(dislikecount));
+                                                }
+                                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
+                                            }
+                                            usersList.get(position).setLikes(true);
+                                            usersList.get(position).setDisLikes(false);
+
+                                            ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 2);
+                                        }
+                                        break;
+                                    case "Funny":
+                                        if (usersList.get(position).getLikes()) {
+                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            int count = usersList.get(position).getLikesCount() - 1;
+                                            if (count >= 0) {
+                                                holder.tv_like_yes.setText(Utils.format(count));
+                                                usersList.get(position).setLikesCount(count);
+                                            }
+                                            usersList.get(position).setLikes(false);
+
+                                            ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 3);
+                                        } else {
+                                            holder.iv_like.setImageResource(R.drawable.resizefunny);
+                                            int count = usersList.get(position).getLikesCount() + 1;
+                                            usersList.get(position).setLikesCount(count);
+                                            holder.tv_like_yes.setText(Utils.format(count));
+                                            if (usersList.get(position).getDisLikes()) {
+                                                int dislikecount = usersList.get(position).getDislikesCount() - 1;
+                                                if (dislikecount >= 0) {
+                                                    usersList.get(position).setDislikesCount(dislikecount);
+                                                    holder.tv_dislike_yes.setText(Utils.format(dislikecount));
+                                                }
+                                                holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
+                                            }
+                                            usersList.get(position).setLikes(true);
+                                            usersList.get(position).setDisLikes(false);
+
+                                            ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 3);
+                                        }
+                                        break;
+                                }
 
 
                             }
@@ -641,54 +724,148 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                         .setup();
 
 
-
-                EmojiConfig.with(mContext)
+                com.opozee.emojilike.EmojiConfig.with(mContext)
                         .on(holder.ll_dislike)
                         .open(holder.emojiView_dislike)
-                        .addEmoji(new Emoji(R.drawable.noresizewows, "Wow", position))
-                        .addEmoji(new Emoji(R.drawable.noresizesad, "Sad", position))
-                        .addEmoji(new Emoji(R.drawable.noresizeangry, "Angry", position))
-
-                        .setOnEmojiSelectedListener(new OnEmojiSelectedListener() {
+                        .addEmoji(new com.opozee.emojilike.Emoji(R.drawable.resizewow, "Wow", position))
+                        .addEmoji(new com.opozee.emojilike.Emoji(R.drawable.resizesad, "Sad", position))
+                        .addEmoji(new com.opozee.emojilike.Emoji(R.drawable.reseizeangry, "Angry", position))
+                        .setOnEmojiSelectedListener(new com.opozee.emojilike.OnEmojiSelectedListener() {
                             @Override
-                            public void onEmojiSelected(Emoji emoji) {
-                                String data=emoji.getDescription();
-                                switch(data){
+                            public void onEmojiSelected(com.opozee.emojilike.Emoji emoji) {
+                                String data = emoji.getDescription();
+                                switch (data) {
                                     case "Wow":
                                         if (usersList.get(position).getDisLikes()) {
-                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
+                                            int count = usersList.get(position).getDislikesCount() - 1;
+                                            if (count >= 0) {
+                                                holder.tv_dislike_yes.setText(Utils.format(count));
+                                                usersList.get(position).setDislikesCount(count);
+                                            }
+                                            usersList.get(position).setDisLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 4);
-                                        }else{
-                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+
+                                        } else {
+                                            holder.iv_dislike.setImageResource(R.drawable.resizewow);
+                                            int count = usersList.get(position).getDislikesCount() + 1;
+                                            holder.tv_dislike_yes.setText(Utils.format(count));
+                                            usersList.get(position).setDislikesCount(count);
+                                            if (usersList.get(position).getLikes()) {
+                                                int likescount = usersList.get(position).getLikesCount() - 1;
+                                                if (likescount >= 0) {
+                                                    usersList.get(position).setLikesCount(likescount);
+                                                    holder.tv_like_yes.setText(Utils.format(likescount));
+                                                }
+                                                holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            }
+                                            usersList.get(position).setDisLikes(true);
+                                            usersList.get(position).setLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 4);
                                         }
                                         break;
                                     case "Sad":
                                         if (usersList.get(position).getDisLikes()) {
-                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
+                                            int count = usersList.get(position).getDislikesCount() - 1;
+                                            if (count >= 0) {
+                                                holder.tv_dislike_yes.setText(Utils.format(count));
+                                                usersList.get(position).setDislikesCount(count);
+                                            }
+                                            usersList.get(position).setDisLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 5);
-                                        }else{
-                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                        } else {
+                                            holder.iv_dislike.setImageResource(R.drawable.resizesad);
+                                            int count = usersList.get(position).getDislikesCount() + 1;
+                                            holder.tv_dislike_yes.setText(Utils.format(count));
+                                            usersList.get(position).setDislikesCount(count);
+                                            if (usersList.get(position).getLikes()) {
+                                                int likescount = usersList.get(position).getLikesCount() - 1;
+                                                if (likescount >= 0) {
+                                                    usersList.get(position).setLikesCount(likescount);
+                                                    holder.tv_like_yes.setText(Utils.format(likescount));
+                                                }
+                                                holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            }
+                                            usersList.get(position).setDisLikes(true);
+                                            usersList.get(position).setLikes(false);
+
                                             ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 5);
                                         }
                                         break;
                                     case "Angry":
                                         if (usersList.get(position).getDisLikes()) {
-                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            holder.iv_dislike.setImageResource(R.drawable.dislike_thumb_off);
+                                            int count = usersList.get(position).getDislikesCount() - 1;
+                                            if (count >= 0) {
+                                                holder.tv_dislike_yes.setText(Utils.format(count));
+                                                usersList.get(position).setDislikesCount(count);
+                                            }
+                                            usersList.get(position).setDisLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 6);
-                                        }else{
-                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                        } else {
+                                            holder.iv_dislike.setImageResource(R.drawable.reseizeangry);
+                                            int count = usersList.get(position).getDislikesCount() + 1;
+                                            holder.tv_dislike_yes.setText(Utils.format(count));
+                                            usersList.get(position).setDislikesCount(count);
+                                            if (usersList.get(position).getLikes()) {
+                                                int likescount = usersList.get(position).getLikesCount() - 1;
+                                                if (likescount >= 0) {
+                                                    usersList.get(position).setLikesCount(likescount);
+                                                    holder.tv_like_yes.setText(Utils.format(likescount));
+                                                }
+                                                holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            }
+                                            usersList.get(position).setDisLikes(true);
+                                            usersList.get(position).setLikes(false);
+
                                             ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 6);
                                         }
                                         break;
                                 }
                             }
                         })
-
                         .setEmojiViewInAnimation((AnimationSet) AnimationUtils.loadAnimation(mContext, R.anim.in_animation))
                         .setEmojiViewOutAnimation((AnimationSet) AnimationUtils.loadAnimation(mContext, R.anim.out_animation))
                         .setBackgroundImage(R.drawable.background_drawable)
                         .setup();
+
+//                        .setOnEmojiSelectedListener(new OnEmojiSelectedListener() {
+//                            @Override
+//                            public void onEmojiSelected(Emoji emoji) {
+//                                String data=emoji.getDescription();
+//                                switch(data){
+//                                    case "Wow":
+//                                        if (usersList.get(position).getDisLikes()) {
+//                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+//                                            ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 4);
+//                                        }else{
+//                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+//                                            ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 4);
+//                                        }
+//                                        break;
+//                                    case "Sad":
+//                                        if (usersList.get(position).getDisLikes()) {
+//                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+//                                            ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 5);
+//                                        }else{
+//                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+//                                            ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 5);
+//                                        }
+//                                        break;
+//                                    case "Angry":
+//                                        if (usersList.get(position).getDisLikes()) {
+//                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+//                                            ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 6);
+//                                        }else{
+//                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+//                                            ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 6);
+//                                        }
+//                                        break;
+//                                }
+//                            }
+//                        })
+
 
 //holder.tv_like_yes.setOnTouchListener(touchListener);
 
@@ -1094,6 +1271,34 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                 holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_off);
             }
 
+
+            switch (usersList.get(position).getSubreation()){
+                case 1:
+                    holder.iv_like_yes.setImageResource(R.drawable.resizelike);
+                    break;
+                case 2:
+                    holder.iv_like_yes.setImageResource(R.drawable.resizefactual);
+                    break;
+                case 3:
+                    holder.iv_like_yes.setImageResource(R.drawable.resizefunny);
+                    break;
+                case 4:
+                    holder.iv_dislike_no.setImageResource(R.drawable.resizewow);
+                    break;
+                case 5:
+                    holder.iv_dislike_no.setImageResource(R.drawable.resizesad);
+                    break;
+                case 6:
+                    holder.iv_dislike_no.setImageResource(R.drawable.reseizeangry);
+                    break;
+                default:
+                    holder.iv_like_yes.setImageResource(R.drawable.thumb_off);
+                    holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_off);
+                    break;
+
+
+            }
+
 //            Log.d("CheckResponse=", usersList.get(position).getLikesthought());
 //            Log.d("CheckResponse=", usersList.get(position).getLikesfactual());
 //            Log.d("CheckResponse=", usersList.get(position).getLikesfunny());
@@ -1133,39 +1338,100 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                 EmojiConfig.with(mContext)
                         .on(holder.ll_like_yes)
                         .open(holder.emojiView_like_yes)
-                        .addEmoji(new Emoji(R.drawable.noresizelike, "Like", position))
-                        .addEmoji(new Emoji(R.drawable.noresizefactual, "Factual", position))
-                        .addEmoji(new Emoji(R.drawable.noresizefunny, "Funny", position))
+                        .addEmoji(new Emoji(R.drawable.resizelike, "Like", position))
+                        .addEmoji(new Emoji(R.drawable.resizefactual, "Factual", position))
+                        .addEmoji(new Emoji(R.drawable.resizefunny, "Funny", position))
 
                         .setOnEmojiSelectedListener(new OnEmojiSelectedListener() {
                             @Override
                             public void onEmojiSelected(Emoji emoji) {
-                                String data=emoji.getDescription();
-                                switch(data){
+                                String data = emoji.getDescription();
+                                switch (data) {
                                     case "Like":
                                         if (usersList.get(position).getLikes()) {
-                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            holder.iv_like_yes.setImageResource(R.drawable.thumb_off);
+                                            int count = usersList.get(position).getLikesCount() - 1;
+                                            if (count >= 0) {
+                                                holder.tv_like_no.setText(Utils.format(count));
+                                                usersList.get(position).setLikesCount(count);
+                                            }
+                                            usersList.get(position).setLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 1);
-                                        }else{
-                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                        } else {
+                                            holder.iv_like_yes.setImageResource(R.drawable.resizelike);
+                                            int count = usersList.get(position).getLikesCount() + 1;
+                                            holder.tv_like_no.setText(Utils.format(count));
+                                            usersList.get(position).setLikesCount(count);
+                                            if (usersList.get(position).getDisLikes()) {
+                                                int dislikecount = usersList.get(position).getDislikesCount() - 1;
+                                                if (dislikecount >= 0) {
+                                                    usersList.get(position).setDislikesCount(dislikecount);
+                                                    holder.tv_dislike_no.setText(Utils.format(dislikecount));
+                                                }
+                                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_off);
+                                            }
+
+                                            usersList.get(position).setLikes(true);
+                                            usersList.get(position).setDisLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 1);
                                         }
                                         break;
+
                                     case "Factual":
                                         if (usersList.get(position).getLikes()) {
-                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            holder.iv_like_yes.setImageResource(R.drawable.thumb_off);
+                                            int count = usersList.get(position).getLikesCount() - 1;
+                                            if (count >= 0) {
+                                                holder.tv_like_no.setText(Utils.format(count));
+                                                usersList.get(position).setLikesCount(count);
+                                            }
+                                            usersList.get(position).setLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 2);
-                                        }else{
-                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                        } else {
+                                            holder.iv_like_yes.setImageResource(R.drawable.resizefactual);
+                                            int count = usersList.get(position).getLikesCount() + 1;
+                                            holder.tv_like_no.setText(Utils.format(count));
+                                            usersList.get(position).setLikesCount(count);
+                                            if (usersList.get(position).getDisLikes()) {
+                                                int dislikecount = usersList.get(position).getDislikesCount() - 1;
+                                                if (dislikecount >= 0) {
+                                                    usersList.get(position).setDislikesCount(dislikecount);
+                                                    holder.tv_dislike_no.setText(Utils.format(dislikecount));
+                                                }
+                                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_off);
+                                            }
+
+                                            usersList.get(position).setLikes(true);
+                                            usersList.get(position).setDisLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 2);
                                         }
                                         break;
                                     case "Funny":
                                         if (usersList.get(position).getLikes()) {
-                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            holder.iv_like_yes.setImageResource(R.drawable.thumb_off);
+                                            int count = usersList.get(position).getLikesCount() - 1;
+                                            if (count >= 0) {
+                                                holder.tv_like_no.setText(Utils.format(count));
+                                                usersList.get(position).setLikesCount(count);
+                                            }
+                                            usersList.get(position).setLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 3);
-                                        }else{
-                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                        } else {
+                                            holder.iv_like_yes.setImageResource(R.drawable.resizefunny);
+                                            int count = usersList.get(position).getLikesCount() + 1;
+                                            holder.tv_like_no.setText(Utils.format(count));
+                                            usersList.get(position).setLikesCount(count);
+                                            if (usersList.get(position).getDisLikes()) {
+                                                int dislikecount = usersList.get(position).getDislikesCount() - 1;
+                                                if (dislikecount >= 0) {
+                                                    usersList.get(position).setDislikesCount(dislikecount);
+                                                    holder.tv_dislike_no.setText(Utils.format(dislikecount));
+                                                }
+                                                holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_off);
+                                            }
+
+                                            usersList.get(position).setLikes(true);
+                                            usersList.get(position).setDisLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(1, usersList.get(position).getId(), 3);
                                         }
                                         break;
@@ -1181,43 +1447,108 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                         .setup();
 
 
-
                 EmojiConfig.with(mContext)
                         .on(holder.ll_dislike_no)
                         .open(holder.emojiView_dislike_no)
-                        .addEmoji(new Emoji(R.drawable.noresizewows, "Wow", position))
-                        .addEmoji(new Emoji(R.drawable.noresizesad, "Sad", position))
-                        .addEmoji(new Emoji(R.drawable.noresizeangry, "Angry", position))
+                        .addEmoji(new Emoji(R.drawable.resizewow, "Wow", position))
+                        .addEmoji(new Emoji(R.drawable.resizesad, "Sad", position))
+                        .addEmoji(new Emoji(R.drawable.reseizeangry, "Angry", position))
 
                         .setOnEmojiSelectedListener(new OnEmojiSelectedListener() {
                             @Override
                             public void onEmojiSelected(Emoji emoji) {
-                                String data=emoji.getDescription();
-                                switch(data){
+                                String data = emoji.getDescription();
+                                switch (data) {
                                     case "Wow":
                                         if (usersList.get(position).getDisLikes()) {
-                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_off);
+                                            int count = usersList.get(position).getDislikesCount() - 1;
+                                            if (count >= 0) {
+                                                holder.tv_dislike_no.setText(Utils.format(count));
+                                                usersList.get(position).setDislikesCount(count);
+                                            }
+                                            usersList.get(position).setDisLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 4);
-                                        }else{
-                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                        } else {
+                                            holder.iv_dislike_no.setImageResource(R.drawable.resizewow);
+
+
+                                            int count = usersList.get(position).getDislikesCount() + 1;
+                                            holder.tv_dislike_no.setText(Utils.format(count));
+                                            usersList.get(position).setDislikesCount(count);
+                                            if (usersList.get(position).getLikes()) {
+                                                int likescount = usersList.get(position).getLikesCount() - 1;
+                                                if (likescount >= 0) {
+                                                    usersList.get(position).setLikesCount(likescount);
+                                                    holder.tv_like_no.setText(Utils.format(likescount));
+                                                }
+                                                holder.iv_like_yes.setImageResource(R.drawable.thumb_off);
+                                            }
+                                            usersList.get(position).setDisLikes(true);
+                                            usersList.get(position).setLikes(false);
+
                                             ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 4);
                                         }
                                         break;
+
+
                                     case "Sad":
                                         if (usersList.get(position).getDisLikes()) {
-                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_off);
+                                            int count = usersList.get(position).getDislikesCount() - 1;
+                                            if (count >= 0) {
+                                                holder.tv_dislike_no.setText(Utils.format(count));
+                                                usersList.get(position).setDislikesCount(count);
+                                            }
+                                            usersList.get(position).setDisLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 5);
-                                        }else{
-                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                        } else {
+                                            holder.iv_dislike_no.setImageResource(R.drawable.resizesad);
+
+
+                                            int count = usersList.get(position).getDislikesCount() + 1;
+                                            holder.tv_dislike_no.setText(Utils.format(count));
+                                            usersList.get(position).setDislikesCount(count);
+                                            if (usersList.get(position).getLikes()) {
+                                                int likescount = usersList.get(position).getLikesCount() - 1;
+                                                if (likescount >= 0) {
+                                                    usersList.get(position).setLikesCount(likescount);
+                                                    holder.tv_like_no.setText(Utils.format(likescount));
+                                                }
+                                                holder.iv_like_yes.setImageResource(R.drawable.thumb_off);
+                                            }
+                                            usersList.get(position).setDisLikes(true);
+                                            usersList.get(position).setLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 5);
                                         }
                                         break;
                                     case "Angry":
                                         if (usersList.get(position).getDisLikes()) {
-                                            holder.iv_like.setImageResource(R.drawable.thumb_off);
+                                            holder.iv_dislike_no.setImageResource(R.drawable.dislike_thumb_off);
+                                            int count = usersList.get(position).getDislikesCount() - 1;
+                                            if (count >= 0) {
+                                                holder.tv_dislike_no.setText(Utils.format(count));
+                                                usersList.get(position).setDislikesCount(count);
+                                            }
+                                            usersList.get(position).setDisLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 6);
-                                        }else{
-                                            holder.iv_like.setImageResource(R.drawable.thumb_on);
+                                        } else {
+                                            holder.iv_dislike_no.setImageResource(R.drawable.reseizeangry);
+
+
+                                            int count = usersList.get(position).getDislikesCount() + 1;
+                                            holder.tv_dislike_no.setText(Utils.format(count));
+                                            usersList.get(position).setDislikesCount(count);
+                                            if (usersList.get(position).getLikes()) {
+                                                int likescount = usersList.get(position).getLikesCount() - 1;
+                                                if (likescount >= 0) {
+                                                    usersList.get(position).setLikesCount(likescount);
+                                                    holder.tv_like_no.setText(Utils.format(likescount));
+                                                }
+                                                holder.iv_like_yes.setImageResource(R.drawable.thumb_off);
+                                            }
+                                            usersList.get(position).setDisLikes(true);
+                                            usersList.get(position).setLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(0, usersList.get(position).getId(), 6);
                                         }
                                         break;
@@ -1229,7 +1560,6 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                         .setEmojiViewOutAnimation((AnimationSet) AnimationUtils.loadAnimation(mContext, R.anim.out_animation))
                         .setBackgroundImage(R.drawable.background_drawable)
                         .setup();
-
 
 
 //                holder.ll_wowGif.setOnClickListener(new View.OnClickListener() {

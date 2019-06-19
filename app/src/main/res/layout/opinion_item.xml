@@ -466,7 +466,7 @@
                             android:layout_width="@dimen/_5sdp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1.5"
-                            android:src="@drawable/angryresizeduck"
+                            android:src="@drawable/reseizeangry"
                             />
                         <TextView
                             android:id="@+id/tv_angry"
