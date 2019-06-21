@@ -12,13 +12,13 @@ public interface WebUrl {
 
 
     //SandboxUrl
-    public static final String BASE_URL = "http://test.opozee.com:81/opozee/api/MobileApi/";
-//    public static final String BASE_URL = "http://test.opozee.com:81/opozee/api/WebApi/";
+    public static final String BASE_URL = "https://opozee.com:81/opozee/api/MobileApi/";
+//    public static final String BASE_URL = "http://test.opozee.com:81/opozee/api/MobileApi/";
     public static final String REGISTRER_LOGIN = "http://test.opozee.com/register";
     public static final String FORGOT_PASSWORD = "http://test.opozee.com/login";
 
 
-    public static final String IMAGE_BASE_URL = "http://23.111.138.246/Content/EventImages/";
+    public static final String IMAGE_BASE_URL = "https://opozee.com/Content/EventImages/";
     public static final String GET_ALL_POSTS_BY_USER_ID_URL = "GetAllPostsByUserId";
     public static final String LIKE_DISLIKE_URL = "LikeDislikeOpinion";
     public static final String UPDATE_PROFILE_URL = "UpdateUserProfile";
