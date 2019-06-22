@@ -104,7 +104,7 @@ public class QuestionListTopBeliefView  extends CardView{
                 .into(mUserImage);
 
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams)getLayoutParams();
-        int sideMargin = getContext().getResources().getDimensionPixelSize(R.dimen._30sdp);
+        int sideMargin = getContext().getResources().getDimensionPixelSize(R.dimen._10sdp);
         int upDownMargin =getContext().getResources().getDimensionPixelSize(R.dimen._3sdp);
         if (belief instanceof PostedQuestionsResponse.MostLiked) {
             layoutParams.setMargins(0, upDownMargin,sideMargin,upDownMargin);

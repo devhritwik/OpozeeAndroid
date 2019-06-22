@@ -9,7 +9,7 @@ package com.opozee.adapters;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
-        import android.widget.SeekBar;
+
         import android.widget.TextView;
 
 
@@ -73,8 +73,7 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
         @BindView(R.id.tv_count_dislikes)
         public TextView tv_count_dislikes;
 
-        @BindView(R.id.seekBar)
-        public SeekBar seekBar;
+
 
         @BindView(R.id.best_supporting_view)
         QuestionListTopBeliefView bestSupportingView;
@@ -89,7 +88,6 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
             super(v);
 
             ButterKnife.bind(this, v);
-            seekBar.setEnabled(false);
         }
     }
 
@@ -187,6 +185,8 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
         holder.tv_user_name.setText("@"+usersList.get(position).getOwnerUserName().replace(" ", "").toLowerCase());
         holder.tv_name.setText(Utils.capitalize(usersList.get(position).getOwnerUserName()));
 
+        holder.tv_name.setText("@"+usersList.get(position).getOwnerUserName().replace(" ", "").toLowerCase());
+
 
 
         boolean isMostLiked =  questionDetail.getMostLiked() != null;
@@ -215,11 +215,11 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
         int noCount = usersList.get(position).getNoCount() != null ? usersList.get(position).getNoCount() : 0;
 
 
-        initDataToSeekbar(holder.seekBar, holder.tv_count_likes, holder.tv_count_dislikes,yesCount, noCount);
+        initDataToSeekbar(  holder.tv_count_likes, holder.tv_count_dislikes,yesCount, noCount);
 
     }
 
-    private void initDataToSeekbar(SeekBar seekBar, TextView tv_count_likes, TextView tv_count_dislikes, int likes, int dislikes) {
+    private void initDataToSeekbar( TextView tv_count_likes, TextView tv_count_dislikes, int likes, int dislikes) {
         int total = likes + dislikes == 0 ? 100 : likes + dislikes;
 
         // dislike span
@@ -230,19 +230,7 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
         int likes_percentage = (likes  * 100 / total);
         Log.e("likes >>", "  "  +  likes +  "    " + likes_percentage);
 
-        if(dislikes == 0 && likes == 0)
-        {
-            seekBar.setProgressDrawable(mContext.getResources().getDrawable(R.drawable.progress_bg));
-            seekBar.setSecondaryProgress(0);
-            seekBar.invalidate();
-        }
-        else
-        {
-            seekBar.setProgressDrawable(mContext.getResources().getDrawable(R.drawable.progress_line));
-//            seekBar.setProgress(dislikes_percentage);
-            seekBar.setSecondaryProgress(likes_percentage);
-            seekBar.invalidate();
-        }
+
 
         tv_count_dislikes.setText("No " + dislikes_percentage + "%");
         tv_count_likes.setText( likes_percentage + "% Yes");
