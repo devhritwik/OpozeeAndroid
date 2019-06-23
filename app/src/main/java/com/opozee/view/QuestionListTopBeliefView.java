@@ -92,7 +92,7 @@ public class QuestionListTopBeliefView  extends CardView{
 
     public void setBelief(TopBeliefs belief) {
         mUserName.setText(String.format("@%s", belief.getCommentedUserName().replace(" ", "").toLowerCase()));
-        mOpinionTextView.setText(Html.fromHtml(StringEscapeUtils.unescapeJava(belief.getComment()).trim()));
+        mOpinionTextView.setText(Html.fromHtml(StringEscapeUtils.unescapeJava(belief.getComment())));//.trim()));
         mUpvotesView.setText(Utils.format(belief.getLikesCount()));
         mDownvotesView.setText(Utils.format(belief.getDislikesCount()));
         String imageURL1 = belief.getUserImage();
@@ -104,13 +104,13 @@ public class QuestionListTopBeliefView  extends CardView{
                 .into(mUserImage);
 
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams)getLayoutParams();
-        int sideMargin = getContext().getResources().getDimensionPixelSize(R.dimen._10sdp);
-        int upDownMargin =getContext().getResources().getDimensionPixelSize(R.dimen._3sdp);
+        int sideMargin = getContext().getResources().getDimensionPixelSize(R.dimen._5sdp);
+        int upDownMargin =getContext().getResources().getDimensionPixelSize(R.dimen._2sdp);
         if (belief instanceof PostedQuestionsResponse.MostLiked) {
-            layoutParams.setMargins(0, upDownMargin,sideMargin,upDownMargin);
+            layoutParams.setMargins(0, upDownMargin,0,upDownMargin);
             setBackground(getResources().getDrawable(R.drawable.top_belief_view_positive_bg));
         } else {
-            layoutParams.setMargins(sideMargin, upDownMargin,0,upDownMargin);
+            layoutParams.setMargins(0, upDownMargin,0,upDownMargin);
             setBackground(getResources().getDrawable(R.drawable.top_belief_view_negative_bg));
         }
     }

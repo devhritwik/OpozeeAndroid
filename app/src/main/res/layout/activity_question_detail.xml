@@ -321,6 +321,7 @@
 
     </android.support.v4.widget.NestedScrollView>
 
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_opinion_fab"
         android:layout_width="@dimen/fab_size"
@@ -331,12 +332,10 @@
         android:layout_margin="@dimen/_25sdp"
         android:src="@mipmap/add_icon"
         android:tint="@color/white_color"
-        app:backgroundTint="@android:color/white"
-        app:rippleColor="@android:color/black"
+        app:backgroundTint="@color/color_primary_dark"
         app:elevation="@dimen/_10sdp"
+        app:rippleColor="@color/grey_light" />
 
-        app:borderWidth="1dp"
-        app:pressedTranslationZ="12dp"        />
 
 
     <LinearLayout
