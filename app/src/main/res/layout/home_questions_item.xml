@@ -194,7 +194,8 @@
 
                             android:focusable="false"
                             android:progressDrawable="@drawable/progress_line"
-                            android:thumb="@null" />
+                            android:thumb="@null"
+                            android:visibility="invisible"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
