@@ -31,8 +31,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
-
-public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdapter.ViewHolder> {
+public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdapter.ViewHolder>  {
 
     List<PostedQuestionsResponse.PostQuestionDetail> usersList;
     private Activity mContext;
@@ -100,7 +99,6 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
         this.usersList = usersList;
 
     }
-
     // Create new views (invoked by the layout manager)
     @Override
     public HomeQuestionsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -126,32 +124,32 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
         holder.tv_question.setText(Html.fromHtml(fromServerUnicodeDecoded.trim()));
         //holder.tv_question.setText(fromServerUnicodeDecoded.trim());
 
-        Log.d("TimeFormat_Log", usersList.get(position).getCreationDate());
+        Log.d("TimeFormat_Log",usersList.get(position).getCreationDate());
         String timeArr[] = usersList.get(position).getCreationDate().replace("T", " ").split("/.");
         Log.e("TIME SPLIT ", " " + timeArr[0]);
         String time = Utils.convertESTToLocalTime(timeArr[0]).replace("-", " at ");
-        String conertdate = timeArr[0].replace("ll", "");
+        String conertdate=timeArr[0].replace("ll","");
 
-        String timeexact = Utils.getlocaltime(conertdate);
-        Long date = Utils.convertdatestring(timeexact);
-        String timeago = Utils.getTimeAgo(date);
+        String timeexact=Utils.getlocaltime(conertdate);
+        Long date=Utils.convertdatestring(timeexact);
+        String timeago=Utils.getTimeAgo(date);
 
-        Log.d("TimeFormat_Log", time);
-        Log.d("TimeFormat_Log", "conertdate=" + conertdate);
-        Log.d("TimeFormat_Log", "Long=" + date);
-        Log.d("TimeFormat_Log", "timeago=" + timeago);
-        Log.d("TimeFormat_Log", "Date=" + timeexact);
-        if (timeago != null) {
+        Log.d("TimeFormat_Log",time);
+        Log.d("TimeFormat_Log","conertdate="+conertdate);
+        Log.d("TimeFormat_Log","Long="+date);
+        Log.d("TimeFormat_Log","timeago="+timeago);
+        Log.d("TimeFormat_Log","Date="+timeexact);
+        if(timeago!=null) {
             holder.tv_time.setText(timeago);
         }
 //        Log.d("Home_Log",usersList.get(position).getActivitytime());
 //        Log.d("Home_Log",usersList.get(position).getReactionsum());
-        if (usersList.get(position).getReactionsum() != null) {
-            holder.tv_reaction.setText("Reactions :" + usersList.get(position).getReactionsum());
-        } else {
-            holder.tv_reaction.setText("Reactions :" + "0");
+        if(usersList.get(position).getReactionsum()!=null){
+            holder.tv_reaction.setText("Reactions :"+usersList.get(position).getReactionsum());
+        }else{
+            holder.tv_reaction.setText("Reactions :"+"0");
         }
-        if (usersList.get(position).getActivitytime() != null) {
+        if(usersList.get(position).getActivitytime()!=null){
 
         }
 
@@ -163,7 +161,7 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
                 HashMap<String, String> map = new HashMap<>();
                 map.put("questionText", questionDetail.getQuestion());
                 JSONObject jsonObject = new JSONObject(map);
-                QuestionnaireApplication.getMixpanelApi().track("Question Clicked on Home Fragment", jsonObject);
+                QuestionnaireApplication.getMixpanelApi().track("Question Clicked on Home Fragment" , jsonObject);
                 Intent intent = new Intent(mContext, QuestionDetailActivity.class);
                 intent.putExtra("id", usersList.get(position).getId());
                 intent.putExtra(AppGlobal.LAST_FRAG_TYPE, AppGlobal.HOMEFRAG);
@@ -171,10 +169,9 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
             }
         });
 
-
         String imageURL = questionDetail.getUserImage();
 
-        String url = (imageURL == null || imageURL.length() == 0 || imageURL.equals("")) ? Utils.DEFAULT_PROFILE_PIC_URL : imageURL;
+        String url = (imageURL == null || imageURL.length() == 0 || imageURL.equals(""))? Utils.DEFAULT_PROFILE_PIC_URL : imageURL;
         Picasso.get()
                 .load(url)
                 .placeholder(R.drawable.user)
@@ -182,38 +179,45 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
                 .into(holder.iv_user);
 
 
-        holder.tv_user_name.setText("@" + usersList.get(position).getOwnerUserName().replace(" ", "").toLowerCase());
+
+
+        holder.tv_user_name.setText("@"+usersList.get(position).getOwnerUserName().replace(" ", "").toLowerCase());
         holder.tv_name.setText(Utils.capitalize(usersList.get(position).getOwnerUserName()));
 
 
-        boolean isMostLiked = questionDetail.getMostLiked() != null;
-        boolean isMostDisliked = questionDetail.getMostDisliked() != null;
+
+        boolean isMostLiked =  questionDetail.getMostLiked() != null;
+        boolean isMostDisliked =  questionDetail.getMostDisliked() != null;
+
 
 
         int yesCount = usersList.get(position).getYesCount() != null ? usersList.get(position).getYesCount() : 0;
         int noCount = usersList.get(position).getNoCount() != null ? usersList.get(position).getNoCount() : 0;
 
-
-        if (isMostLiked) {
+        if(isMostLiked) {
             holder.bestSupportingView.setVisibility(View.VISIBLE);
             holder.bestSupportingView.setBelief(questionDetail.getMostLiked());
-//            initDataToSeekbar(holder.seekBar, holder.tv_count_likes, holder.tv_count_dislikes, yesCount, noCount, position);
-        } else {
+        }
+        else
+        {
             holder.bestSupportingView.setVisibility(View.GONE);
         }
 
-        if (isMostDisliked) {
+        if(isMostDisliked) {
             holder.bestAgainstView.setVisibility(View.VISIBLE);
             holder.bestAgainstView.setBelief(questionDetail.getMostDisliked());
-//            initDataToSeekbar(holder.seekBar, holder.tv_count_likes, holder.tv_count_dislikes, yesCount, noCount, position);
 
-        } else {
+        }
+        else
+        {
             holder.bestAgainstView.setVisibility(View.GONE);
         }
-        initDataToSeekbar(holder.seekBar, holder.tv_count_likes, holder.tv_count_dislikes, yesCount, noCount, position);
-//        initDataToSeekbar(holder.seekBar, holder.tv_count_likes, holder.tv_count_dislikes,yesCount, noCount);
+
+
+        initDataToSeekbar(holder.seekBar, holder.tv_count_likes, holder.tv_count_dislikes,yesCount, noCount,position);
 
     }
+
 
     private void initDataToSeekbar(SeekBar seekBar, TextView tv_count_likes, TextView tv_count_dislikes, int likes, int dislikes, int status) {
 
@@ -232,6 +236,7 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
                     scoreNo = scoreNo + (_score > 0 ? _score : 0);
                     Log.d("Percentage=","scoreNo="+scoreNo);
                 }
+
 
             }
             Log.d("Percentage=","scoreNo=1----"+scoreNo);
@@ -263,6 +268,9 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
         } catch (Exception e) {
 Log.d("Percentage=",e.toString());
         }
+
+
+
 
 //
 //        int total = likes + dislikes == 0 ? 100 : likes + dislikes;

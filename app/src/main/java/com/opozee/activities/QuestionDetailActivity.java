@@ -89,8 +89,7 @@ public class QuestionDetailActivity extends  com.opozee.emojilike.ActivityWithEm
     RecyclerView recyclerView;
     @BindView(R.id.tv_user_name)
     public TextView tv_user_name;
-    @BindView(R.id.tv_name)
-    public TextView tv_name;
+
     @BindView(R.id.iv_user)
     public CircleImageView iv_user;
     @BindView(R.id.iv_send)
@@ -557,14 +556,14 @@ public class QuestionDetailActivity extends  com.opozee.emojilike.ActivityWithEm
             mQuestionText = fromServerUnicodeDecoded;
             tv_question.setText(Html.fromHtml(fromServerUnicodeDecoded.trim()));
             tv_user_name.setText("@" + response.getResponse().getAllOpinion().getPostQuestionDetail().getOwnerUserName().replace(" ", "").toLowerCase());
-            tv_name.setText(Utils.capitalize(response.getResponse().getAllOpinion().getPostQuestionDetail().getOwnerUserName()));
+            //tv_name.setText(Utils.capitalize(response.getResponse().getAllOpinion().getPostQuestionDetail().getOwnerUserName()));
             final JSONObject jsonObject = new JSONObject();
             try {
                 jsonObject.putOpt("ProfileOpened", response.getResponse().getAllOpinion().getPostQuestionDetail().getOwnerUserName());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            tv_name.setOnClickListener(new View.OnClickListener() {
+            tv_user_name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     QuestionnaireApplication.getMixpanelApi().track("Profile Opened", jsonObject);

@@ -15,6 +15,7 @@
         android:layout_marginLeft="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginRight="25dp"
+
         android:background="@drawable/top_belief_view_positive_bg"
         app:cardCornerRadius="@dimen/_5sdp"
         app:cardElevation="1dp"
@@ -33,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_5sdp"
                 android:layout_weight="1"
                 android:autoLink="web"
                 android:fontFamily="@font/renner"
@@ -101,12 +103,10 @@
                 android:id="@+id/emojiView"
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="wrap_content"
-                android:elevation="@dimen/_50sdp"
                 android:layout_alignBottom="@+id/likeButton"
+                android:elevation="@dimen/_50sdp"
                 app:layout_constraintBottom_toTopOf="@+id/ll_yes_inner"
                 app:layout_constraintStart_toStartOf="@+id/emojiView_dislike" />
-
-
 
 
             <LinearLayout
@@ -307,7 +307,8 @@
         android:id="@+id/card_no"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_25sdp"
+        android:layout_marginLeft="@dimen/_5sdp"
+
         android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginRight="@dimen/_5sdp"
         android:layout_marginBottom="5dp"
@@ -335,6 +336,7 @@
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
             <!--<LinearLayout-->
             <!--android:id="@+id/ll_subreation_no1"-->
@@ -392,8 +394,8 @@
                 android:id="@+id/emojiView_like_yes"
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="wrap_content"
-                android:elevation="@dimen/_50sdp"
                 android:layout_alignBottom="@+id/likeButton"
+                android:elevation="@dimen/_50sdp"
                 app:layout_constraintBottom_toTopOf="@+id/ll_no"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -401,8 +403,8 @@
                 android:id="@+id/emojiView_dislike_no"
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="wrap_content"
-                android:elevation="@dimen/_50sdp"
                 android:layout_alignBottom="@+id/likeButton"
+                android:elevation="@dimen/_50sdp"
                 app:layout_constraintBottom_toTopOf="@+id/ll_no"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
