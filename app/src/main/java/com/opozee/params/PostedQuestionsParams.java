@@ -5,6 +5,15 @@ public class PostedQuestionsParams {
     int pageIndex;
     int pageSize;
     String searchtext;
+    int sortorder;
+
+    public int getSortorder() {
+        return sortorder;
+    }
+
+    public void setSortorder(int sortorder) {
+        this.sortorder = sortorder;
+    }
 
     public String getSearchtext() {
         return searchtext;

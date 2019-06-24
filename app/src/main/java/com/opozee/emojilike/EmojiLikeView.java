@@ -3,12 +3,14 @@ package com.opozee.emojilike;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -21,6 +23,7 @@ public class EmojiLikeView extends RelativeLayout
     GifImageView emojiBackgroundView;
 
     LinearLayout emojiImagesContainer;
+
 
     List<GifImageView> emojiImageViews;
 
@@ -243,6 +246,8 @@ public class EmojiLikeView extends RelativeLayout
             selectedEmoji=index;
             GifImageView view=emojiImageViews.get(selectedEmoji);
             float w=getWeight (view);
+//            final Vibrator vibe = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+//            vibe.vibrate(20);
             growView(view, index, w, 4, config.emojiAnimationSpeed, true);
         }
     }
@@ -261,6 +266,8 @@ public class EmojiLikeView extends RelativeLayout
     {
         Animation a=new ViewWeightAnimation(getContext(), view, index, initWeight, maxWeight, step, forSelected, config);
         view.startAnimation(a);
+
+
     }
 
     private void shrinkView (GifImageView view, int index, float initWeight, float maxWeight, float step, boolean forSelected)

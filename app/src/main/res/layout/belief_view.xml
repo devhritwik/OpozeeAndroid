@@ -10,7 +10,6 @@
     app:cardElevation="10dp">
 
 
-
     <LinearLayout
         android:id="@+id/belief_view_main_linear_layout"
         android:layout_width="match_parent"
@@ -26,7 +25,6 @@
             android:layout_marginTop="@dimen/_2sdp"
             android:ellipsize="end"
             android:fontFamily="@font/renner"
-            android:maxLines="2"
             android:textColor="@color/grey"
             android:textSize="@dimen/_12sdp" />
 
@@ -37,36 +35,71 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_4sdp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-
-            <TextView
-                android:id="@+id/belief_view_upvotes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/_2sdp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/like_drawable"
-                android:drawablePadding="@dimen/_4sdp"
                 android:gravity="left|center"
-                android:singleLine="true"
-                android:text="2003"
-                android:textColor="@color/like_color"
-                android:textSize="@dimen/_12sdp" />
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-            <TextView
-                android:id="@+id/belief_view_downvotes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_2sdp"
+                <ImageView
+                    android:id="@+id/iv_thum_on"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_weight="0.2"
+                    android:paddingTop="@dimen/_2sdp"
+                    android:paddingBottom="@dimen/_1sdp"
+                    android:src="@drawable/thumb_off" />
+
+                <TextView
+                    android:id="@+id/belief_view_upvotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_2sdp"
+                    android:layout_weight="1.8"
+                    android:drawablePadding="@dimen/_1sdp"
+                    android:gravity="left|center"
+                    android:paddingLeft="@dimen/_2sdp"
+                    android:singleLine="true"
+                    android:text="2003"
+                    android:textColor="@color/black_color"
+                    android:textSize="@dimen/_12sdp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/dislike_drawable"
-                android:drawablePadding="@dimen/_4sdp"
                 android:gravity="left|center"
-                android:singleLine="true"
-                android:text="2003"
-                android:textColor="@color/dislike_color"
-                android:textSize="@dimen/_12sdp" />
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <ImageView
+                    android:id="@+id/iv_thum_off"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_weight="0.2"
+                    android:src="@drawable/dislike_thumb_off" />
+
+                <TextView
+                    android:id="@+id/belief_view_downvotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_2sdp"
+                    android:layout_weight="1.8"
+                    android:drawablePadding="@dimen/_4sdp"
+                    android:gravity="left|center"
+                    android:singleLine="true"
+                    android:text="2003"
+                    android:textColor="@color/black_color"
+                    android:textSize="@dimen/_12sdp" />
+
+            </LinearLayout>
 
 
             <de.hdodenhof.circleimageview.CircleImageView

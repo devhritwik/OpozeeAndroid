@@ -83,6 +83,9 @@ public class Utils {
     public static String getLoggedInUserId(Context context) {
         return AppSP.getInstance(context).readInt(AppGlobal.USER_ID) + "";
     }
+    public static String getsortedorder(Context context) {
+        return AppSP.getInstance(context).readInt(AppGlobal.SORT_ORDER) + "";
+    }
 
     public static String formatConversion(double ServicePrice) {
         DecimalFormat form = new DecimalFormat("0.00");
@@ -193,6 +196,10 @@ public class Utils {
         sp.savePreferences(AppGlobal.IS_LOGGED_IN, true);
 //        sp.savePreferences(AppGlobal.UserRole, userProfile.getResponse().getUserData().getUserRole());
         sp.savePreferences(AppGlobal.Photo, loginEmail.getData().getImageURL());
+    }
+    public static void savesortedata(Context context,int sort){
+        AppSP appSP=AppSP.getInstance(context);
+        appSP.savePreferences(AppGlobal.SORT_ORDER,sort);
     }
 
     //for customToast

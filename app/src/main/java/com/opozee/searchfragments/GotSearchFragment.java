@@ -113,6 +113,7 @@ public class GotSearchFragment extends Fragment implements PostedQuestionsView {
         params.setPageIndex(pageIndex);
         params.setPageSize(pageSize);
         params.setUser_id("0");
+        params.setSortorder(Integer.parseInt(Utils.getsortedorder(getActivity())));
         if (HomeNewFragment.getTagsModelist.size() >= 3) {
             params.setSearchtext(HomeNewFragment.getTagsModelist.get(2).getHashtag());
         }else{
@@ -136,11 +137,14 @@ public class GotSearchFragment extends Fragment implements PostedQuestionsView {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
 
                 switch (newState) {
+
                     case RecyclerView.SCROLL_STATE_IDLE:
                         ((HomeActivity)getActivity()).btn_add_post.show();
+                        ((HomeActivity)getActivity()).btn_sort.setVisibility(View.VISIBLE);
                         break;
                     default:
                         ((HomeActivity)getActivity()).btn_add_post.hide();
+                        ((HomeActivity)getActivity()).btn_sort.setVisibility(View.INVISIBLE);
                         break;
                 }
                 super.onScrollStateChanged(recyclerView, newState);

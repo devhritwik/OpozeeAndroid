@@ -18,6 +18,7 @@ public class AppGlobal {
     public static final String Email = "Email";// String
     public static final String Photo = "Photo";// String
     public static final String IS_LOGGED_IN = "IsLoggedIn";
+    public static final String SORT_ORDER = "sort_order";
 
     //Types of API calls
     public static final int TYPE_PROFILE_UPDATE = 2;

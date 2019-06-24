@@ -123,6 +123,7 @@ public class HomeNewFragment extends Fragment {
 
                             }
                             for(int i=0;i<getTagsModelist.size();i++){
+                                Log.d("TabName=",getTagsModelist.get(i).getHashtag());
                                 tab_layout.addTab(tab_layout.newTab().setText(getTagsModelist.get(i).getHashtag()));
                             }
                             tab_layout.post(new Runnable() {

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.opozee.LoadTabData;
 import com.opozee.R;
 import com.opozee.activities.HomeActivity;
+import com.opozee.activities.UserQuestionPostsActivity;
 import com.opozee.adapters.HomeQuestionsAdapter;
 import com.opozee.fragments.HomeFragment;
 import com.opozee.fragments.HomeNewFragment;
@@ -115,6 +116,7 @@ public class AllSearchFragment extends Fragment implements PostedQuestionsView {
         params.setPageIndex(pageIndex);
         params.setPageSize(pageSize);
         params.setUser_id("0");
+        params.setSortorder(Integer.parseInt(Utils.getsortedorder(getActivity())));
         if (HomeNewFragment.getTagsModelist.size() > 1) {
             params.setSearchtext(HomeNewFragment.getTagsModelist.get(0).getHashtag());
         }else{
@@ -140,9 +142,11 @@ public class AllSearchFragment extends Fragment implements PostedQuestionsView {
                 switch (newState) {
                     case RecyclerView.SCROLL_STATE_IDLE:
                         ((HomeActivity)getActivity()).btn_add_post.show();
+                        ((HomeActivity)getActivity()).btn_sort.setVisibility(View.VISIBLE);
                         break;
                     default:
                         ((HomeActivity)getActivity()).btn_add_post.hide();
+                        ((HomeActivity)getActivity()).btn_sort.setVisibility(View.INVISIBLE);
                         break;
                 }
                 super.onScrollStateChanged(recyclerView, newState);

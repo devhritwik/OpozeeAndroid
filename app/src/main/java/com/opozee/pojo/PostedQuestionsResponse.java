@@ -93,6 +93,7 @@ public class PostedQuestionsResponse {
         @SerializedName("MostYesLiked")
         @Expose
         private MostLiked mostLiked;
+
         @SerializedName("MostNoLiked")
         @Expose
         private MostDisliked mostDisliked;
@@ -105,6 +106,11 @@ public class PostedQuestionsResponse {
         @Expose
         private Integer noCount;
 
+        @SerializedName("Comments")
+        @Expose
+        private List<Comments> comments =null;
+
+
 
         @SerializedName("ReactionSum")
         @Expose
@@ -113,6 +119,15 @@ public class PostedQuestionsResponse {
         @SerializedName("LastActivityTime")
         @Expose
         private String activitytime;
+
+        public List<Comments> getComments() {
+            return comments;
+        }
+
+        public void setComments(List<Comments> comments) {
+            this.comments = comments;
+        }
+
 
         public String getActivitytime() {
             return activitytime;
@@ -242,9 +257,80 @@ public class PostedQuestionsResponse {
             this.mostDisliked = mostDisliked;
         }
 
+
+
     }
 
-    public class MostLiked implements TopBeliefs {
+
+    public class Comments{
+        @SerializedName("LikesCount")
+        @Expose
+        private Integer likescount;
+
+        @SerializedName("DislikesCount")
+        @Expose
+        private Integer dislikescount;
+
+        @SerializedName("Likes")
+        @Expose
+        private boolean Likes;
+
+        @SerializedName("DisLikes")
+        @Expose
+        private boolean DisLikes;
+
+        @SerializedName("IsAgree")
+        @Expose
+        private boolean IsAgree;
+
+        public Integer getLikescount() {
+            return likescount;
+        }
+
+        public void setLikescount(Integer likescount) {
+            this.likescount = likescount;
+        }
+
+        public Integer getDislikescount() {
+            return dislikescount;
+        }
+
+        public void setDislikescount(Integer dislikescount) {
+            this.dislikescount = dislikescount;
+        }
+
+        public boolean isLikes() {
+            return Likes;
+        }
+
+        public void setLikes(boolean likes) {
+            Likes = likes;
+        }
+
+        public boolean isDisLikes() {
+            return DisLikes;
+        }
+
+        public void setDisLikes(boolean disLikes) {
+            DisLikes = disLikes;
+        }
+
+        public boolean isAgree() {
+            return IsAgree;
+        }
+
+        public void setAgree(boolean agree) {
+            IsAgree = agree;
+        }
+    }
+
+
+
+
+
+
+
+        public class MostLiked implements TopBeliefs {
 
         @SerializedName("Id")
         @Expose

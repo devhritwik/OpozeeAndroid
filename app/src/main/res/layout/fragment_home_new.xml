@@ -28,9 +28,11 @@
                 app:tabIndicatorColor="@color/black_color"
                 app:tabPadding="5dp"
                 android:elevation="@dimen/_40sdp"
+                app:tabTextAppearance="@style/CustomTextAppearanceTab"
                 android:background="@color/white_color"
                 app:tabTextColor="@android:color/black"
                 app:tabBackground="@color/white_color"
+
                 app:tabMode="scrollable"/>
 
             <android.support.v4.view.ViewPager

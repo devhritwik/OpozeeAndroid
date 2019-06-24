@@ -645,50 +645,103 @@ public class QuestionDetailActivity extends  com.opozee.emojilike.ActivityWithEm
     }
 
     private void initDataToSeekbar(SeekBar seekBar, TextView tv_count_likes, TextView tv_count_dislikes, int likes, int dislikes) {
-        int total = likes + dislikes == 0 ? 100 : likes + dislikes;
 
-        // dislike span
-        int dislikes_percentage = ((dislikes * 100 / total));
 
-        Log.e("Dislikes >>", "  " + dislikes + "    " + dislikes_percentage);
-        // like span
-        int likes_percentage = (likes * 100 / total);
-        Log.e("likes >>", "  " + likes + "    " + likes_percentage);
 
-        if (dislikes == 0 && likes == 0) {
-            seekBar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_bg));
-            seekBar.setSecondaryProgress(0);
-            seekBar.invalidate();
-        } else {
-            seekBar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_line));
+        try {
+            int scoreYes = 0;
+            int scoreNo = 0;
+            int _score = 0;
+            for (int k = 0; k < response.getResponse().getAllOpinion().getComments().size(); k++) {
+                _score = response.getResponse().getAllOpinion().getComments().get(k).getLikesCount() - response.getResponse().getAllOpinion().getComments().get(k).getDislikesCount();
+                Log.d("Percentage=","_score="+_score);
+                if (response.getResponse().getAllOpinion().getComments().get(k).getIsAgree() == true) {
+                    scoreYes = scoreYes + (_score > 0 ? _score : 0);
+                    Log.d("Percentage=","scoreYes="+scoreYes);
+                } else {
+                    scoreNo = scoreNo + (_score > 0 ? _score : 0);
+                    Log.d("Percentage=","scoreNo="+scoreNo);
+                }
+
+            }
+            Log.d("Percentage=","scoreNo=1----"+scoreNo);
+            Log.d("Percentage=","scoreYes=1----"+scoreYes);
+            int finalscore=scoreYes+scoreNo;
+            double finaldata=(double) scoreYes/finalscore;
+            Log.d("Percentage=","finalscore=1----"+finalscore);
+            Log.d("Percentage=","finaldata=1----"+finaldata);
+            double finalpercentage = (double) finaldata *100;
+            int percentage=(int)finalpercentage;
+            Log.d("Percentage=",""+percentage+"-------------------------------");
+            if (percentage <= 0) {
+                percentage = 0;
+                scoreNo = 0;
+                scoreYes = 0;
+                seekBar.setProgressDrawable(QuestionDetailActivity.this.getResources().getDrawable(R.drawable.progress_bg));
+                seekBar.setSecondaryProgress(0);
+                seekBar.invalidate();
+            } else {
+                seekBar.setProgressDrawable(QuestionDetailActivity.this.getResources().getDrawable(R.drawable.progress_line));
 //            seekBar.setProgress(dislikes_percentage);
-            seekBar.setSecondaryProgress(likes_percentage);
-            seekBar.invalidate();
+                seekBar.setSecondaryProgress( percentage);
+                seekBar.invalidate();
+            }
+
+            tv_count_dislikes.setText("No " + percentage + "%");
+            tv_count_likes.setText(percentage + "% Yes");
+
+        } catch (Exception e) {
+            Log.d("Percentage=",e.toString());
         }
 
-        tv_count_dislikes.setText("No " + dislikes_percentage + "%");
-        tv_count_likes.setText(likes_percentage + "% Yes");
 
 
-    }
 
-    private void tokensAlert() {
-        new AlertDialog.Builder(QuestionDetailActivity.this)
-                .setMessage("You have 0 tokens in your account. Please email us to refill the account to post opinion.")
-                .setPositiveButton(R.string.email, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                        sendEmail();
-                    }
-                })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                })
-                .show();
+
+        //        int total = likes + dislikes == 0 ? 100 : likes + dislikes;
+//
+//        // dislike span
+//        int dislikes_percentage = ((dislikes * 100 / total));
+//
+//        Log.e("Dislikes >>", "  " + dislikes + "    " + dislikes_percentage);
+//        // like span
+//        int likes_percentage = (likes * 100 / total);
+//        Log.e("likes >>", "  " + likes + "    " + likes_percentage);
+//
+//        if (dislikes == 0 && likes == 0) {
+//            seekBar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_bg));
+//            seekBar.setSecondaryProgress(0);
+//            seekBar.invalidate();
+//        } else {
+//            seekBar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_line));
+////            seekBar.setProgress(dislikes_percentage);
+//            seekBar.setSecondaryProgress(likes_percentage);
+//            seekBar.invalidate();
+//        }
+//
+//        tv_count_dislikes.setText("No " + dislikes_percentage + "%");
+//        tv_count_likes.setText(likes_percentage + "% Yes");
+//
+//
+//    }
+//
+//    private void tokensAlert() {
+//        new AlertDialog.Builder(QuestionDetailActivity.this)
+//                .setMessage("You have 0 tokens in your account. Please email us to refill the account to post opinion.")
+//                .setPositiveButton(R.string.email, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        dialogInterface.dismiss();
+//                        sendEmail();
+//                    }
+//                })
+//                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        dialogInterface.dismiss();
+//                    }
+//                })
+//                .show();
     }
 
     private void sendEmail() {

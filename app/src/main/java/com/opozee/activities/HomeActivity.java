@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
 import com.opozee.OpozeeActivity;
 import com.opozee.R;
+import com.opozee.SortDialog;
 import com.opozee.application.QuestionnaireApplication;
 import com.opozee.fragments.FavouriteFragment;
 import com.opozee.fragments.HomeFragment;
@@ -79,6 +81,8 @@ public class HomeActivity extends OpozeeActivity implements ProfileView {
     public FloatingActionButton btn_add_post;
     @BindView(R.id.app_bar_token_count)
     TextView mTokenCountView;
+    @BindView(R.id.btn_sort)
+    public ImageView btn_sort;
     EmojiLikeTouchDetector emojiLikeTouchDetector;
 
     @Override
@@ -86,7 +90,7 @@ public class HomeActivity extends OpozeeActivity implements ProfileView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        emojiLikeTouchDetector=new EmojiLikeTouchDetector();
+        emojiLikeTouchDetector = new EmojiLikeTouchDetector();
 
         ButterKnife.bind(this);
         mProfilePresenter = new ProfilePresenterImpl();
@@ -105,25 +109,24 @@ public class HomeActivity extends OpozeeActivity implements ProfileView {
 
         getLastFragment(last_frag);
 
-Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
+        Log.d(TAG, "id=" + Utils.getLoggedInUserId(this));
         createNotificationChannel();
 //        mTokenCountView.setText("30");
-
 
 
         handleData();
     }
 
-    public void refresh(){
+    public void refresh() {
         finish();
         startActivity(getIntent());
     }
+
     public void getLastFragment(int last_frag) {
         if (currFrag == last_frag) return;
 
 
-        switch (last_frag)
-        {
+        switch (last_frag) {
             case AppGlobal.HOMEFRAG:
                 spaceNavView.setCentreButtonSelected();
                 //customized method in the library to change the color of the item icons
@@ -133,6 +136,7 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
 //                spaceNavView.onCenterClickedorSelected(3);
                 tv_title.setText(getString(R.string.title_home));
                 btn_add_post.show();
+                btn_sort.setVisibility(View.VISIBLE);
                 spaceNavView.setVisibility(View.VISIBLE);
                 iv_back.setVisibility(View.INVISIBLE);
                 //show fragment
@@ -144,11 +148,12 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
             case AppGlobal.PROFILEFRAG:
                 tv_title.setText(getString(R.string.title_profile));
                 btn_add_post.hide();
+                btn_sort.setVisibility(View.INVISIBLE);
                 spaceNavView.setVisibility(View.VISIBLE);
                 iv_back.setVisibility(View.INVISIBLE);
                 //show Fragment
-                Bundle bundle  = new Bundle();
-                bundle.putInt(PROFILE_FRAGMENG_ARGUEMENT_USER_ID , Integer.valueOf(Utils.getLoggedInUserId(this)));
+                Bundle bundle = new Bundle();
+                bundle.putInt(PROFILE_FRAGMENG_ARGUEMENT_USER_ID, Integer.valueOf(Utils.getLoggedInUserId(this)));
                 loadFragment(new ProfileFragment(), bundle);
                 QuestionnaireApplication.getMixpanelApi().track("Profile Fragment on HomeActivity");
 
@@ -157,6 +162,7 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
             case AppGlobal.NOTIFICATIONFRAG:
                 tv_title.setText(getString(R.string.title_notifications));
                 btn_add_post.hide();
+                btn_sort.setVisibility(View.INVISIBLE);
                 spaceNavView.setVisibility(View.VISIBLE);
                 iv_back.setVisibility(View.INVISIBLE);
                 //show fragment
@@ -168,6 +174,7 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
             case AppGlobal.SEARCHFRAG:
                 tv_title.setText(getString(R.string.title_search));
                 btn_add_post.hide();
+                btn_sort.setVisibility(View.INVISIBLE);
                 spaceNavView.setVisibility(View.VISIBLE);
                 iv_back.setVisibility(View.INVISIBLE);
                 //show Fragment
@@ -179,6 +186,7 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
             case AppGlobal.FAVOURITEFRAG:
                 tv_title.setText(getString(R.string.title_bookmarks));
                 btn_add_post.hide();
+                btn_sort.setVisibility(View.INVISIBLE);
                 spaceNavView.setVisibility(View.VISIBLE);
                 iv_back.setVisibility(View.INVISIBLE);
                 //show Fragment
@@ -190,6 +198,7 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
             case AppGlobal.POSTQUESTFRAG:
                 tv_title.setText(getString(R.string.title_post_questions));
                 btn_add_post.hide();
+                btn_sort.setVisibility(View.INVISIBLE);
                 spaceNavView.setVisibility(View.GONE);
                 iv_back.setVisibility(View.VISIBLE);
                 //show Fragment
@@ -200,6 +209,7 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
             default:
                 tv_title.setText(getString(R.string.title_home));
                 btn_add_post.show();
+                btn_sort.setVisibility(View.INVISIBLE);
                 spaceNavView.setVisibility(View.VISIBLE);
                 iv_back.setVisibility(View.INVISIBLE);
                 //show fragment
@@ -234,7 +244,7 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Create channel to show notifications.
-            String channelId  = getString(R.string.default_notification_channel_id);
+            String channelId = getString(R.string.default_notification_channel_id);
             String channelName = getString(R.string.default_notification_channel_name);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH));
@@ -252,20 +262,13 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
 
             @Override
             public void onItemClick(int itemIndex, String itemName) {
-                if(itemIndex + 1 == AppGlobal.PROFILEFRAG)
-                {
+                if (itemIndex + 1 == AppGlobal.PROFILEFRAG) {
                     getLastFragment(AppGlobal.PROFILEFRAG);
-                }
-                else if(itemIndex + 1 == AppGlobal.NOTIFICATIONFRAG)
-                {
+                } else if (itemIndex + 1 == AppGlobal.NOTIFICATIONFRAG) {
                     getLastFragment(AppGlobal.NOTIFICATIONFRAG);
-                }
-                else if(itemIndex + 1 == AppGlobal.SEARCHFRAG)
-                {
+                } else if (itemIndex + 1 == AppGlobal.SEARCHFRAG) {
                     getLastFragment(AppGlobal.SEARCHFRAG);
-                }
-                else if(itemIndex + 1 == AppGlobal.FAVOURITEFRAG)
-                {
+                } else if (itemIndex + 1 == AppGlobal.FAVOURITEFRAG) {
                     getLastFragment(AppGlobal.FAVOURITEFRAG);
                 }
 
@@ -274,20 +277,13 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
 
             @Override
             public void onItemReselected(int itemIndex, String itemName) {
-                if(itemIndex + 1 == AppGlobal.PROFILEFRAG)
-                {
+                if (itemIndex + 1 == AppGlobal.PROFILEFRAG) {
                     getLastFragment(AppGlobal.PROFILEFRAG);
-                }
-                else if(itemIndex + 1 == AppGlobal.NOTIFICATIONFRAG)
-                {
+                } else if (itemIndex + 1 == AppGlobal.NOTIFICATIONFRAG) {
                     getLastFragment(AppGlobal.NOTIFICATIONFRAG);
-                }
-                else if(itemIndex + 1 == AppGlobal.SEARCHFRAG)
-                {
+                } else if (itemIndex + 1 == AppGlobal.SEARCHFRAG) {
                     getLastFragment(AppGlobal.SEARCHFRAG);
-                }
-                else if(itemIndex + 1 == AppGlobal.FAVOURITEFRAG)
-                {
+                } else if (itemIndex + 1 == AppGlobal.FAVOURITEFRAG) {
                     getLastFragment(AppGlobal.FAVOURITEFRAG);
                 }
 
@@ -312,13 +308,18 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
     }
 
     @OnClick(R.id.btn_add_post)
-    public void fabOnClick()
-    {
+    public void fabOnClick() {
         QuestionnaireApplication.getMixpanelApi().track("Post Question Clicked from home activity");
         AppSP.getInstance(HomeActivity.this).savePreferences("last_frag", AppGlobal.HOMEFRAG);
         btn_add_post.hide();
         spaceNavView.setVisibility(View.GONE);
         getLastFragment(AppGlobal.POSTQUESTFRAG);
+    }
+
+    @OnClick(R.id.btn_sort)
+    public void fabsort() {
+        SortDialog sortDialog = new SortDialog();
+        sortDialog.showDialog(HomeActivity.this);
     }
 
 
@@ -355,16 +356,18 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
     public void onBackPressed() {
 
         int last_frag = AppSP.getInstance(HomeActivity.this).readInt("last_frag");
-        if(last_frag != -1)
-        {
+        if (last_frag != -1) {
             AppSP.getInstance(HomeActivity.this).savePreferences("last_frag", -1);
-            getLastFragment(last_frag);
-        }
-        else {
+//            getLastFragment(last_frag);
+            finish();
+            startActivity(getIntent());
+            Log.d(TAG, "last_frag");
+        } else {
 
             if (fr instanceof PostQuestionFragment || fr instanceof NotificationsFragment || fr instanceof ProfileFragment
                     || fr instanceof SearchFragment || fr instanceof FavouriteFragment) {
                 Log.e("onBackPressed", " ONBACK Pressed");
+                Log.d(TAG, "last_frag" + "fr");
 //                getLastFragment(AppGlobal.HOMEFRAG);
                 finish();
                 startActivity(getIntent());
@@ -381,26 +384,24 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
         Log.e("onResume", " onResume");
 
         String from = getIntent().getStringExtra("from");
-        if(from != null)
-           if(from.equals("DetailActivity"))
-        {
+        if (from != null)
+            if (from.equals("DetailActivity")) {
 //            getLastFragment(AppGlobal.HOMEFRAG);
-            finish();
-            startActivity(getIntent());
-        }
+                finish();
+                startActivity(getIntent());
+            }
 
     }
 
     @OnClick(R.id.iv_back)
-    public void onBackClick()
-    {
+    public void onBackClick() {
         int last_frag = AppSP.getInstance(HomeActivity.this).readInt("last_frag");
-        if(last_frag != -1)
-        {
+        if (last_frag != -1) {
             AppSP.getInstance(HomeActivity.this).savePreferences("last_frag", -1);
-            getLastFragment(last_frag);
-        }
-        else {
+//            getLastFragment(last_frag);
+            finish();
+            startActivity(getIntent());
+        } else {
 
             if (fr instanceof PostQuestionFragment || fr instanceof NotificationsFragment || fr instanceof ProfileFragment
                     || fr instanceof SearchFragment || fr instanceof FavouriteFragment) {
@@ -414,8 +415,7 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
     }
 
 
-    public void onLogoutClick()
-    {
+    public void onLogoutClick() {
         logoutAlert();
     }
 
@@ -466,7 +466,7 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
                 .show();
     }
 
-    private ProfileParams getProfileParams(){
+    private ProfileParams getProfileParams() {
         ProfileParams params = new ProfileParams();
         params.setType(AppGlobal.TYPE_GET_PROFILE);
         // params.setUser_id(Utils.getLoggedInUserId(getActivity()));
@@ -474,6 +474,7 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
         params.setViewuserid(Utils.getLoggedInUserId(this));
         return params;
     }
+
     @Override
     public void showProgress() {
         Utils.showProgress(this);
@@ -499,7 +500,7 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
 
     @Override
     public void onSuccess(ProfileResponse response) {
-        Log.d("CountHome_Log","Token="+response.getResponse().getUserProfile().getBalanceToken());
+        Log.d("CountHome_Log", "Token=" + response.getResponse().getUserProfile().getBalanceToken());
         mTokenCountView.setText(Integer.toString(response.getResponse().getUserProfile().getBalanceToken()));
 
     }
@@ -510,16 +511,12 @@ Log.d(TAG,"id="+Utils.getLoggedInUserId(this));
     }
 
 
-
 //    @OnClick(R.id.fragmentDemo)
 //    public void fragmentDemo ()
 //    {
 //        Intent i=new Intent(this, FragmentActivitySample.class);
 //        startActivity(i);
 //    }
-
-
-
 
 
 }

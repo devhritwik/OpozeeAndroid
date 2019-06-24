@@ -68,7 +68,10 @@ public class PostedQuestionsInteractorImpl implements PostedQuestionsInteractor 
         }else{
             params.setSearchtext("All");
         }
-        Call<PostedQuestionsResponse> call = WebServiceFactory.getInstance().getAllQuestions(params.getUser_id(), params.getPageIndex(), params.getPageSize(),1,params.getSearchtext());
+
+
+
+        Call<PostedQuestionsResponse> call = WebServiceFactory.getInstance().getAllQuestions(params.getUser_id(), params.getPageIndex(), params.getPageSize(),params.getSortorder(),params.getSearchtext());
 
         call.enqueue(new Callback<PostedQuestionsResponse>() {
             @Override

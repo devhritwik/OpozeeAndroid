@@ -24,6 +24,7 @@ import com.opozee.OpozeeActivity;
 import com.opozee.R;
 import com.opozee.utils.AppGlobal;
 import com.opozee.utils.AppSP;
+import com.opozee.utils.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,6 +43,7 @@ public class SplashActivity extends OpozeeActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getStatusBarHeight();
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
@@ -49,6 +51,7 @@ public class SplashActivity extends OpozeeActivity {
         }
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
+        Utils.savesortedata(SplashActivity.this, 0);
         mLogo.setImageDrawable(getResources().getDrawable(R.drawable.opozee_logo));
         checkDeviceID();
         showSplash();

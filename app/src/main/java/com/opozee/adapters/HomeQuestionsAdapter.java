@@ -1,38 +1,38 @@
 package com.opozee.adapters;
 
 
-        import android.app.Activity;
-        import android.content.Intent;
-        import android.support.v7.widget.RecyclerView;
-        import android.text.Html;
-        import android.util.Log;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.SeekBar;
-        import android.widget.TextView;
+import android.app.Activity;
+import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 
-        import com.opozee.R;
-        import com.opozee.activities.QuestionDetailActivity;
-        import com.opozee.application.QuestionnaireApplication;
-        import com.opozee.pojo.PostedQuestionsResponse;
-        import com.opozee.utils.AppGlobal;
-        import com.opozee.utils.Utils;
-        import com.opozee.view.QuestionListTopBeliefView;
-        import com.squareup.picasso.Picasso;
+import com.opozee.R;
+import com.opozee.activities.QuestionDetailActivity;
+import com.opozee.application.QuestionnaireApplication;
+import com.opozee.pojo.PostedQuestionsResponse;
+import com.opozee.utils.AppGlobal;
+import com.opozee.utils.Utils;
+import com.opozee.view.QuestionListTopBeliefView;
+import com.squareup.picasso.Picasso;
 
-        import org.apache.commons.lang3.StringEscapeUtils;
-        import org.json.JSONObject;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.json.JSONObject;
 
-        import java.util.HashMap;
-        import java.util.List;
+import java.util.HashMap;
+import java.util.List;
 
-        import butterknife.BindView;
-        import butterknife.ButterKnife;
-        import de.hdodenhof.circleimageview.CircleImageView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
-public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdapter.ViewHolder>  {
+public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdapter.ViewHolder> {
 
     List<PostedQuestionsResponse.PostQuestionDetail> usersList;
     private Activity mContext;
@@ -100,16 +100,17 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
         this.usersList = usersList;
 
     }
+
     // Create new views (invoked by the layout manager)
     @Override
     public HomeQuestionsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-            // create a new view-
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.home_questions_item, parent, false);
-            // set the view's size, margins, paddings and layout parameters
-            ViewHolder vh = new ViewHolder(v);
-            return vh;
+        // create a new view-
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.home_questions_item, parent, false);
+        // set the view's size, margins, paddings and layout parameters
+        ViewHolder vh = new ViewHolder(v);
+        return vh;
 
     }
 
@@ -125,32 +126,32 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
         holder.tv_question.setText(Html.fromHtml(fromServerUnicodeDecoded.trim()));
         //holder.tv_question.setText(fromServerUnicodeDecoded.trim());
 
-        Log.d("TimeFormat_Log",usersList.get(position).getCreationDate());
+        Log.d("TimeFormat_Log", usersList.get(position).getCreationDate());
         String timeArr[] = usersList.get(position).getCreationDate().replace("T", " ").split("/.");
         Log.e("TIME SPLIT ", " " + timeArr[0]);
         String time = Utils.convertESTToLocalTime(timeArr[0]).replace("-", " at ");
-        String conertdate=timeArr[0].replace("ll","");
+        String conertdate = timeArr[0].replace("ll", "");
 
-        String timeexact=Utils.getlocaltime(conertdate);
-        Long date=Utils.convertdatestring(timeexact);
-        String timeago=Utils.getTimeAgo(date);
+        String timeexact = Utils.getlocaltime(conertdate);
+        Long date = Utils.convertdatestring(timeexact);
+        String timeago = Utils.getTimeAgo(date);
 
-        Log.d("TimeFormat_Log",time);
-        Log.d("TimeFormat_Log","conertdate="+conertdate);
-        Log.d("TimeFormat_Log","Long="+date);
-        Log.d("TimeFormat_Log","timeago="+timeago);
-        Log.d("TimeFormat_Log","Date="+timeexact);
-        if(timeago!=null) {
+        Log.d("TimeFormat_Log", time);
+        Log.d("TimeFormat_Log", "conertdate=" + conertdate);
+        Log.d("TimeFormat_Log", "Long=" + date);
+        Log.d("TimeFormat_Log", "timeago=" + timeago);
+        Log.d("TimeFormat_Log", "Date=" + timeexact);
+        if (timeago != null) {
             holder.tv_time.setText(timeago);
         }
 //        Log.d("Home_Log",usersList.get(position).getActivitytime());
 //        Log.d("Home_Log",usersList.get(position).getReactionsum());
-        if(usersList.get(position).getReactionsum()!=null){
-            holder.tv_reaction.setText("Reactions :"+usersList.get(position).getReactionsum());
-        }else{
-            holder.tv_reaction.setText("Reactions :"+"0");
+        if (usersList.get(position).getReactionsum() != null) {
+            holder.tv_reaction.setText("Reactions :" + usersList.get(position).getReactionsum());
+        } else {
+            holder.tv_reaction.setText("Reactions :" + "0");
         }
-        if(usersList.get(position).getActivitytime()!=null){
+        if (usersList.get(position).getActivitytime() != null) {
 
         }
 
@@ -162,7 +163,7 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
                 HashMap<String, String> map = new HashMap<>();
                 map.put("questionText", questionDetail.getQuestion());
                 JSONObject jsonObject = new JSONObject(map);
-                QuestionnaireApplication.getMixpanelApi().track("Question Clicked on Home Fragment" , jsonObject);
+                QuestionnaireApplication.getMixpanelApi().track("Question Clicked on Home Fragment", jsonObject);
                 Intent intent = new Intent(mContext, QuestionDetailActivity.class);
                 intent.putExtra("id", usersList.get(position).getId());
                 intent.putExtra(AppGlobal.LAST_FRAG_TYPE, AppGlobal.HOMEFRAG);
@@ -171,10 +172,9 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
         });
 
 
-
         String imageURL = questionDetail.getUserImage();
 
-        String url = (imageURL == null || imageURL.length() == 0 || imageURL.equals(""))? Utils.DEFAULT_PROFILE_PIC_URL : imageURL;
+        String url = (imageURL == null || imageURL.length() == 0 || imageURL.equals("")) ? Utils.DEFAULT_PROFILE_PIC_URL : imageURL;
         Picasso.get()
                 .load(url)
                 .placeholder(R.drawable.user)
@@ -182,80 +182,124 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
                 .into(holder.iv_user);
 
 
-
-
-        holder.tv_user_name.setText("@"+usersList.get(position).getOwnerUserName().replace(" ", "").toLowerCase());
+        holder.tv_user_name.setText("@" + usersList.get(position).getOwnerUserName().replace(" ", "").toLowerCase());
         holder.tv_name.setText(Utils.capitalize(usersList.get(position).getOwnerUserName()));
 
 
+        boolean isMostLiked = questionDetail.getMostLiked() != null;
+        boolean isMostDisliked = questionDetail.getMostDisliked() != null;
 
-        boolean isMostLiked =  questionDetail.getMostLiked() != null;
-        boolean isMostDisliked =  questionDetail.getMostDisliked() != null;
-
-        if(isMostLiked) {
-            holder.bestSupportingView.setVisibility(View.VISIBLE);
-            holder.bestSupportingView.setBelief(questionDetail.getMostLiked());
-        }
-        else
-        {
-            holder.bestSupportingView.setVisibility(View.GONE);
-        }
-
-        if(isMostDisliked) {
-            holder.bestAgainstView.setVisibility(View.VISIBLE);
-            holder.bestAgainstView.setBelief(questionDetail.getMostDisliked());
-
-        }
-        else
-        {
-            holder.bestAgainstView.setVisibility(View.GONE);
-        }
 
         int yesCount = usersList.get(position).getYesCount() != null ? usersList.get(position).getYesCount() : 0;
         int noCount = usersList.get(position).getNoCount() != null ? usersList.get(position).getNoCount() : 0;
 
 
-        initDataToSeekbar(holder.seekBar, holder.tv_count_likes, holder.tv_count_dislikes,yesCount, noCount);
+        if (isMostLiked) {
+            holder.bestSupportingView.setVisibility(View.VISIBLE);
+            holder.bestSupportingView.setBelief(questionDetail.getMostLiked());
+//            initDataToSeekbar(holder.seekBar, holder.tv_count_likes, holder.tv_count_dislikes, yesCount, noCount, position);
+        } else {
+            holder.bestSupportingView.setVisibility(View.GONE);
+        }
+
+        if (isMostDisliked) {
+            holder.bestAgainstView.setVisibility(View.VISIBLE);
+            holder.bestAgainstView.setBelief(questionDetail.getMostDisliked());
+//            initDataToSeekbar(holder.seekBar, holder.tv_count_likes, holder.tv_count_dislikes, yesCount, noCount, position);
+
+        } else {
+            holder.bestAgainstView.setVisibility(View.GONE);
+        }
+        initDataToSeekbar(holder.seekBar, holder.tv_count_likes, holder.tv_count_dislikes, yesCount, noCount, position);
+//        initDataToSeekbar(holder.seekBar, holder.tv_count_likes, holder.tv_count_dislikes,yesCount, noCount);
 
     }
 
-    private void initDataToSeekbar(SeekBar seekBar, TextView tv_count_likes, TextView tv_count_dislikes, int likes, int dislikes) {
-        int total = likes + dislikes == 0 ? 100 : likes + dislikes;
+    private void initDataToSeekbar(SeekBar seekBar, TextView tv_count_likes, TextView tv_count_dislikes, int likes, int dislikes, int status) {
 
-        // dislike span
-        int dislikes_percentage = ((dislikes * 100 / total));
 
-        Log.e("Dislikes >>", "  "  +  dislikes +  "    " + dislikes_percentage);
-        // like span
-        int likes_percentage = (likes  * 100 / total);
-        Log.e("likes >>", "  "  +  likes +  "    " + likes_percentage);
+        try {
+            int scoreYes = 0;
+            int scoreNo = 0;
+            int _score = 0;
+            for (int k = 0; k < usersList.get(status).getComments().size(); k++) {
+                _score = usersList.get(status).getComments().get(k).getLikescount() - usersList.get(status).getComments().get(k).getDislikescount();
+                Log.d("Percentage=","_score="+_score);
+                if (usersList.get(status).getComments().get(k).isAgree() == true) {
+                    scoreYes = scoreYes + (_score > 0 ? _score : 0);
+                    Log.d("Percentage=","scoreYes="+scoreYes);
+                } else {
+                    scoreNo = scoreNo + (_score > 0 ? _score : 0);
+                    Log.d("Percentage=","scoreNo="+scoreNo);
+                }
 
-        if(dislikes == 0 && likes == 0)
-        {
-            seekBar.setProgressDrawable(mContext.getResources().getDrawable(R.drawable.progress_bg));
+            }
+            Log.d("Percentage=","scoreNo=1----"+scoreNo);
+            Log.d("Percentage=","scoreYes=1----"+scoreYes);
+            int finalscore=scoreYes+scoreNo;
+            double finaldata=(double) scoreYes/finalscore;
+            Log.d("Percentage=","finalscore=1----"+finalscore);
+            Log.d("Percentage=","finaldata=1----"+finaldata);
+            double finalpercentage = (double) finaldata *100;
+            int percentage=(int)finalpercentage;
+            Log.d("Percentage=",""+percentage+"-------------------------------");
+            if (percentage <= 0) {
+                percentage = 0;
+                scoreNo = 0;
+                scoreYes = 0;
+                seekBar.setProgressDrawable(mContext.getResources().getDrawable(R.drawable.progress_bg));
             seekBar.setSecondaryProgress(0);
             seekBar.invalidate();
-        }
-        else
-        {
-            seekBar.setProgressDrawable(mContext.getResources().getDrawable(R.drawable.progress_line));
+            } else {
+                seekBar.setProgressDrawable(mContext.getResources().getDrawable(R.drawable.progress_line));
 //            seekBar.setProgress(dislikes_percentage);
-            seekBar.setSecondaryProgress(likes_percentage);
-            seekBar.invalidate();
+                seekBar.setSecondaryProgress( percentage);
+                seekBar.invalidate();
+            }
+
+            tv_count_dislikes.setText("No " + percentage + "%");
+            tv_count_likes.setText(percentage + "% Yes");
+
+        } catch (Exception e) {
+Log.d("Percentage=",e.toString());
         }
 
-        tv_count_dislikes.setText("No " + dislikes_percentage + "%");
-        tv_count_likes.setText( likes_percentage + "% Yes");
+//
+//        int total = likes + dislikes == 0 ? 100 : likes + dislikes;
+//
+//        // dislike span
+//        int dislikes_percentage = ((dislikes * 100 / total));
+//
+//        Log.e("Dislikes >>", "  "  +  dislikes +  "    " + dislikes_percentage);
+//        // like span
+//        int likes_percentage = (likes  * 100 / total);
+//        Log.e("likes >>", "  "  +  likes +  "    " + likes_percentage);
+//
+//        if(dislikes == 0 && likes == 0)
+//        {
+//            seekBar.setProgressDrawable(mContext.getResources().getDrawable(R.drawable.progress_bg));
+//            seekBar.setSecondaryProgress(0);
+//            seekBar.invalidate();
+//        }
+//        else
+//        {
+//            seekBar.setProgressDrawable(mContext.getResources().getDrawable(R.drawable.progress_line));
+////            seekBar.setProgress(dislikes_percentage);
+//            seekBar.setSecondaryProgress(likes_percentage);
+//            seekBar.invalidate();
+//        }
+//
+//        tv_count_dislikes.setText("No " + dislikes_percentage + "%");
+//        tv_count_likes.setText( likes_percentage + "% Yes");
 
 
     }
-
 
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        Log.d("Size==",""+usersList.size());
+        Log.d("Size==", "" + usersList.size());
         return usersList == null ? 0 : usersList.size();
     }
 }

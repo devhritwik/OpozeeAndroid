@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.opozee.OpozeeActivity;
 import com.opozee.R;
 
 import butterknife.BindView;
@@ -21,7 +22,7 @@ import ro.andreidobrescu.emojilike.EmojiLikeView;
 import ro.andreidobrescu.emojilike.IActivityWithEmoji;
 import ro.andreidobrescu.emojilike.OnEmojiSelectedListener;
 
-public class MainTestActivity extends AppCompatActivity implements OnEmojiSelectedListener, IActivityWithEmoji {
+public class MainTestActivity extends OpozeeActivity implements OnEmojiSelectedListener, IActivityWithEmoji {
 
     EmojiLikeTouchDetector emojiLikeTouchDetector;
 

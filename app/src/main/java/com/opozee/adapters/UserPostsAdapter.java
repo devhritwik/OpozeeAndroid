@@ -144,37 +144,90 @@ public class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.View
         int noCount = usersList.get(position).getNoCount() != null ? usersList.get(position).getNoCount() : 0;
 
 
-        initDataToSeekbar(holder.seekBar, holder.tv_count_likes, holder.tv_count_dislikes,yesCount, noCount );
+        initDataToSeekbar(holder.seekBar, holder.tv_count_likes, holder.tv_count_dislikes,yesCount, noCount,position );
 
     }
 
-    private void initDataToSeekbar(SeekBar seekBar, TextView tv_count_likes, TextView tv_count_dislikes, int likes, int dislikes) {
-        int total = likes + dislikes == 0 ? 100 : likes + dislikes;
+    private void initDataToSeekbar(SeekBar seekBar, TextView tv_count_likes, TextView tv_count_dislikes, int likes, int dislikes,int status) {
 
-        // dislike span
-        int dislikes_percentage = ((dislikes * 100 / total));
 
-        Log.e("Dislikes >>", "  "  +  dislikes +  "    " + dislikes_percentage);
-        // like span
-        int likes_percentage = (likes  * 100 / total);
-        Log.e("likes >>", "  "  +  likes +  "    " + likes_percentage);
+        try {
+            int scoreYes = 0;
+            int scoreNo = 0;
+            int _score = 0;
+            for (int k = 0; k < usersList.get(status).getComments().size(); k++) {
+                _score = usersList.get(status).getComments().get(k).getLikescount() - usersList.get(status).getComments().get(k).getDislikescount();
+                Log.d("Percentage=","_score="+_score);
+                if (usersList.get(status).getComments().get(k).isAgree() == true) {
+                    scoreYes = scoreYes + (_score > 0 ? _score : 0);
+                    Log.d("Percentage=","scoreYes="+scoreYes);
+                } else {
+                    scoreNo = scoreNo + (_score > 0 ? _score : 0);
+                    Log.d("Percentage=","scoreNo="+scoreNo);
+                }
 
-        if(dislikes == 0 && likes == 0)
-        {
-            seekBar.setProgressDrawable(mContext.getResources().getDrawable(R.drawable.progress_bg));
-            seekBar.setSecondaryProgress(0);
-            seekBar.invalidate();
-        }
-        else
-        {
-            seekBar.setProgressDrawable(mContext.getResources().getDrawable(R.drawable.progress_line));
+            }
+            Log.d("Percentage=","scoreNo=1----"+scoreNo);
+            Log.d("Percentage=","scoreYes=1----"+scoreYes);
+            int finalscore=scoreYes+scoreNo;
+            double finaldata=(double) scoreYes/finalscore;
+            Log.d("Percentage=","finalscore=1----"+finalscore);
+            Log.d("Percentage=","finaldata=1----"+finaldata);
+            double finalpercentage = (double) finaldata *100;
+            int percentage=(int)finalpercentage;
+            Log.d("Percentage=",""+percentage+"-------------------------------");
+            if (percentage <= 0) {
+                percentage = 0;
+                scoreNo = 0;
+                scoreYes = 0;
+                seekBar.setProgressDrawable(mContext.getResources().getDrawable(R.drawable.progress_bg));
+                seekBar.setSecondaryProgress(0);
+                seekBar.invalidate();
+            } else {
+                seekBar.setProgressDrawable(mContext.getResources().getDrawable(R.drawable.progress_line));
 //            seekBar.setProgress(dislikes_percentage);
-            seekBar.setSecondaryProgress(likes_percentage);
-            seekBar.invalidate();
+                seekBar.setSecondaryProgress( percentage);
+                seekBar.invalidate();
+            }
+
+            tv_count_dislikes.setText("No " + percentage + "%");
+            tv_count_likes.setText(percentage + "% Yes");
+
+        } catch (Exception e) {
+            Log.d("Percentage=",e.toString());
         }
 
-        tv_count_dislikes.setText("No " + dislikes_percentage + "%");
-        tv_count_likes.setText( likes_percentage + "% Yes");
+
+
+
+
+
+        //        int total = likes + dislikes == 0 ? 100 : likes + dislikes;
+//
+//        // dislike span
+//        int dislikes_percentage = ((dislikes * 100 / total));
+//
+//        Log.e("Dislikes >>", "  "  +  dislikes +  "    " + dislikes_percentage);
+//        // like span
+//        int likes_percentage = (likes  * 100 / total);
+//        Log.e("likes >>", "  "  +  likes +  "    " + likes_percentage);
+//
+//        if(dislikes == 0 && likes == 0)
+//        {
+//            seekBar.setProgressDrawable(mContext.getResources().getDrawable(R.drawable.progress_bg));
+//            seekBar.setSecondaryProgress(0);
+//            seekBar.invalidate();
+//        }
+//        else
+//        {
+//            seekBar.setProgressDrawable(mContext.getResources().getDrawable(R.drawable.progress_line));
+////            seekBar.setProgress(dislikes_percentage);
+//            seekBar.setSecondaryProgress(likes_percentage);
+//            seekBar.invalidate();
+//        }
+//
+//        tv_count_dislikes.setText("No " + dislikes_percentage + "%");
+//        tv_count_likes.setText( likes_percentage + "% Yes");
 
 
     }

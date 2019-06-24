@@ -81,8 +81,8 @@ public class EmojiConfig
         selectedEmojiHeight=dpToPx (85);
         selectedEmojiWeight=4;
         unselectedEmojiWeight=1;
-        emojiViewMarginLeft=dpToPx(15);
-        emojiViewMarginRight=dpToPx(15);
+        emojiViewMarginLeft=dpToPx(10);
+        emojiViewMarginRight=dpToPx(10);
         selectedEmojiMarginBottom=dpToPx(15);
         selectedEmojiMarginTop=0;
         selectedEmojiMarginLeft=dpToPx(5);
@@ -91,7 +91,7 @@ public class EmojiConfig
         unselectedEmojiMarginTop=dpToPx(30);
         unselectedEmojiMarginLeft=dpToPx(0);
         unselectedEmojiMarginRight=dpToPx(0);
-        emojiImagesContainerHeight=dpToPx(100);
+        emojiImagesContainerHeight=dpToPx(80);
         backgroundViewHeight=dpToPx(50);
         backgroundViewMarginBottom=dpToPx(10);
         emojiAnimationSpeed=0.4f;

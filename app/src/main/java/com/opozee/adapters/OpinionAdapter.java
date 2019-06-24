@@ -548,22 +548,22 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
 
             switch (usersList.get(position).getSubreation()){
                 case 1:
-                    holder.iv_like.setImageResource(R.drawable.resizelike);
+                    holder.iv_like.setImageResource(R.drawable.thoughtful);
                     break;
                 case 2:
-                    holder.iv_like.setImageResource(R.drawable.resizefactual);
+                    holder.iv_like.setImageResource(R.drawable.factual);
                     break;
                 case 3:
-                    holder.iv_like.setImageResource(R.drawable.resizefunny);
+                    holder.iv_like.setImageResource(R.drawable.funny);
                     break;
                 case 4:
-                    holder.iv_dislike.setImageResource(R.drawable.resizewow);
+                    holder.iv_dislike.setImageResource(R.drawable.irrational);
                     break;
                 case 5:
-                    holder.iv_dislike.setImageResource(R.drawable.resizesad);
+                    holder.iv_dislike.setImageResource(R.drawable.fakenews);
                     break;
                 case 6:
-                    holder.iv_dislike.setImageResource(R.drawable.reseizeangry);
+                    holder.iv_dislike.setImageResource(R.drawable.offtopic);
                     break;
                     default:
                         holder.iv_like.setImageResource(R.drawable.thumb_off);
@@ -603,12 +603,13 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
             if (!String.valueOf(usersList.get(position).getCommentedUserId()).equals(Utils.getLoggedInUserId(mContext))) {
 
 
+
                 EmojiConfig.with(mContext)
                         .on(holder.ll_like)
                         .open(holder.emojiView_like)
-                        .addEmoji(new Emoji(R.drawable.resizelike, "Like", position))
-                        .addEmoji(new Emoji(R.drawable.resizefactual, "Factual", position))
-                        .addEmoji(new Emoji(R.drawable.resizefunny, "Funny", position))
+                        .addEmoji(new Emoji(R.drawable.thoughtful, "Like", position))
+                        .addEmoji(new Emoji(R.drawable.factual, "Factual", position))
+                        .addEmoji(new Emoji(R.drawable.funny, "Funny", position))
 //                        .setEmojiViewMarginRight(0)
 //                        .setEmojiViewMarginLeft(0)
 //                        .setUnselectedEmojiMarginLeft(0)
@@ -632,7 +633,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
 
                                             ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 1);
                                         } else {
-                                            holder.iv_like.setImageResource(R.drawable.resizelike);
+                                            holder.iv_like.setImageResource(R.drawable.thoughtful);
                                             int count = usersList.get(position).getLikesCount() + 1;
                                             holder.tv_like_yes.setText(Utils.format(count));
                                             usersList.get(position).setLikesCount(count);
@@ -664,7 +665,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
 
                                             ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 2);
                                         } else {
-                                            holder.iv_like.setImageResource(R.drawable.resizefactual);
+                                            holder.iv_like.setImageResource(R.drawable.factual);
                                             int count = usersList.get(position).getLikesCount() + 1;
                                             holder.tv_like_yes.setText(Utils.format(count));
                                             usersList.get(position).setLikesCount(count);
@@ -694,7 +695,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
 
                                             ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 3);
                                         } else {
-                                            holder.iv_like.setImageResource(R.drawable.resizefunny);
+                                            holder.iv_like.setImageResource(R.drawable.funny);
                                             int count = usersList.get(position).getLikesCount() + 1;
                                             usersList.get(position).setLikesCount(count);
                                             holder.tv_like_yes.setText(Utils.format(count));
@@ -727,9 +728,9 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                 com.opozee.emojilike.EmojiConfig.with(mContext)
                         .on(holder.ll_dislike)
                         .open(holder.emojiView_dislike)
-                        .addEmoji(new com.opozee.emojilike.Emoji(R.drawable.resizewow, "Wow", position))
-                        .addEmoji(new com.opozee.emojilike.Emoji(R.drawable.resizesad, "Sad", position))
-                        .addEmoji(new com.opozee.emojilike.Emoji(R.drawable.reseizeangry, "Angry", position))
+                        .addEmoji(new com.opozee.emojilike.Emoji(R.drawable.irrational, "Wow", position))
+                        .addEmoji(new com.opozee.emojilike.Emoji(R.drawable.fakenews, "Sad", position))
+                        .addEmoji(new com.opozee.emojilike.Emoji(R.drawable.offtopic, "Angry", position))
                         .setOnEmojiSelectedListener(new com.opozee.emojilike.OnEmojiSelectedListener() {
                             @Override
                             public void onEmojiSelected(com.opozee.emojilike.Emoji emoji) {
@@ -747,7 +748,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                                             ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 4);
 
                                         } else {
-                                            holder.iv_dislike.setImageResource(R.drawable.resizewow);
+                                            holder.iv_dislike.setImageResource(R.drawable.irrational);
                                             int count = usersList.get(position).getDislikesCount() + 1;
                                             holder.tv_dislike_yes.setText(Utils.format(count));
                                             usersList.get(position).setDislikesCount(count);
@@ -775,7 +776,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                                             usersList.get(position).setDisLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 5);
                                         } else {
-                                            holder.iv_dislike.setImageResource(R.drawable.resizesad);
+                                            holder.iv_dislike.setImageResource(R.drawable.fakenews);
                                             int count = usersList.get(position).getDislikesCount() + 1;
                                             holder.tv_dislike_yes.setText(Utils.format(count));
                                             usersList.get(position).setDislikesCount(count);
@@ -804,7 +805,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                                             usersList.get(position).setDisLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 6);
                                         } else {
-                                            holder.iv_dislike.setImageResource(R.drawable.reseizeangry);
+                                            holder.iv_dislike.setImageResource(R.drawable.offtopic);
                                             int count = usersList.get(position).getDislikesCount() + 1;
                                             holder.tv_dislike_yes.setText(Utils.format(count));
                                             usersList.get(position).setDislikesCount(count);
@@ -1274,22 +1275,22 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
 
             switch (usersList.get(position).getSubreation()){
                 case 1:
-                    holder.iv_like_yes.setImageResource(R.drawable.resizelike);
+                    holder.iv_like_yes.setImageResource(R.drawable.thoughtful);
                     break;
                 case 2:
-                    holder.iv_like_yes.setImageResource(R.drawable.resizefactual);
+                    holder.iv_like_yes.setImageResource(R.drawable.factual);
                     break;
                 case 3:
-                    holder.iv_like_yes.setImageResource(R.drawable.resizefunny);
+                    holder.iv_like_yes.setImageResource(R.drawable.funny);
                     break;
                 case 4:
-                    holder.iv_dislike_no.setImageResource(R.drawable.resizewow);
+                    holder.iv_dislike_no.setImageResource(R.drawable.irrational);
                     break;
                 case 5:
-                    holder.iv_dislike_no.setImageResource(R.drawable.resizesad);
+                    holder.iv_dislike_no.setImageResource(R.drawable.fakenews);
                     break;
                 case 6:
-                    holder.iv_dislike_no.setImageResource(R.drawable.reseizeangry);
+                    holder.iv_dislike_no.setImageResource(R.drawable.offtopic);
                     break;
                 default:
                     holder.iv_like_yes.setImageResource(R.drawable.thumb_off);
@@ -1338,9 +1339,9 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                 EmojiConfig.with(mContext)
                         .on(holder.ll_like_yes)
                         .open(holder.emojiView_like_yes)
-                        .addEmoji(new Emoji(R.drawable.resizelike, "Like", position))
-                        .addEmoji(new Emoji(R.drawable.resizefactual, "Factual", position))
-                        .addEmoji(new Emoji(R.drawable.resizefunny, "Funny", position))
+                        .addEmoji(new Emoji(R.drawable.thoughtful, "Like", position))
+                        .addEmoji(new Emoji(R.drawable.factual, "Factual", position))
+                        .addEmoji(new Emoji(R.drawable.funny, "Funny", position))
 
                         .setOnEmojiSelectedListener(new OnEmojiSelectedListener() {
                             @Override
@@ -1358,7 +1359,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                                             usersList.get(position).setLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 1);
                                         } else {
-                                            holder.iv_like_yes.setImageResource(R.drawable.resizelike);
+                                            holder.iv_like_yes.setImageResource(R.drawable.thoughtful);
                                             int count = usersList.get(position).getLikesCount() + 1;
                                             holder.tv_like_no.setText(Utils.format(count));
                                             usersList.get(position).setLikesCount(count);
@@ -1388,7 +1389,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                                             usersList.get(position).setLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 2);
                                         } else {
-                                            holder.iv_like_yes.setImageResource(R.drawable.resizefactual);
+                                            holder.iv_like_yes.setImageResource(R.drawable.factual);
                                             int count = usersList.get(position).getLikesCount() + 1;
                                             holder.tv_like_no.setText(Utils.format(count));
                                             usersList.get(position).setLikesCount(count);
@@ -1417,7 +1418,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                                             usersList.get(position).setLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(2, usersList.get(position).getId(), 3);
                                         } else {
-                                            holder.iv_like_yes.setImageResource(R.drawable.resizefunny);
+                                            holder.iv_like_yes.setImageResource(R.drawable.funny);
                                             int count = usersList.get(position).getLikesCount() + 1;
                                             holder.tv_like_no.setText(Utils.format(count));
                                             usersList.get(position).setLikesCount(count);
@@ -1450,9 +1451,9 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                 EmojiConfig.with(mContext)
                         .on(holder.ll_dislike_no)
                         .open(holder.emojiView_dislike_no)
-                        .addEmoji(new Emoji(R.drawable.resizewow, "Wow", position))
-                        .addEmoji(new Emoji(R.drawable.resizesad, "Sad", position))
-                        .addEmoji(new Emoji(R.drawable.reseizeangry, "Angry", position))
+                        .addEmoji(new Emoji(R.drawable.irrational, "Wow", position))
+                        .addEmoji(new Emoji(R.drawable.fakenews, "Sad", position))
+                        .addEmoji(new Emoji(R.drawable.offtopic, "Angry", position))
 
                         .setOnEmojiSelectedListener(new OnEmojiSelectedListener() {
                             @Override
@@ -1470,7 +1471,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                                             usersList.get(position).setDisLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 4);
                                         } else {
-                                            holder.iv_dislike_no.setImageResource(R.drawable.resizewow);
+                                            holder.iv_dislike_no.setImageResource(R.drawable.irrational);
 
 
                                             int count = usersList.get(position).getDislikesCount() + 1;
@@ -1503,7 +1504,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                                             usersList.get(position).setDisLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 5);
                                         } else {
-                                            holder.iv_dislike_no.setImageResource(R.drawable.resizesad);
+                                            holder.iv_dislike_no.setImageResource(R.drawable.fakenews);
 
 
                                             int count = usersList.get(position).getDislikesCount() + 1;
@@ -1533,7 +1534,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                                             usersList.get(position).setDisLikes(false);
                                             ((QuestionDetailActivity) mContext).likeDislike(3, usersList.get(position).getId(), 6);
                                         } else {
-                                            holder.iv_dislike_no.setImageResource(R.drawable.reseizeangry);
+                                            holder.iv_dislike_no.setImageResource(R.drawable.offtopic);
 
 
                                             int count = usersList.get(position).getDislikesCount() + 1;
