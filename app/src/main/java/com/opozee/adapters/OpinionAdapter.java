@@ -513,7 +513,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
             holder.tv_dislike_yes.setText(Utils.format(usersList.get(position).getDislikesCount()));
             holder.tv_like_yes.setText(Utils.format(usersList.get(position).getLikesCount()));
             String imageURL = usersList.get(position).getUserImage();
-            String defaultURL = "http://23.111.138.246:8021/Content/Upload/ProfileImage/oposee-profile.png";
+            String defaultURL = "https://opozee.com:81/Content/Upload/ProfileImage/oposee-profile.png";
 
             String url = imageURL == null || imageURL.length() == 0 || imageURL.equals("") ? defaultURL : imageURL;
             Picasso.get()
@@ -1239,7 +1239,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
             holder.tv_dislike_no.setText(Utils.format(usersList.get(position).getDislikesCount()) + "");
             holder.tv_like_no.setText(Utils.format(usersList.get(position).getLikesCount()) + "");
             String imageURL = usersList.get(position).getUserImage();
-            String defaultURL = "http://23.111.138.246:8021/Content/Upload/ProfileImage/oposee-profile.png";
+            String defaultURL = "https://opozee.com:81/Content/Upload/ProfileImage/oposee-profile.png";
 
             String url = imageURL == null || imageURL.length() == 0 || imageURL.equals("") ? defaultURL : imageURL;
             Picasso.get()
@@ -1339,7 +1339,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                 EmojiConfig.with(mContext)
                         .on(holder.ll_like_yes)
                         .open(holder.emojiView_like_yes)
-                        .addEmoji(new Emoji(R.drawable.thoughtful, "Like", position))
+                        .addEmoji(new Emoji(R.drawable.thoughtful, "Thoughtful", position))
                         .addEmoji(new Emoji(R.drawable.factual, "Factual", position))
                         .addEmoji(new Emoji(R.drawable.funny, "Funny", position))
 
@@ -1451,9 +1451,9 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                 EmojiConfig.with(mContext)
                         .on(holder.ll_dislike_no)
                         .open(holder.emojiView_dislike_no)
-                        .addEmoji(new Emoji(R.drawable.irrational, "Wow", position))
-                        .addEmoji(new Emoji(R.drawable.fakenews, "Sad", position))
-                        .addEmoji(new Emoji(R.drawable.offtopic, "Angry", position))
+                        .addEmoji(new Emoji(R.drawable.irrational, "Irrational", position))
+                        .addEmoji(new Emoji(R.drawable.fakenews, "FakeNews", position))
+                        .addEmoji(new Emoji(R.drawable.offtopic, "OffTopic", position))
 
                         .setOnEmojiSelectedListener(new OnEmojiSelectedListener() {
                             @Override

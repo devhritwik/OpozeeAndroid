@@ -47,7 +47,7 @@ public class Utils {
 
 
     public static final String MIXPANEL_TOKEN = "414c39b7ab192ac62a36f71bfe023d32" ; 
-    public static final String DEFAULT_PROFILE_PIC_URL = "http://23.111.138.246:8021/Content/Upload/ProfileImage/oposee-profile.png";
+    public static final String DEFAULT_PROFILE_PIC_URL = "https://opozee.com:81/Content/Upload/ProfileImage/oposee-profile.png";
 
     public static ProgressDialog mProgressDialog;
     private static String givenDate;

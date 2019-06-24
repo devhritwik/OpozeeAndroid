@@ -93,15 +93,15 @@ public class QuestionListTopBeliefView  extends CardView{
     public void setBelief(TopBeliefs belief) {
         mUserName.setText(String.format("@%s", belief.getCommentedUserName().replace(" ", "").toLowerCase()));
         mOpinionTextView.setText(Html.fromHtml(StringEscapeUtils.unescapeJava(belief.getComment())));//.trim()));
-        mUpvotesView.setText(Utils.format(belief.getLikesCount()));
-        mDownvotesView.setText(Utils.format(belief.getDislikesCount()));
-        String imageURL1 = belief.getUserImage();
-        String url = imageURL1 == null || imageURL1.length() == 0 || imageURL1.equals("")? DEFAULT_PROFILE_PIC_URL : imageURL1;
-        Picasso.get()
-                .load(url)
-                .placeholder(R.drawable.user)
-                .error(R.drawable.user)
-                .into(mUserImage);
+        //mUpvotesView.setText(Utils.format(belief.getLikesCount()));
+        //mDownvotesView.setText(Utils.format(belief.getDislikesCount()));
+        //String imageURL1 = belief.getUserImage();
+        //String url = imageURL1 == null || imageURL1.length() == 0 || imageURL1.equals("")? DEFAULT_PROFILE_PIC_URL : imageURL1;
+//        Picasso.get()
+//                .load(url)
+//                .placeholder(R.drawable.user)
+//                .error(R.drawable.user)
+//                .into(mUserImage);
 
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams)getLayoutParams();
         int sideMargin = getContext().getResources().getDimensionPixelSize(R.dimen._5sdp);

@@ -48,12 +48,15 @@
 
                 <ImageView
                     android:id="@+id/iv_thum_on"
-                    android:layout_width="@dimen/_20sdp"
+                    android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
                     android:layout_weight="0.2"
                     android:paddingTop="@dimen/_2sdp"
                     android:paddingBottom="@dimen/_1sdp"
-                    android:src="@drawable/thumb_off" />
+                    android:src="@drawable/thumb_off"
+                    android:visibility="invisible"
+
+                    />
 
                 <TextView
                     android:id="@+id/belief_view_upvotes"
@@ -66,8 +69,9 @@
                     android:paddingLeft="@dimen/_2sdp"
                     android:singleLine="true"
                     android:text="2003"
-                    android:textColor="@color/black_color"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textColor="@color/grey_color"
+                    android:textSize="@dimen/_10sdp"
+                    android:visibility="invisible"/>
 
             </LinearLayout>
 
@@ -81,10 +85,12 @@
 
                 <ImageView
                     android:id="@+id/iv_thum_off"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_15sdp"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_10sdp"
                     android:layout_weight="0.2"
-                    android:src="@drawable/dislike_thumb_off" />
+                    android:src="@drawable/dislike_thumb_off"
+                    android:visibility="invisible"
+                    />
 
                 <TextView
                     android:id="@+id/belief_view_downvotes"
@@ -96,8 +102,9 @@
                     android:gravity="left|center"
                     android:singleLine="true"
                     android:text="2003"
-                    android:textColor="@color/black_color"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textColor="@color/grey_color"
+                    android:textSize="@dimen/_10sdp"
+                    android:visibility="invisible"/>
 
             </LinearLayout>
 
@@ -109,7 +116,8 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/_4sdp"
                 android:layout_marginRight="@dimen/_4sdp"
-                android:src="@drawable/user_drawable" />
+                android:src="@drawable/user_drawable"
+                android:visibility="invisible"/>
 
             <TextView
                 android:id="@+id/belief_view_user_name_tv"
@@ -118,8 +126,8 @@
                 android:fontFamily="@font/renner"
                 android:gravity="center_vertical"
                 android:singleLine="true"
-                android:text="#@user1233"
-                android:textColor="@color/grey"
+                android:text="@"
+                android:textColor="@color/grey_light"
                 android:textSize="@dimen/_12sdp" />
         </LinearLayout>
     </LinearLayout>

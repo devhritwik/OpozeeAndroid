@@ -123,7 +123,7 @@ public class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.View
 
 
         String imageURL = usersList.get(position).getUserImage();
-        String defaultURL = "http://23.111.138.246:8021/Content/Upload/ProfileImage/oposee-profile.png";
+        String defaultURL = "https://opozee.com:81/Content/Upload/ProfileImage/oposee-profile.png";
 
         String url = imageURL == null || imageURL.length() == 0 || imageURL.equals("")? defaultURL : imageURL;
         Picasso.get()
