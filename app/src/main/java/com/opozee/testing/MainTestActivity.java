@@ -15,12 +15,13 @@ import com.opozee.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import ro.andreidobrescu.emojilike.Emoji;
-import ro.andreidobrescu.emojilike.EmojiConfig;
-import ro.andreidobrescu.emojilike.EmojiLikeTouchDetector;
-import ro.andreidobrescu.emojilike.EmojiLikeView;
-import ro.andreidobrescu.emojilike.IActivityWithEmoji;
-import ro.andreidobrescu.emojilike.OnEmojiSelectedListener;
+import com.opozee.newemojilikegif.Emoji;
+import com.opozee.newemojilikegif.EmojiCellView;
+import com.opozee.newemojilikegif.EmojiConfig;
+import com.opozee.newemojilikegif.EmojiLikeTouchDetector;
+import com.opozee.newemojilikegif.EmojiLikeView;
+import com.opozee.newemojilikegif.IActivityWithEmoji;
+import com.opozee.newemojilikegif.OnEmojiSelectedListener;
 
 public class MainTestActivity extends OpozeeActivity implements OnEmojiSelectedListener, IActivityWithEmoji {
 
@@ -43,14 +44,11 @@ public class MainTestActivity extends OpozeeActivity implements OnEmojiSelectedL
         EmojiConfig.with(this)
                 .on(likeButton)
                 .open(emojiView)
-                .addEmoji(new Emoji(R.drawable.resizelike, "Like"))
+                .addEmoji(new Emoji(R.drawable.like, "Like"))
                 .addEmoji(new Emoji(R.drawable.haha, "Haha"))
                 .addEmoji(new Emoji(R.drawable.kiss, "Kiss"))
-//                .addEmoji(new Emoji(R.drawable.sad, "Sad"))
-//                .addEmoji(new Emoji(R.drawable.t, ":P"))
-                .setEmojiViewInAnimation((AnimationSet) AnimationUtils.loadAnimation(this, R.anim.in_animation))
-                .setEmojiViewOutAnimation((AnimationSet) AnimationUtils.loadAnimation(this, R.anim.out_animation))
-                .setBackgroundImage(R.drawable.background_drawable)
+                .setEmojiAnimationSpeed(0.2f)
+                .setEmojiCellViewFactory(EmojiCellView.WithImageAndText::new)
                 .setOnEmojiSelectedListener(this)
                 .setup();
     }

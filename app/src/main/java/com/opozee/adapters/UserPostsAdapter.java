@@ -37,6 +37,7 @@ public class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.View
 
     List<PostedQuestionsResponse.PostQuestionDetail> usersList;
     private Context mContext;
+    public final String TAG="USER_POST_Adapter_LOG";
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -78,6 +79,7 @@ public class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.View
 
         this.mContext = mContext;
         this.usersList = usersList;
+        Log.d(TAG,"Adapter Call");
     }
 
     // Create new views (invoked by the layout manager)
@@ -157,25 +159,25 @@ public class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.View
             int _score = 0;
             for (int k = 0; k < usersList.get(status).getComments().size(); k++) {
                 _score = usersList.get(status).getComments().get(k).getLikescount() - usersList.get(status).getComments().get(k).getDislikescount();
-                Log.d("Percentage=","_score="+_score);
+                Log.d(TAG,"Percentage="+"_score="+_score);
                 if (usersList.get(status).getComments().get(k).isAgree() == true) {
                     scoreYes = scoreYes + (_score > 0 ? _score : 0);
-                    Log.d("Percentage=","scoreYes="+scoreYes);
+                    Log.d(TAG,"Percentage="+"scoreYes="+scoreYes);
                 } else {
                     scoreNo = scoreNo + (_score > 0 ? _score : 0);
-                    Log.d("Percentage=","scoreNo="+scoreNo);
+                    Log.d(TAG,"Percentage="+"scoreNo="+scoreNo);
                 }
 
             }
-            Log.d("Percentage=","scoreNo=1----"+scoreNo);
-            Log.d("Percentage=","scoreYes=1----"+scoreYes);
+            Log.d(TAG,"Percentage="+"scoreNo=1----"+scoreNo);
+            Log.d(TAG,"Percentage="+"scoreYes=1----"+scoreYes);
             int finalscore=scoreYes+scoreNo;
             double finaldata=(double) scoreYes/finalscore;
-            Log.d("Percentage=","finalscore=1----"+finalscore);
-            Log.d("Percentage=","finaldata=1----"+finaldata);
+            Log.d(TAG,"Percentage="+"finalscore=1----"+finalscore);
+            Log.d(TAG,"Percentage="+"finaldata=1----"+finaldata);
             double finalpercentage = (double) finaldata *100;
             int percentage=(int)finalpercentage;
-            Log.d("Percentage=",""+percentage+"-------------------------------");
+            Log.d(TAG,"Percentage="+""+percentage+"-------------------------------");
             if (percentage <= 0) {
                 percentage = 0;
                 scoreNo = 0;
@@ -189,12 +191,17 @@ public class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.View
                 seekBar.setSecondaryProgress( percentage);
                 seekBar.invalidate();
             }
+if(percentage>0){
+    int dislikepercent=100-percentage;
+    tv_count_dislikes.setText("No " + dislikepercent + "%");
+}else{
+    tv_count_dislikes.setText("No " + 0 + "%");
+}
 
-            tv_count_dislikes.setText("No " + percentage + "%");
             tv_count_likes.setText(percentage + "% Yes");
 
         } catch (Exception e) {
-            Log.d("Percentage=",e.toString());
+            Log.d(TAG,"Percentage="+e.toString());
         }
 
 

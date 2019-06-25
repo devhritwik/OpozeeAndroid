@@ -90,7 +90,7 @@ public class QuestionDetailResponse {
         @Expose
         private Boolean ischecked;
 
-        @SerializedName("LikesThoughtfullCount")
+        @SerializedName("LikesThoughtfulCount")
         @Expose
         private String likesthought;
 
@@ -102,7 +102,7 @@ public class QuestionDetailResponse {
         @Expose
         private String likesfunny;
 
-        @SerializedName("DislikesNoMaterialCount")
+        @SerializedName("DislikesIrrationalCount")
         @Expose
         private String dislikenomaterial;
 
@@ -110,7 +110,7 @@ public class QuestionDetailResponse {
         @Expose
         private String dislikefakenewscount;
 
-        @SerializedName("DislikesBiasedCount")
+        @SerializedName("DislikesOffTopicCount")
         @Expose
         private String dislikebiasedcount;
 

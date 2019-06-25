@@ -563,7 +563,7 @@ mFollowingView.setText("Followings("+response.getResponse().getUserProfile().get
                 mFollowingView.setBackground(getResources().getDrawable(R.drawable.textview_following_un));
                 recyclerView.setAdapter(mBeliefsAdapter);
                 for (Belief b : mBeliefList) {
-                    Log.d(TAG, b.getQuestionText());
+//                    Log.d(TAG, b.getQuestionText());
                 }
             }
         } else if (tabMode == TabMode.Followers) {

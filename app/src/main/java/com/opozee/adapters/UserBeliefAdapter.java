@@ -57,7 +57,10 @@ public class UserBeliefAdapter extends RecyclerView.Adapter<UserBeliefAdapter.Vi
         viewHolder.mBeliefText.setText(Html.fromHtml(currBelief.getBeliefText()));
         viewHolder.mNumDislikes.setText(Integer.toString(currBelief.getDislikesCount()));
         viewHolder.mNumLikes.setText(Integer.toString(currBelief.getLikesCount()));
-        viewHolder.mQuestionText.setText(Html.fromHtml(currBelief.getQuestionText()));
+        if(currBelief.getQuestionText()!=null){
+            viewHolder.mQuestionText.setText(Html.fromHtml(currBelief.getQuestionText()));
+        }
+
         if (currBelief.isAgree()){
             viewHolder.mBeliefContainer.setBackground(mContext.getResources().getDrawable(R.drawable.top_belief_view_positive_bg));
         } else {

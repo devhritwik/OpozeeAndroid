@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
@@ -83,7 +84,7 @@ import static com.opozee.activities.EmptyFragmentActivity.EMPTY_FRAGMENT_ACTIVIT
 import static com.opozee.fragments.ProfileFragment.PROFILE_FRAGMENG_ARGUEMENT_USER_ID;
 import static com.opozee.fragments.TagSeachFragment.SEARCH_TAG_ARGUMENT;
 
-public class QuestionDetailActivity extends  com.opozee.emojilike.ActivityWithEmoji implements QuestionDetailView, BookMarkView, LikeDislikeView, ProfileView {
+public class QuestionDetailActivity extends  com.opozee.newemojilikegif.ActivityWithEmoji implements QuestionDetailView, BookMarkView, LikeDislikeView, ProfileView {
 
     @BindView(R.id.question_details_opinion_recycle_view)
     RecyclerView recyclerView;
@@ -401,15 +402,31 @@ public class QuestionDetailActivity extends  com.opozee.emojilike.ActivityWithEm
 
     //like dislike opinion
 //    LikeDislikeOpinion
-    public void likeDislike(int commentStatus, int opinionId,int reactiontype) {
+    public void likeDislike(int commentStatus, int opinionId,int reactiontype,List<QuestionDetailResponse.Comment> commentList1) {
 //        if(commentList.size()>0) {
 //            for (int i = 0; i < commentList.size(); i++) {
 //                commentList.get(i).setIschecked(false);
 //                if(ticketNumber!=null) {
 //                    ticketNumber.notifyDataSetChanged();
+//
 //                }
 //            }
 //        }
+//        ticketNumber.notifyItemChanged(0);
+//
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    if(commentList1.size()>0&&ticketNumber!=null&&recyclerView!=null) {
+////                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(QuestionDetailActivity.this, LinearLayoutManager.VERTICAL, false);
+////                        ticketNumber = new OpinionAdapter(QuestionDetailActivity.this, commentList1);
+////                        recyclerView.setLayoutManager(linearLayoutManager);
+////                        recyclerView.setAdapter(ticketNumber);
+//
+//                    }
+//                }
+//            }, 500);
+//        ticketNumber.notifyDataSetChanged();
 
         if (Utils.isNetworkAvail(QuestionDetailActivity.this)) {
             Log.d("Data_Log",""+commentStatus);
@@ -496,6 +513,7 @@ public class QuestionDetailActivity extends  com.opozee.emojilike.ActivityWithEm
     public void onSuccess(LikeDislikeResponse response) {
         //dont Update the data (If uppdate data uncomment following line)
 //        getDetailWithoutShowingLoading();
+      getDetail();
         //Do nothing
     }
 

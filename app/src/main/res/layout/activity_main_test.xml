@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="ro.andreidobrescu.sample.MainActivity">
+    android:fitsSystemWindows="true">
 
     <ImageView
         android:layout_width="30dp"
@@ -26,9 +25,9 @@
         android:layout_alignTop="@+id/likeButton"
         android:layout_marginTop="5dp"/>
 
-    <ro.andreidobrescu.emojilike.EmojiLikeView
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="110dp"
+    <com.opozee.newemojilikegif.EmojiLikeView
+        android:layout_width="@dimen/_140sdp"
+        android:layout_height="wrap_content"
         android:id="@+id/emojiView"
         android:layout_alignBottom="@+id/likeButton"
         android:layout_marginBottom="10dp"/>

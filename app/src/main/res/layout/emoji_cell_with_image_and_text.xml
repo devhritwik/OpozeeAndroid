@@ -7,21 +7,22 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/default_emoji_description_label_height"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/default_emoji_description_label_bottom_margin"
         tools:text="Test"
         android:gravity="center_vertical"
-        android:textColor="@color/black_color"
-        android:textSize="16sp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:textColor="@color/white_color"
+        android:textSize="@dimen/_10sdp"
+        android:padding="@dimen/_2sdp"
         android:lines="1"
+        android:background="@drawable/background_likepopup"
         android:id="@+id/descriptionLabel"/>
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical"
         android:id="@+id/imageView"/>
 
 </LinearLayout>
