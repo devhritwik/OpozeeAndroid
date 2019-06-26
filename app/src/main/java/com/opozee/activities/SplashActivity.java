@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.opozee.CheckPermissionsRefine;
 import com.opozee.OpozeeActivity;
 import com.opozee.R;
 import com.opozee.utils.AppGlobal;
@@ -121,7 +122,10 @@ public class SplashActivity extends OpozeeActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+//                Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+//                startActivity(i);
+//                finish();
+                Intent i = new Intent(SplashActivity.this, CheckPermissionsRefine.class);
                 startActivity(i);
                 finish();
             }

@@ -41,11 +41,11 @@ import java.util.TreeMap;
 public class Utils {
 
     private static final int SECOND_MILLIS = 1000;
-    private static final int MINUTE_MILLIS = 60 * SECOND_MILLIS;
-    private static final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
-    private static final int DAY_MILLIS = 24 * HOUR_MILLIS;
-    private static final int MONTH_MILLS = 30 * DAY_MILLIS;
-    private static final int YEAR_MILLS = 365 * MONTH_MILLS;
+    private static final long MINUTE_MILLIS = 60 * SECOND_MILLIS;
+    private static final long HOUR_MILLIS = 60 * MINUTE_MILLIS;
+    private static final long DAY_MILLIS = 24 * HOUR_MILLIS;
+    private static final long MONTH_MILLS = 30 * DAY_MILLIS;
+    private static final long YEAR_MILLS = 365 * MONTH_MILLS;
 
 
     public static final String MIXPANEL_TOKEN = "414c39b7ab192ac62a36f71bfe023d32";
@@ -432,6 +432,7 @@ public class Utils {
                 timeago = "2 months ago";
             } else if ((diff / DAY_MILLIS) > 60 && (diff / DAY_MILLIS) <= 365) {
                 long monthago = (diff / MONTH_MILLS);
+                Log.d("CurrentUTC=","months="+monthago);
                 timeago = monthago + " months ago";
             } else if ((diff / DAY_MILLIS) > 365) {
                 long yearsago = (diff / YEAR_MILLS);

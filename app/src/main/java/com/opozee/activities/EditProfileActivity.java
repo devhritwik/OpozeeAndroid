@@ -1,10 +1,15 @@
 package com.opozee.activities;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -32,6 +37,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,6 +68,7 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
     private ImageLoaderFromDevice imageLoader;
     private File mSelectedImageFile;
     EditText et_username;
+    private static final int PERMISSION_REQUEST_CODE = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +78,7 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
         //add the whole view to the butterknife
         ButterKnife.bind(this);
 
-        et_username=findViewById(R.id.et_edit_username);
+        et_username = findViewById(R.id.et_edit_username);
         //initialize the imageLoader class to make interface for getting the profile pic using camera or gallery
         imageLoader = new ImageLoaderFromDevice(EditProfileActivity.this);
 
@@ -140,10 +147,10 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
 
     @OnClick(R.id.btnSave)
     public void onSaveClick() {
-        if(et_username!=null){
-            if(et_username.getText().toString().trim().length()>0){
+        if (et_username != null) {
+            if (et_username.getText().toString().trim().length() > 0) {
                 editProfile();
-            }else{
+            } else {
                 et_username.setError("Username is empty");
                 et_username.requestFocus();
             }
@@ -154,7 +161,13 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
     @OnClick(R.id.iv_edit)
     public void onEditClick() {
 //            permissionDialog();
-        imageLoader.selectImage();
+        if (checkPermission()) {
+            imageLoader.selectImage();
+                } else {
+
+                    requestPermission();
+                }
+
     }
 
     @Override
@@ -277,12 +290,15 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
             sdIconStorageDir.mkdirs();
         }
         try {
-            filepath = sdIconStorageDir.toString() + File.separator + filename;
+//            filepath = sdIconStorageDir.toString() + File.separator + filename;
+            Date now = new Date();
+            android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
+            filepath =  Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg";
             FileOutputStream fileOutputStream = new FileOutputStream(filepath);
             BufferedOutputStream bos = new BufferedOutputStream(fileOutputStream);
             //Toast.makeText(m_cont, "Image Saved at----" + filePath, Toast.LENGTH_LONG).show();
             // choose another format if PNG doesn't suit you
-            imageData.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+            imageData.compress(Bitmap.CompressFormat.PNG, 100, bos);
             bos.flush();
             bos.close();
 
@@ -316,6 +332,65 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
         params.setProfilePic(mSelectedImageFile);
         params.setUser_id(Utils.getLoggedInUserId(EditProfileActivity.this));
         return params;
+    }
+
+
+    private boolean checkPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            return false;
+        }
+        return true;
+    }
+
+    private void requestPermission() {
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST_CODE);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getApplicationContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
+
+                    // main logic
+                } else {
+                    Toast.makeText(getApplicationContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                            showMessageOKCancel("You need to allow access permissions",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                requestPermission();
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+
+                }
+                break;
+        }
+
+    }
+
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(EditProfileActivity.this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
     }
 
 }
