@@ -44,9 +44,11 @@ public class Utils {
     private static final int MINUTE_MILLIS = 60 * SECOND_MILLIS;
     private static final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
     private static final int DAY_MILLIS = 24 * HOUR_MILLIS;
+    private static final int MONTH_MILLS = 30 * DAY_MILLIS;
+    private static final int YEAR_MILLS = 365 * MONTH_MILLS;
 
 
-    public static final String MIXPANEL_TOKEN = "414c39b7ab192ac62a36f71bfe023d32" ; 
+    public static final String MIXPANEL_TOKEN = "414c39b7ab192ac62a36f71bfe023d32";
     public static final String DEFAULT_PROFILE_PIC_URL = "https://opozee.com:81/Content/Upload/ProfileImage/oposee-profile.png";
 
     public static ProgressDialog mProgressDialog;
@@ -54,6 +56,7 @@ public class Utils {
 
     /* formatting the likes counts and dislike counts*/
     private static final NavigableMap<Long, String> suffixes = new TreeMap<>();
+
     static {
         suffixes.put(1_000L, "k");
         suffixes.put(1_000_000L, "M");
@@ -83,6 +86,7 @@ public class Utils {
     public static String getLoggedInUserId(Context context) {
         return AppSP.getInstance(context).readInt(AppGlobal.USER_ID) + "";
     }
+
     public static String getsortedorder(Context context) {
         return AppSP.getInstance(context).readInt(AppGlobal.SORT_ORDER) + "";
     }
@@ -93,7 +97,7 @@ public class Utils {
         return price;
     }
 
-    public static boolean isEmpty(String string){
+    public static boolean isEmpty(String string) {
         return string == null || string.length() == 0;
     }
 
@@ -133,12 +137,12 @@ public class Utils {
 
     //animations for the buttons
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public static void circularReveal(final Button button, final ProgressBar pBar)
-    {
-        int x = button.getRight()/2;
-        int y = button.getBottom()/2;
+    public static void circularReveal(final Button button, final ProgressBar pBar) {
+        int x = button.getRight() / 2;
+        int y = button.getBottom() / 2;
 
-        int startRadius = (int) Math.hypot(button.getWidth()/2, button.getHeight()/2);;
+        int startRadius = (int) Math.hypot(button.getWidth() / 2, button.getHeight() / 2);
+        ;
         int endRadius = 0;
 
         Animator anim = ViewAnimationUtils.createCircularReveal(button, x, y, startRadius, endRadius);
@@ -185,26 +189,26 @@ public class Utils {
         sp.savePreferences(AppGlobal.Photo, userData.getImageURL());
     }
 
-    public static void saveemailuserdata(Context context,LoginEmail loginEmail){
+    public static void saveemailuserdata(Context context, LoginEmail loginEmail) {
         AppSP sp = AppSP.getInstance(context);
 
         sp.savePreferences(AppGlobal.USER_ID, Integer.parseInt(loginEmail.getData().getId()));
         sp.savePreferences(AppGlobal.Email, loginEmail.getData().getEmail());
         sp.savePreferences(AppGlobal.UserName, loginEmail.getData().getUserName());
-        sp.savePreferences(AppGlobal.FirstName,"");
+        sp.savePreferences(AppGlobal.FirstName, "");
         sp.savePreferences(AppGlobal.LastName, "");
         sp.savePreferences(AppGlobal.IS_LOGGED_IN, true);
 //        sp.savePreferences(AppGlobal.UserRole, userProfile.getResponse().getUserData().getUserRole());
         sp.savePreferences(AppGlobal.Photo, loginEmail.getData().getImageURL());
     }
-    public static void savesortedata(Context context,int sort){
-        AppSP appSP=AppSP.getInstance(context);
-        appSP.savePreferences(AppGlobal.SORT_ORDER,sort);
+
+    public static void savesortedata(Context context, int sort) {
+        AppSP appSP = AppSP.getInstance(context);
+        appSP.savePreferences(AppGlobal.SORT_ORDER, sort);
     }
 
     //for customToast
-    public static void showCustomToast(Activity activity, String msg)
-    {
+    public static void showCustomToast(Activity activity, String msg) {
         Toast.makeText(activity, msg, Toast.LENGTH_LONG).show();
 //        Toast toast = new Toast(activity);
 //        View v = activity.getLayoutInflater().inflate(R.layout.custom_toast, null);
@@ -242,6 +246,7 @@ public class Utils {
         mProgressDialog.setCancelable(false);
         mProgressDialog.show();
     }
+
     public static void dismissProgress() {
         try {
             if (mProgressDialog != null) {
@@ -250,7 +255,7 @@ public class Utils {
                     mProgressDialog = null;
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
@@ -308,11 +313,10 @@ public class Utils {
 
     //animations for the buttons
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public static void unReveal(final Button button, final ProgressBar pBar)
-    {
+    public static void unReveal(final Button button, final ProgressBar pBar) {
         pBar.setVisibility(View.GONE);
-        int x = button.getRight()/2;
-        int y = button.getBottom()/2;
+        int x = button.getRight() / 2;
+        int y = button.getBottom() / 2;
 
         int startRadius = 0;
         int endRadius = (int) Math.hypot(button.getWidth(), button.getHeight());
@@ -320,8 +324,6 @@ public class Utils {
         Animator anim = ViewAnimationUtils.createCircularReveal(button, x, y, startRadius, endRadius);
         anim.setDuration(1000);
 //        main_relative.setVisibility(View.VISIBLE);
-
-
 
 
         anim.addListener(new Animator.AnimatorListener() {
@@ -365,48 +367,118 @@ public class Utils {
 
         // TODO: localize
         final long diff = now - time;
+        Log.d("CurrentUTC=", "" + diff);
+        Log.d("CurrentUTC=", "" + time);
+        Log.d("CurrentUTC=", "" + now);
         if (diff < MINUTE_MILLIS) {
-            return "just now";
-        }
-        else if (diff < 2 * MINUTE_MILLIS) {
+            return "a few seconds ago";
+        } else if (diff < 2 * MINUTE_MILLIS) {
             return "a minute ago";
         } else if (diff < 50 * MINUTE_MILLIS) {
             return diff / MINUTE_MILLIS + " minutes ago";
         } else if (diff < 90 * MINUTE_MILLIS) {
             return "an hour ago";
         } else if (diff < 24 * HOUR_MILLIS) {
-            return diff / HOUR_MILLIS + " hours ago";
+            long hours = 0;
+            String timeago = "";
+            double difference = (double) diff / HOUR_MILLIS;
+            long differenceint = diff / HOUR_MILLIS;
+            double finaldata = differenceint - differenceint;
+            if (finaldata > 0.5) {
+                hours = (diff / HOUR_MILLIS) + 1;
+            } else {
+                hours = (diff / HOUR_MILLIS);
+            }
+
+            if (hours <= 22) {
+                timeago = hours + " hours ago";
+            } else if ((diff / HOUR_MILLIS) > 22 && (diff / HOUR_MILLIS) <= 36) {
+                timeago = "a day ago";
+            }
+
+            return timeago;
         } else if (diff < 48 * HOUR_MILLIS) {
-            return "yesterday";
+            long hours = 0;
+            String timeago = "";
+            double difference = (double) diff / HOUR_MILLIS;
+            if (difference >= 22 && difference <= 36) {
+                timeago = "a day ago";
+            }else if(difference>36&&difference<=48){
+                timeago = "2 day ago";
+            }
+            return timeago;
         } else {
-            return diff / DAY_MILLIS + " days ago";
+            long hours = 0;
+            String timeago = "";
+            double difference = (double) diff / HOUR_MILLIS;
+            if (difference >= 22 && difference <= 36) {
+                timeago = "a day ago";
+            } else if (difference >= 36 && difference <= 48) {
+                timeago = "2 day ago";
+            } else if ((diff / DAY_MILLIS) <= 25) {
+//                long finaldatas=(long) (difference/DAY_MILLIS);
+                double finaldays = (double) diff / DAY_MILLIS;
+                long finaldaya = diff / DAY_MILLIS;
+                double differencedata=finaldays=finaldaya;
+                if(differencedata>0.5){
+                    timeago=diff/DAY_MILLIS +1+"days ago";
+                }else{
+                    timeago = diff / DAY_MILLIS + " days ago";
+                }
+
+            } else if ((diff / DAY_MILLIS) > 25 && (diff / DAY_MILLIS) <= 45) {
+                timeago = "a month ago";
+            } else if ((diff / DAY_MILLIS) > 45 && (diff / DAY_MILLIS) <= 60) {
+                timeago = "2 months ago";
+            } else if ((diff / DAY_MILLIS) > 60 && (diff / DAY_MILLIS) <= 365) {
+                long monthago = (diff / MONTH_MILLS);
+                timeago = monthago + " months ago";
+            } else if ((diff / DAY_MILLIS) > 365) {
+                long yearsago = (diff / YEAR_MILLS);
+                timeago = yearsago + " years ago";
+            }
+//            return diff / DAY_MILLIS + " days ago";
+            return timeago;
         }
     }
 
+//
+//    0 - 45 seconds	a few seconds ago
+//45 - 90 seconds	a minute ago
+//90 seconds - 45 minutes	X minutes ago
+//45 - 90 minutes	an hour ago
+//90 minutes - 22 hours	X hours ago
+//22 - 36 hours	a day ago
+//36 hours - 25 days	X days ago
+//25 - 45 days	a month ago
+//45 - 345 days	X months ago
+//345 - 545 days (1.5 years)	a year ago
+//546 days+	X years ago
+
     /**
      * change the server time to current time zone
+     *
      * @param strTime
      * @return the system time
      */
-    public static String getSystemLocalTime(String strTime)
-    {
+    public static String getSystemLocalTime(String strTime) {
 //        2019-02-28 02:02:09.56
         long timeInMillisec = 0;
         Date d3 = null;
         TimeZone tz = TimeZone.getTimeZone("EST");
         System.out.println(tz.getDisplayName());
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         format.setTimeZone(tz);
         Date d1 = null;
 
         try {
-            Log.d("DATE","date before parse "+strTime);
+            Log.d("DATE", "date before parse " + strTime);
             d1 = format.parse(strTime);
-            Log.e("PARSED DATE",""+d1);
-            SimpleDateFormat format2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Log.e("PARSED DATE", "" + d1);
+            SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             givenDate = format2.format(d1);
 
-            Log.e("Date Given","d1   >>>   "+givenDate);
+            Log.e("Date Given", "d1   >>>   " + givenDate);
 
         } catch (Exception e) {
             Log.e("exception", e.getMessage());
@@ -415,7 +487,7 @@ public class Utils {
 
     }
 
-    public static long convertdatestring(String strtime){
+    public static long convertdatestring(String strtime) {
 //        String givenDateString = "Tue Apr 23 16:08:28 GMT+05:30 2013";
 //        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -423,34 +495,34 @@ public class Utils {
             Date mDate = sdf.parse(strtime);
             long timeInMilliseconds = mDate.getTime();
             System.out.println("Date in milli :: " + timeInMilliseconds);
-        return timeInMilliseconds;
+            return timeInMilliseconds;
         } catch (ParseException e) {
-            Log.d("TimeFormat_Log","Exception="+e.toString());
-          return 0;
+            Log.d("TimeFormat_Log", "Exception=" + e.toString());
+            return 0;
         }
     }
-    public static String convertESTToLocalTime(String strTime)
-    {
+
+    public static String convertESTToLocalTime(String strTime) {
 
 
         long timeInMillisec = 0;
         Date d3 = null;
         TimeZone tz = TimeZone.getTimeZone("EST");
         System.out.println(tz.getDisplayName());
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         format.setTimeZone(tz);
-        Log.d("TimeFormat_Log","Method="+tz);
+        Log.d("TimeFormat_Log", "Method=" + tz);
         Date d1 = null;
 
         try {
-            Log.d("DATE","date before parse "+strTime);
+            Log.d("DATE", "date before parse " + strTime);
             d1 = format.parse(strTime);
-            Log.e("PARSED DATE",""+d1);
+            Log.e("PARSED DATE", "" + d1);
 //            Mar 29 '13 at 16:44
-            SimpleDateFormat format2=new SimpleDateFormat("dd MMM, yy-HH:mm");
+            SimpleDateFormat format2 = new SimpleDateFormat("dd MMM, yy-HH:mm");
             givenDate = format2.format(d1);
 
-            Log.e("Date Given","d1   >>>   "+givenDate);
+            Log.e("Date Given", "d1   >>>   " + givenDate);
             return givenDate;
         } catch (Exception e) {
             Log.e("exception", e.getMessage());
@@ -460,17 +532,16 @@ public class Utils {
 
     }
 
-    public static Date getUTCLocalTime(String strTime)
-    {
+    public static Date getUTCLocalTime(String strTime) {
 
         long timeInMillisec = 0;
         Date d3 = null;
         TimeZone tz = TimeZone.getTimeZone("UTC");
         System.out.println(tz.getDisplayName());
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        Date d4  = null;
-        SimpleDateFormat zoneformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date d4 = null;
+        SimpleDateFormat zoneformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         zoneformat.setTimeZone(tz);
 //        Log.e("WITHOUT FORMAT DATE> ",""+strTime);
         Date d1 = null;
@@ -478,19 +549,19 @@ public class Utils {
 //        Log.e("Current Date >> ","d2   >>>  "+d2);
 
         try {
-            Log.d("DATE","date before parse "+strTime);
+            Log.d("DATE", "date before parse " + strTime);
             d1 = format.parse(strTime);
-            Log.e("PARSED DATE",""+d1);
-            d3 = new Date(d1.getTime()+ TimeZone.getDefault().getOffset(d2.getTime()));
-            Log.e("d3 >>> "," "+d3);
+            Log.d("PARSED DATE", "" + d1);
+            d3 = new Date(d1.getTime() + TimeZone.getDefault().getOffset(d2.getTime()));
+            Log.e("d3 >>> ", " " + d3);
             String[] dateArray = d3.toString().split(" ");
-            String dateStr = dateArray[0] +" " + dateArray[1] + " " + dateArray[2] + " " + dateArray[3] + " " + dateArray[5];
+            String dateStr = dateArray[0] + " " + dateArray[1] + " " + dateArray[2] + " " + dateArray[3] + " " + dateArray[5];
 //            "Tue Jul 26 12:23:32 GMT+05:30 2016
             SimpleDateFormat format1 = new SimpleDateFormat("EEE MMM dd HH:mm:ss yyyy");
 //            Date d3 = format.parse(zoneformat.format(d2));
             d4 = format1.parse(dateStr);
-            Log.e("d4 >>> ",""+d4);
-            SimpleDateFormat format2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Log.e("d4 >>> ", "" + d4);
+            SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String givenDate = format2.format(d4);
 
 //            Log.e("Date Given","d1   >>>   "+givenDate);
@@ -504,7 +575,7 @@ public class Utils {
 
     }
 
-    public static String getlocaltime(String dates){
+    public static String getlocaltime(String dates) {
 //        String dateStr = "Jul 16, 2013 12:08:59 AM";
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
         df.setTimeZone(TimeZone.getTimeZone("UTC"));

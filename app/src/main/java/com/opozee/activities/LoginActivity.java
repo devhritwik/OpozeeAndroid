@@ -175,7 +175,7 @@ public class LoginActivity extends OpozeeActivity implements GoogleApiClient.OnC
         }
         //get device id for notification
         checkDeviceID();
-
+        Utils.savesortedata(LoginActivity.this, 0);
     }
 
     private void checkDeviceID() {
