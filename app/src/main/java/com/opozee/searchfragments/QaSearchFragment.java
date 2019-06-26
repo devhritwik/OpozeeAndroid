@@ -60,8 +60,7 @@ public class QaSearchFragment extends Fragment implements PostedQuestionsView {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, rootView);
-        Log.e("onCreateView", "onCreateView");
-
+        Log.d("TESTFRAGMENT", "onCreateView4");
         //set scroll listener for fab visibility
         setScrollListener();
 //        recyclerView.clearOnScrollListeners();

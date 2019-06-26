@@ -180,6 +180,7 @@ public class HomeNewFragment extends Fragment {
            adapter.addFragment(new TestSearchFragment(), getTagsModelist.get(5).getHashtag());
 //       }
        viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(6);
 //        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tab_layout));
 //        onTabSelectedListener(viewPager);
 

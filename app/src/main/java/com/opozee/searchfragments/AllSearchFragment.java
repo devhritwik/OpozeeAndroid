@@ -62,7 +62,7 @@ public class AllSearchFragment extends Fragment implements PostedQuestionsView {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, rootView);
-        Log.e("onCreateView", "onCreateView");
+        Log.d("TESTFRAGMENT", "onCreateView1");
 
         //set scroll listener for fab visibility
         setScrollListener();
@@ -76,6 +76,7 @@ public class AllSearchFragment extends Fragment implements PostedQuestionsView {
         if(mAdapter != null)
             mAdapter.notifyDataSetChanged();
         //get all the questions
+
         getQuestions();
         return rootView;
     }

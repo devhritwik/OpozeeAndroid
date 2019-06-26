@@ -604,14 +604,27 @@ public class QuestionDetailActivity extends  com.opozee.newemojilikegif.Activity
 
             mTagsContainer.removeAllViews();
             String tagString = response.getResponse().getAllOpinion().getPostQuestionDetail().getHashTags();
-            tagString = tagString.replace(",", "");
-            String[] tags = tagString.split("#");
-            for (String tag : tags) {
-                View currTagView = generateTagView(tag);
-                if (currTagView != null)
-                    mTagsContainer.addView(currTagView);
+            Log.d("HASHTAG=",tagString);
+//            if(tagString.contains("#")) {
+//                tagString = tagString.replace(",", "");
+                String[] tags = tagString.split("#");
+                for (String tag : tags) {
+                    String[] tagdata=tag.split(",");
+                    for (int k=0;k<tagdata.length;k++){
+                        View currTagView = generateTagView(tagdata[k]);
+                    if (currTagView != null) {
+                        mTagsContainer.addView(currTagView);
+                    }
+                }
+//            }else{
+//                String[] tags = tagString.split(",");
+//                for (String tag : tags) {
+//
+//                    View currTagView = generateTagView(tag);
+//                    if (currTagView != null)
+//                        mTagsContainer.addView(currTagView);
+//                }
             }
-
 
             if (mIsBookmarked) {
                 iv_favourite.setImageResource(R.drawable.bookmark_icon_filled);
