@@ -87,6 +87,11 @@ public class Utils {
         return AppSP.getInstance(context).readInt(AppGlobal.USER_ID) + "";
     }
 
+    public static String idprofileget(Context context) {
+        return AppSP.getInstance(context).readInt(AppGlobal.IDPROFILEGET) + "";
+    }
+
+
     public static String getsortedorder(Context context) {
         return AppSP.getInstance(context).readInt(AppGlobal.SORT_ORDER) + "";
     }

@@ -81,7 +81,7 @@ import ro.andreidobrescu.emojilike.ActivityWithEmoji;
 import ro.andreidobrescu.emojilike.EmojiLikeTouchDetector;
 
 import static com.opozee.activities.EmptyFragmentActivity.EMPTY_FRAGMENT_ACTIVITY_TITLE_ARGUMENT;
-import static com.opozee.fragments.ProfileFragment.PROFILE_FRAGMENG_ARGUEMENT_USER_ID;
+import static com.opozee.fragments.Profile_New_Fragment.PROFILE_FRAGMENG_ARGUEMENT_USER_ID;
 import static com.opozee.fragments.TagSeachFragment.SEARCH_TAG_ARGUMENT;
 
 public class QuestionDetailActivity extends  com.opozee.newemojilikegif.ActivityWithEmoji implements QuestionDetailView, BookMarkView, LikeDislikeView, ProfileView {

@@ -242,6 +242,7 @@ if(percentage>0){
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
+        Log.d(TAG,"Size="+usersList.size());
         return usersList.size();
     }
 }

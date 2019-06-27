@@ -57,7 +57,7 @@ import com.opozee.newemojilikegif.IActivityWithEmoji;
 import com.opozee.newemojilikegif.OnEmojiSelectedListener;
 
 
-import static com.opozee.fragments.ProfileFragment.PROFILE_FRAGMENG_ARGUEMENT_USER_ID;
+import static com.opozee.fragments.Profile_New_Fragment.PROFILE_FRAGMENG_ARGUEMENT_USER_ID;
 
 public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHolder> {
 

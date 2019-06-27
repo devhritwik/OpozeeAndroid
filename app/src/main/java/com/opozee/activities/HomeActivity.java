@@ -35,7 +35,8 @@ import com.opozee.fragments.HomeFragment;
 import com.opozee.fragments.HomeNewFragment;
 import com.opozee.fragments.NotificationsFragment;
 import com.opozee.fragments.PostQuestionFragment;
-import com.opozee.fragments.ProfileFragment;
+import com.opozee.fragments.Profile_New_Fragment;
+import com.opozee.fragments.Profile_New_Fragment;
 import com.opozee.fragments.SearchFragment;
 import com.opozee.params.ProfileParams;
 import com.opozee.pojo.ProfileResponse;
@@ -57,7 +58,7 @@ import ro.andreidobrescu.emojilike.EmojiLikeTouchDetector;
 import ro.andreidobrescu.emojilike.IActivityWithEmoji;
 import ro.andreidobrescu.emojilike.OnEmojiSelectedListener;
 
-import static com.opozee.fragments.ProfileFragment.PROFILE_FRAGMENG_ARGUEMENT_USER_ID;
+import static com.opozee.fragments.Profile_New_Fragment.PROFILE_FRAGMENG_ARGUEMENT_USER_ID;
 
 public class HomeActivity extends OpozeeActivity implements ProfileView {
 
@@ -154,7 +155,8 @@ public class HomeActivity extends OpozeeActivity implements ProfileView {
                 //show Fragment
                 Bundle bundle = new Bundle();
                 bundle.putInt(PROFILE_FRAGMENG_ARGUEMENT_USER_ID, Integer.valueOf(Utils.getLoggedInUserId(this)));
-                loadFragment(new ProfileFragment(), bundle);
+//                loadFragment(new ProfileFragment(), bundle);
+                loadFragment(new Profile_New_Fragment(), bundle);
                 QuestionnaireApplication.getMixpanelApi().track("Profile Fragment on HomeActivity");
 
                 break;
@@ -364,7 +366,7 @@ public class HomeActivity extends OpozeeActivity implements ProfileView {
             Log.d(TAG, "last_frag");
         } else {
 
-            if (fr instanceof PostQuestionFragment || fr instanceof NotificationsFragment || fr instanceof ProfileFragment
+            if (fr instanceof PostQuestionFragment || fr instanceof NotificationsFragment || fr instanceof Profile_New_Fragment
                     || fr instanceof SearchFragment || fr instanceof FavouriteFragment) {
                 Log.e("onBackPressed", " ONBACK Pressed");
                 Log.d(TAG, "last_frag" + "fr");
@@ -403,7 +405,7 @@ public class HomeActivity extends OpozeeActivity implements ProfileView {
             startActivity(getIntent());
         } else {
 
-            if (fr instanceof PostQuestionFragment || fr instanceof NotificationsFragment || fr instanceof ProfileFragment
+            if (fr instanceof PostQuestionFragment || fr instanceof NotificationsFragment || fr instanceof Profile_New_Fragment
                     || fr instanceof SearchFragment || fr instanceof FavouriteFragment) {
                 Log.e("onBackPressed", " ONBACK Pressed");
 //                getLastFragment(AppGlobal.HOMEFRAG);

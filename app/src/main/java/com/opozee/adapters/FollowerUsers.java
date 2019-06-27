@@ -1,6 +1,8 @@
 package com.opozee.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
@@ -11,21 +13,32 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.opozee.R;
-import com.opozee.fragments.ProfileFragment;
+import com.opozee.activities.ProfileActivity;
+import com.opozee.application.QuestionnaireApplication;
+//import com.opozee.fragments.ProfileFragment;
+import com.opozee.fragments.Profile_New_Fragment;
 import com.opozee.model.FollowesUsers;
+import com.opozee.pojo.follower_pojo.FollowerData;
+import com.opozee.profiletabs.Followers;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.opozee.fragments.Profile_New_Fragment.PROFILE_FRAGMENG_ARGUEMENT_USER_ID;
+
 public class FollowerUsers extends RecyclerView.Adapter<FollowerUsers.MyViewHolder> {
-    ProfileFragment context;
+    public static Context context;
     ArrayList<FollowesUsers> followerUsersArrayList;
     String loggedInUserId;
 
-    public FollowerUsers(ProfileFragment activity, ArrayList<FollowesUsers> followerslist, String loggedInUserId) {
+    public FollowerUsers(Context activity, ArrayList<FollowesUsers> followerslist, String loggedInUserId) {
     this.followerUsersArrayList=followerslist;
     this.context=activity;
     this.loggedInUserId=loggedInUserId;
@@ -72,10 +85,10 @@ public class FollowerUsers extends RecyclerView.Adapter<FollowerUsers.MyViewHold
                 public void onClick(View view) {
                     if(followingUser.getIsfollowback().equals("true")){
 //                        myViewHolder.btn_status.setText("Unfollow");
-                        ((ProfileFragment) context).unfollowuser(followingUser.getOwneruserid(),"false", followingUser.getUserid());
+                        Followers.unfollowcall(followingUser.getOwneruserid(),"false", followingUser.getUserid());
                     }else{
 //                        myViewHolder.btn_status.setText("Follow");
-                        ((ProfileFragment) context).followuser(followingUser.getOwneruserid(),"true", followingUser.getUserid());
+                        Followers.followfacecall(followingUser.getOwneruserid(),"true", followingUser.getUserid());
                     }
 
                 }
@@ -84,14 +97,14 @@ public class FollowerUsers extends RecyclerView.Adapter<FollowerUsers.MyViewHold
             myViewHolder.tv_name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    Map<String, String> map = new HashMap<>();
-//                    map.put("ProfileOpened", followingUser.getUsername());
-//                    QuestionnaireApplication.getMixpanelApi().track("Profile Opened", new JSONObject(map));
-//                    int userId = Integer.parseInt(followingUser.getUserid());
-//                    Intent intent = new Intent(Followingadapter.this.context,ProfileActivity.class);
-//                    intent.putExtra(PROFILE_FRAGMENG_ARGUEMENT_USER_ID, userId);
-//                    Followingadapter.this.context.startActivity(intent);
-                    ((ProfileFragment) context).relodfragment(Integer.parseInt(followingUser.getUserid()));
+                    Map<String, String> map = new HashMap<>();
+                    map.put("ProfileOpened", followingUser.getUsername());
+                    QuestionnaireApplication.getMixpanelApi().track("Profile Opened", new JSONObject(map));
+                    int userId = Integer.parseInt(followingUser.getUserid());
+                    Intent intent = new Intent(context, ProfileActivity.class);
+                    intent.putExtra(PROFILE_FRAGMENG_ARGUEMENT_USER_ID, userId);
+                    context.startActivity(intent);
+//                    ((Activity) context).relodfragment(Integer.parseInt(followingUser.getUserid()));
                 }
             });
 

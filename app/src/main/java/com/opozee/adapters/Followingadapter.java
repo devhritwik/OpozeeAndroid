@@ -14,8 +14,9 @@ import android.widget.TextView;
 import com.opozee.R;
 import com.opozee.activities.ProfileActivity;
 import com.opozee.application.QuestionnaireApplication;
-import com.opozee.fragments.ProfileFragment;
+//import com.opozee.fragments.ProfileFragment;
 import com.opozee.model.FollowingUser;
+import com.opozee.profiletabs.Followings;
 import com.opozee.utils.Utils;
 import com.squareup.picasso.Picasso;
 
@@ -28,17 +29,17 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.opozee.fragments.ProfileFragment.PROFILE_FRAGMENG_ARGUEMENT_USER_ID;
+import static com.opozee.fragments.Profile_New_Fragment.PROFILE_FRAGMENG_ARGUEMENT_USER_ID;
 
 
 public class Followingadapter extends RecyclerView.Adapter<Followingadapter.MyViewHoder> {
 
-    public ProfileFragment context;
+    public Context context;
     ArrayList<FollowingUser> followingUserArrayList;
     String loggedInUserId;
 
 
-    public Followingadapter(ProfileFragment activity, ArrayList<FollowingUser> followingUserList, String loggedInUserId) {
+    public Followingadapter(Context activity, ArrayList<FollowingUser> followingUserList, String loggedInUserId) {
         this.context = activity;
         this.followingUserArrayList = followingUserList;
         this.loggedInUserId=loggedInUserId;
@@ -75,7 +76,7 @@ public class Followingadapter extends RecyclerView.Adapter<Followingadapter.MyVi
             myViewHoder.btn_status.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ((ProfileFragment) context).unfollowuser(followingUser.getOwneruserid(),"false", followingUser.getUserid());
+                    Followings.unfollowcall(followingUser.getOwneruserid(),"false", followingUser.getUserid());
 
                 }
             });
@@ -83,14 +84,15 @@ public class Followingadapter extends RecyclerView.Adapter<Followingadapter.MyVi
             myViewHoder.tv_name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    Map<String, String> map = new HashMap<>();
-//                    map.put("ProfileOpened", followingUser.getUsername());
-//                    QuestionnaireApplication.getMixpanelApi().track("Profile Opened", new JSONObject(map));
-//                    int userId = Integer.parseInt(followingUser.getUserid());
-//                    Intent intent = new Intent(Followingadapter.this.context,ProfileActivity.class);
-//                    intent.putExtra(PROFILE_FRAGMENG_ARGUEMENT_USER_ID, userId);
-//                    Followingadapter.this.context.startActivity(intent);
-                    ((ProfileFragment) context).relodfragment(Integer.parseInt(followingUser.getUserid()));
+                    Map<String, String> map = new HashMap<>();
+                    map.put("ProfileOpened", followingUser.getUsername());
+                    QuestionnaireApplication.getMixpanelApi().track("Profile Opened", new JSONObject(map));
+                    int userId = Integer.parseInt(followingUser.getUserid());
+                    Intent intent = new Intent(Followingadapter.this.context,ProfileActivity.class);
+                    intent.putExtra(PROFILE_FRAGMENG_ARGUEMENT_USER_ID, userId);
+                    Followingadapter.this.context.startActivity(intent);
+                    context.startActivity(intent);
+//                    context.relodfragment(Integer.parseInt(followingUser.getUserid()));
                 }
             });
 

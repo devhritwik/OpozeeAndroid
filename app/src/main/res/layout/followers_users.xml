@@ -31,13 +31,14 @@
 
     <Button
         android:id="@+id/btn_followers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_30sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginRight="@dimen/_15sdp"
         android:textColor="@color/white_color"
+        android:textSize="@dimen/_10sdp"
         android:background="@drawable/follower_background_button"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -19,6 +19,7 @@ public class AppGlobal {
     public static final String Photo = "Photo";// String
     public static final String IS_LOGGED_IN = "IsLoggedIn";
     public static final String SORT_ORDER = "sort_order";
+    public static final String IDPROFILEGET = "id_profile_get";
 
     //Types of API calls
     public static final int TYPE_PROFILE_UPDATE = 2;
