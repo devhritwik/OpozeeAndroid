@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -49,6 +50,7 @@ import permission.auron.com.marshmallowpermissionhelper.PermissionUtils;
 
 public class EditProfileActivity extends ActivityManagePermission implements ProfileView {
 
+    private static final String TAG = "EditProfileActivity_LOG";
     @BindView(R.id.iv_user)
     CircleImageView iv_user;
     @BindView(R.id.iv_edit)
@@ -69,6 +71,12 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
     private File mSelectedImageFile;
     EditText et_username;
     private static final int PERMISSION_REQUEST_CODE = 200;
+    String[] storagePermissions = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA};
+    int count = 0;
+    boolean isSendToSettings = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,11 +170,12 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
     public void onEditClick() {
 //            permissionDialog();
         if (checkPermission()) {
+            count = 0;
             imageLoader.selectImage();
-                } else {
-
-                    requestPermission();
-                }
+        } else {
+            count = 0;
+            requestPermission();
+        }
 
     }
 
@@ -293,7 +302,7 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
 //            filepath = sdIconStorageDir.toString() + File.separator + filename;
             Date now = new Date();
             android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
-            filepath =  Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg";
+            filepath = Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg";
             FileOutputStream fileOutputStream = new FileOutputStream(filepath);
             BufferedOutputStream bos = new BufferedOutputStream(fileOutputStream);
             //Toast.makeText(m_cont, "Image Saved at----" + filePath, Toast.LENGTH_LONG).show();
@@ -303,10 +312,10 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
             bos.close();
 
         } catch (FileNotFoundException e) {
-            Log.w("TAG", "Error saving image file: " + e.getMessage());
+            Log.d("TAG", "Error saving image file: " + e.getMessage());
             return filepath;
         } catch (IOException e) {
-            Log.w("TAG", "Error saving image file: " + e.getMessage());
+            Log.d("TAG", "Error saving image file: " + e.getMessage());
             return filepath;
         }
         return filepath;
@@ -336,9 +345,11 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
 
 
     private boolean checkPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, storagePermissions[0]) != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this, storagePermissions[1]) != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this, storagePermissions[2]) != PackageManager.PERMISSION_GRANTED
+
+        ) {
             // Permission is not granted
             return false;
         }
@@ -347,42 +358,71 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
 
     private void requestPermission() {
 
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST_CODE);
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+//        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST_CODE);
+//        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+        Log.d(TAG, "CountValue" + " " + count);
+        if (count < 1) {
+            try {
+                if (ActivityCompat.checkSelfPermission(this, storagePermissions[0]) != PackageManager.PERMISSION_GRANTED
+                        || ActivityCompat.checkSelfPermission(this, storagePermissions[1]) != PackageManager.PERMISSION_GRANTED
+                        || ActivityCompat.checkSelfPermission(this, storagePermissions[2]) != PackageManager.PERMISSION_GRANTED
+
+                ) {
+                    ActivityCompat.requestPermissions(this, storagePermissions, PERMISSION_REQUEST_CODE);
+                    Log.d(TAG, "storagePermissions");
+                    count++;
+                    Log.d(TAG, "Count" + count);
+                } else {
+                    Log.d(TAG, "ACTIVITY");
+                    requestPermission();
+                }
+            } catch (Exception e) {
+                Log.d(TAG, e.getMessage());
+                e.printStackTrace();
+            }
+        } else {
+            Log.d(TAG, "DIALOG");
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setCancelable(false);
+            alert.setMessage("Permission required to  update your profile ");
+            alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+
+
+                }
+            });
+
+            alert.show();
+        }
 
 
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSION_REQUEST_CODE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getApplicationContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
-
-                    // main logic
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            //If permission is granted
+            if (grantResults.length > 0) {
+                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    requestPermission();
+                    return;
+                } else if (grantResults[1] != PackageManager.PERMISSION_GRANTED) {
+                    requestPermission();
+                    return;
+                } else if (grantResults[2] != PackageManager.PERMISSION_GRANTED) {
+                    requestPermission();
+                    return;
                 } else {
-                    Toast.makeText(getApplicationContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                            showMessageOKCancel("You need to allow access permissions",
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                                requestPermission();
-                                            }
-                                        }
-                                    });
-                        }
-                    }
-
+                    imageLoader.selectImage();
                 }
-                break;
+            } else {
+                requestPermission();
+            }
         }
-
     }
+
 
     private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
         new AlertDialog.Builder(EditProfileActivity.this)

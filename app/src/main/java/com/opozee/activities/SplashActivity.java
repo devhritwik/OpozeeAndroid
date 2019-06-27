@@ -122,12 +122,12 @@ public class SplashActivity extends OpozeeActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-//                Intent i = new Intent(SplashActivity.this, LoginActivity.class);
-//                startActivity(i);
-//                finish();
-                Intent i = new Intent(SplashActivity.this, CheckPermissionsRefine.class);
+                Intent i = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(i);
                 finish();
+//                Intent i = new Intent(SplashActivity.this, CheckPermissionsRefine.class);
+//                startActivity(i);
+//                finish();
             }
         }, 500);
     }
