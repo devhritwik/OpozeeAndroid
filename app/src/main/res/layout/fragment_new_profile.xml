@@ -226,7 +226,8 @@
                 android:background="@color/white_color"
                 app:tabTextColor="@android:color/black"
                 app:tabBackground="@color/white_color"
-                app:tabMode="fixed"
+
+                app:tabMode="scrollable"
                 android:layout_below="@+id/token_info_layout"/>
 
             <android.support.v4.view.ViewPager
