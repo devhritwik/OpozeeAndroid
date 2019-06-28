@@ -106,7 +106,7 @@
                     android:weightSum="2"
                     >
 
-                    <com.opozee.view.GradientTextView
+                    <com.opozeeApp.view.GradientTextView
                         android:id="@+id/tv_total_question"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

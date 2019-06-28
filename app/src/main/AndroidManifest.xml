@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.opozee">
+    package="com.opozeeApp">
 
     <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,7 +16,7 @@
     <uses-permission android:name="android.permission.VIBRATE"></uses-permission>
 
     <application
-        android:name=".application.QuestionnaireApplication"
+        android:name="com.opozeeApp.application.QuestionnaireApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -25,37 +25,37 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
-        <activity android:name=".CheckPermissionsRefine"></activity>
-        <activity android:name=".testing.ReactionButton"></activity>
-        <activity android:name=".testing.MainTestActivity">
+        <activity android:name="com.opozeeApp.CheckPermissionsRefine"></activity>
+        <activity android:name="com.opozeeApp.testing.ReactionButton"></activity>
+        <activity android:name="com.opozeeApp.testing.MainTestActivity">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
-        <activity android:name=".testing.TestingActivity"></activity>
-        <activity android:name=".OpozeeActivity" />
-        <activity android:name=".activities.RegisterUserActivity" />
+        <activity android:name="com.opozeeApp.testing.TestingActivity"></activity>
+        <activity android:name="com.opozeeApp.OpozeeActivity" />
+        <activity android:name="com.opozeeApp.activities.RegisterUserActivity" />
         <activity
-            android:name=".activities.UserQuestionPostsActivity"
+            android:name="com.opozeeApp.activities.UserQuestionPostsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.EditProfileActivity"
+            android:name="com.opozeeApp.activities.EditProfileActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.QuestionDetailActivity"
+            android:name="com.opozeeApp.activities.QuestionDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.HomeActivity"
+            android:name="com.opozeeApp.activities.HomeActivity"
             android:label="@string/title_activity_home"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.ProfileActivity"
+            android:name="com.opozeeApp.activities.ProfileActivity"
             android:label="@string/title_profile"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.SplashActivity"
+            android:name="com.opozeeApp.activities.SplashActivity"
             android:screenOrientation="portrait">
 
              <intent-filter>
@@ -66,10 +66,10 @@
              </intent-filter>
         </activity>
         <activity
-            android:name=".activities.EmptyFragmentActivity"
+            android:name="com.opozeeApp.activities.EmptyFragmentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.LoginActivity"
+            android:name="com.opozeeApp.activities.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
@@ -122,7 +122,7 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/color_primary_light" />
 
-        <service android:name=".fcm.FCMMessagingService">
+        <service android:name="com.opozeeApp.fcm.FCMMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

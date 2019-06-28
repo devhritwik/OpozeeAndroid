@@ -68,7 +68,7 @@
             <!--</LinearLayout>-->
 
 
-            <com.opozee.newemojilikegif.EmojiLikeView
+            <com.opozeeApp.newemojilikegif.EmojiLikeView
                 android:id="@+id/emojiView_dislike"
                 android:layout_width="@dimen/_130sdp"
                 android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
             <!--app:layout_constraintBottom_toTopOf="@+id/ll_yes_inner"/>-->
 
             <!--</LinearLayout>-->
-            <com.opozee.newemojilikegif.EmojiLikeView
+            <com.opozeeApp.newemojilikegif.EmojiLikeView
                 android:id="@+id/emojiView"
                 android:layout_width="@dimen/_130sdp"
                 android:layout_height="wrap_content"
@@ -395,7 +395,7 @@
             <!--</LinearLayout>-->
 
 
-            <com.opozee.newemojilikegif.EmojiLikeView
+            <com.opozeeApp.newemojilikegif.EmojiLikeView
                 android:id="@+id/emojiView_dislike_no"
                 android:layout_width="@dimen/_130sdp"
                 android:layout_height="wrap_content"
@@ -405,7 +405,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/ll_no"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <com.opozee.newemojilikegif.EmojiLikeView
+            <com.opozeeApp.newemojilikegif.EmojiLikeView
                 android:id="@+id/emojiView_like_yes"
                 android:layout_width="@dimen/_130sdp"
                 android:layout_height="wrap_content"

@@ -25,7 +25,7 @@
         android:layout_alignTop="@+id/likeButton"
         android:layout_marginTop="5dp"/>
 
-    <com.opozee.newemojilikegif.EmojiLikeView
+    <com.opozeeApp.newemojilikegif.EmojiLikeView
         android:layout_width="@dimen/_140sdp"
         android:layout_height="wrap_content"
         android:id="@+id/emojiView"

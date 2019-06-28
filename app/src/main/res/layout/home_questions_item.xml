@@ -126,17 +126,17 @@
                 android:thumb="@null"
                 android:visibility="invisible"/>
 
-            <com.opozee.view.QuestionListTopBeliefView
+            <com.opozeeApp.view.QuestionListTopBeliefView
                 android:id="@+id/best_supporting_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <com.opozee.view.QuestionListTopBeliefView
+            <com.opozeeApp.view.QuestionListTopBeliefView
                 android:id="@+id/best_against_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            </com.opozee.view.QuestionListTopBeliefView>
+            </com.opozeeApp.view.QuestionListTopBeliefView>
 
 
         </LinearLayout>
