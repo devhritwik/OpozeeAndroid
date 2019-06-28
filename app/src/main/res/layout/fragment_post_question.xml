@@ -34,7 +34,6 @@
                 />
 
             <TextView
-                android:id="@+id/tv_"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_12sdp"
@@ -129,7 +128,6 @@
                     android:textSize="@dimen/_16sdp"/>
             </RelativeLayout>
             <TextView
-                android:id="@+id/tvf_"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_12sdp"

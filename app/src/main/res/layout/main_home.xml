@@ -9,7 +9,6 @@
     android:background="@color/white_color"
     >
         <ImageView
-            android:id="@+id/top_image"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_45sdp"
             android:visibility="gone"
@@ -28,7 +27,6 @@
 
         <android.support.design.widget.TabLayout
             style="@style/myTabLayoutStyle"
-            android:id="@+id/tabLayout"
             android:visibility="gone"
             app:tabTextColor="@color/white_color"
             app:tabSelectedTextColor="@color/white_color"
@@ -48,7 +46,6 @@
             />
 
         <android.support.design.widget.BottomNavigationView
-            android:id="@+id/navigation"
             android:layout_width="match_parent"
             android:visibility="gone"
             android:layout_height="@dimen/_90sdp"

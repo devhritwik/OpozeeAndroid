@@ -148,7 +148,6 @@
                             android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/tv_anaglysis"
                             android:textSize="@dimen/_12sdp"
                             android:textColor="@color/grey"
                             android:text="Opinions"
@@ -176,7 +175,6 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/tv_count_likes1"
                                     android:textSize="@dimen/_12sdp"
                                     android:textColor="@color/green_color"
                                     android:text="Yes 88%"

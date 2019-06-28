@@ -7,7 +7,6 @@
     <!--<string name="fb_login_protocol_scheme">fb2286238128100867</string>-->
     <string name="facebook_app_id">2286238128100867</string>
     <string name="fb_login_protocol_scheme">fb2286238128100867</string>
-    <string name="message_fb_ca1ncelled">Facebook Cancelled</string>
     <string name="message_fb_error">Error connecting to Facebook</string>
     <string name="com_twitter_sdk_android_CONSUMER_KEY">2mxUlFSRyQPxke3OPMpWelK7l</string>
     <string name="com_twitter_sdk_android_CONSUMER_SECRET">L7ftTBIL93QMNbCiDX2Kf9JDP4ETn6VrjQ60T1XBwceWa8C8eE</string>
@@ -15,25 +14,14 @@
     <string name="title_home">Home</string>
     <string name="title_profile">Profile</string>
     <string name="title_notifications">Notifications</string>
-    <string name="title_settings">Settings</string>
-    <string name="title_add_post">Add Post</string>
     <string name="title_search">Search</string>
     <string name="title_bookmarks">Bookmarks</string>
     <string name="title_post_questions">Post Questions</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="internet_alert">Please connect to internet first</string>
 
-    <string name="emoji_text_view">Emoji TextView %s</string>
-    <string name="emoji_edit_text">Emoji EditText %s</string>
-    <string name="emoji_button">Emoji Button %s</string>
-    <string name="regular_text_view">Regular TextView %s</string>
-    <string name="custom_text_view">Custom TextView %s</string>
     <string name="save_question">Save Question</string>
-    <string name="enterEmail">Enter Email</string>
-    <string name="username">Username</string>
-    <string name="entername">Enter Name</string>
     <string name="saveprofile">Save Profile</string>
 
     <string name="camera">Camera</string>
@@ -44,7 +32,6 @@
     <string name="needCameraPermission">Please allow Camera and storage permissions to set your Profile Photo</string>
     <string name="fcm_message">Opozee</string>
 
-    <string name="msg_subscribed">Subscribed to weather topic</string>
     <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
@@ -53,28 +40,17 @@
         It should describe the category of notifications that will be sent through this channel
      -->
     <string name="default_notification_channel_name" translatable="true">OpozeeApp_noti_channel</string>
-    <string name="msg_subscribe_failed">Failed to subscribe to weather topic</string>
-    <string name="cancel">Cancel</string>
-    <string name="email">Email</string>
 
     <!--Login Page -->
-    <string name="login">Login</string>
     <string name="login_with_facebook">Login With Facebook</string>
     <string name="login_with_google">Login With Google</string>
-    <string name="login_with_twitter">Login With Twitter</string>
     <string name="search_bar_hint">Search</string>
 
     <!-- Add opinion Dialog Box -->
     <string name="add_opinion_hint">Add Opinion...</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
     <string name="agree">Agree</string>
     <string name="disagree">Disagree</string>
     <string name="select_a_side_warning_message">* Please pick a side</string>
-    <string name="first_name">First Name</string>
-    <string name="last_name">Last Name</string>
-    <string name="questions">Questions</string>
-    <string name="beliefs">Beliefs</string>
     <string name="text_email">Email</string>
     <string name="text_password">Password</string>
     <string name="text_forgot">Forgot Password ?</string>
@@ -84,8 +60,6 @@
     <string name="text_username">User Name</string>
     <string name="refferalcode">Referral Code (Optional)</string>
     <string name="text_cancel">Cancel</string>
-    <string name="followers">Followers()</string>
-    <string name="following">Followings()</string>
 
 
 </resources>

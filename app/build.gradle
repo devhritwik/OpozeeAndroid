@@ -19,9 +19,17 @@ apply plugin: 'io.fabric'
 
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\vishr\\Desktop\\opozee.jks')
+            storePassword 'honey99'
+            keyAlias = 'key0'
+            keyPassword 'honey99'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.opozee"
+        applicationId "com.opozeeApp"
         minSdkVersion 18
         targetSdkVersion 28
         versionCode 2
@@ -40,6 +48,11 @@ android {
             targetCompatibility 1.8
             sourceCompatibility 1.8
 
+    }
+    buildTypes {
+        release {
+            minifyEnabled = true
+        }
     }
 }
 

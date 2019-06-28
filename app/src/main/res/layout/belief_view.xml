@@ -30,7 +30,6 @@
 
 
         <LinearLayout
-            android:id="@+id/belief_view_votes_and_user_parent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_4sdp"
@@ -47,7 +46,6 @@
                 android:weightSum="2">
 
                 <ImageView
-                    android:id="@+id/iv_thum_on"
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
                     android:layout_weight="0.2"
@@ -84,7 +82,6 @@
                 android:weightSum="2">
 
                 <ImageView
-                    android:id="@+id/iv_thum_off"
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_10sdp"
                     android:layout_weight="0.2"

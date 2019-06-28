@@ -35,7 +35,6 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_registerLogo">
 
             <EditText
-                android:id="@+id/et_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/black_color"
@@ -63,7 +62,6 @@
             app:layout_constraintTop_toBottomOf="@+id/tl_username">
 
             <EditText
-                android:id="@+id/et_emailregister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/black_color"
@@ -92,7 +90,6 @@
             app:layout_constraintTop_toBottomOf="@+id/tl_email">
 
             <EditText
-                android:id="@+id/et_passwordregister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/black_color"

@@ -10,20 +10,20 @@
       "client_info": {
         "mobilesdk_app_id": "1:466748366632:android:c6d4a75b3a4e93a7",
         "android_client_info": {
-          "package_name": "com.opozee"
+          "package_name": "com.opozeeApp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "466748366632-bsit9bh8evfco3ccnu292hff6laq9ak1.apps.googleusercontent.com",
+          "client_id": "275497348164-ga7prv27trlmrtmm1luj2tldqqc3u6b7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.opozee",
+            "package_name": "com.opozeeApp",
             "certificate_hash": "c7902b0ddee64bd63e7c16d49239c3b03a4ccac7"
           }
         },
         {
-          "client_id": "466748366632-t79lmeuio8s2m11i79apv7222p8g21k9.apps.googleusercontent.com",
+          "client_id": "275497348164-ga7prv27trlmrtmm1luj2tldqqc3u6b7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -36,7 +36,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "466748366632-t79lmeuio8s2m11i79apv7222p8g21k9.apps.googleusercontent.com",
+              "client_id": "275497348164-ga7prv27trlmrtmm1luj2tldqqc3u6b7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
