@@ -2,6 +2,9 @@ package com.opozeeApp.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.text.Html;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -121,6 +124,11 @@ public class AddOpinionDialogFragment extends DialogFragment implements AddOpini
         {
             //the below line has been added for smileys or emojis
             String toServerUnicodeEncoded = StringEscapeUtils.escapeJava(opinion.trim());
+            toServerUnicodeEncoded=toServerUnicodeEncoded.replace("\\n","<br/>");
+
+            //SpannableString contentText = new SpannableString(toServerUnicodeEncoded);
+            //toServerUnicodeEncoded = Html.toHtml(contentText);
+
             int agreeStatus = mCurrentState == State.Agree? 1 : 0;
             OpinionParams params = new OpinionParams();
             params.setId(String.valueOf(0));
@@ -128,6 +136,7 @@ public class AddOpinionDialogFragment extends DialogFragment implements AddOpini
             params.setCommentedUserId(Utils.getLoggedInUserId(getActivity()));
             params.setComment(toServerUnicodeEncoded);
             params.setOpinionAgreeStatus(agreeStatus);
+
 
             if (Utils.isNetworkAvail(getActivity())){
                 mAddOpinionPresenter.addOpinion(params);

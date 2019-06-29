@@ -2,8 +2,8 @@
   "project_info": {
     "project_number": "466748366632",
     "firebase_url": "https://opozee-1553046493426.firebaseio.com",
-    "project_id": "opozee-1553046493426",
-    "storage_bucket": "opozee-1553046493426.appspot.com"
+    "project_id": "opozee-245103",
+    "storage_bucket": "opozee-245103.appspot.com"
   },
   "client": [
     {
@@ -15,7 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "275497348164-ga7prv27trlmrtmm1luj2tldqqc3u6b7.apps.googleusercontent.com",
+          "client_id": "892275178182-4a1orgo9bidb149pk76arddd0688fvcq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.opozeeApp",
@@ -23,7 +23,7 @@
           }
         },
         {
-          "client_id": "275497348164-ga7prv27trlmrtmm1luj2tldqqc3u6b7.apps.googleusercontent.com",
+          "client_id": "892275178182-4a1orgo9bidb149pk76arddd0688fvcq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -36,7 +36,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "275497348164-ga7prv27trlmrtmm1luj2tldqqc3u6b7.apps.googleusercontent.com",
+              "client_id": "892275178182-4a1orgo9bidb149pk76arddd0688fvcq.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
