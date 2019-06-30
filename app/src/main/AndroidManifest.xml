@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    android:versionCode="3"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.opozeeApp">
 
@@ -24,6 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
+        android:versionCode="3"
         tools:replace="android:allowBackup">
         <activity android:name="com.opozeeApp.CheckPermissionsRefine"></activity>
         <activity android:name="com.opozeeApp.testing.ReactionButton"></activity>
