@@ -393,13 +393,25 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
                             }
                             followerUsersadapter.notifyDataSetChanged();
 
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
                             break;
                         case 1:
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
                             break;
                         default:
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
                             break;
                     }
                 }
@@ -407,7 +419,11 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
 
             @Override
             public void onFailure(Call<GetFollower> call, Throwable t) {
-                progressDialog.dismiss();
+                if(progressDialog!=null){
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
             }
         });
     }
@@ -437,14 +453,26 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
                                 followingUser.setIsfollowback(getFollowing.getResponse().getGetMyFollowing().get(i).getHasFollowBack());
                                 followingUserList.add(followingUser);
                             }
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
                             followingadapter.notifyDataSetChanged();
                             break;
                         case 1:
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
                             break;
                         default:
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
                             break;
                     }
                 }
@@ -452,7 +480,11 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
 
             @Override
             public void onFailure(Call<GetFollowing> call, Throwable t) {
-
+                if(progressDialog!=null){
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
             }
         });
 
@@ -628,7 +660,11 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
                     int code = Integer.parseInt(following.getResponse().getCode());
                     switch (code) {
                         case 0:
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
                             getProfile();
 //                            getFollowing();
 //                            getFollowers();
@@ -636,20 +672,36 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
 //                            Followers.updatelist();
                             break;
                         default:
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
                             break;
                     }
-                    progressDialog.dismiss();
+                    if(progressDialog!=null){
+                        if(progressDialog.isShowing()){
+                            progressDialog.dismiss();
+                        }
+                    }
 
                 } else {
-                    progressDialog.dismiss();
+                    if(progressDialog!=null){
+                        if(progressDialog.isShowing()){
+                            progressDialog.dismiss();
+                        }
+                    }
                 }
 
             }
 
             @Override
             public void onFailure(Call<Following> call, Throwable t) {
-                progressDialog.dismiss();
+                if(progressDialog!=null){
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
             }
         });
     }
@@ -666,7 +718,11 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
                     int code = Integer.parseInt(unFollow.getResponse().getCode());
                     switch (code) {
                         case 0:
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
                             getProfile();
 //                            getFollowing();
 //                            getFollowers();
@@ -674,18 +730,30 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
 //                            Followers.updatelist();
                             break;
                         default:
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
                             break;
                     }
 
                 } else {
-                    progressDialog.dismiss();
+                    if(progressDialog!=null){
+                        if(progressDialog.isShowing()){
+                            progressDialog.dismiss();
+                        }
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<UnFollow> call, Throwable t) {
-                progressDialog.dismiss();
+                if(progressDialog!=null){
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
             }
         });
 

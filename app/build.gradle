@@ -32,8 +32,8 @@ android {
         applicationId "com.opozeeApp"
         minSdkVersion 18
         targetSdkVersion 28
-        versionCode 3
-        versionName "1.0.3"
+        versionCode 6
+        versionName "5.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
@@ -51,7 +51,14 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled = true
+            lintOptions {
+                checkReleaseBuilds false
+                // Or, if you prefer, you can continue to check for errors in release builds,
+                // but continue the build even when errors are found:
+                abortOnError false
+            }
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }

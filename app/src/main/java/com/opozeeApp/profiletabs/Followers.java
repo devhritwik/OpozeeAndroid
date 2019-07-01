@@ -98,13 +98,26 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
 //                            followerUsersadapter.notifyDataSetChanged();
                             followerUsersadapter = new FollowerUsers(getActivity(), followerslist, Utils.getLoggedInUserId(getContext()));
                             rv_followers.setAdapter(followerUsersadapter);
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
                             break;
                         case 1:
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
                             break;
                         default:
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
+
                             break;
                     }
                 }
@@ -112,7 +125,11 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
 
             @Override
             public void onFailure(Call<GetFollower> call, Throwable t) {
-                progressDialog.dismiss();
+                if(progressDialog!=null){
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
             }
         });
     }
@@ -160,7 +177,11 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
                     int code = Integer.parseInt(unFollow.getResponse().getCode());
                     switch (code) {
                         case 0:
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
 //                            getProfile();
 //                            getFollowing();
 //                            getFollowers();
@@ -168,18 +189,30 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
                             Followings.updatelist();
                             break;
                         default:
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
                             break;
                     }
 
                 } else {
-                    progressDialog.dismiss();
+                    if(progressDialog!=null){
+                        if(progressDialog.isShowing()){
+                            progressDialog.dismiss();
+                        }
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<UnFollow> call, Throwable t) {
-                progressDialog.dismiss();
+                if(progressDialog!=null){
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
             }
         });
 
@@ -211,7 +244,9 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
     }
 
     public void followuser(String owneruserid, String aTrue, String userid) {
-        progressDialog.show();
+        if(progressDialog!=null) {
+            progressDialog.show();
+        }
         String data = followjsonString(owneruserid, aTrue, userid);
         followingCall = WebRequest.apiInterface.followuser("application/json", data);
         followingCall.enqueue(new Callback<Following>() {
@@ -222,27 +257,47 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
                     int code = Integer.parseInt(following.getResponse().getCode());
                     switch (code) {
                         case 0:
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
 //                            getProfile();
 //                            getFollowing();
                             getfollowers();
                             Followings.updatelist();
                             break;
                         default:
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
                             break;
                     }
-                    progressDialog.dismiss();
+                    if(progressDialog!=null){
+                        if(progressDialog.isShowing()){
+                            progressDialog.dismiss();
+                        }
+                    }
 
                 } else {
-                    progressDialog.dismiss();
+                    if(progressDialog!=null){
+                        if(progressDialog.isShowing()){
+                            progressDialog.dismiss();
+                        }
+                    }
                 }
 
             }
 
             @Override
             public void onFailure(Call<Following> call, Throwable t) {
-                progressDialog.dismiss();
+                if(progressDialog!=null){
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
             }
         });
     }

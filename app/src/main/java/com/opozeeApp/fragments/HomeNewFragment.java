@@ -143,12 +143,20 @@ public class HomeNewFragment extends Fragment {
                                 }
                             });
                             createViewPager(viewPager);
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
 //                            getTagsAdapter = new GetTagsAdapter(getActivity(), getTagsModelist);
 //                            rv_tags.setAdapter(getTagsAdapter);
                             break;
                         default:
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
                             break;
                     }
                 }
@@ -156,7 +164,11 @@ public class HomeNewFragment extends Fragment {
 
             @Override
             public void onFailure(Call<GetAllTags> call, Throwable t) {
-                progressDialog.dismiss();
+                if(progressDialog!=null){
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
             }
         });
         return getTagsModelist;

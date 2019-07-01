@@ -101,14 +101,26 @@ public class Followings extends Fragment implements TabClicked, LoadTabData {
                             }
                             followingadapter = new Followingadapter(getActivity(), followingUserList, Utils.getLoggedInUserId(getContext()));
                             rv_followings.setAdapter(followingadapter);
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
 //                            followingadapter.notifyDataSetChanged();
                             break;
                         case 1:
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
                             break;
                         default:
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
                             break;
                     }
                 }
@@ -116,7 +128,11 @@ public class Followings extends Fragment implements TabClicked, LoadTabData {
 
             @Override
             public void onFailure(Call<GetFollowing> call, Throwable t) {
-
+                if(progressDialog!=null){
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
             }
         });
     }
@@ -159,23 +175,39 @@ getfollowings();
                     int code = Integer.parseInt(unFollow.getResponse().getCode());
                     switch (code) {
                         case 0:
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
                             Followers.updatelist();
                             getfollowings();
                             break;
                         default:
-                            progressDialog.dismiss();
+                            if(progressDialog!=null){
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                            }
                             break;
                     }
 
                 } else {
-                    progressDialog.dismiss();
+                    if(progressDialog!=null){
+                        if(progressDialog.isShowing()){
+                            progressDialog.dismiss();
+                        }
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<UnFollow> call, Throwable t) {
-                progressDialog.dismiss();
+                if(progressDialog!=null){
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
             }
         });
 
