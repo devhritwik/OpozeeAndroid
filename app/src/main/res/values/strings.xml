@@ -1,12 +1,15 @@
 <resources>
     <string name="app_name">Opozee</string>
-    <string name="app_package">com.opozee</string>
+    <string name="app_package">com.opozeeApp</string>
 
     <!--<string name="facebook_app_id">1239122812912148</string> -->
     <!--<string name="facebook_app_id">2286238128100867</string>-->
     <!--<string name="fb_login_protocol_scheme">fb2286238128100867</string>-->
-    <string name="facebook_app_id">2286238128100867</string>
-    <string name="fb_login_protocol_scheme">fb2286238128100867</string>
+    <string name="facebook_app_id">2322202134526132</string>
+    <string name="fb_login_protocol_scheme">fb2322202134526132</string>
+
+    <!--<string name="facebook_app_id">2286238128100867</string>-->
+    <!--<string name="fb_login_protocol_scheme">fb2286238128100867</string>-->
     <string name="message_fb_error">Error connecting to Facebook</string>
     <string name="com_twitter_sdk_android_CONSUMER_KEY">2mxUlFSRyQPxke3OPMpWelK7l</string>
     <string name="com_twitter_sdk_android_CONSUMER_SECRET">L7ftTBIL93QMNbCiDX2Kf9JDP4ETn6VrjQ60T1XBwceWa8C8eE</string>
