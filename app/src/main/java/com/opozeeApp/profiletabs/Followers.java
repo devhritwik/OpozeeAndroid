@@ -158,7 +158,7 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
 
 
             userdata = obj.toString();
-            Log.d("Jason", userdata);
+//            Log.d("Jason", userdata);
 
         } catch (JSONException e1) {
             Log.e("ERROR :", "" + e1);
@@ -342,10 +342,10 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
 
 
             userdata = obj.toString();
-            Log.d("Jason", userdata);
+//            Log.d("Jason", userdata);
 
         } catch (JSONException e1) {
-            Log.e("ERROR :", "" + e1);
+//            Log.e("ERROR :", "" + e1);
             e1.printStackTrace();
 
         }

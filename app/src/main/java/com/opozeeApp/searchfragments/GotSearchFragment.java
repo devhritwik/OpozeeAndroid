@@ -58,7 +58,7 @@ public class GotSearchFragment extends Fragment implements PostedQuestionsView {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, rootView);
-        Log.d("TESTFRAGMENT", "onCreateView3");
+//        Log.d("TESTFRAGMENT", "onCreateView3");
 
         //set scroll listener for fab visibility
         setScrollListener();
@@ -186,11 +186,11 @@ public class GotSearchFragment extends Fragment implements PostedQuestionsView {
 
     @Override
     public void onSuccess(PostedQuestionsResponse response) {
-        Log.d("HomeQuestionLog=",""+response.getResponse());
-        Log.d("HomeQuestionLog=",""+response);
+//        Log.d("HomeQuestionLog=",""+response.getResponse());
+//        Log.d("HomeQuestionLog=",""+response);
         if(response.getResponse().getAllUserQuestions().getPostQuestionDetail() != null)
             if(response.getResponse().getAllUserQuestions().getPostQuestionDetail().size() > 0) {
-                Log.d("HomeQuestionLog=",response.getResponse().getAllUserQuestions().getPostQuestionDetail().toString());
+//                Log.d("HomeQuestionLog=",response.getResponse().getAllUserQuestions().getPostQuestionDetail().toString());
                 questionsList.addAll(response.getResponse().getAllUserQuestions().getPostQuestionDetail());
                 mAdapter.notifyDataSetChanged();
                 isRefreshed = false;

@@ -31,8 +31,8 @@ public class PostedQuestionsInteractorImpl implements PostedQuestionsInteractor 
             public void onResponse(Call<PostedQuestionsResponse> call, Response<PostedQuestionsResponse> response) {
 
                 if (response.isSuccessful()) {
-                    Log.d("Response_Profile=",""+response.body().toString());
-                    Log.d("Response_Profile=",""+response.body());
+//                    Log.d("Response_Profile=",""+response.body().toString());
+//                    Log.d("Response_Profile=",""+response.body());
                     if (response.body().getResponse().getCode() == 0 ) {
                         PostedQuestionsResponse LoginSignupResponse = response.body();
                         if (LoginSignupResponse != null) {
@@ -51,8 +51,8 @@ public class PostedQuestionsInteractorImpl implements PostedQuestionsInteractor 
 
             @Override
             public void onFailure(Call<PostedQuestionsResponse> call, Throwable t) {
-                Log.d("toString", call.toString() );
-                Log.d("localizedMessage", t.getLocalizedMessage());
+//                Log.d("toString", call.toString() );
+//                Log.d("localizedMessage", t.getLocalizedMessage());
                 mListener.onFailure("Request Failed, Please try again ");
             }
         });
@@ -97,8 +97,8 @@ public class PostedQuestionsInteractorImpl implements PostedQuestionsInteractor 
 
             @Override
             public void onFailure(Call<PostedQuestionsResponse> call, Throwable t) {
-                Log.d("toString", call.toString() );
-                Log.d("localizedMessage", t.getLocalizedMessage());
+//                Log.d("toString", call.toString() );
+//                Log.d("localizedMessage", t.getLocalizedMessage());
                 mListener.onFailure("Request Failed, Please try again ");
             }
         });

@@ -16,34 +16,34 @@ public class LikeDislikePresenterImpl implements LikeDislikePresenter, LikeDisli
     @Override
     public void onSuccess(LikeDislikeResponse response) {
 //        dView.hideProgress();
-        Log.d(TAG, "onSuccess()");
+//        Log.d(TAG, "onSuccess()");
         dView.onSuccess(response);
     }
 
     @Override
     public void onFailure(String error) {
-        Log.d(TAG, "inFailure()");
+//        Log.d(TAG, "inFailure()");
 //        dView.hideProgress();
         dView.onFailure(error);
     }
 
     @Override
     public void attachView(LikeDislikeView dView, LikeDislikeInteractorImpl dInteractor) {
-        Log.d(TAG, "attachView()");
+//        Log.d(TAG, "attachView()");
         this.dView = dView;
         this.dInteractor = dInteractor;
     }
 
     @Override
     public void dettachView() {
-        Log.d(TAG, "detachView()");
+//        Log.d(TAG, "detachView()");
         this.dView = null;
         this.dInteractor = null;
     }
 
     @Override
     public void dislike(LikeDislikeParams params) {
-        Log.d(TAG, "dislike()");
+//        Log.d(TAG, "dislike()");
 //        dView.showProgress();
         dInteractor.dislike(params, this);
     }

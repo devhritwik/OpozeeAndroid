@@ -53,11 +53,11 @@ public class ProfileInteractorImpl implements ProfileInteractor {
             RequestBody fileReqBody = RequestBody.create(MediaType.parse("image/*"), params.getProfilePic());
             MultipartBody.Part part = MultipartBody.Part.createFormData("upload", params.getProfilePic().getName(), fileReqBody);
 //            RequestBody description = RequestBody.create(MediaType.parse("text/plain"), "image-type");
-         Log.d("ImageBitmap=",fileReqBody.toString());
-         Log.d("ImageBitmap=",part.toString());
-         Log.d("ImageBitmap=",""+params.getProfilePic());
-         Log.d("ImageBitmap=",""+params.getProfilePic().getName());
-         Log.d("ImageBitmap=",""+params.getProfilePic());
+//         Log.d("ImageBitmap=",fileReqBody.toString());
+//         Log.d("ImageBitmap=",part.toString());
+//         Log.d("ImageBitmap=",""+params.getProfilePic());
+//         Log.d("ImageBitmap=",""+params.getProfilePic().getName());
+//         Log.d("ImageBitmap=",""+params.getProfilePic());
 //            req = webService.editProfile(MultipartBody.Part.createFormData(AppGlobal.KEY_USER_PROFILE_PIC, params.getProfilePic().getName(), RequestBody.create(MediaType.parse("image/*"), params.getProfilePic())), userIdBody, firstNameBody, lastNameBody);
             req = webService.editProfile(part, userIdBody, firstNameBody, lastNameBody,UserName);
         } else {
@@ -66,13 +66,13 @@ public class ProfileInteractorImpl implements ProfileInteractor {
         req.enqueue(new Callback<ProfileResponse>() {
             @Override
             public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
-                Log.d("Profile_Log",""+response.body().toString());
-                Log.d("Profile_Log",""+response);
-                Log.d("Profile_Log",""+response.body().getResponse().getCode());
-                Log.d("Profile_Log",""+response.body().getResponse().getStatus());
-                Log.d("Profile_Log",""+response.body().getResponse().getStatus());
-                Log.d("Profile_Log",""+response);
-                Log.d("Profile_Log",""+response.body().getResponse());
+//                Log.d("Profile_Log",""+response.body().toString());
+//                Log.d("Profile_Log",""+response);
+//                Log.d("Profile_Log",""+response.body().getResponse().getCode());
+//                Log.d("Profile_Log",""+response.body().getResponse().getStatus());
+//                Log.d("Profile_Log",""+response.body().getResponse().getStatus());
+//                Log.d("Profile_Log",""+response);
+//                Log.d("Profile_Log",""+response.body().getResponse());
                 if (response.isSuccessful()) {
                     if (response.body().getResponse().getCode() == 0 ) {
                         ProfileResponse LoginSignupResponse = response.body();
@@ -93,7 +93,7 @@ public class ProfileInteractorImpl implements ProfileInteractor {
 
             @Override
             public void onFailure(Call<ProfileResponse> call, Throwable t) {
-                Log.d("Response=",t.toString());
+//                Log.d("Response=",t.toString());
                 mListener.onFailure("Request Failed, Please try again ");
             }
         });
@@ -111,9 +111,9 @@ public class ProfileInteractorImpl implements ProfileInteractor {
                     if (response.body().getResponse().getCode() == 0 ) {
 
                         ProfileResponse LoginSignupResponse = response.body();
-                        Log.d("Userprofile",""+LoginSignupResponse);
-                        Log.d("Userprofile",""+response.body());
-                        Log.d("Userprofile","hasfollowed="+LoginSignupResponse.getResponse().getUserProfile().getHasfollowed());
+//                        Log.d("Userprofile",""+LoginSignupResponse);
+//                        Log.d("Userprofile",""+response.body());
+//                        Log.d("Userprofile","hasfollowed="+LoginSignupResponse.getResponse().getUserProfile().getHasfollowed());
                         if (LoginSignupResponse != null) {
                             response.body().getResponse().setType(AppGlobal.TYPE_GET_PROFILE);
 
@@ -130,7 +130,7 @@ public class ProfileInteractorImpl implements ProfileInteractor {
 
             @Override
             public void onFailure(Call<ProfileResponse> call, Throwable t) {
-                Log.d("RequestError=","4="+t.toString());
+//                Log.d("RequestError=","4="+t.toString());
                 mListener.onFailure("Request Failed, Please try again ");
             }
         });

@@ -108,9 +108,9 @@ public class NotificationsFragment  extends Fragment implements NotificationsVie
         params.setPageSize(pageSize);
         params.setUser_id(Utils.getLoggedInUserId(getActivity()));
 //        params.setUser_id(Utils.getLoggedInUserId(getActivity()));
-        Log.d("notification_log","pageIndex="+pageIndex);
-        Log.d("notification_log","pageSize="+pageSize);
-        Log.d("notification_log","Utils.getLoggedInUserId(getActivity()="+Utils.getLoggedInUserId(getActivity()));
+//        Log.d("notification_log","pageIndex="+pageIndex);
+//        Log.d("notification_log","pageSize="+pageSize);
+//        Log.d("notification_log","Utils.getLoggedInUserId(getActivity()="+Utils.getLoggedInUserId(getActivity()));
 
         mPresenter.getNotifications(params);
     }

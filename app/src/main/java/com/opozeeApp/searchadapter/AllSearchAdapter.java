@@ -123,7 +123,7 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
         holder.tv_question.setText(Html.fromHtml(fromServerUnicodeDecoded.trim()));
         //holder.tv_question.setText(fromServerUnicodeDecoded.trim());
 
-        Log.d("TimeFormat_Log",usersList.get(position).getCreationDate());
+//        Log.d("TimeFormat_Log",usersList.get(position).getCreationDate());
         String[] timeArr = usersList.get(position).getCreationDate().replace("T", " ").split("/.");
         Log.e("TIME SPLIT ", " " + timeArr[0]);
         String time = Utils.convertESTToLocalTime(timeArr[0]).replace("-", " at ");
@@ -133,11 +133,11 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
         Long date=Utils.convertdatestring(timeexact);
         String timeago=Utils.getTimeAgo(date);
 
-        Log.d("TimeFormat_Log",time);
-        Log.d("TimeFormat_Log","conertdate="+conertdate);
-        Log.d("TimeFormat_Log","Long="+date);
-        Log.d("TimeFormat_Log","timeago="+timeago);
-        Log.d("TimeFormat_Log","Date="+timeexact);
+//        Log.d("TimeFormat_Log",time);
+//        Log.d("TimeFormat_Log","conertdate="+conertdate);
+//        Log.d("TimeFormat_Log","Long="+date);
+//        Log.d("TimeFormat_Log","timeago="+timeago);
+//        Log.d("TimeFormat_Log","Date="+timeexact);
         if(timeago!=null) {
             holder.tv_time.setText(timeago);
         }
@@ -253,7 +253,7 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        Log.d("Size==SearchAdapter",""+usersList.size());
+//        Log.d("Size==SearchAdapter",""+usersList.size());
         return usersList == null ? 0 : usersList.size();
     }
 }

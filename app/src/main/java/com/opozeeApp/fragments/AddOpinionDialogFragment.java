@@ -60,7 +60,7 @@ public class AddOpinionDialogFragment extends DialogFragment implements AddOpini
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate()");
+//        Log.d(TAG, "onCreate()");
     }
 
 
@@ -74,7 +74,7 @@ public class AddOpinionDialogFragment extends DialogFragment implements AddOpini
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView()");
+//        Log.d(TAG, "onCreateView()");
         View v = inflater.inflate(R.layout.add_opinion_dialog_fragment, container, false);
         // retrieve display dimensions
         ButterKnife.bind(this, v);
@@ -96,7 +96,7 @@ public class AddOpinionDialogFragment extends DialogFragment implements AddOpini
 
     @OnClick(R.id.add_opinion_agree_button)
     public void onAgreeClicked(){
-        Log.d(TAG, "onAgreeClicked()");
+//        Log.d(TAG, "onAgreeClicked()");
         mWarningTextView.setVisibility(View.GONE);
         setState(State.Agree);
 
@@ -105,7 +105,7 @@ public class AddOpinionDialogFragment extends DialogFragment implements AddOpini
 
     @OnClick(R.id.add_opinion_disagree_button)
     public void onDisagreeClicked(){
-        Log.d(TAG, "onDisagreeClicked()");
+//        Log.d(TAG, "onDisagreeClicked()");
         mWarningTextView.setVisibility(View.GONE);
         setState(State.Disagree);
     }
@@ -113,7 +113,7 @@ public class AddOpinionDialogFragment extends DialogFragment implements AddOpini
     @OnClick(R.id.add_opinion_submit_button)
     public void onSubmitButtonClicked(){
         String opinion = mOpinionEditText.getText().toString();
-        Log.d(TAG, "onSubmitButtonClicked, opinion: " + opinion);
+//        Log.d(TAG, "onSubmitButtonClicked, opinion: " + opinion);
 
         if (mCurrentState == State.Unselected) {
             mWarningTextView.setVisibility(View.VISIBLE);

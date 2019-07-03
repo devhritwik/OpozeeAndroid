@@ -23,19 +23,19 @@ public class UserBeliefInteractorImpl implements UserBeliefInteractor{
             @Override
             public void onResponse(Call<List<Belief>> call, Response<List<Belief>> response) {
                 if ( response.body() == null ||  !response.isSuccessful()) {
-                    Log.d(TAG, "response not succesfull : " + response.toString());
+//                    Log.d(TAG, "response not succesfull : " + response.toString());
                     mListener.onFailure("An error occurred");
                     return;
                 }
                 for (Belief b : response.body()){
-                    Log.d("PenisBalls", b.getBeliefText() + b.isAgree());
+//                    Log.d("PenisBalls", b.getBeliefText() + b.isAgree());
                 }
                 mListener.onSuccess(response.body());
             }
 
             @Override
             public void onFailure(Call<List<Belief>> call, Throwable t) {
-                Log.d(TAG, "onFailure " + t.toString());
+//                Log.d(TAG, "onFailure " + t.toString());
                 mListener.onFailure("An error occurred");
             }
         });
