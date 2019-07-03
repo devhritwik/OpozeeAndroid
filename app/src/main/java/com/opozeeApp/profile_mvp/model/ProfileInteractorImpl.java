@@ -94,7 +94,7 @@ public class ProfileInteractorImpl implements ProfileInteractor {
             @Override
             public void onFailure(Call<ProfileResponse> call, Throwable t) {
                 Log.d("Response=",t.toString());
-                mListener.onFailure("Request Failed, Please try again 3");
+                mListener.onFailure("Request Failed, Please try again ");
             }
         });
 
@@ -131,7 +131,7 @@ public class ProfileInteractorImpl implements ProfileInteractor {
             @Override
             public void onFailure(Call<ProfileResponse> call, Throwable t) {
                 Log.d("RequestError=","4="+t.toString());
-                mListener.onFailure("Request Failed, Please try again 4");
+                mListener.onFailure("Request Failed, Please try again ");
             }
         });
 

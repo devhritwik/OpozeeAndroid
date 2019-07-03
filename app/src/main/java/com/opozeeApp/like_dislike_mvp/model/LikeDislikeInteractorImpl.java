@@ -36,7 +36,7 @@ public class LikeDislikeInteractorImpl implements LikeDislikeInteractor {
 
             @Override
             public void onFailure(Call<LikeDislikeResponse> call, Throwable t) {
-                mListener.onFailure("Request Failed, Please try again 11");
+                mListener.onFailure("Request Failed, Please try again ");
             }
         });
     }

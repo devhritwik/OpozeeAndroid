@@ -68,7 +68,12 @@ public class Followings extends Fragment implements TabClicked, LoadTabData {
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Loading");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        getfollowings();
+        if (Utils.isNetworkAvail(getActivity())) {
+            getfollowings();
+        } else {
+            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+        }
+
         return view;
 
     }
@@ -145,12 +150,21 @@ public class Followings extends Fragment implements TabClicked, LoadTabData {
     }
     @Override
     public void updatedata() {
-getfollowings();
+        if (Utils.isNetworkAvail(getActivity())) {
+            getfollowings();
+        } else {
+            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+        }
     }
 
     @Override
     public void LoadData(String owneruserid, String aFalse, String userid) {
-        unfollowuser(owneruserid, aFalse, userid);
+        if (Utils.isNetworkAvail(getActivity())) {
+            unfollowuser(owneruserid, aFalse, userid);
+        } else {
+            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+        }
+
     }
 
     @Override
@@ -181,7 +195,11 @@ getfollowings();
                                 }
                             }
                             Followers.updatelist();
-                            getfollowings();
+                            if (Utils.isNetworkAvail(getActivity())) {
+                                getfollowings();
+                            } else {
+                                Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+                            }
                             break;
                         default:
                             if(progressDialog!=null){

@@ -61,7 +61,12 @@ public class NotificationsFragment  extends Fragment implements NotificationsVie
         setAdapter();
 
         //get all the questions
-        getQuestions();
+        if (Utils.isNetworkAvail(getActivity())) {
+            getQuestions();
+        } else {
+            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+        }
+
         return rootView;
     }
 
@@ -71,7 +76,11 @@ public class NotificationsFragment  extends Fragment implements NotificationsVie
             public void onLoadmore(RefreshLayout refreshlayout) {
                 isLastPage = true;
                 ++pageIndex;
-                getQuestions();
+                if (Utils.isNetworkAvail(getActivity())) {
+                    getQuestions();
+                } else {
+                    Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+                }
                 refreshlayout.finishLoadmore(2000/*,false*/);
             }
 
@@ -82,7 +91,11 @@ public class NotificationsFragment  extends Fragment implements NotificationsVie
                 questionsList.clear();
                 if(mAdapter != null)
                     mAdapter.notifyDataSetChanged();
-                getQuestions();
+                if (Utils.isNetworkAvail(getActivity())) {
+                    getQuestions();
+                } else {
+                    Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+                }
                 refreshlayout.finishRefresh(2000/*,false*/);
             }
         });

@@ -33,6 +33,7 @@ import com.opozeeApp.searchfragments.GotSearchFragment;
 import com.opozeeApp.searchfragments.QaSearchFragment;
 import com.opozeeApp.searchfragments.QuestionFragment;
 import com.opozeeApp.searchfragments.TestSearchFragment;
+import com.opozeeApp.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +86,12 @@ public class HomeNewFragment extends Fragment {
 
 
         ArrayList<GetTagsModel> titleTabs=new ArrayList<>();
-        titleTabs = getAllTags();
+        if (Utils.isNetworkAvail(getActivity())) {
+            titleTabs = getAllTags();
+        } else {
+            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+        }
+
 
         tab_layout.setupWithViewPager(viewPager);
         tab_layout.setOnTabSelectedListener(onTabSelectedListener(viewPager));
@@ -181,7 +187,8 @@ public class HomeNewFragment extends Fragment {
     }
 
     private void createViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(myContext.getSupportFragmentManager());
+//        ViewPagerAdapter adapter = new ViewPagerAdapter(myContext.getSupportFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
 //       for(int i=0;i<getTagsModelist.size();i++){
            adapter.addFragment(new AllSearchFragment(), getTagsModelist.get(0).getHashtag());
            adapter.addFragment(new CountSearchFragment(), getTagsModelist.get(1).getHashtag());

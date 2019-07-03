@@ -35,7 +35,7 @@ public class DeleteInteractorImpl implements DeleteInteractor{
 
             @Override
             public void onFailure(Call<DeletePostResponse> call, Throwable t) {
-                mListener.onFailure("Request Failed, Please try again 10");
+                mListener.onFailure("Request Failed, Please try again ");
             }
         });
 

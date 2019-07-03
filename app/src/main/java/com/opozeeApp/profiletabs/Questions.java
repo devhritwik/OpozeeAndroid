@@ -61,7 +61,12 @@ public class Questions extends Fragment implements PostedQuestionsView {
         params.setPageIndex(pageIndex);
         params.setPageSize(pageSize);
         params.setUser_id(String.valueOf(mUserId));
-        mPostedQuestionPresenter.getQuestions(params);
+        if (Utils.isNetworkAvail(getActivity())) {
+            mPostedQuestionPresenter.getQuestions(params);
+        } else {
+            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+        }
+
     }
 
     @Override

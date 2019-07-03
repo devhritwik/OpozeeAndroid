@@ -63,7 +63,12 @@ public class FavouriteFragment extends Fragment implements FavouriteView {
         setAdapter();
 
         //get all bookmarked questions
-        getBookmarked();
+        if (Utils.isNetworkAvail(getActivity())) {
+            getBookmarked();
+        } else {
+            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+        }
+
         return rootView;
     }
 
@@ -73,7 +78,11 @@ public class FavouriteFragment extends Fragment implements FavouriteView {
             public void onLoadmore(RefreshLayout refreshlayout) {
                 isLastPage = true;
                 ++pageIndex;
-                getBookmarked();
+                if (Utils.isNetworkAvail(getActivity())) {
+                    getBookmarked();
+                } else {
+                    Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+                }
                 refreshlayout.finishLoadmore(2000/*,false*/);
             }
 
@@ -84,7 +93,11 @@ public class FavouriteFragment extends Fragment implements FavouriteView {
                 questionsList.clear();
                 if(mAdapter != null)
                     mAdapter.notifyDataSetChanged();
-                getBookmarked();
+                if (Utils.isNetworkAvail(getActivity())) {
+                    getBookmarked();
+                } else {
+                    Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+                }
                 refreshlayout.finishRefresh(2000/*,false*/);
             }
         });

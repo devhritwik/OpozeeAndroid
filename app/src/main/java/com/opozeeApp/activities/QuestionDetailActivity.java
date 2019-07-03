@@ -286,6 +286,7 @@ public class QuestionDetailActivity extends  com.opozeeApp.newemojilikegif.Activ
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+
         if (from == null)
             super.onBackPressed();
         else if (from.equals("notification")) {

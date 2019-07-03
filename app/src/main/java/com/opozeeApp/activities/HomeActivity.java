@@ -88,7 +88,13 @@ public class HomeActivity extends OpozeeActivity implements ProfileView {
         mProfilePresenter = new ProfilePresenterImpl();
         spaceNavView.setCentreButtonSelectable(true);
         mProfilePresenter.attachView(this, new ProfileInteractorImpl());
-        mProfilePresenter.profile(getProfileParams());
+
+        if (Utils.isNetworkAvail(HomeActivity.this)) {
+            mProfilePresenter.profile(getProfileParams());
+        } else {
+            Utils.showCustomToast(HomeActivity.this, getString(R.string.internet_alert));
+        }
+
 
         //add icons to the nav view
         addIconsToNavView(savedInstanceState);
@@ -248,9 +254,9 @@ public class HomeActivity extends OpozeeActivity implements ProfileView {
         spaceNavView.setSpaceOnClickListener(new SpaceOnClickListener() {
             @Override
             public void onCentreButtonClick() {
-//                getLastFragment(AppGlobal.HOMEFRAG);
-                finish();
-                startActivity(getIntent());
+                getLastFragment(AppGlobal.HOMEFRAG);
+//                finish();
+//                startActivity(getIntent());
             }
 
             @Override
@@ -351,9 +357,9 @@ public class HomeActivity extends OpozeeActivity implements ProfileView {
         int last_frag = AppSP.getInstance(HomeActivity.this).readInt("last_frag");
         if (last_frag != -1) {
             AppSP.getInstance(HomeActivity.this).savePreferences("last_frag", -1);
-//            getLastFragment(last_frag);
-            finish();
-            startActivity(getIntent());
+            getLastFragment(last_frag);
+//            finish();
+//            startActivity(getIntent());
             Log.d(TAG, "last_frag");
         } else {
 
@@ -361,9 +367,9 @@ public class HomeActivity extends OpozeeActivity implements ProfileView {
                     || fr instanceof SearchFragment || fr instanceof FavouriteFragment) {
                 Log.e("onBackPressed", " ONBACK Pressed");
                 Log.d(TAG, "last_frag" + "fr");
-//                getLastFragment(AppGlobal.HOMEFRAG);
-                finish();
-                startActivity(getIntent());
+                getLastFragment(AppGlobal.HOMEFRAG);
+//                finish();
+//                startActivity(getIntent());
             } else {
                 exitAlert();
             }
@@ -379,9 +385,9 @@ public class HomeActivity extends OpozeeActivity implements ProfileView {
         String from = getIntent().getStringExtra("from");
         if (from != null)
             if (from.equals("DetailActivity")) {
-//            getLastFragment(AppGlobal.HOMEFRAG);
-                finish();
-                startActivity(getIntent());
+            getLastFragment(AppGlobal.HOMEFRAG);
+//                finish();
+//                startActivity(getIntent());
             }
 
     }
@@ -391,15 +397,15 @@ public class HomeActivity extends OpozeeActivity implements ProfileView {
         int last_frag = AppSP.getInstance(HomeActivity.this).readInt("last_frag");
         if (last_frag != -1) {
             AppSP.getInstance(HomeActivity.this).savePreferences("last_frag", -1);
-//            getLastFragment(last_frag);
-            finish();
-            startActivity(getIntent());
+            getLastFragment(last_frag);
+//            finish();
+//            startActivity(getIntent());
         } else {
 
             if (fr instanceof PostQuestionFragment || fr instanceof NotificationsFragment || fr instanceof Profile_New_Fragment
                     || fr instanceof SearchFragment || fr instanceof FavouriteFragment) {
                 Log.e("onBackPressed", " ONBACK Pressed");
-//                getLastFragment(AppGlobal.HOMEFRAG);
+                getLastFragment(AppGlobal.HOMEFRAG);
 
             } else {
                 exitAlert();

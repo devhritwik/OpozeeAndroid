@@ -95,7 +95,7 @@ public class LoginActivity extends OpozeeActivity implements GoogleApiClient.OnC
     private TwitterLogin twitterLogin;
     private LoginPresenterImpl mPresenter;
     private AppSP appSP;
-    private String TAG = "LoginActivity";
+    private String TAG = "LoginActivity_LOG";
     private String deviceId;
     private EditText et_email, et_password;
     private Button btn_login;
@@ -168,17 +168,28 @@ public class LoginActivity extends OpozeeActivity implements GoogleApiClient.OnC
         }
         //get device id for notification
         checkDeviceID();
+        Log.d(TAG, "oncreate");
         Utils.savesortedata(LoginActivity.this, 0);
     }
+
 
     private void checkDeviceID() {
         appSP = AppSP.getInstance(LoginActivity.this);
 
         deviceId = appSP.readString(AppGlobal.REGISTRATION_ID, "");
-
+        Log.d(TAG, deviceId);
         if (deviceId.equals("")) {
+            Log.d(TAG, "devicetoken");
             getDeviceToken();
+
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("checked=", "onresumecall");
+        checkDeviceID();
     }
 
     private void getDeviceToken() {
@@ -201,16 +212,18 @@ public class LoginActivity extends OpozeeActivity implements GoogleApiClient.OnC
                         appSP.savePreferences(AppGlobal.REGISTRATION_ID, token);
 
                         // Log and toast
+                        deviceId=token;
                         String msg = getString(R.string.msg_token_fmt, token);
                         Log.d(TAG, msg);
+
 //                        Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
         // [END retrieve_current_token]
     }
+
     @OnEditorAction(R.id.et_password)
-    boolean onEditorAction()
-    {
+    boolean onEditorAction() {
         if (et_email != null && et_password != null) {
             String email = et_email.getText().toString();
             String password = et_password.getText().toString();
@@ -235,6 +248,7 @@ public class LoginActivity extends OpozeeActivity implements GoogleApiClient.OnC
 
         return false;
     }
+
     private void setPresenter() {
         mPresenter = new LoginPresenterImpl();
         mPresenter.attachView(this, new LoginInteractorImpl());
@@ -248,7 +262,6 @@ public class LoginActivity extends OpozeeActivity implements GoogleApiClient.OnC
         }
         return result;
     }
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -308,7 +321,7 @@ public class LoginActivity extends OpozeeActivity implements GoogleApiClient.OnC
                 md = MessageDigest.getInstance("SHA1");
                 md.update(signature.toByteArray());
                 String something = new String(Base64.encode(md.digest(), 0));
-                Log.e("KeyHash", "KeyHash  -->>" + something);
+                Log.d("KeyHashGet", "KeyHash  -->>" + something);
             }
         } catch (PackageManager.NameNotFoundException e1) {
             Log.e("KeyHash", "name not found" + e1.toString());
@@ -361,7 +374,7 @@ public class LoginActivity extends OpozeeActivity implements GoogleApiClient.OnC
     }
 
     private void hitloginapi(String params) {
-        Log.d("Json=","Params="+params);
+        Log.d("Json=", "Params=" + params);
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Authenticating");
@@ -451,9 +464,9 @@ public class LoginActivity extends OpozeeActivity implements GoogleApiClient.OnC
             if (response.getData().getUserName() != null)
                 jsonObject.put("Username", response.getData().getUserName());
             if (response.getData().getDeviceToken() != null)
-            jsonObject.put("DeviceToken", response.getData().getDeviceToken());
+                jsonObject.put("DeviceToken", response.getData().getDeviceToken());
             if (response.getData().getDeviceType() != null)
-            jsonObject.put("DeviceType", response.getData().getDeviceToken());
+                jsonObject.put("DeviceType", response.getData().getDeviceToken());
 
         } catch (JSONException e) {
             // do nothing for now
@@ -474,8 +487,8 @@ public class LoginActivity extends OpozeeActivity implements GoogleApiClient.OnC
 
             obj.put("email", email);
             obj.put("password", password);
-            obj.put("DeviceType","Android");
-            obj.put("DeviceToken",deviceId);
+            obj.put("DeviceType", "Android");
+            obj.put("DeviceToken", deviceId);
 //            obj.put("",)
 
 
@@ -518,7 +531,10 @@ public class LoginActivity extends OpozeeActivity implements GoogleApiClient.OnC
         String url = (imageURL == null || imageURL.length() == 0 || imageURL.equals("")) ? defaultURL : imageURL;
 
         params.setImageURL(url);
+
         params.setDeviceToken(deviceId);
+
+
         params.setDeviceType("Android");
         if (email == null)
             params.setEmail("");
@@ -574,6 +590,7 @@ public class LoginActivity extends OpozeeActivity implements GoogleApiClient.OnC
 
     @Override
     public void onSuccess(LoginResponse response) {
+        Log.d(TAG,"token="+response.getResponse().getUserData().getDeviceToken());
         Utils.saveUserDataInSharePreferences(LoginActivity.this, response.getResponse().getUserData());
         Intent i = new Intent(LoginActivity.this, HomeActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

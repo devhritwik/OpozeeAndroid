@@ -142,7 +142,11 @@ public class UserQuestionPostsActivity extends OpozeeActivity implements PostedQ
         params.setPageIndex(pageIndex);
         params.setPageSize(pageSize);
         params.setUser_id(Utils.getLoggedInUserId(UserQuestionPostsActivity.this));
-        mPresenter.getQuestions(params);
+        if (Utils.isNetworkAvail(getApplicationContext())) {
+            mPresenter.getQuestions(params);
+        } else {
+            Utils.showCustomToast(UserQuestionPostsActivity.this, getString(R.string.internet_alert));
+        }
     }
 
 

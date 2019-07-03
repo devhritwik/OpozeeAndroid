@@ -116,7 +116,11 @@ public class HomeFragment extends Fragment implements PostedQuestionsView {
         if (HomeNewFragment.tabName.trim().length() > 0) {
             params.setSearchtext(HomeNewFragment.tabName);
         }
-        mPresenter.getQuestions(params);
+        if (Utils.isNetworkAvail(getActivity())) {
+            mPresenter.getQuestions(params);
+        } else {
+            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+        }
     }
 
     //setPresenter to attach the view to the model

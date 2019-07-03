@@ -65,7 +65,12 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Loading");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        getfollowers();
+        if (Utils.isNetworkAvail(getActivity())) {
+            getfollowers();
+        } else {
+            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+        }
+
         return view;
     }
 
@@ -185,7 +190,11 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
 //                            getProfile();
 //                            getFollowing();
 //                            getFollowers();
-                            getfollowers();
+                            if (Utils.isNetworkAvail(getActivity())) {
+                                getfollowers();
+                            } else {
+                                Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+                            }
                             Followings.updatelist();
                             break;
                         default:
@@ -225,17 +234,31 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
 
     @Override
     public void LoadData(String owneruserid, String aFalse, String userid) {
-        unfollowuser(owneruserid, aFalse, userid);
+        if (Utils.isNetworkAvail(getActivity())) {
+            unfollowuser(owneruserid, aFalse, userid);
+        } else {
+            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+        }
+
     }
 
     @Override
     public void followcall(String owneruserid, String aFalse, String userid) {
-        followuser(owneruserid, aFalse, userid);
+        if (Utils.isNetworkAvail(getActivity())) {
+            followuser(owneruserid, aFalse, userid);
+        } else {
+            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+        }
+
     }
 
     @Override
     public void updatedata() {
-        getfollowers();
+        if (Utils.isNetworkAvail(getActivity())) {
+            getfollowers();
+        } else {
+            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+        }
     }
 
     public static void followfacecall(String owneruserid, String aTrue, String userid) {
@@ -264,7 +287,11 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
                             }
 //                            getProfile();
 //                            getFollowing();
-                            getfollowers();
+                            if (Utils.isNetworkAvail(getActivity())) {
+                                getfollowers();
+                            } else {
+                                Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+                            }
                             Followings.updatelist();
                             break;
                         default:

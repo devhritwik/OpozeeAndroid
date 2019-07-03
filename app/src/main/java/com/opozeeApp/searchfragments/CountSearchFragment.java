@@ -117,7 +117,11 @@ public class CountSearchFragment extends Fragment implements PostedQuestionsView
         }else{
             params.setSearchtext("All");
         }
-        mPresenter.getQuestions(params);
+        if (Utils.isNetworkAvail(getActivity())) {
+            mPresenter.getQuestions(params);
+        } else {
+            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+        }
     }
 
     //setPresenter to attach the view to the model

@@ -34,7 +34,7 @@ public class FavouriteInteractorImpl implements FavouriteInteractor {
 
             @Override
             public void onFailure(Call<FavouriteResponse> call, Throwable t) {
-                mListener.onFailure("Request Failed, Please try again 6");
+                mListener.onFailure("Request Failed, Please try again ");
             }
         });
     }

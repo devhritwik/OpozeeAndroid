@@ -14,7 +14,7 @@ public interface WebUrl {
     //SandboxUrl
     String BASE_URL = "https://opozee.com:81/opozee/api/MobileApi/";
     //public static final String BASE_URL = "http://localhost:61545/opozee/api/MobileApi/";
-  //  public static final String BASE_URL = "http://test.opozee.com:81/opozee/api/MobileApi/";
+//    public static final String BASE_URL = "http://test.opozee.com:81/opozee/api/MobileApi/";
     String REGISTRER_LOGIN = "https://opozee.com/register";
     String FORGOT_PASSWORD = "https://opozee.com/login";
 

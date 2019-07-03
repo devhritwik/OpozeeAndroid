@@ -53,7 +53,12 @@ public class Beliefs extends Fragment implements UserBeliefView {
     }
 
     private void getBeliefs() {
-        mUserBeliefPresenter.getUserBeliefs(mUserId);
+        if (Utils.isNetworkAvail(getActivity())) {
+            mUserBeliefPresenter.getUserBeliefs(mUserId);
+        } else {
+            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+        }
+
     }
 
     private void setPresenters() {

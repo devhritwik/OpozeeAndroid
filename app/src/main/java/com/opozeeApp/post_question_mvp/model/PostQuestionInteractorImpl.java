@@ -55,7 +55,7 @@ public class PostQuestionInteractorImpl implements PostQuestionInteractor{
 
             @Override
             public void onFailure(Call<PostQuestionResponse> call, Throwable t) {
-                mListener.onFailure("Request Failed, Please try again 13");
+                mListener.onFailure("Request Failed, Please try again ");
             }
         });
     }
@@ -86,7 +86,7 @@ public class PostQuestionInteractorImpl implements PostQuestionInteractor{
 
             @Override
             public void onFailure(Call<PostQuestionResponse> call, Throwable t) {
-                mListener.onFailure("Request Failed, Please try again 14");
+                mListener.onFailure("Request Failed, Please try again ");
             }
         });
     }

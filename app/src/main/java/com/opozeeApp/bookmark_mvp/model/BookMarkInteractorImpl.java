@@ -34,7 +34,7 @@ public class BookMarkInteractorImpl implements BookMarkInteractor{
 
             @Override
             public void onFailure(Call<BookMarkResponse> call, Throwable t) {
-                mListener.onFailure("Request Failed, Please try again 5");
+                mListener.onFailure("Request Failed, Please try again ");
             }
         });
     }

@@ -36,7 +36,7 @@ public class SearchIntractorImpl implements SearchInteractor {
 
             @Override
             public void onFailure(Call<SearchQuestionResponse> call, Throwable t) {
-                mListener.onFailure("Request Failed, Please try again 2");
+                mListener.onFailure("Request Failed, Please try again ");
             }
         });
     }

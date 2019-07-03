@@ -167,7 +167,12 @@ public class SearchFragment extends Fragment implements SearchView {
         params.setPageIndex(pageIndex);
         params.setPageSize(pageSize);
         params.setSearchStr(searchStr);
-        mPresenter.search(params);
+        if (Utils.isNetworkAvail(getActivity())) {
+            mPresenter.search(params);
+        } else {
+            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+        }
+
     }
 
     private void setPresenter() {

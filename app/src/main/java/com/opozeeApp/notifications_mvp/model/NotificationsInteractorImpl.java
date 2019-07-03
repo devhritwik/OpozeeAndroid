@@ -37,7 +37,7 @@ public class NotificationsInteractorImpl implements NotificationsInteractor{
 
             @Override
             public void onFailure(Call<NotificationsResponse> call, Throwable t) {
-                mListener.onFailure("Request Failed, Please try again 12");
+                mListener.onFailure("Request Failed, Please try again ");
             }
         });
     }

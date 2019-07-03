@@ -53,7 +53,7 @@ public class PostedQuestionsInteractorImpl implements PostedQuestionsInteractor 
             public void onFailure(Call<PostedQuestionsResponse> call, Throwable t) {
                 Log.d("toString", call.toString() );
                 Log.d("localizedMessage", t.getLocalizedMessage());
-                mListener.onFailure("Request Failed, Please try again 16");
+                mListener.onFailure("Request Failed, Please try again ");
             }
         });
 
@@ -99,7 +99,7 @@ public class PostedQuestionsInteractorImpl implements PostedQuestionsInteractor 
             public void onFailure(Call<PostedQuestionsResponse> call, Throwable t) {
                 Log.d("toString", call.toString() );
                 Log.d("localizedMessage", t.getLocalizedMessage());
-                mListener.onFailure("Request Failed, Please try again 17");
+                mListener.onFailure("Request Failed, Please try again ");
             }
         });
 

@@ -18,7 +18,12 @@ public class LoginInteractorImpl implements LoginInteractor {
 
     @Override
     public void login(final LoginParams params, final OnLoginFinishListener mListener) {
-        Log.d("Response=", "Params=" + params);
+        Log.d("LoginActivity_LOG", "Params=" + params);
+        Log.d("LoginActivity_LOG", "Params=" + params.getDeviceToken());
+        Log.d("LoginActivity_LOG", "Params=" + params.getDeviceType());
+        Log.d("LoginActivity_LOG", "Params=" + params.getThirdPartyId());
+        Log.d("LoginActivity_LOG", "Params=" + params.getThirdPartyType());
+        Log.d("LoginActivity_LOG", "Params=" + params.getUserName());
         Call<LoginResponse> call = WebServiceFactory.getInstance().loginUser(params);
 
         call.enqueue(new Callback<LoginResponse>() {
@@ -46,7 +51,7 @@ public class LoginInteractorImpl implements LoginInteractor {
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                mListener.onFailure("Request Failed, Please try again 1");
+                mListener.onFailure("Request Failed, Please try again ");
             }
         });
 

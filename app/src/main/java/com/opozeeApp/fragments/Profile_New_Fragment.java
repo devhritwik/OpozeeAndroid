@@ -204,9 +204,19 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
             @Override
             public void onClick(View view) {
                 if (followrequest == false) {
-                    followuser(Utils.getLoggedInUserId(getContext()), "true", String.valueOf(mUserId));
+                    if (Utils.isNetworkAvail(getActivity())) {
+                        followuser(Utils.getLoggedInUserId(getContext()), "true", String.valueOf(mUserId));
+                    } else {
+                        Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+                    }
+
                 } else if (followrequest == true) {
-                    unfollowuser(Utils.getLoggedInUserId(getContext()), "false", String.valueOf(mUserId));
+                    if (Utils.isNetworkAvail(getActivity())) {
+                        unfollowuser(Utils.getLoggedInUserId(getContext()), "false", String.valueOf(mUserId));
+                    } else {
+                        Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+                    }
+
                 }
             }
         });
@@ -238,6 +248,7 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
     public void onResume() {
         super.onResume();
         //set presenter to attach view with interactor to get the data from API
+        Log.d("UserId=",Utils.getLoggedInUserId(getContext()));
         if (getArguments().containsKey(PROFILE_FRAGMENG_ARGUEMENT_USER_ID)) {
             mUserId = getArguments().getInt(PROFILE_FRAGMENG_ARGUEMENT_USER_ID);
             AppSP appSP = AppSP.getInstance(getActivity());
@@ -560,11 +571,21 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
         params.setPageIndex(pageIndex);
         params.setPageSize(pageSize);
         params.setUser_id(String.valueOf(mUserId));
-        mPostedQuestionPresenter.getQuestions(params);
+        if (Utils.isNetworkAvail(getActivity())) {
+            mPostedQuestionPresenter.getQuestions(params);
+        } else {
+            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+        }
+
     }
 
     private void getBeliefs() {
-        mUserBeliefPresenter.getUserBeliefs(mUserId);
+        if (Utils.isNetworkAvail(getActivity())) {
+            mUserBeliefPresenter.getUserBeliefs(mUserId);
+        } else {
+            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+        }
+
     }
 
 
@@ -625,7 +646,11 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
         tv_dislikes.setText(dislikes + "");
         tv_likes.setText(likes + "");
         tv_total_question.setText(String.format("Questions Posted : %d", response.getResponse().getUserProfile().getTotalPostedQuestion()));
-
+       if(response.getResponse().getUserProfile().getTotalbeliefs()>0) {
+           mBeliefCountView.setText(String.format("Beliefs Posted : %d", response.getResponse().getUserProfile().getTotalbeliefs()));
+       }else{
+           mBeliefCountView.setText(String.format("Beliefs Posted : %d", 0));
+       }
         follow=response.getResponse().getUserProfile().getFollowers();
         followings= response.getResponse().getUserProfile().getFollowings();
 

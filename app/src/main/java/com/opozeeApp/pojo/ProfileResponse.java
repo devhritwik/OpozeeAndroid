@@ -102,9 +102,22 @@ public class ProfileResponse {
         @Expose
         private Integer totalDislikes;
 
+
+
         @SerializedName("HasFollowed")
         @Expose
         private String hasfollowed;
+        @SerializedName("TotalPostedBeliefs")
+        @Expose
+        private int totalbeliefs;
+
+        public int getTotalbeliefs() {
+            return totalbeliefs;
+        }
+
+        public void setTotalbeliefs(int totalbeliefs) {
+            this.totalbeliefs = totalbeliefs;
+        }
 
         public String getFollowers() {
             return followers;
