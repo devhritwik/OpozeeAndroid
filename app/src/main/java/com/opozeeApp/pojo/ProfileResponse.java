@@ -139,7 +139,7 @@ public class ProfileResponse {
         @Expose
         private String followers;
 
-        @SerializedName("Followings")
+        @SerializedName("Following")
         @Expose
         private String followings;
 
@@ -147,7 +147,7 @@ public class ProfileResponse {
         public String getHasfollowed() {
             return hasfollowed;
         }
-
+t
         public void setHasfollowed(String hasfollowed) {
             this.hasfollowed = hasfollowed;
         }
