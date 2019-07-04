@@ -16,7 +16,7 @@
         <RelativeLayout
             android:id="@+id/top_header"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_220sdp"
+            android:layout_height="@dimen/_250sdp"
             android:background="@color/color_primary">
             <!--<TextView-->
             <!--android:id="@+id/tv_header"-->
@@ -82,14 +82,36 @@
                 android:textColor="@color/white_color"
                 android:textSize="@dimen/_14sdp" />
 
+<LinearLayout
+    android:id="@+id/ll_referlinks"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/tv_user_name"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:layout_centerHorizontal="true"
+    android:orientation="horizontal">
 
 
+    <ImageView
+        android:layout_below="@+id/tv_user_name"
+        android:layout_width="27dp"
+        android:layout_marginLeft="20dp"
+        android:layout_height="30dp"
+        app:srcCompat="@drawable/ic_share_black_24dp"
+        android:padding="@dimen/_5sdp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refer and Earn Coins"
+        android:textColor="@color/white_color"
+        android:layout_marginTop="5dp"/>
+</LinearLayout>
 
             <View
                 android:id="@+id/view_profile"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="1dp"
-                android:layout_below="@+id/tv_user_name"
+                android:layout_below="@+id/ll_referlinks"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@color/color_primary" />

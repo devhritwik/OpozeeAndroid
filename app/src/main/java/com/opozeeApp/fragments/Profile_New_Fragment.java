@@ -20,12 +20,14 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.opozeeApp.R;
 import com.opozeeApp.WebRequest;
 import com.opozeeApp.activities.EditProfileActivity;
+import com.opozeeApp.activities.RefferealCodeActivity;
 import com.opozeeApp.adapters.FollowerUsers;
 import com.opozeeApp.adapters.Followingadapter;
 import com.opozeeApp.adapters.UserBeliefAdapter;
@@ -111,6 +113,8 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
     @BindView(R.id.tv_dislikes)
     TextView tv_dislikes;
 
+    @BindView(R.id.ll_referlinks)
+    LinearLayout ll_referlinks;
 //    @BindView(R.id.recyclerView)
 //    RecyclerView recyclerView;
 
@@ -535,6 +539,11 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
     public void onEditClick() {
         QuestionnaireApplication.getMixpanelApi().track("Edit Profile Picture Clicked");
         Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+        startActivity(intent);
+    }
+    @OnClick(R.id.ll_referlinks)
+    public void referclicked(){
+        Intent intent=new Intent(getActivity(), RefferealCodeActivity.class);
         startActivity(intent);
     }
 

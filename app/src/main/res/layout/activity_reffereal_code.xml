@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.RefferealCodeActivity"
+    android:background="@drawable/back">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_bar_height"
+            android:background="@color/color_primary"
+            android:gravity="center"
+            android:visibility="visible"
+            app:contentInsetLeft="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:contentInsetStart="0dp"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"></android.support.v7.widget.Toolbar>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/_15sdp"
+                android:src="@mipmap/back_icon"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/renner"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="ReferralCode"
+                android:textAllCaps="false"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/_15sdp" />
+
+
+
+
+        </RelativeLayout>
+    <!--<ImageView-->
+        <!--android:id="@+id/iv_back"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--android:layout_marginTop="@dimen/_5sdp"-->
+        <!--android:layout_marginLeft="@dimen/_5sdp"-->
+        <!--app:srcCompat="@drawable/ic_arrow_back_black_24dp"-->
+        <!--android:padding="@dimen/_10sdp"/>-->
+    <TextView
+        android:id="@+id/tv_shared"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:text="Share your referral code and earn 10 OPZ coins"
+        android:textAlignment="center"
+        android:textColor="@color/black_color"
+        android:textSize="@dimen/_18sdp"/>
+
+    <TextView
+        android:id="@+id/tv_sharedtext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_shared"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:text="Every time a new user signs up with your invite code, each will earn 10 OPZ coins."
+        android:textAlignment="center"
+        android:textColor="@color/black_color"
+        android:textSize="@dimen/_11sdp"/>
+
+    <TextView
+        android:id="@+id/tv_referralcode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sharedtext"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:text="Your Refferal Code"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/black_color"
+        android:textSize="@dimen/_14sdp"/>
+
+    <EditText
+        android:id="@+id/et_referralcode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_referralcode"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/backgroiund_editext"
+        android:padding="@dimen/_10sdp"
+        android:enabled="false"
+        android:clickable="false"
+        android:text="jksdkjksadvks"
+        android:textColor="@color/black_color"/>
+
+    <ImageView
+        android:id="@+id/iv_copy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_referralcode"
+        app:layout_constraintBottom_toBottomOf="@+id/et_referralcode"
+        app:srcCompat="@drawable/ic_content_copy_black_24dp"
+        android:layout_marginRight="@dimen/_30sdp"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/stroke_color"
+            app:layout_constraintStart_toStartOf="@+id/et_referralcode"
+            app:layout_constraintEnd_toStartOf="@+id/tv_or"
+            android:layout_marginRight="@dimen/_5sdp"
+            app:layout_constraintTop_toTopOf="@+id/tv_or"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_or"></View>
+    <TextView
+        android:id="@+id/tv_or"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_referralcode"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="or"
+        android:textColor="@color/black_color"
+        android:textSize="@dimen/_14sdp"
+        android:textAlignment="center"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/stroke_color"
+            app:layout_constraintStart_toEndOf="@+id/tv_or"
+            app:layout_constraintEnd_toEndOf="@+id/et_referralcode"
+            android:layout_marginLeft="@dimen/_5sdp"
+            app:layout_constraintTop_toTopOf="@+id/tv_or"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_or"></View>
+    <TextView
+        android:id="@+id/tv_referrallink"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_or"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:text="Your Refferal Link"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/black_color"
+        android:textSize="@dimen/_14sdp"/>
+
+    <EditText
+        android:id="@+id/et_referrallink"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_referrallink"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/backgroiund_editext"
+        android:padding="@dimen/_10sdp"
+        android:enabled="false"
+        android:clickable="false"
+        android:textColor="@color/black_color"/>
+
+    <ImageView
+        android:id="@+id/iv_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_referrallink"
+        app:layout_constraintBottom_toBottomOf="@+id/et_referrallink"
+        app:srcCompat="@drawable/ic_share_black"
+        android:layout_marginRight="@dimen/_30sdp"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</ScrollView>

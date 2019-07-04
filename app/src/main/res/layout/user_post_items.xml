@@ -1,266 +1,278 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:swipe="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white_color"
-    app:cardCornerRadius="7dp"
-    app:cardElevation="1dp"
     android:layout_margin="2dp"
-    app:cardBackgroundColor="@color/white_color">
+    android:background="@color/white_color"
+    app:cardBackgroundColor="@color/white_color"
+    app:cardCornerRadius="7dp"
+    app:cardElevation="1dp">
 
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <LinearLayout
-            android:id="@+id/linear"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_user"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_gravity="center" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_6sdp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/_2sdp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/renner"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:text="user1233"
+                        android:textColor="@color/black_color"
+                        android:textSize="@dimen/_13sdp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:id="@+id/tv_count_likes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_14sdp"
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/renner"
+                            android:gravity="right|bottom"
+                            android:text="Yes 88%"
+                            android:textAllCaps="true"
+                            android:textColor="@color/green_color"
+                            android:textSize="@dimen/_12sdp" />
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_2sdp"
+                        android:layout_weight="0.5"
+                        android:fontFamily="@font/renner"
+                        android:gravity="center_vertical|right"
+                        android:paddingRight="@dimen/_4sdp"
+                        android:singleLine="true"
+                        android:text="Now"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/_11sdp"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:fontFamily="@font/renner"
+                    android:gravity="center_vertical"
+                    android:paddingRight="@dimen/_4sdp"
+                    android:singleLine="true"
+                    android:text="#@user1233"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/_11sdp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center">
+                android:weightSum="2">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="@dimen/_35sdp"
-                    android:layout_height="@dimen/_35sdp"
-                    android:id="@+id/iv_user"
-                    android:layout_gravity="center"
-                    />
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tv_question"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="@dimen/_6sdp">
+                    android:fontFamily="@font/renner"
+                    android:text="Is Today's Climate good?"
+                    android:textColor="@color/black_color"
+                    android:layout_weight="0.4"
+                    android:textSize="@dimen/_13sdp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="2"
-                        android:gravity="left|center">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="user1233"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/renner"
-                            android:textColor="@color/black_color"
-                            android:id="@+id/tv_name"
-                            android:layout_marginRight="@dimen/_2sdp"
-                            android:gravity="center_vertical"
-                            android:textSize="@dimen/_13sdp"
-                            android:singleLine="true"
-                            />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/tv_count_likes"
-                            android:textSize="@dimen/_12sdp"
-                            android:textColor="@color/green_color"
-                            android:text="Yes 88%"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:gravity="right|bottom"
-                            android:fontFamily="@font/renner"
-                            android:textAllCaps="true"
-                            android:layout_weight="1"
-                            android:layout_marginLeft="@dimen/_14sdp"
-                            />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Now"
-                            android:visibility="gone"
-                            android:textColor="@color/grey"
-                            android:id="@+id/tv_time"
-                            android:paddingRight="@dimen/_4sdp"
-                            android:layout_weight="0.5"
-                            android:fontFamily="@font/renner"
-                            android:layout_marginLeft="@dimen/_2sdp"
-                            android:gravity="center_vertical|right"
-                            android:textSize="@dimen/_11sdp"
-                            android:singleLine="true"
-                            />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="#@user1233"
-                        android:visibility="gone"
-                        android:layout_weight="0.4"
-                        android:fontFamily="@font/renner"
-                        android:textColor="@color/grey"
-                        android:id="@+id/tv_user_name"
-                        android:gravity="center_vertical"
-                        android:textSize="@dimen/_11sdp"
-                        android:singleLine="true"
-                        android:paddingRight="@dimen/_4sdp"
-                        />
-
-                </LinearLayout>
-
-
+                <ImageView
+                    android:id="@+id/iv_delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_weight="1.6"
+                    app:srcCompat="@drawable/ic_delete_black_24dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="@dimen/_4sdp"
-                >
-
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tv_question"
-                    android:textSize="@dimen/_13sdp"
-                    android:textColor="@color/black_color"
-                    android:fontFamily="@font/renner"
-                    android:text="Is Today's Climate good?"
-                    />
-
+                android:weightSum="1">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:weightSum="1"
-                    android:orientation="vertical">
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="0.70"
+                        android:fontFamily="@font/renner"
+                        android:gravity="bottom"
+                        android:text="Opinions"
+                        android:textAllCaps="true"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="1"
-                        android:gravity="center"
-                        android:layout_marginTop="@dimen/_6sdp"
-                        >
-                        <TextView
-                            android:visibility="gone"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/_12sdp"
-                            android:textColor="@color/grey"
-                            android:text="Opinions"
-                            android:gravity="bottom"
-                            android:layout_gravity="bottom"
-                            android:fontFamily="@font/renner"
-                            android:textAllCaps="true"
-                            android:layout_weight="0.70"
-                            />
+                        android:layout_weight="0.30"
+                        android:orientation="vertical"
+                        android:weightSum="1">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:weightSum="1"
-                            android:layout_weight="0.30">
+                            android:layout_weight="0.30"
+                            android:orientation="horizontal"
+                            android:visibility="gone"
+                            android:weightSum="1">
 
-                            <LinearLayout
+                            <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:weightSum="1"
-                                android:visibility="gone"
-                                android:layout_weight="0.30">
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="@dimen/_12sdp"
-                                    android:textColor="@color/green_color"
-                                    android:text="Yes 88%"
-                                    android:gravity="left|bottom"
-                                    android:fontFamily="@font/renner"
-                                    android:textAllCaps="true"
-                                    android:layout_weight="0.5"
-                                    android:layout_marginLeft="@dimen/_14sdp"
-                                    />
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:id="@+id/tv_count_dislikes"
-                                    android:textSize="@dimen/_12sdp"
-                                    android:textColor="@color/red_color"
-                                    android:gravity="right|center"
-                                    android:text="No 12%"
-                                    android:layout_marginRight="@dimen/_14sdp"
-                                    android:fontFamily="@font/renner"
-                                    android:textAllCaps="true"
-                                    android:layout_weight="0.50"
-                                    />
+                                android:layout_marginLeft="@dimen/_14sdp"
+                                android:layout_weight="0.5"
+                                android:fontFamily="@font/renner"
+                                android:gravity="left|bottom"
+                                android:text="Yes 88%"
+                                android:textAllCaps="true"
+                                android:textColor="@color/green_color"
+                                android:textSize="@dimen/_12sdp" />
 
-
-                            </LinearLayout>
-
-
-                            <SeekBar
-                                android:visibility="gone"
-                                android:thumb="@null"
+                            <TextView
+                                android:id="@+id/tv_count_dislikes"
                                 android:layout_width="match_parent"
-                                android:layout_height="@dimen/_5sdp"
-                                android:id="@+id/seekBar"
-                                android:layout_weight="0.7"
-                                android:progressDrawable="@drawable/progress_line"/>
-
-
-                            <!--<com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="@dimen/_5sdp"-->
-                            <!--app:rcProgress="50"-->
-                            <!--app:rcSecondaryProgress="100"-->
-                            <!--app:rcMax="100"-->
-                            <!--app:rcRadius="5dp"-->
-                            <!--app:rcBackgroundPadding="0dp"-->
-                            <!--app:rcReverse="false"-->
-                            <!--app:rcProgressColor="@drawable/red"-->
-                            <!--app:rcSecondaryProgressColor="@drawable/green"-->
-                            <!--app:rcBackgroundColor="@color/black_color"-->
-                            <!--app:rcIconSrc="@drawable/red"/>-->
-
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="@dimen/_14sdp"
+                                android:layout_weight="0.50"
+                                android:fontFamily="@font/renner"
+                                android:gravity="right|center"
+                                android:text="No 12%"
+                                android:textAllCaps="true"
+                                android:textColor="@color/red_color"
+                                android:textSize="@dimen/_12sdp" />
 
 
                         </LinearLayout>
 
+
+                        <SeekBar
+                            android:id="@+id/seekBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_5sdp"
+                            android:layout_weight="0.7"
+                            android:progressDrawable="@drawable/progress_line"
+                            android:thumb="@null"
+                            android:visibility="gone" />
+
+
+                        <!--<com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="@dimen/_5sdp"-->
+                        <!--app:rcProgress="50"-->
+                        <!--app:rcSecondaryProgress="100"-->
+                        <!--app:rcMax="100"-->
+                        <!--app:rcRadius="5dp"-->
+                        <!--app:rcBackgroundPadding="0dp"-->
+                        <!--app:rcReverse="false"-->
+                        <!--app:rcProgressColor="@drawable/red"-->
+                        <!--app:rcSecondaryProgressColor="@drawable/green"-->
+                        <!--app:rcBackgroundColor="@color/black_color"-->
+                        <!--app:rcIconSrc="@drawable/red"/>-->
+
+
                     </LinearLayout>
-
-
 
                 </LinearLayout>
 
 
             </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                android:layout_marginTop="@dimen/_6sdp"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginRight="3dp"
-                    android:layout_weight="1.3"
-                    android:gravity="left|center">
+                android:layout_marginRight="3dp"
+                android:layout_weight="1.3"
+                android:gravity="left|center"
+                android:orientation="horizontal">
 
 
-                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-
-
+    </LinearLayout>
 
 
 </android.support.v7.widget.CardView>

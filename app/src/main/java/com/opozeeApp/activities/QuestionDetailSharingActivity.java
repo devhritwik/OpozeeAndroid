@@ -1,12 +1,12 @@
 package com.opozeeApp.activities;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,7 +27,6 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.google.android.flexbox.FlexboxLayout;
 import com.opozeeApp.R;
@@ -55,7 +54,6 @@ import com.opozeeApp.question_detail_mvp.model.QuestionDetailInteractorImpl;
 import com.opozeeApp.question_detail_mvp.presenter.QuestionDetailPresenterImpl;
 import com.opozeeApp.question_detail_mvp.view.QuestionDetailView;
 import com.opozeeApp.utils.AppGlobal;
-import com.opozeeApp.utils.AppUtils;
 import com.opozeeApp.utils.Utils;
 import com.squareup.picasso.Picasso;
 
@@ -77,7 +75,7 @@ import static com.opozeeApp.activities.EmptyFragmentActivity.EMPTY_FRAGMENT_ACTI
 import static com.opozeeApp.fragments.Profile_New_Fragment.PROFILE_FRAGMENG_ARGUEMENT_USER_ID;
 import static com.opozeeApp.fragments.TagSeachFragment.SEARCH_TAG_ARGUMENT;
 
-public class QuestionDetailActivity extends  com.opozeeApp.newemojilikegif.ActivityWithEmoji implements QuestionDetailView, BookMarkView, LikeDislikeView, ProfileView {
+public class QuestionDetailSharingActivity extends  com.opozeeApp.newemojilikegif.ActivityWithEmoji implements QuestionDetailView, BookMarkView, LikeDislikeView, ProfileView {
 
     @BindView(R.id.question_details_opinion_recycle_view)
     RecyclerView recyclerView;
@@ -147,7 +145,6 @@ public class QuestionDetailActivity extends  com.opozeeApp.newemojilikegif.Activ
     public List<QuestionDetailResponse.Comment> commentList=new ArrayList<>();
 
 
-    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -164,126 +161,23 @@ public class QuestionDetailActivity extends  com.opozeeApp.newemojilikegif.Activ
         Log.e("FROM>>> ", "" + from);
         //set presenter to attach with model and view so that they can interact with each other for data transfer
         setPresenter();
+        //call API
+        getDetail();
+        //set presenter to attach view with interactor to get the data from API
+        setProfile();
+        //call API to populate data
+        getProfile();
+
+        //setupYesNoButtonMode();
+        setupAddingOpinionInterface();
+
+
+
 
         // ATTENTION: This was auto-generated to handle app links.
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
-        Log.d("ShareData=",""+appLinkData);
-
-       if(appLinkData==null){
-           getDetail();
-           //set presenter to attach view with interactor to get the data from API
-           setProfile();
-           //call API to populate data
-           getProfile();
-
-           //setupYesNoButtonMode();
-           setupAddingOpinionInterface();
-       }else if(appLinkData.toString().trim().length()>0){
-           String data=appLinkData.toString();
-           String split[]=data.split("/");
-           Log.d("Status=","length="+split.length);
-           int datas=0;
-
-               for(int i=0;i<split.length;i++){
-                   try {
-                       Log.d("Status=", split[i]);
-                   datas=Integer.parseInt(split[i]);
-                   }catch (Exception e){
-
-                   }
-                   }
-
-
-
-
-           Log.d("Status=",""+datas);
-           id=datas;
-           if(id<=0){
-               Intent intent=new Intent(QuestionDetailActivity.this,SplashActivity.class);
-               intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
-               startActivity(intent);
-               finish();
-           }else {
-               getDetail();
-               //set presenter to attach view with interactor to get the data from API
-               setProfile();
-               //call API to populate data
-               if (AppUtils.isLoggedIn(QuestionDetailActivity.this)) {
-                   getProfile();
-               }
-           }
-
-
-           //setupYesNoButtonMode();
-           setupAddingOpinionInterface();
-       }
-
-
-//        linear.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(commentList.size()>0) {
-//                    for (int i = 0; i < commentList.size(); i++) {
-//                        commentList.get(i).setIschecked(false);
-//                        if(ticketNumber!=null) {
-//                            ticketNumber.notifyDataSetChanged();
-//                        }
-//                    }
-//                }
-////                for (QuestionDetailResponse.Comment item1 : usersList) {
-////                    item1.setIschecked(false);
-////                }
-//            }
-//        });
-//        toolbar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(commentList.size()>0) {
-//                    for (int i = 0; i < commentList.size(); i++) {
-//                        commentList.get(i).setIschecked(false);
-//                        if(ticketNumber!=null) {
-//                            ticketNumber.notifyDataSetChanged();
-//                        }
-//                    }
-//                }
-//
-//            }
-//        });
-
-//        rl_questions.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(getApplicationContext(), "test visibility", Toast.LENGTH_SHORT).show();
-//                if(OpinionAdapter.ViewHolder.ll_subreation.getVisibility()==View.VISIBLE){
-//                    OpinionAdapter.ViewHolder.ll_subreation.setVisibility(View.GONE);
-//                }
-//            }
-//        });
-//        view_reaction.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(QuestionDetailActivity.this, "Check testing", Toast.LENGTH_SHORT).show();
-//                if (OpinionAdapter.ViewHolder.ll_subreation.getVisibility() == View.VISIBLE) {
-//                    OpinionAdapter.ViewHolder.ll_subreation.setVisibility(View.GONE);
-//                    view_reaction.setVisibility(View.GONE);
-//                }
-//            }
-//        });
-
-        if(AppUtils.isLoggedIn(QuestionDetailActivity.this)) {
-            mAddOpinionFAB.setVisibility(View.VISIBLE);
-            iv_favourite.setVisibility(View.VISIBLE);
-        }else{
-            mAddOpinionFAB.setVisibility(View.GONE);
-            iv_favourite.setVisibility(View.INVISIBLE);
-        }
-
-
-
-
-
     }
 
     private void getProfile() {
@@ -334,16 +228,9 @@ public class QuestionDetailActivity extends  com.opozeeApp.newemojilikegif.Activ
     @OnClick(R.id.iv_back)
     void onBackClick() {
         if (from == null)
-            if(AppUtils.isLoggedIn(QuestionDetailActivity.this)){
-                finish();
-            }else {
-
-                Intent intent=new Intent(QuestionDetailActivity.this,SplashActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
+            finish();
         else if (from.equals("notification")) {
-            Intent i = new Intent(QuestionDetailActivity.this, HomeActivity.class);
+            Intent i = new Intent(QuestionDetailSharingActivity.this, HomeActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
             finish();
@@ -355,18 +242,10 @@ public class QuestionDetailActivity extends  com.opozeeApp.newemojilikegif.Activ
     public void onBackPressed() {
         super.onBackPressed();
 
-        if (from == null) {
-            if(AppUtils.isLoggedIn(QuestionDetailActivity.this)){
-                finish();
-            }else {
-
-                Intent intent=new Intent(QuestionDetailActivity.this,SplashActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-          }
+        if (from == null)
+            super.onBackPressed();
         else if (from.equals("notification")) {
-            Intent i = new Intent(QuestionDetailActivity.this, HomeActivity.class);
+            Intent i = new Intent(QuestionDetailSharingActivity.this, HomeActivity.class);
             i.putExtra("from", "DetailActivity");
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
@@ -382,7 +261,7 @@ public class QuestionDetailActivity extends  com.opozeeApp.newemojilikegif.Activ
         QuestionnaireApplication.getMixpanelApi().track("share clicked", new JSONObject(map));
         Intent sendIntent = new Intent();
 //        String url = "https://opozee.com/qid/" + mQuestionId;
-        String url = "https://opozee.com/questiondetail/"+mQuestionId;
+        String url = "http://test.opozee.com/questiondetail";
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey I'd like to know your opinion on this question. " + url);
         sendIntent.setType("text/plain");
@@ -406,55 +285,27 @@ public class QuestionDetailActivity extends  com.opozeeApp.newemojilikegif.Activ
     }
 
     private void getDetail() {
-        Log.d("Status=",""+id);
-        Log.d("Status=",Utils.getLoggedInUserId(QuestionDetailActivity.this));
         QuestionDetailParams params = new QuestionDetailParams();
         params.setQuestionId(String.valueOf(id));
-        if(AppUtils.isLoggedIn(QuestionDetailActivity.this)) {
-            params.setUserid(Utils.getLoggedInUserId(QuestionDetailActivity.this));
-        }else{
-            params.setUserid("0");
-        }
-        if (Utils.isNetworkAvail(QuestionDetailActivity.this)) {
+        params.setUserid(Utils.getLoggedInUserId(QuestionDetailSharingActivity.this));
+        if (Utils.isNetworkAvail(QuestionDetailSharingActivity.this)) {
             mPresenter.getQuestionDetail(params);
         } else {
-            Utils.showCustomToast(QuestionDetailActivity.this, getString(R.string.internet_alert));
+            Utils.showCustomToast(QuestionDetailSharingActivity.this, getString(R.string.internet_alert));
         }
     }
 
     private void getDetailWithoutShowingLoading() {
         QuestionDetailParams params = new QuestionDetailParams();
         params.setQuestionId(String.valueOf(id));
-        params.setUserid(Utils.getLoggedInUserId(QuestionDetailActivity.this));
-        if (Utils.isNetworkAvail(QuestionDetailActivity.this)) {
+        params.setUserid(Utils.getLoggedInUserId(QuestionDetailSharingActivity.this));
+        if (Utils.isNetworkAvail(QuestionDetailSharingActivity.this)) {
             mPresenter.getQuestionDetailWithoutShowingLoading(params);
         } else {
-            Utils.showCustomToast(QuestionDetailActivity.this, getString(R.string.internet_alert));
+            Utils.showCustomToast(QuestionDetailSharingActivity.this, getString(R.string.internet_alert));
         }
     }
-//
-//    private void postOpinion(String opinion)
-//    {
-//
-//        if(opinion.trim().length() != 0 && opinion.trim() != null)
-//        {
-//            send_message_layout.setVisibility(View.GONE);
-//            //the below line has been added for smileys or emojis
-//            String toServerUnicodeEncoded = StringEscapeUtils.escapeJava(opinion.trim());
-//            OpinionParams params = new OpinionParams();
-//            params.setId(String.valueOf(0));
-//            params.setQuestion_id(String.valueOf(id));
-//            params.setCommentedUserId(Utils.getLoggedInUserId(QuestionDetailActivity.this));
-//            params.setComment(toServerUnicodeEncoded);
-//            params.setOpinionAgreeStatus(agreeStatus);
-//
-//            if (Utils.isNetworkAvail(QuestionDetailActivity.this)) {
-//                mOpinionPresenter.addOpinion(params);
-//            } else {
-//                Utils.showCustomToast(QuestionDetailActivity.this, getString(R.string.internet_alert));
-//            }
-//        }
-//    }
+
 
     private void setPresenter() {
         //opinion presenter
@@ -475,64 +326,31 @@ public class QuestionDetailActivity extends  com.opozeeApp.newemojilikegif.Activ
 
     }
 
-    //like dislike opinion
-//    LikeDislikeOpinion
+
     public void likeDislike(int commentStatus, int opinionId,int reactiontype,List<QuestionDetailResponse.Comment> commentList1) {
-//        if(commentList.size()>0) {
-//            for (int i = 0; i < commentList.size(); i++) {
-//                commentList.get(i).setIschecked(false);
-//                if(ticketNumber!=null) {
-//                    ticketNumber.notifyDataSetChanged();
-//
-//                }
-//            }
-//        }
-//        ticketNumber.notifyItemChanged(0);
-//
-//            new Handler().postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    if(commentList1.size()>0&&ticketNumber!=null&&recyclerView!=null) {
-////                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(QuestionDetailActivity.this, LinearLayoutManager.VERTICAL, false);
-////                        ticketNumber = new OpinionAdapter(QuestionDetailActivity.this, commentList1);
-////                        recyclerView.setLayoutManager(linearLayoutManager);
-////                        recyclerView.setAdapter(ticketNumber);
-//
-//                    }
-//                }
-//            }, 500);
-//        ticketNumber.notifyDataSetChanged();
 
-        if(AppUtils.isLoggedIn(QuestionDetailActivity.this)) {
 
-            if (Utils.isNetworkAvail(QuestionDetailActivity.this)) {
-                Log.d("Data_Log", "" + commentStatus);
-                Log.d("Data_Log", "" + opinionId);
-                Log.d("Data_Log", "" + reactiontype);
+        if (Utils.isNetworkAvail(QuestionDetailSharingActivity.this)) {
+            Log.d("Data_Log",""+commentStatus);
+            Log.d("Data_Log",""+opinionId);
+            Log.d("Data_Log",""+reactiontype);
 
-                mLikeDislikePresenter.dislike(getParams(commentStatus, opinionId, reactiontype));
-            } else {
-                Utils.showCustomToast(QuestionDetailActivity.this, getString(R.string.internet_alert));
-            }
-        }else{
-            Intent intent=new Intent(QuestionDetailActivity.this,SplashActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
-
+            mLikeDislikePresenter.dislike(getParams(commentStatus, opinionId,reactiontype));
+        } else {
+            Utils.showCustomToast(QuestionDetailSharingActivity.this, getString(R.string.internet_alert));
         }
     }
 
     //like dislike opinion
     private void bookMarkQuestion(boolean isBooked) {
-        if (Utils.isNetworkAvail(QuestionDetailActivity.this)) {
+        if (Utils.isNetworkAvail(QuestionDetailSharingActivity.this)) {
             Map<String, String> map = new HashMap<>();
             map.put("Bookmark change", !isBooked + " to " + isBooked);
             map.put("Question", mQuestionText);
             QuestionnaireApplication.getMixpanelApi().track("Bookmark clicked", new JSONObject(map));
             mBookMarkPresenter.bookMark(getBookMarkParams(isBooked));
         } else {
-            Utils.showCustomToast(QuestionDetailActivity.this, getString(R.string.internet_alert));
+            Utils.showCustomToast(QuestionDetailSharingActivity.this, getString(R.string.internet_alert));
         }
     }
 
@@ -541,17 +359,17 @@ public class QuestionDetailActivity extends  com.opozeeApp.newemojilikegif.Activ
         params.setBookmark(isBooked);
         params.setId(String.valueOf(0));
         params.setQuestion_id(String.valueOf(id));
-        params.setUserId(Utils.getLoggedInUserId(QuestionDetailActivity.this));
+        params.setUserId(Utils.getLoggedInUserId(QuestionDetailSharingActivity.this));
         return params;
     }
 
     //get likedislike params
-    private LikeDislikeParams getParams(int commentStatus, int opinionId,int reactiontype) {
+    private LikeDislikeParams getParams(int commentStatus, int opinionId, int reactiontype) {
         LikeDislikeParams params = new LikeDislikeParams();
         params.setId(0);
         params.setQuestId(id);
         params.setCommentedId(opinionId);
-        params.setCommentedUserId(Integer.parseInt(Utils.getLoggedInUserId(QuestionDetailActivity.this)));
+        params.setCommentedUserId(Integer.parseInt(Utils.getLoggedInUserId(QuestionDetailSharingActivity.this)));
         params.setCommentStatus(commentStatus);
         params.setReactiontype(reactiontype);
         return params;
@@ -559,32 +377,18 @@ public class QuestionDetailActivity extends  com.opozeeApp.newemojilikegif.Activ
 
     public void setAdapter(List<QuestionDetailResponse.Comment> homeList) {
         commentList=homeList;
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(QuestionDetailActivity.this, LinearLayoutManager.VERTICAL, false);
-        ticketNumber = new OpinionAdapter(QuestionDetailActivity.this, homeList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(QuestionDetailSharingActivity.this, LinearLayoutManager.VERTICAL, false);
+        ticketNumber = new OpinionAdapter(QuestionDetailSharingActivity.this, homeList);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(ticketNumber);
     }
 
-//    @OnClick(R.id.iv_send)
-//    void onSendClick()
-//    {
-//
-//        hideKeyBoard();
-//        if(tokens == 0 || tokens < 0)
-//        {
-//            tokensAlert();
-//        }
-//        else {
-//
-//            postOpinion(edit_message.getText().toString());
-//        }
-//
-//    }
+
 
     @Override
     public void showProgress() {
         if (Utils.mProgressDialog == null)
-            Utils.showProgress(QuestionDetailActivity.this);
+            Utils.showProgress(QuestionDetailSharingActivity.this);
     }
 
     @Override
@@ -597,7 +401,7 @@ public class QuestionDetailActivity extends  com.opozeeApp.newemojilikegif.Activ
     public void onSuccess(LikeDislikeResponse response) {
         //dont Update the data (If uppdate data uncomment following line)
 //        getDetailWithoutShowingLoading();
-      getDetail();
+        getDetail();
         //Do nothing
     }
 
@@ -636,7 +440,7 @@ public class QuestionDetailActivity extends  com.opozeeApp.newemojilikegif.Activ
             public void onAnimationEnd(Animation animation) {
                 view.setVisibility(visibilityStatus);
                 if (view instanceof LinearLayout) {
-                    slideUpVisibility(QuestionDetailActivity.this, send_message_layout, View.VISIBLE);
+                    slideUpVisibility(QuestionDetailSharingActivity.this, send_message_layout, View.VISIBLE);
                 }
 
             }
@@ -670,7 +474,7 @@ public class QuestionDetailActivity extends  com.opozeeApp.newemojilikegif.Activ
                 public void onClick(View v) {
                     QuestionnaireApplication.getMixpanelApi().track("Profile Opened", jsonObject);
                     int userId = response.getResponse().getAllOpinion().getPostQuestionDetail().getOwnerUserID();
-                    Intent intent = new Intent(QuestionDetailActivity.this, ProfileActivity.class);
+                    Intent intent = new Intent(QuestionDetailSharingActivity.this, ProfileActivity.class);
                     intent.putExtra(PROFILE_FRAGMENG_ARGUEMENT_USER_ID, userId);
                     startActivity(intent);
                 }
@@ -680,7 +484,7 @@ public class QuestionDetailActivity extends  com.opozeeApp.newemojilikegif.Activ
                 public void onClick(View v) {
                     QuestionnaireApplication.getMixpanelApi().track("Profile Opened", jsonObject);
                     int userId = response.getResponse().getAllOpinion().getPostQuestionDetail().getOwnerUserID();
-                    Intent intent = new Intent(QuestionDetailActivity.this, ProfileActivity.class);
+                    Intent intent = new Intent(QuestionDetailSharingActivity.this, ProfileActivity.class);
                     intent.putExtra(PROFILE_FRAGMENG_ARGUEMENT_USER_ID, userId);
                     startActivity(intent);
                 }
@@ -691,11 +495,11 @@ public class QuestionDetailActivity extends  com.opozeeApp.newemojilikegif.Activ
             Log.d("HASHTAG=",tagString);
 //            if(tagString.contains("#")) {
 //                tagString = tagString.replace(",", "");
-                String[] tags = tagString.split("#");
-                for (String tag : tags) {
-                    String[] tagdata=tag.split(",");
-                    for (int k=0;k<tagdata.length;k++){
-                        View currTagView = generateTagView(tagdata[k]);
+            String[] tags = tagString.split("#");
+            for (String tag : tags) {
+                String[] tagdata=tag.split(",");
+                for (int k=0;k<tagdata.length;k++){
+                    View currTagView = generateTagView(tagdata[k]);
                     if (currTagView != null) {
                         mTagsContainer.addView(currTagView);
                     }
@@ -791,11 +595,11 @@ public class QuestionDetailActivity extends  com.opozeeApp.newemojilikegif.Activ
                 percentage = 0;
                 scoreNo = 0;
                 scoreYes = 0;
-                seekBar.setProgressDrawable(QuestionDetailActivity.this.getResources().getDrawable(R.drawable.progress_bg));
+                seekBar.setProgressDrawable(QuestionDetailSharingActivity.this.getResources().getDrawable(R.drawable.progress_bg));
                 seekBar.setSecondaryProgress(0);
                 seekBar.invalidate();
             } else {
-                seekBar.setProgressDrawable(QuestionDetailActivity.this.getResources().getDrawable(R.drawable.progress_line));
+                seekBar.setProgressDrawable(QuestionDetailSharingActivity.this.getResources().getDrawable(R.drawable.progress_line));
 //            seekBar.setProgress(dislikes_percentage);
                 seekBar.setSecondaryProgress( percentage);
                 seekBar.invalidate();
@@ -809,57 +613,10 @@ public class QuestionDetailActivity extends  com.opozeeApp.newemojilikegif.Activ
         }
 
 
-
-
-
-        //        int total = likes + dislikes == 0 ? 100 : likes + dislikes;
-//
-//        // dislike span
-//        int dislikes_percentage = ((dislikes * 100 / total));
-//
-//        Log.e("Dislikes >>", "  " + dislikes + "    " + dislikes_percentage);
-//        // like span
-//        int likes_percentage = (likes * 100 / total);
-//        Log.e("likes >>", "  " + likes + "    " + likes_percentage);
-//
-//        if (dislikes == 0 && likes == 0) {
-//            seekBar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_bg));
-//            seekBar.setSecondaryProgress(0);
-//            seekBar.invalidate();
-//        } else {
-//            seekBar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_line));
-////            seekBar.setProgress(dislikes_percentage);
-//            seekBar.setSecondaryProgress(likes_percentage);
-//            seekBar.invalidate();
-//        }
-//
-//        tv_count_dislikes.setText("No " + dislikes_percentage + "%");
-//        tv_count_likes.setText(likes_percentage + "% Yes");
-//
-//
-//    }
-//
-//    private void tokensAlert() {
-//        new AlertDialog.Builder(QuestionDetailActivity.this)
-//                .setMessage("You have 0 tokens in your account. Please email us to refill the account to post opinion.")
-//                .setPositiveButton(R.string.email, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        dialogInterface.dismiss();
-//                        sendEmail();
-//                    }
-//                })
-//                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        dialogInterface.dismiss();
-//                    }
-//                })
-//                .show();
     }
 
     private void sendEmail() {
-        Intent i = QuestionDetailActivity.this.getPackageManager().getLaunchIntentForPackage("com.google.android.gm");
+        Intent i = QuestionDetailSharingActivity.this.getPackageManager().getLaunchIntentForPackage("com.google.android.gm");
         if (i != null) {
 
 
@@ -873,14 +630,14 @@ public class QuestionDetailActivity extends  com.opozeeApp.newemojilikegif.Activ
             emailIntent.setData(Uri.parse(mailTo));
             startActivity(emailIntent);
         } else {
-            Toast.makeText(QuestionDetailActivity.this, "Gmail App Is Not Installed In Your Phone", Toast.LENGTH_SHORT).show();
+            Toast.makeText(QuestionDetailSharingActivity.this, "Gmail App Is Not Installed In Your Phone", Toast.LENGTH_SHORT).show();
         }
     }
 
 
     @Override
     public void onFailure(String error) {
-        Utils.showCustomToast(QuestionDetailActivity.this, error);
+        Utils.showCustomToast(QuestionDetailSharingActivity.this, error);
     }
 
     public void hideKeyBoard() {
@@ -962,12 +719,12 @@ public class QuestionDetailActivity extends  com.opozeeApp.newemojilikegif.Activ
                 Map<String, String> map = new HashMap<>();
                 map.put("Tag", tag);
                 QuestionnaireApplication.getMixpanelApi().track("Tag Clicked", new JSONObject(map));
-                Intent intent = new Intent(QuestionDetailActivity.this, EmptyFragmentActivity.class);
+                Intent intent = new Intent(QuestionDetailSharingActivity.this, EmptyFragmentActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString(EMPTY_FRAGMENT_ACTIVITY_TITLE_ARGUMENT, "#" + tag);
                 bundle.putString(SEARCH_TAG_ARGUMENT, tag);
                 intent.putExtras(bundle);
-                QuestionDetailActivity.this.startActivity(intent);
+                QuestionDetailSharingActivity.this.startActivity(intent);
             }
         });
 

@@ -165,9 +165,9 @@ public class AllSearchFragment extends Fragment implements PostedQuestionsView {
 
     public void setAdapter() {
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        mAdapter = new HomeQuestionsAdapter(getActivity(), questionsList);
+//        mAdapter = new HomeQuestionsAdapter(getActivity(), questionsList);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(mAdapter);
+//        recyclerView.setAdapter(mAdapter);
     }
 
 
@@ -190,13 +190,23 @@ public class AllSearchFragment extends Fragment implements PostedQuestionsView {
     public void onSuccess(PostedQuestionsResponse response) {
 //        Log.d("HomeQuestionLog=",""+response.getResponse());
 //        Log.d("HomeQuestionLog=",""+response);
+
         if(response.getResponse().getAllUserQuestions().getPostQuestionDetail() != null)
             if(response.getResponse().getAllUserQuestions().getPostQuestionDetail().size() > 0) {
 //                Log.d("HomeQuestionLog=",response.getResponse().getAllUserQuestions().getPostQuestionDetail().toString());
                 questionsList.addAll(response.getResponse().getAllUserQuestions().getPostQuestionDetail());
-                mAdapter.notifyDataSetChanged();
+//                mAdapter.notifyDataSetChanged();
+                mAdapter = new HomeQuestionsAdapter(getActivity(), questionsList);
+                recyclerView.setAdapter(mAdapter);
+
                 isRefreshed = false;
                 isLastPage = false;
+
+                if(Utils.mProgressDialog != null)
+                    Utils.dismissProgress();
+            }else{
+                if(Utils.mProgressDialog != null)
+                    Utils.dismissProgress();
             }
     }
 

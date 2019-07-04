@@ -194,7 +194,13 @@ public class CountSearchFragment extends Fragment implements PostedQuestionsView
                 mAdapter.notifyDataSetChanged();
                 isRefreshed = false;
                 isLastPage = false;
+                if(Utils.mProgressDialog != null)
+                    Utils.dismissProgress();
+            }else{
+                if(Utils.mProgressDialog != null)
+                    Utils.dismissProgress();
             }
+
     }
 
 

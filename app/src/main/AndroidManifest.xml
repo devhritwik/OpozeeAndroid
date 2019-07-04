@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:tools="http://schemas.android.com/tools"
     package="com.opozeeApp">
-
-    <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
+    <!-- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
-    <!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
-    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
-    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" /> <!-- <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.VIBRATE"></uses-permission>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:name="com.opozeeApp.application.QuestionnaireApplication"
+        android:name=".application.QuestionnaireApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -27,75 +23,90 @@
         android:usesCleartextTraffic="true"
         android:versionCode="9"
         tools:replace="android:allowBackup">
-        <activity android:name="com.opozeeApp.CheckPermissionsRefine"></activity>
-        <activity android:name="com.opozeeApp.testing.ReactionButton"></activity>
-        <activity android:name="com.opozeeApp.testing.MainTestActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+        <activity
+            android:name=".activities.RefferealCodeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity>
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+        <activity android:name=".CheckPermissionsRefine" />
+        <activity android:name=".testing.ReactionButton" />
+        <activity android:name=".testing.MainTestActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-        <activity android:name="com.opozeeApp.testing.TestingActivity"></activity>
-        <activity android:name="com.opozeeApp.OpozeeActivity" />
-        <activity android:name="com.opozeeApp.activities.RegisterUserActivity" />
+        <activity android:name=".testing.TestingActivity" />
+        <activity android:name=".OpozeeActivity" />
+        <activity android:name=".activities.RegisterUserActivity" />
         <activity
-            android:name="com.opozeeApp.activities.UserQuestionPostsActivity"
+            android:name=".activities.UserQuestionPostsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.opozeeApp.activities.EditProfileActivity"
+            android:name=".activities.EditProfileActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.opozeeApp.activities.QuestionDetailActivity"
-            android:screenOrientation="portrait" />
+            android:name=".activities.QuestionDetailActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="opozee.com"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
         <activity
-            android:name="com.opozeeApp.activities.HomeActivity"
+            android:name=".activities.HomeActivity"
             android:label="@string/title_activity_home"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.opozeeApp.activities.ProfileActivity"
+            android:name=".activities.ProfileActivity"
             android:label="@string/title_profile"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.opozeeApp.activities.SplashActivity"
+            android:name=".activities.SplashActivity"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
-
-
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
-            android:name="com.opozeeApp.activities.EmptyFragmentActivity"
+            android:name=".activities.EmptyFragmentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.opozeeApp.activities.LoginActivity"
+            android:name=".activities.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-
-
-
-
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -126,7 +137,7 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/color_primary_light" />
 
-        <service android:name="com.opozeeApp.fcm.FCMMessagingService">
+        <service android:name=".fcm.FCMMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

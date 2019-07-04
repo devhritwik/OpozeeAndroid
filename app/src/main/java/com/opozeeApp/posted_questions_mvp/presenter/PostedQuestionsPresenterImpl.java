@@ -12,7 +12,7 @@ public class PostedQuestionsPresenterImpl implements PostedQuestionsPresenter, P
 
     @Override
     public void onSuccess(PostedQuestionsResponse response) {
-        pView.hideProgress();
+//        pView.hideProgress();
         pView.onSuccess(response);
     }
 

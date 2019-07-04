@@ -9,6 +9,7 @@ package com.opozeeApp.adapters;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
+        import android.widget.ImageView;
         import android.widget.LinearLayout;
         import android.widget.SeekBar;
         import android.widget.TextView;
@@ -17,7 +18,9 @@ package com.opozeeApp.adapters;
         import com.opozeeApp.R;
         import com.opozeeApp.activities.QuestionDetailActivity;
         import com.opozeeApp.application.QuestionnaireApplication;
+        import com.opozeeApp.pojo.PostQuestionResponse;
         import com.opozeeApp.pojo.PostedQuestionsResponse;
+        import com.opozeeApp.profiletabs.Questions;
         import com.opozeeApp.utils.AppGlobal;
         import com.opozeeApp.utils.Utils;
         import com.squareup.picasso.Picasso;
@@ -28,10 +31,13 @@ package com.opozeeApp.adapters;
         import java.util.HashMap;
         import java.util.List;
         import java.util.Map;
+        import java.util.concurrent.TimeUnit;
 
         import butterknife.BindView;
         import butterknife.ButterKnife;
         import de.hdodenhof.circleimageview.CircleImageView;
+
+        import static com.opozeeApp.profiletabs.Questions.*;
 
 public class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.ViewHolder>  {
 
@@ -65,12 +71,21 @@ public class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.View
         @BindView(R.id.linear)
         public LinearLayout linear;
 
+        @BindView(R.id.iv_delete)
+        public ImageView iv_delete;
+
 
 
         public ViewHolder(View v) {
             super(v);
             ButterKnife.bind(this, v);
             seekBar.setEnabled(false);
+
+
+        }
+
+        void bind(final int position) {
+
         }
     }
 
@@ -97,6 +112,8 @@ public class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.View
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+
+        holder.bind(position);
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
@@ -140,7 +157,32 @@ public class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.View
 //        String time = Utils.convertESTToLocalTime(timeArr[0]).replace(" ", " at ");
 //        holder.tv_time.setText(time);
 
+        if(usersList.get(position).getCreationDate()!=null) {
+            String[] timeArr = usersList.get(position).getCreationDate().replace("T", " ").split("/.");
+            Log.e("TIME SPLIT ", " " + timeArr[0]);
+            String time = Utils.convertESTToLocalTime(timeArr[0]).replace("-", " at ");
+            String conertdate = timeArr[0].replace("ll", "");
 
+            String timeexact = Utils.getlocaltime(conertdate);
+            Long date = Utils.convertdatestring(timeexact);
+            long now = System.currentTimeMillis();
+            final long diff = now - date;
+            long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
+
+            if(minutes>10){
+                holder.iv_delete.setVisibility(View.GONE);
+            }else{
+                holder.iv_delete.setVisibility(View.VISIBLE);
+            }
+
+        }
+
+        holder.iv_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Questions.deleterequest(usersList.get(position).getId());
+            }
+        });
 
         int yesCount = usersList.get(position).getYesCount() != null ? usersList.get(position).getYesCount() : 0;
         int noCount = usersList.get(position).getNoCount() != null ? usersList.get(position).getNoCount() : 0;

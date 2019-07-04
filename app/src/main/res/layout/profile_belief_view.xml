@@ -13,23 +13,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:id="@+id/ll_beliefquestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
+            <TextView
+                android:id="@+id/profile_belief_view_question_text"
+                android:text="Im gonna ride my horse to the old town road and ride till i cant no more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:fontFamily="@font/renner"
+                android:layout_weight="0.4"
+                android:textColor="@color/black_color"
+                android:textSize="18dp"
+                />
+            <ImageView
+                android:id="@+id/iv_delete"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_weight="1.6"
+                app:srcCompat="@drawable/ic_delete_black_24dp" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/profile_belief_view_question_text"
-        android:text="Im gonna ride my horse to the old town road and ride till i cant no more"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:fontFamily="@font/renner"
-        android:textColor="@color/black_color"
-        android:textSize="18dp"
-        />
 
     <LinearLayout
         android:id="@+id/belief_container"
         android:background="@drawable/top_belief_view_positive_bg"
-        android:layout_below="@+id/profile_belief_view_question_text"
+        android:layout_below="@+id/ll_beliefquestion"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"

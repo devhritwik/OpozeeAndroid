@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,13 +17,17 @@ import com.opozeeApp.R;
 import com.opozeeApp.activities.QuestionDetailActivity;
 import com.opozeeApp.application.QuestionnaireApplication;
 import com.opozeeApp.models.Belief;
+import com.opozeeApp.profiletabs.Beliefs;
+import com.opozeeApp.profiletabs.Questions;
 import com.opozeeApp.utils.AppGlobal;
+import com.opozeeApp.utils.Utils;
 
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,6 +73,33 @@ public class UserBeliefAdapter extends RecyclerView.Adapter<UserBeliefAdapter.Vi
             viewHolder.mBeliefContainer.setBackground(mContext.getResources().getDrawable(R.drawable.top_belief_view_negative_bg));
         }
 
+        if(currBelief.getCreationDate()!=null){
+            String[] timeArr = currBelief.getCreationDate().replace("T", " ").split("/.");
+            Log.e("TIME SPLIT ", " " + timeArr[0]);
+            String time = Utils.convertESTToLocalTime(timeArr[0]).replace("-", " at ");
+            String conertdate = timeArr[0].replace("ll", "");
+
+            String timeexact = Utils.getlocaltime(conertdate);
+            Long date = Utils.convertdatestring(timeexact);
+            long now = System.currentTimeMillis();
+            final long diff = now - date;
+            long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
+
+            if(minutes>10){
+                viewHolder.iv_delete.setVisibility(View.GONE);
+            }else{
+                viewHolder.iv_delete.setVisibility(View.GONE);
+            }
+
+        }
+
+        viewHolder.iv_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Beliefs.deleterequest(currBelief.getId());
+            }
+        });
+
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,6 +131,8 @@ public class UserBeliefAdapter extends RecyclerView.Adapter<UserBeliefAdapter.Vi
 
         @BindView(R.id.profile_belief_view_question_text)
         TextView mQuestionText;
+        @BindView(R.id.iv_delete)
+         ImageView iv_delete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

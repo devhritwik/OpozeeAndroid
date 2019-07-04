@@ -99,6 +99,17 @@ public class LoginResponse {
         @SerializedName("CreatedDate")
         @Expose
         private String createdDate;
+        @SerializedName("ReferralCode")
+        @Expose
+        private String referralcode;
+
+        public String getReferralcode() {
+            return referralcode;
+        }
+
+        public void setReferralcode(String referralcode) {
+            this.referralcode = referralcode;
+        }
 
         public Integer getUserID() {
             return userID;

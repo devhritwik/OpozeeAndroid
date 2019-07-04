@@ -20,6 +20,7 @@ public class AppGlobal {
     public static final String IS_LOGGED_IN = "IsLoggedIn";
     public static final String SORT_ORDER = "sort_order";
     public static final String IDPROFILEGET = "id_profile_get";
+    public static final String REFERRALCODE = "referral_code";
 
     //Types of API calls
     public static final int TYPE_PROFILE_UPDATE = 2;

@@ -11,9 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.opozeeApp.DeleteQuestions;
 import com.opozeeApp.R;
 import com.opozeeApp.adapters.UserBeliefAdapter;
+import com.opozeeApp.delete_post_mvp.model.DeleteInteractorImpl;
+import com.opozeeApp.delete_post_mvp.presenter.DeletePresenterImpl;
+import com.opozeeApp.delete_post_mvp.view.DeleteView;
 import com.opozeeApp.models.Belief;
+import com.opozeeApp.params.DeletePostParams;
+import com.opozeeApp.pojo.DeletePostResponse;
 import com.opozeeApp.pojo.PostedQuestionsResponse;
 import com.opozeeApp.user_belief_mvp.model.UserBeliefInteractorImpl;
 import com.opozeeApp.user_belief_mvp.presenter.UserBeliefPresenter;
@@ -24,7 +30,7 @@ import com.opozeeApp.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Beliefs extends Fragment implements UserBeliefView {
+public class Beliefs extends Fragment implements UserBeliefView, DeleteView, DeleteQuestions {
     private static final String TAG = "Beliefs_Log";
     private int pageIndex = 1;
     private int pageSize = 1000;
@@ -37,13 +43,14 @@ public class Beliefs extends Fragment implements UserBeliefView {
     private RecyclerView rv_beliefs;
     private UserBeliefPresenter mUserBeliefPresenter;
     private UserBeliefAdapter mBeliefsAdapter;
+    private static DeletePresenterImpl mDeletePresenter;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=LayoutInflater.from(inflater.getContext()).inflate(R.layout.fragment_beliefs,null);
-        rv_beliefs=view.findViewById(R.id.rv_beliefs);
+        View view = LayoutInflater.from(inflater.getContext()).inflate(R.layout.fragment_beliefs, null);
+        rv_beliefs = view.findViewById(R.id.rv_beliefs);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv_beliefs.setLayoutManager(linearLayoutManager);
         setPresenters();
@@ -64,6 +71,9 @@ public class Beliefs extends Fragment implements UserBeliefView {
     private void setPresenters() {
         mUserBeliefPresenter = new UserBeliefPresenterImpl();
         mUserBeliefPresenter.attachView(this, new UserBeliefInteractorImpl());
+
+        mDeletePresenter = new DeletePresenterImpl();
+        mDeletePresenter.attachView(this, new DeleteInteractorImpl());
     }
 
 
@@ -82,6 +92,11 @@ public class Beliefs extends Fragment implements UserBeliefView {
     }
 
     @Override
+    public void onSuccess(DeletePostResponse response) {
+        getBeliefs();
+    }
+
+    @Override
     public void onSuccess(List<Belief> beliefList) {
         Log.d(TAG, "onSuccess Belief list");
         mBeliefList.clear();
@@ -94,8 +109,20 @@ public class Beliefs extends Fragment implements UserBeliefView {
         isLastPage = false;
     }
 
+    public static void deleterequest(int id) {
+        DeleteQuestions deleteQuestions = new Beliefs();
+        deleteQuestions.deletequestions(id);
+    }
+
     @Override
     public void onFailure(String error) {
         Utils.showCustomToast(getActivity(), error);
+    }
+
+    @Override
+    public void deletequestions(int id) {
+        DeletePostParams params = new DeletePostParams();
+        params.setQuestId(id);
+        mDeletePresenter.deletePost(params);
     }
 }

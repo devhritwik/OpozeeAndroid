@@ -90,7 +90,9 @@ public class Utils {
     public static String idprofileget(Context context) {
         return AppSP.getInstance(context).readInt(AppGlobal.IDPROFILEGET) + "";
     }
-
+public static String getreferralcode(Context context){
+    return AppSP.getInstance(context).readString(AppGlobal.REFERRALCODE) + "";
+}
 
     public static String getsortedorder(Context context) {
         return AppSP.getInstance(context).readInt(AppGlobal.SORT_ORDER) + "";
@@ -189,6 +191,7 @@ public class Utils {
         sp.savePreferences(AppGlobal.FirstName, userData.getUserName());
         sp.savePreferences(AppGlobal.LastName, userData.getUserName());
         sp.savePreferences(AppGlobal.IS_LOGGED_IN, true);
+        sp.savePreferences(AppGlobal.REFERRALCODE,userData.getReferralcode());
 //        sp.savePreferences(AppGlobal.UserRole, userProfile.getResponse().getUserData().getUserRole());
         sp.savePreferences(AppGlobal.Photo, userData.getImageURL());
     }
@@ -202,6 +205,7 @@ public class Utils {
         sp.savePreferences(AppGlobal.FirstName, "");
         sp.savePreferences(AppGlobal.LastName, "");
         sp.savePreferences(AppGlobal.IS_LOGGED_IN, true);
+        sp.savePreferences(AppGlobal.REFERRALCODE,loginEmail.getData().getReferralCode());
 //        sp.savePreferences(AppGlobal.UserRole, userProfile.getResponse().getUserData().getUserRole());
         sp.savePreferences(AppGlobal.Photo, loginEmail.getData().getImageURL());
     }

@@ -1,6 +1,8 @@
 package com.opozeeApp.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -85,6 +87,10 @@ public class UserQuestionPostsActivity extends OpozeeActivity implements PostedQ
 
         setAdapter();
 
+        // ATTENTION: This was auto-generated to handle app links.
+        Intent appLinkIntent = getIntent();
+        String appLinkAction = appLinkIntent.getAction();
+        Uri appLinkData = appLinkIntent.getData();
     }
 
     private void setScrollListener() {
@@ -256,6 +262,11 @@ public class UserQuestionPostsActivity extends OpozeeActivity implements PostedQ
                 mAdapter.notifyDataSetChanged();
                 isRefreshed = false;
                 isLastPage = false;
+                if (Utils.mProgressDialog != null)
+                    Utils.dismissProgress();
+            }else{
+                if (Utils.mProgressDialog != null)
+                    Utils.dismissProgress();
             }
     }
 
