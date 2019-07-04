@@ -147,7 +147,7 @@ public class ProfileResponse {
         public String getHasfollowed() {
             return hasfollowed;
         }
-t
+
         public void setHasfollowed(String hasfollowed) {
             this.hasfollowed = hasfollowed;
         }
