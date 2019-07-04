@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    android:versionCode="3"
+
     xmlns:tools="http://schemas.android.com/tools"
     package="com.opozeeApp">
 
@@ -25,7 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        android:versionCode="3"
+        android:versionCode="9"
         tools:replace="android:allowBackup">
         <activity android:name="com.opozeeApp.CheckPermissionsRefine"></activity>
         <activity android:name="com.opozeeApp.testing.ReactionButton"></activity>
@@ -75,26 +75,28 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
 
-        <activity
-            android:name="com.facebook.FacebookActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
-        </activity> <!-- //for naugat and above devices -->
+        </activity>
+
+
+
+
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="@string/content_provider"
@@ -135,7 +137,7 @@
             android:value="@string/default_notification_channel_id" />
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="18716e0ac21a7a6c53451a7baaf7c9e4e45a4bff" />
+            android:value="87a30cd6b7e6215be5bfbb2150aabd0179cf037b" />
     </application>
 
 </manifest>

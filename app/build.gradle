@@ -32,8 +32,8 @@ android {
         applicationId "com.opozeeApp"
         minSdkVersion 18
         targetSdkVersion 28
-        versionCode 6
-        versionName "5.1"
+        versionCode 9
+        versionName "6.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
