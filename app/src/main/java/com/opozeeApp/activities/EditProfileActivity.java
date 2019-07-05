@@ -219,7 +219,8 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
 
     private void updateUI(ProfileResponse response) {
 //        tv_user_name.setText(Utils.capitalize(response.getResponse().getUserProfile().getFirstName() + " " +  response.getResponse().getUserProfile().getLastName()));
-        tv_user_name.setText(Utils.capitalize(response.getResponse().getUserProfile().getUserName()));
+//        tv_user_name.setText(Utils.capitalize(response.getResponse().getUserProfile().getUserName()));
+        tv_user_name.setText(response.getResponse().getUserProfile().getUserName());
         et_username.setText(response.getResponse().getUserProfile().getUserName());
 //        etEmail.setText(Utils.capitalize(response.getResponse().getUserProfile().getEmail()));
 //        etFirstName.setText(Utils.capitalize(response.getResponse().getUserProfile().getFirstName()));

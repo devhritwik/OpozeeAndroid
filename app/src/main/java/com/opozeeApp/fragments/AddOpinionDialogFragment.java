@@ -2,9 +2,11 @@ package com.opozeeApp.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.text.Editable;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,11 +49,14 @@ public class AddOpinionDialogFragment extends DialogFragment implements AddOpini
     @BindView(R.id.warning_select_a_side)
     TextView mWarningTextView;
 
+    @BindView(R.id.tv_countLength)
+    TextView tv_countLength;
+
     private final String TAG = AddOpinionDialogFragment.class.getSimpleName();
     private State mCurrentState;
     private AddOpinionPresenter mAddOpinionPresenter;
 
-    enum State{
+    enum State {
         Unselected,
         Agree,  // agreeStats = 1
         Disagree   // agreeStats = 0
@@ -72,6 +77,7 @@ public class AddOpinionDialogFragment extends DialogFragment implements AddOpini
         params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         getDialog().getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 //        Log.d(TAG, "onCreateView()");
@@ -83,19 +89,37 @@ public class AddOpinionDialogFragment extends DialogFragment implements AddOpini
         mAddOpinionPresenter.attachView(this, new AddOpinionInteractorImpl());
 
 
+        mOpinionEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                tv_countLength.setText(String.valueOf(mOpinionEditText.getText().toString().length()));
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         // Do all the stuff to initialize your custom view
 
         return v;
     }
 
     @OnClick(R.id.add_opinion_dialog_cancel_button)
-    void onCancelClicked(){
+    void onCancelClicked() {
         dismiss();
     }
 
 
     @OnClick(R.id.add_opinion_agree_button)
-    public void onAgreeClicked(){
+    public void onAgreeClicked() {
 //        Log.d(TAG, "onAgreeClicked()");
         mWarningTextView.setVisibility(View.GONE);
         setState(State.Agree);
@@ -104,14 +128,14 @@ public class AddOpinionDialogFragment extends DialogFragment implements AddOpini
     }
 
     @OnClick(R.id.add_opinion_disagree_button)
-    public void onDisagreeClicked(){
+    public void onDisagreeClicked() {
 //        Log.d(TAG, "onDisagreeClicked()");
         mWarningTextView.setVisibility(View.GONE);
         setState(State.Disagree);
     }
 
     @OnClick(R.id.add_opinion_submit_button)
-    public void onSubmitButtonClicked(){
+    public void onSubmitButtonClicked() {
         String opinion = mOpinionEditText.getText().toString();
 //        Log.d(TAG, "onSubmitButtonClicked, opinion: " + opinion);
 
@@ -120,28 +144,27 @@ public class AddOpinionDialogFragment extends DialogFragment implements AddOpini
             return;
         }
 
-        if(opinion.trim().length() != 0 && opinion.trim() != null)
-        {
+        if (opinion.trim().length() != 0 && opinion.trim() != null) {
             //the below line has been added for smileys or emojis
             String toServerUnicodeEncoded = StringEscapeUtils.escapeJava(opinion.trim());
-            toServerUnicodeEncoded=toServerUnicodeEncoded.replace("\\n","<br/>");
+            toServerUnicodeEncoded = toServerUnicodeEncoded.replace("\\n", "<br/>");
 
             //SpannableString contentText = new SpannableString(toServerUnicodeEncoded);
             //toServerUnicodeEncoded = Html.toHtml(contentText);
 
-            int agreeStatus = mCurrentState == State.Agree? 1 : 0;
+            int agreeStatus = mCurrentState == State.Agree ? 1 : 0;
             OpinionParams params = new OpinionParams();
             params.setId(String.valueOf(0));
-            params.setQuestion_id(String.valueOf(((QuestionDetailActivity)getActivity()).getId()));
+            params.setQuestion_id(String.valueOf(((QuestionDetailActivity) getActivity()).getId()));
             params.setCommentedUserId(Utils.getLoggedInUserId(getActivity()));
             params.setComment(toServerUnicodeEncoded);
             params.setOpinionAgreeStatus(agreeStatus);
 
 
-            if (Utils.isNetworkAvail(getActivity())){
+            if (Utils.isNetworkAvail(getActivity())) {
                 mAddOpinionPresenter.addOpinion(params);
             } else {
-                Utils.showCustomToast(getActivity() , getString(R.string.internet_alert));
+                Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
             }
         }
 
@@ -149,9 +172,9 @@ public class AddOpinionDialogFragment extends DialogFragment implements AddOpini
     }
 
 
-    public void setState(State state){
+    public void setState(State state) {
         mCurrentState = state;
-        switch (state){
+        switch (state) {
             case Unselected:
                 mAgreeButton.setBackground(getResources().getDrawable(R.drawable.add_opinion_button_unselected_bg));
                 mDisagreeButton.setBackground(getResources().getDrawable(R.drawable.add_opinion_button_unselected_bg));
@@ -180,20 +203,20 @@ public class AddOpinionDialogFragment extends DialogFragment implements AddOpini
 
     @Override
     public void showProgress() {
-        if(Utils.mProgressDialog == null)
+        if (Utils.mProgressDialog == null)
             Utils.showProgress(getActivity());
     }
 
     @Override
     public void hideProgress() {
-        if(Utils.mProgressDialog != null)
+        if (Utils.mProgressDialog != null)
             Utils.dismissProgress();
     }
 
     @Override
     public void onSuccess(OpinionResponse response) {
         Utils.showCustomToast(getActivity(), "Successfully posted belief");
-        QuestionDetailActivity activity = (QuestionDetailActivity)getActivity();
+        QuestionDetailActivity activity = (QuestionDetailActivity) getActivity();
         if (activity != null)
             activity.refresh();
         dismiss();
@@ -210,10 +233,9 @@ public class AddOpinionDialogFragment extends DialogFragment implements AddOpini
     }
 
     @OnTextChanged(R.id.add_opinion_edit_text)
-    public void onAddOpinionEditTextChanged(){
+    public void onAddOpinionEditTextChanged() {
         mWarningTextView.setVisibility(View.GONE);
     }
-
 
 
 }

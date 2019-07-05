@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.opozeeApp.pojo.deletebelief.DeleteBelief;
+import com.opozeeApp.pojo.deletebelief.DeleteMyBelief;
 import com.opozeeApp.pojo.follower_pojo.Following;
 import com.opozeeApp.pojo.getallhashtags.GetAllTags;
 import com.opozeeApp.pojo.getmyfollowers.GetFollower;
@@ -23,6 +25,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 
@@ -96,6 +99,9 @@ public class WebRequest {
 
         @GET("GetPopularHashTags")
         Call<GetAllTags> getalltags();
+
+        @POST("DeleteMyBelief")
+        Call<DeleteBelief> deletebelief(@Header("Content-Type") String content,@Body String data);
 
     }
 }

@@ -1,6 +1,7 @@
 package com.opozeeApp.searchfragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,6 +29,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cc.cloudist.acplibrary.ACProgressFlower;
 
 public class AllSearchFragment extends Fragment implements PostedQuestionsView {
 
@@ -46,6 +48,7 @@ public class AllSearchFragment extends Fragment implements PostedQuestionsView {
     private boolean isLastPage = false;
     private boolean isRefreshed = false;
     public static boolean loaddata = false;
+
 
     public AllSearchFragment() {
         // Required empty public constructor
@@ -202,8 +205,11 @@ public class AllSearchFragment extends Fragment implements PostedQuestionsView {
                 isRefreshed = false;
                 isLastPage = false;
 
-                if(Utils.mProgressDialog != null)
-                    Utils.dismissProgress();
+
+                        if(Utils.mProgressDialog != null)
+                            Utils.dismissProgress();
+
+
             }else{
                 if(Utils.mProgressDialog != null)
                     Utils.dismissProgress();

@@ -91,7 +91,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
-        holder.tv_name.setText(Utils.capitalize(usersList.get(position).getOwnerUserName()));
+        holder.tv_name.setText(usersList.get(position).getOwnerUserName());
 
         holder.tv_user_name.setText("@"+usersList.get(position).getName().replace(" ", "").toLowerCase());
 

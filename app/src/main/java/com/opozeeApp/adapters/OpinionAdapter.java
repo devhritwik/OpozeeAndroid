@@ -456,7 +456,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.bind(position);
+//        holder.bind(position);
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
@@ -1271,14 +1271,14 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                 holder.ll_like.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(mContext, "You cannot vote on your own beliefs", Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext, "You cannot vote on your own beliefs", Toast.LENGTH_SHORT).show();
                     }
                 });
 
                 holder.ll_dislike.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(mContext, "You cannot vote on your own beliefs", Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext, "You cannot vote on your own beliefs", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -1831,7 +1831,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                 holder.ll_like_yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(mContext, "You cannot vote on your own beliefs", Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext, "You cannot vote on your own beliefs", Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -1839,7 +1839,7 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                 holder.ll_dislike_no.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(mContext, "You cannot vote on your own beliefs", Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext, "You cannot vote on your own beliefs", Toast.LENGTH_SHORT).show();
 //
                     }
                 });

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -38,6 +39,9 @@ import java.util.NavigableMap;
 import java.util.TimeZone;
 import java.util.TreeMap;
 
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
+
 public class Utils {
 
     private static final int SECOND_MILLIS = 1000;
@@ -51,7 +55,8 @@ public class Utils {
     public static final String MIXPANEL_TOKEN = "414c39b7ab192ac62a36f71bfe023d32";
     public static final String DEFAULT_PROFILE_PIC_URL = "https://opozee.com:81/Content/Upload/ProfileImage/oposee-profile.png";
 
-    public static ProgressDialog mProgressDialog;
+//    public static ProgressDialog mProgressDialog;
+    public static ACProgressFlower mProgressDialog;
     private static String givenDate;
 
     /* formatting the likes counts and dislike counts*/
@@ -86,6 +91,15 @@ public class Utils {
     public static String getLoggedInUserId(Context context) {
         return AppSP.getInstance(context).readInt(AppGlobal.USER_ID) + "";
     }
+
+
+    public static String getLoggedInUsername(Context context) {
+        return AppSP.getInstance(context).readString(AppGlobal.UserName) + "";
+    }
+    public static String getLoggedInEmail(Context context) {
+        return AppSP.getInstance(context).readString(AppGlobal.Email) + "";
+    }
+
 
     public static String idprofileget(Context context) {
         return AppSP.getInstance(context).readInt(AppGlobal.IDPROFILEGET) + "";
@@ -249,10 +263,19 @@ public static String getreferralcode(Context context){
     }
 
     public static void showProgress(Activity activity) {
-        mProgressDialog = new ProgressDialog(activity);
-        mProgressDialog.setMessage("Loading...");
-        mProgressDialog.setCancelable(false);
-        mProgressDialog.show();
+        try {
+            mProgressDialog = new ACProgressFlower.Builder(activity)
+                    .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                    .themeColor(Color.WHITE)
+                    .fadeColor(Color.DKGRAY).build();
+            mProgressDialog.show();
+        }catch (Exception e){
+
+        }
+//        mProgressDialog = new ProgressDialog(activity);
+//        mProgressDialog.setMessage("Loading...");
+//        mProgressDialog.setCancelable(false);
+//        mProgressDialog.show();
     }
 
     public static void dismissProgress() {

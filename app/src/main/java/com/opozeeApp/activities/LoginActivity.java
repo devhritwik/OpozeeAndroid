@@ -525,6 +525,8 @@ public class LoginActivity extends OpozeeActivity implements GoogleApiClient.OnC
 
     //getLogin params
     private LoginParams getParams(String email, String socialId, String imageURL, String name, String type, String screenName) {
+
+
         LoginParams params = new LoginParams();
         params.setThirdPartyId(socialId);
         String defaultURL = "https://opozee.com:81/Content/Upload/ProfileImage/oposee-profile.png";

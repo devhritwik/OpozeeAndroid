@@ -64,7 +64,7 @@ public class RefferealCodeActivity extends AppCompatActivity implements View.OnC
                 Intent sendIntent = new Intent();
                 String url = "https://play.google.com/store/apps/details?id=com.opozeeApp&hl=en";
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey , Have you tried this awesome app? To get started use my referral link."+et_link.getText().toString()+" Download the app at " + url);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey , Have you tried this awesome app? To get started use my referral link "+et_link.getText().toString()+" Download the app at " + url);
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
                 break;

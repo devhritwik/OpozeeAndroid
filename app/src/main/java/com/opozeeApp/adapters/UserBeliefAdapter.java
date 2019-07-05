@@ -85,8 +85,12 @@ public class UserBeliefAdapter extends RecyclerView.Adapter<UserBeliefAdapter.Vi
             final long diff = now - date;
             long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
 
-            if(minutes>10){
-                viewHolder.iv_delete.setVisibility(View.GONE);
+            if(Integer.parseInt(Utils.getLoggedInUserId(mContext))==currBelief.getUserId()) {
+                if (minutes > 10) {
+                    viewHolder.iv_delete.setVisibility(View.GONE);
+                } else {
+                    viewHolder.iv_delete.setVisibility(View.VISIBLE);
+                }
             }else{
                 viewHolder.iv_delete.setVisibility(View.GONE);
             }
@@ -108,7 +112,7 @@ public class UserBeliefAdapter extends RecyclerView.Adapter<UserBeliefAdapter.Vi
                 QuestionnaireApplication.getMixpanelApi().track("Question from Profile questions", new JSONObject(map));
                 Intent intent = new Intent(mContext, QuestionDetailActivity.class);
                 intent.putExtra("id", currBelief.getQuestionId());
-                intent.putExtra(AppGlobal.LAST_FRAG_TYPE, AppGlobal.HOMEFRAG);
+                intent.putExtra(AppGlobal.LAST_FRAG_TYPE, AppGlobal.PROFILEFRAG);
                 mContext.startActivity(intent);
             }
         });

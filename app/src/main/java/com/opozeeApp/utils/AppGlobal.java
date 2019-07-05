@@ -29,8 +29,8 @@ public class AppGlobal {
 
 
     public static String FACEBOOK = "0";
-    public static String TWITTER = "2";
-    public static String GOOGLE = "1";
+    public static String TWITTER = "1";
+    public static String GOOGLE = "2";
 
 
     public static final String REGISTRATION_ID = "registrationId";// String

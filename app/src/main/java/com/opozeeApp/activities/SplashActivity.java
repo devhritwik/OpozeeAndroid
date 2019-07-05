@@ -1,6 +1,7 @@
 package com.opozeeApp.activities;
 
 import android.animation.Animator;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
@@ -14,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -26,6 +28,7 @@ import com.opozeeApp.utils.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.fabric.sdk.android.Fabric;
 
 public class SplashActivity extends OpozeeActivity {
     private static final String TAG = "Token_Get_Log" ;
@@ -36,12 +39,13 @@ public class SplashActivity extends OpozeeActivity {
     @BindView(R.id.iv_logo)
     ImageView mLogo;
 
+    Context context;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getStatusBarHeight();
-
+        Fabric.with(this, new Crashlytics());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);

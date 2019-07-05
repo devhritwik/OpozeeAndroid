@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
@@ -47,6 +48,7 @@ import com.opozeeApp.utils.Utils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.internal.Util;
 import ro.andreidobrescu.emojilike.EmojiLikeTouchDetector;
 
 import static com.opozeeApp.fragments.Profile_New_Fragment.PROFILE_FRAGMENG_ARGUEMENT_USER_ID;
@@ -111,9 +113,18 @@ public class HomeActivity extends OpozeeActivity implements ProfileView {
         createNotificationChannel();
 //        mTokenCountView.setText("30");
 
-
+//        logUser();
         handleData();
     }
+
+//    private void logUser() {
+//        // TODO: Use the current user's information
+//        // You can call any combination of these three methods
+//        Crashlytics.setUserIdentifier(Utils.getLoggedInUserId(HomeActivity.this));
+//        Crashlytics.setUserEmail(Utils.getLoggedInEmail(HomeActivity.this));
+//        Crashlytics.setUserName(Utils.getLoggedInUsername(HomeActivity.this));
+//    }
+
 
     public void refresh() {
         finish();
@@ -385,7 +396,7 @@ public class HomeActivity extends OpozeeActivity implements ProfileView {
         String from = getIntent().getStringExtra("from");
         if (from != null)
             if (from.equals("DetailActivity")) {
-            getLastFragment(AppGlobal.HOMEFRAG);
+                getLastFragment(AppGlobal.HOMEFRAG);
 //                finish();
 //                startActivity(getIntent());
             }

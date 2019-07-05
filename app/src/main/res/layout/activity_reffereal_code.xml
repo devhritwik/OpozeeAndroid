@@ -46,7 +46,7 @@
                 android:fontFamily="@font/renner"
                 android:gravity="center"
                 android:singleLine="true"
-                android:text="ReferralCode"
+                android:text="Referral Code"
                 android:textAllCaps="false"
                 android:textColor="@color/white_color"
                 android:textSize="@dimen/_15sdp" />

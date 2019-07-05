@@ -1,6 +1,7 @@
 package com.opozeeApp.profiletabs;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -29,6 +30,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,7 +46,7 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
     private static ArrayList<FollowesUsers> followerslist = new ArrayList<>();
     private static boolean isRefreshed = false;
     private static boolean isLastPage = false;
-    public static ProgressDialog progressDialog;
+    public static ACProgressFlower progressDialog;
     public Button btn_followersProfile;
 
     private static WebRequest webRequest;
@@ -61,10 +64,11 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv_followers.setLayoutManager(linearLayoutManager);
         webRequest = WebRequest.getSingleton(getActivity());
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Loading");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog = new ACProgressFlower.Builder(getActivity())
+                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                .themeColor(Color.WHITE)
+                .fadeColor(Color.DKGRAY).build();
+
         if (Utils.isNetworkAvail(getActivity())) {
             getfollowers();
         } else {

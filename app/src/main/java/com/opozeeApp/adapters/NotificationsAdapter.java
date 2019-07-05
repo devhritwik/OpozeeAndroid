@@ -86,7 +86,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 if((usersList.get(position).getUserName())!=null) {
-    holder.tv_name.setText(Utils.capitalize(usersList.get(position).getUserName()));
+    holder.tv_name.setText(usersList.get(position).getUserName());
 }
         boolean likeStatus = usersList.get(position).getLike();
         boolean dislikeStatus = usersList.get(position).getDislike();

@@ -71,6 +71,13 @@ public class ProfileResponse {
         @SerializedName("UserID")
         @Expose
         private Integer userID;
+
+
+
+        @SerializedName("UserInfo")
+        @Expose
+        private String userinfo;
+
         @SerializedName("UserName")
         @Expose
         private String userName;
@@ -111,6 +118,15 @@ public class ProfileResponse {
         @Expose
         private int totalbeliefs;
 
+
+        public String getUserinfo() {
+            return userinfo;
+        }
+
+        public void setUserinfo(String userinfo) {
+            this.userinfo = userinfo;
+        }
+
         public int getTotalbeliefs() {
             return totalbeliefs;
         }
@@ -139,7 +155,7 @@ public class ProfileResponse {
         @Expose
         private String followers;
 
-        @SerializedName("Following")
+        @SerializedName("Followings")
         @Expose
         private String followings;
 

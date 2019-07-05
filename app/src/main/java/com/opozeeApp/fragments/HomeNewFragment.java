@@ -2,7 +2,10 @@ package com.opozeeApp.fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -22,6 +25,8 @@ import android.widget.LinearLayout;
 
 import com.opozeeApp.R;
 import com.opozeeApp.WebRequest;
+import com.opozeeApp.activities.LoginActivity;
+import com.opozeeApp.activities.SplashActivity;
 import com.opozeeApp.adapters.GetTagsAdapter;
 import com.opozeeApp.adapters.HomeQuestionsAdapter;
 import com.opozeeApp.model.GetTagsModel;
@@ -38,6 +43,8 @@ import com.opozeeApp.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,20 +64,21 @@ public class HomeNewFragment extends Fragment {
     GetAllTags getAllTags;
     public RecyclerView rv_tags;
     public GetTagsAdapter getTagsAdapter;
-    public static ArrayList<GetTagsModel> getTagsModelist=new ArrayList<>();
+    public static ArrayList<GetTagsModel> getTagsModelist = new ArrayList<>();
     public TabLayout tab_layout;
     ViewPager viewPager;
     private FragmentActivity myContext;
-    public static String tabName="";
+    public static String tabName = "";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home_new, container, false);
-        tab_layout=rootView.findViewById(R.id.tab_layout);
-        viewPager=rootView.findViewById(R.id.viewPager);
+        tab_layout = rootView.findViewById(R.id.tab_layout);
+        viewPager = rootView.findViewById(R.id.viewPager);
 
         webRequest = WebRequest.getSingleton(getActivity());
-        Log.d("Home_Log","oncreate");
+        Log.d("Home_Log", "oncreate");
 //        rv_tags=rootView.findViewById(R.id.rv_tags);
 //        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
 //        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -84,8 +92,7 @@ public class HomeNewFragment extends Fragment {
             mAdapter.notifyDataSetChanged();
 
 
-
-        ArrayList<GetTagsModel> titleTabs=new ArrayList<>();
+        ArrayList<GetTagsModel> titleTabs = new ArrayList<>();
         if (Utils.isNetworkAvail(getActivity())) {
             titleTabs = getAllTags();
         } else {
@@ -93,8 +100,8 @@ public class HomeNewFragment extends Fragment {
         }
 
 
-        tab_layout.setupWithViewPager(viewPager);
-        tab_layout.setOnTabSelectedListener(onTabSelectedListener(viewPager));
+//        tab_layout.setupWithViewPager(viewPager);
+//        tab_layout.setOnTabSelectedListener(onTabSelectedListener(viewPager));
 
 
 //        for (String module : titleTabs) {
@@ -106,11 +113,13 @@ public class HomeNewFragment extends Fragment {
     }
 
     private ArrayList<GetTagsModel> getAllTags() {
-        final ProgressDialog progressDialog=new ProgressDialog(getActivity());
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setMessage("Loading");
-        progressDialog.setCancelable(false);
+        final ACProgressFlower progressDialog = new ACProgressFlower.Builder(getActivity())
+                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                .themeColor(Color.WHITE)
+                .fadeColor(Color.DKGRAY).build();
         progressDialog.show();
+
+
         getAllTagsCall = WebRequest.apiInterface.getalltags();
         getAllTagsCall.enqueue(new Callback<GetAllTags>() {
             @Override
@@ -127,8 +136,8 @@ public class HomeNewFragment extends Fragment {
                                 getTagsModelist.add(getTagsModel);
 
                             }
-                            for(int i=0;i<getTagsModelist.size();i++){
-                                Log.d("TabName=",getTagsModelist.get(i).getHashtag());
+                            for (int i = 0; i < getTagsModelist.size(); i++) {
+                                Log.d("TabName=", getTagsModelist.get(i).getHashtag());
                                 tab_layout.addTab(tab_layout.newTab().setText(getTagsModelist.get(i).getHashtag()));
                             }
                             tab_layout.post(new Runnable() {
@@ -149,19 +158,39 @@ public class HomeNewFragment extends Fragment {
                                 }
                             });
                             createViewPager(viewPager);
-                            if(progressDialog!=null){
-                                if(progressDialog.isShowing()){
-                                    progressDialog.dismiss();
+                            tab_layout.setupWithViewPager(viewPager);
+                            tab_layout.setOnTabSelectedListener(onTabSelectedListener(viewPager));
+
+
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        if (progressDialog != null) {
+                                            if (progressDialog.isShowing()) {
+                                                progressDialog.dismiss();
+                                            }
+                                        }
+                                    }catch (Exception e){
+
+                                    }
+
                                 }
-                            }
+                            }, 3000);
+
+
 //                            getTagsAdapter = new GetTagsAdapter(getActivity(), getTagsModelist);
 //                            rv_tags.setAdapter(getTagsAdapter);
                             break;
                         default:
-                            if(progressDialog!=null){
-                                if(progressDialog.isShowing()){
-                                    progressDialog.dismiss();
+                            try {
+                                if (progressDialog != null) {
+                                    if (progressDialog.isShowing()) {
+                                        progressDialog.dismiss();
+                                    }
                                 }
+                            }catch (Exception e){
+
                             }
                             break;
                     }
@@ -170,10 +199,14 @@ public class HomeNewFragment extends Fragment {
 
             @Override
             public void onFailure(Call<GetAllTags> call, Throwable t) {
-                if(progressDialog!=null){
-                    if(progressDialog.isShowing()){
-                        progressDialog.dismiss();
+                try {
+                    if (progressDialog != null) {
+                        if (progressDialog.isShowing()) {
+                            progressDialog.dismiss();
+                        }
                     }
+                }catch (Exception e){
+
                 }
             }
         });
@@ -182,7 +215,7 @@ public class HomeNewFragment extends Fragment {
 
     @Override
     public void onAttach(Activity activity) {
-        myContext=(FragmentActivity) activity;
+        myContext = (FragmentActivity) activity;
         super.onAttach(activity);
     }
 
@@ -190,19 +223,20 @@ public class HomeNewFragment extends Fragment {
 //        ViewPagerAdapter adapter = new ViewPagerAdapter(myContext.getSupportFragmentManager());
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
 //       for(int i=0;i<getTagsModelist.size();i++){
-           adapter.addFragment(new AllSearchFragment(), getTagsModelist.get(0).getHashtag());
-           adapter.addFragment(new CountSearchFragment(), getTagsModelist.get(1).getHashtag());
-           adapter.addFragment(new GotSearchFragment(), getTagsModelist.get(2).getHashtag());
-           adapter.addFragment(new QaSearchFragment(), getTagsModelist.get(3).getHashtag());
-           adapter.addFragment(new QuestionFragment(), getTagsModelist.get(4).getHashtag());
-           adapter.addFragment(new TestSearchFragment(), getTagsModelist.get(5).getHashtag());
+        adapter.addFragment(new AllSearchFragment(), getTagsModelist.get(0).getHashtag());
+        adapter.addFragment(new CountSearchFragment(), getTagsModelist.get(1).getHashtag());
+        adapter.addFragment(new GotSearchFragment(), getTagsModelist.get(2).getHashtag());
+        adapter.addFragment(new QaSearchFragment(), getTagsModelist.get(3).getHashtag());
+        adapter.addFragment(new QuestionFragment(), getTagsModelist.get(4).getHashtag());
+        adapter.addFragment(new TestSearchFragment(), getTagsModelist.get(5).getHashtag());
 //       }
-       viewPager.setAdapter(adapter);
+        viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(6);
 //        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tab_layout));
 //        onTabSelectedListener(viewPager);
 
     }
+
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
@@ -241,7 +275,7 @@ public class HomeNewFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        Log.d("Home_Log","onResume");
+        Log.d("Home_Log", "onResume");
     }
 
     private TabLayout.OnTabSelectedListener onTabSelectedListener(final ViewPager viewPager) {
@@ -249,7 +283,7 @@ public class HomeNewFragment extends Fragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
-                switch (tab.getPosition()){
+                switch (tab.getPosition()) {
 //                    case 0:
 //                        if (AllSearchFragment.loaddata==true) {
 //                            AllSearchFragment.tabseleted();
@@ -270,7 +304,6 @@ public class HomeNewFragment extends Fragment {
 //                        case 5:
 //                        TestSearchFragment.tabseleted();
 //                        break;
-
 
 
                 }

@@ -4,18 +4,34 @@ buildscript {
     }
 
     dependencies {
-
         classpath 'io.fabric.tools:gradle:1.+'
     }
 }
+//buildscript {
+//    repositories {
+//        maven { url 'https://maven.fabric.io/public' }
+//    }
+//
+//    dependencies {
+//
+//        classpath 'io.fabric.tools:gradle:1.29.0'
+//    }
+//}
 
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
-apply plugin: 'io.fabric'
+
+//
+//repositories {
+//    maven { url 'https://maven.fabric.io/public' }
+//}
+
+//apply plugin: 'io.fabric'
 
 
 android {
@@ -32,8 +48,8 @@ android {
         applicationId "com.opozeeApp"
         minSdkVersion 18
         targetSdkVersion 28
-        versionCode 9
-        versionName "6.4"
+        versionCode 10
+        versionName "6.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
@@ -114,11 +130,16 @@ dependencies {
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-7'
     implementation 'com.mixpanel.android:mixpanel-android:5.+'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
+//    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+
+    implementation'com.crashlytics.sdk.android:crashlytics:2.10.1'
+
     //ESlider
     implementation 'com.github.Emadoki:edslider:1.0.0'
 
     implementation 'com.github.andob:emojilike-android:beta2'
+
+    implementation 'cc.cloudist.acplibrary:library:1.2.1'
 
 
 }

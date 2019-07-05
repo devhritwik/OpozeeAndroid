@@ -36,13 +36,13 @@ public class WebServiceFactory {
 //                builder.interceptors().add(new LoggingInterceptor());
 //            }
 
-            httpClient.addInterceptor(new Interceptor() {
-                @Override
-                public Response intercept(Chain chain) throws IOException {
-                    Request request = chain.request().newBuilder().addHeader("Authorization", "Basic " + WebBinder.addAuthHeader()).build();
-                    return chain.proceed(request);
-                }
-            });
+//            httpClient.addInterceptor(new Interceptor() {
+//                @Override
+//                public Response intercept(Chain chain) throws IOException {
+//                    Request request = chain.request().newBuilder().addHeader("Authorization", "Basic " + WebBinder.addAuthHeader()).build();
+//                    return chain.proceed(request);
+//                }
+//            });
 
             httpClient.readTimeout(60, TimeUnit.SECONDS);
             httpClient.connectTimeout(60, TimeUnit.SECONDS);

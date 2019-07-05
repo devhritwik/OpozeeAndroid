@@ -184,7 +184,7 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
 
 
         holder.tv_user_name.setText("@" + usersList.get(position).getOwnerUserName().replace(" ", "").toLowerCase());
-        holder.tv_name.setText(Utils.capitalize(usersList.get(position).getOwnerUserName()));
+        holder.tv_name.setText(usersList.get(position).getOwnerUserName());
 
 
         boolean isMostLiked = questionDetail.getMostLiked() != null;
@@ -209,6 +209,11 @@ public class HomeQuestionsAdapter extends RecyclerView.Adapter<HomeQuestionsAdap
             holder.bestAgainstView.setVisibility(View.GONE);
         }
 
+        if(isMostLiked||isMostDisliked){
+            holder.tv_count_likes.setVisibility(View.VISIBLE);
+        }else{
+            holder.tv_count_likes.setVisibility(View.GONE);
+        }
 
         initDataToSeekbar(holder.seekBar, holder.tv_count_likes, holder.tv_count_dislikes, yesCount, noCount, position);
 

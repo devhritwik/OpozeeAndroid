@@ -3,7 +3,9 @@ package com.opozeeApp.fragments;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -74,6 +76,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -115,6 +119,9 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
 
     @BindView(R.id.ll_referlinks)
     LinearLayout ll_referlinks;
+
+    @BindView(R.id.tv_user_info)
+    TextView tv_user_info;
 //    @BindView(R.id.recyclerView)
 //    RecyclerView recyclerView;
 
@@ -151,7 +158,7 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
 
     public static FollowerUsers followerUsersadapter;
     public static Followingadapter followingadapter;
-    public static ProgressDialog progressDialog;
+//    public static ProgressDialog progressDialog;
     public Button btn_followersProfile;
     public boolean followrequest = false;
     public  String follow="";
@@ -172,6 +179,7 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
     public TabLayout tab_layout;
     ViewPager viewPager;
     public static NestedScrollView scrollView;
+    public static ACProgressFlower progressDialog;
 
 
     public Profile_New_Fragment() {
@@ -192,10 +200,16 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
         tab_layout = rootView.findViewById(R.id.tab_layout);
         viewPager = rootView.findViewById(R.id.viewPager);
 
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Loading");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog = new ACProgressFlower.Builder(getActivity())
+                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                .themeColor(Color.WHITE)
+                .fadeColor(Color.DKGRAY).build();
+
+
+//        progressDialog = new ProgressDialog(getActivity());
+//        progressDialog.setCancelable(false);
+//        progressDialog.setMessage("Loading");
+//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -263,6 +277,7 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
         }
         if (mUserId != Integer.valueOf(Utils.getLoggedInUserId(getContext()))) {
             iv_edit.setVisibility(GONE);
+            ll_referlinks.setVisibility(GONE);
 
 
 //            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
@@ -285,6 +300,7 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
 
         } else {
             btn_followersProfile.setVisibility(GONE);
+            ll_referlinks.setVisibility(View.VISIBLE);
 
         }
 
@@ -309,6 +325,9 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
         ViewGroup.LayoutParams lp = viewPager.getLayoutParams();
         lp.height =height;
 
+//        createViewPager(viewPager);
+//        tab_layout.setupWithViewPager(viewPager);
+//        tab_layout.setOnTabSelectedListener(onTabSelectedListener(viewPager));
         setPresenters();
         setAdapter();
         //call API to populate data
@@ -381,9 +400,10 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
     }
 
     private void getFollowers() {
-        if (progressDialog != null) {
-            progressDialog.show();
-        }
+        if(Utils.mProgressDialog == null)
+            Utils.showProgress(getActivity());
+
+
         String data = getjsonstring(String.valueOf(mUserId));
 
         getFollowerCall = WebRequest.apiInterface.getallfollowers("application/json", data);
@@ -408,25 +428,16 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
                             }
                             followerUsersadapter.notifyDataSetChanged();
 
-                            if(progressDialog!=null){
-                                if(progressDialog.isShowing()){
-                                    progressDialog.dismiss();
-                                }
-                            }
+                            if(Utils.mProgressDialog != null)
+                                Utils.dismissProgress();
                             break;
                         case 1:
-                            if(progressDialog!=null){
-                                if(progressDialog.isShowing()){
-                                    progressDialog.dismiss();
-                                }
-                            }
+                            if(Utils.mProgressDialog != null)
+                                Utils.dismissProgress();
                             break;
                         default:
-                            if(progressDialog!=null){
-                                if(progressDialog.isShowing()){
-                                    progressDialog.dismiss();
-                                }
-                            }
+                            if(Utils.mProgressDialog != null)
+                                Utils.dismissProgress();
                             break;
                     }
                 }
@@ -434,19 +445,16 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
 
             @Override
             public void onFailure(Call<GetFollower> call, Throwable t) {
-                if(progressDialog!=null){
-                    if(progressDialog.isShowing()){
-                        progressDialog.dismiss();
-                    }
-                }
+                if(Utils.mProgressDialog != null)
+                    Utils.dismissProgress();
             }
         });
     }
 
     private void getFollowing() {
-        if (progressDialog != null) {
-            progressDialog.show();
-        }
+        if(Utils.mProgressDialog == null)
+            Utils.showProgress(getActivity());
+
         String data = getjsonstring(String.valueOf(mUserId));
         getFollowingCall = WebRequest.apiInterface.getallfollowing("application/json", data);
         getFollowingCall.enqueue(new Callback<GetFollowing>() {
@@ -468,26 +476,17 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
                                 followingUser.setIsfollowback(getFollowing.getResponse().getGetMyFollowing().get(i).getHasFollowBack());
                                 followingUserList.add(followingUser);
                             }
-                            if(progressDialog!=null){
-                                if(progressDialog.isShowing()){
-                                    progressDialog.dismiss();
-                                }
-                            }
+                            if(Utils.mProgressDialog != null)
+                                Utils.dismissProgress();
                             followingadapter.notifyDataSetChanged();
                             break;
                         case 1:
-                            if(progressDialog!=null){
-                                if(progressDialog.isShowing()){
-                                    progressDialog.dismiss();
-                                }
-                            }
+                            if(Utils.mProgressDialog != null)
+                                Utils.dismissProgress();
                             break;
                         default:
-                            if(progressDialog!=null){
-                                if(progressDialog.isShowing()){
-                                    progressDialog.dismiss();
-                                }
-                            }
+                            if(Utils.mProgressDialog != null)
+                                Utils.dismissProgress();
                             break;
                     }
                 }
@@ -495,11 +494,8 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
 
             @Override
             public void onFailure(Call<GetFollowing> call, Throwable t) {
-                if(progressDialog!=null){
-                    if(progressDialog.isShowing()){
-                        progressDialog.dismiss();
-                    }
-                }
+                if(Utils.mProgressDialog != null)
+                    Utils.dismissProgress();
             }
         });
 
@@ -508,6 +504,9 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
 
     private void getProfile() {
         if (Utils.isNetworkAvail(getActivity())) {
+            if(progressDialog!=null){
+                progressDialog.show();
+            }
             mProfilePresenter.profile(getParams());
         } else {
             Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
@@ -622,12 +621,22 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
 
     @Override
     public void onFailure(String error) {
+        try{
+            if(progressDialog!=null){
+                if(progressDialog.isShowing()){
+                    progressDialog.dismiss();
+                }
+            }
+        }catch (Exception e){
+
+        }
         Utils.showCustomToast(getActivity(), error);
     }
 
     private void updateUI(ProfileResponse response) {
 //        tv_user_name.setText(Utils.capitalize(response.getResponse().getUserProfile().getFirstName() + " " +  response.getResponse().getUserProfile().getLastName()));
-        tv_user_name.setText(Utils.capitalize(response.getResponse().getUserProfile().getUserName()));
+//        tv_user_name.setText(Utils.capitalize(response.getResponse().getUserProfile().getUserName()));
+        tv_user_name.setText(response.getResponse().getUserProfile().getUserName());
 
         if (response.getResponse().getUserProfile().getHasfollowed() != null) {
             if (response.getResponse().getUserProfile().getHasfollowed().equals("true")) {
@@ -639,6 +648,18 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
             }
         }
         mUserName = response.getResponse().getUserProfile().getUserName();
+
+        if(response.getResponse().getUserProfile().getUserinfo()!=null){
+            if(response.getResponse().getUserProfile().getUserinfo().trim().length()>0){
+                tv_user_info.setVisibility(View.VISIBLE);
+                tv_user_info.setText(response.getResponse().getUserProfile().getUserinfo());
+            }else{
+                tv_user_info.setVisibility(GONE);
+            }
+        }else{
+            tv_user_info.setVisibility(GONE);
+        }
+
         String imageURL = response.getResponse().getUserProfile().getImageURL();
         String defaultURL = "https://opozee.com:81/Content/Upload/ProfileImage/oposee-profile.png";
 
@@ -666,6 +687,23 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
         createViewPager(viewPager);
         tab_layout.setupWithViewPager(viewPager);
         tab_layout.setOnTabSelectedListener(onTabSelectedListener(viewPager));
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    if(progressDialog!=null){
+                        if(progressDialog.isShowing()){
+                            progressDialog.dismiss();
+                        }
+                    }
+                }catch (Exception e){
+
+                }
+            }
+        },3000);
+
 //        mFollowersView.setText("Followers(" + response.getResponse().getUserProfile().getFollowers() + ")");
 //        mFollowingView.setText("Followings(" + response.getResponse().getUserProfile().getFollowings() + ")");
 
@@ -683,7 +721,9 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
 
 
     public void followuser(String userid, String status, String followingId) {
-        progressDialog.show();
+        if (Utils.mProgressDialog == null)
+            Utils.showProgress(getActivity());
+
         String data = followjsonString(userid, status, followingId);
         followingCall = WebRequest.apiInterface.followuser("application/json", data);
         followingCall.enqueue(new Callback<Following>() {
@@ -694,11 +734,8 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
                     int code = Integer.parseInt(following.getResponse().getCode());
                     switch (code) {
                         case 0:
-                            if(progressDialog!=null){
-                                if(progressDialog.isShowing()){
-                                    progressDialog.dismiss();
-                                }
-                            }
+                            if(Utils.mProgressDialog != null)
+                                Utils.dismissProgress();
                             getProfile();
 //                            getFollowing();
 //                            getFollowers();
@@ -706,42 +743,33 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
 //                            Followers.updatelist();
                             break;
                         default:
-                            if(progressDialog!=null){
-                                if(progressDialog.isShowing()){
-                                    progressDialog.dismiss();
-                                }
-                            }
+                            if(Utils.mProgressDialog != null)
+                                Utils.dismissProgress();
                             break;
                     }
-                    if(progressDialog!=null){
-                        if(progressDialog.isShowing()){
-                            progressDialog.dismiss();
-                        }
-                    }
+                    if(Utils.mProgressDialog != null)
+                        Utils.dismissProgress();
 
                 } else {
-                    if(progressDialog!=null){
-                        if(progressDialog.isShowing()){
-                            progressDialog.dismiss();
-                        }
-                    }
+                    if(Utils.mProgressDialog != null)
+                        Utils.dismissProgress();
                 }
 
             }
 
             @Override
             public void onFailure(Call<Following> call, Throwable t) {
-                if(progressDialog!=null){
-                    if(progressDialog.isShowing()){
-                        progressDialog.dismiss();
-                    }
-                }
+                if(Utils.mProgressDialog != null)
+                    Utils.dismissProgress();
             }
         });
     }
 
     public void unfollowuser(String userid, String status, String followingId) {
-        progressDialog.show();
+        if(Utils.mProgressDialog == null)
+            Utils.showProgress(getActivity());
+
+
         String data = followjsonString(userid, status, followingId);
         unFollowCall = WebRequest.apiInterface.unfollowuser("application/json", data);
         unFollowCall.enqueue(new Callback<UnFollow>() {
@@ -752,11 +780,8 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
                     int code = Integer.parseInt(unFollow.getResponse().getCode());
                     switch (code) {
                         case 0:
-                            if(progressDialog!=null){
-                                if(progressDialog.isShowing()){
-                                    progressDialog.dismiss();
-                                }
-                            }
+                            if(Utils.mProgressDialog != null)
+                                Utils.dismissProgress();
                             getProfile();
 //                            getFollowing();
 //                            getFollowers();
@@ -764,30 +789,21 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
 //                            Followers.updatelist();
                             break;
                         default:
-                            if(progressDialog!=null){
-                                if(progressDialog.isShowing()){
-                                    progressDialog.dismiss();
-                                }
-                            }
+                            if(Utils.mProgressDialog != null)
+                                Utils.dismissProgress();
                             break;
                     }
 
                 } else {
-                    if(progressDialog!=null){
-                        if(progressDialog.isShowing()){
-                            progressDialog.dismiss();
-                        }
-                    }
+                    if(Utils.mProgressDialog != null)
+                        Utils.dismissProgress();
                 }
             }
 
             @Override
             public void onFailure(Call<UnFollow> call, Throwable t) {
-                if(progressDialog!=null){
-                    if(progressDialog.isShowing()){
-                        progressDialog.dismiss();
-                    }
-                }
+                if(Utils.mProgressDialog != null)
+                    Utils.dismissProgress();
             }
         });
 

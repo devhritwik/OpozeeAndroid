@@ -21,6 +21,7 @@ public class ProfileInteractorImpl implements ProfileInteractor {
     public void profile(ProfileParams params, OnProfileFinishListener mListener) {
         if(params.getType() == AppGlobal.TYPE_GET_PROFILE)
         {
+            Log.d("ProfileData=","typegetprofile");
             getProfile(params, mListener);
         }
         else if(params.getType() == AppGlobal.TYPE_PROFILE_UPDATE){
@@ -101,6 +102,8 @@ public class ProfileInteractorImpl implements ProfileInteractor {
     }
 
     private void getProfile(ProfileParams params, final OnProfileFinishListener mListener) {
+        Log.d("ProfileData=",params.getUser_id());
+        Log.d("ProfileData=",params.getViewuserid());
         Call<ProfileResponse> call = WebServiceFactory.getInstance().getUserProfile(params.getUser_id(),params.getViewuserid());
 
         call.enqueue(new Callback<ProfileResponse>() {

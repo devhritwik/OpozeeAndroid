@@ -26,7 +26,7 @@ import java.util.Arrays;
 
 public class FBLogin {
 
-    private static final String TAG = "FBLOGIN";
+    private static final String TAG = "FBLOGIN_LOG";
     private Activity activity;
     private CallbackManager callbackManager;
     private String facebookID;
@@ -45,6 +45,8 @@ public class FBLogin {
         callbackManager = CallbackManager.Factory.create();
         LoginManager.getInstance().logOut();
         LoginManager.getInstance().logInWithReadPermissions(activity, Arrays.asList("public_profile", "email"));
+//        LoginManager.getInstance().logInWithReadPermissions(activity, Arrays.asList("email", "public_profile", "user_friends"));
+
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override

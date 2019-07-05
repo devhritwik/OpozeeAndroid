@@ -21,8 +21,8 @@ public class ProfileActivity extends OpozeeActivity {
     private Profile_New_Fragment profileFragment;
 
     @BindView(R.id.iv_back)
-    ImageView mBackButton ;
-public final String TAG="ProfileActivity_LOG";
+    ImageView mBackButton;
+    public final String TAG = "ProfileActivity_LOG";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,10 +31,10 @@ public final String TAG="ProfileActivity_LOG";
         setContentView(R.layout.profile_activity_layout);
         ButterKnife.bind(this);
 
-        Log.d(TAG,"Profile_Activity_Call");
+        Log.d(TAG, "Profile_Activity_Call");
 
         this.profileFragment = new Profile_New_Fragment();
-        Bundle bundle  = getIntent().getExtras();
+        Bundle bundle = getIntent().getExtras();
         profileFragment.setArguments(bundle);
 
 //        FragmentManager fm = getSupportFragmentManager();
@@ -44,16 +44,15 @@ public final String TAG="ProfileActivity_LOG";
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.profile_activity_fragment_container, profileFragment,null);
+        fragmentTransaction.replace(R.id.profile_activity_fragment_container, profileFragment, null);
         fragmentTransaction.commit();
     }
 
 
     @OnClick(R.id.iv_back)
-    public void onBackButtonClicked(){
+    public void onBackButtonClicked() {
         onBackPressed();
     }
-
 
 
 }

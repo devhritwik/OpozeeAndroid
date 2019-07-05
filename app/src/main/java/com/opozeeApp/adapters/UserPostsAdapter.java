@@ -118,7 +118,7 @@ public class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.View
         // - replace the contents of the view with that element
 
 //        holder.tv_name.setText(Utils.capitalize(usersList.get(position).getName()));
-        holder.tv_name.setText(Utils.capitalize(usersList.get(position).getOwnerUserName()));
+        holder.tv_name.setText(usersList.get(position).getOwnerUserName());
 
         holder.tv_user_name.setText("@"+usersList.get(position).getOwnerUserName().replace(" ", "").toLowerCase());
 
@@ -169,10 +169,15 @@ public class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.View
             final long diff = now - date;
             long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
 
-            if(minutes>10){
-                holder.iv_delete.setVisibility(View.GONE);
+
+            if(Integer.parseInt(Utils.getLoggedInUserId(mContext))==usersList.get(position).getOwnerUserID()) {
+                if (minutes > 10) {
+                    holder.iv_delete.setVisibility(View.GONE);
+                } else {
+                    holder.iv_delete.setVisibility(View.VISIBLE);
+                }
             }else{
-                holder.iv_delete.setVisibility(View.VISIBLE);
+                holder.iv_delete.setVisibility(View.GONE);
             }
 
         }
@@ -187,6 +192,15 @@ public class UserPostsAdapter extends RecyclerView.Adapter<UserPostsAdapter.View
         int yesCount = usersList.get(position).getYesCount() != null ? usersList.get(position).getYesCount() : 0;
         int noCount = usersList.get(position).getNoCount() != null ? usersList.get(position).getNoCount() : 0;
 
+
+        boolean isMostLiked = usersList.get(position).getMostLiked() != null;
+        boolean isMostDisliked = usersList.get(position).getMostDisliked() != null;
+
+        if(isMostLiked||isMostDisliked){
+            holder.tv_count_likes.setVisibility(View.VISIBLE);
+        }else{
+            holder.tv_count_likes.setVisibility(View.GONE);
+        }
 
         initDataToSeekbar(holder.seekBar, holder.tv_count_likes, holder.tv_count_dislikes,yesCount, noCount,position );
 

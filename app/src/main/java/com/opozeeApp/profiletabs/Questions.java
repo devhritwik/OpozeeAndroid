@@ -121,6 +121,10 @@ getQuestions();
                     Utils.dismissProgress();
 
             }else{
+                questionsList.clear();
+                mAdapter = new UserPostsAdapter(getContext(), questionsList);
+                rv_questions.setAdapter(mAdapter);
+
                 if (Utils.mProgressDialog != null)
                     Utils.dismissProgress();
             }
@@ -147,7 +151,7 @@ getQuestions();
 
        AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setCancelable(false);
-        alert.setMessage("Are you sure you want to delete");
+        alert.setMessage("Are you sure you want to delete ?");
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
