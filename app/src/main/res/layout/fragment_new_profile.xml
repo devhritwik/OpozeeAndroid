@@ -16,7 +16,7 @@
         <RelativeLayout
             android:id="@+id/top_header"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_250sdp"
+            android:layout_height="@dimen/_220sdp"
             android:background="@color/color_primary">
             <!--<TextView-->
             <!--android:id="@+id/tv_header"-->
@@ -35,8 +35,8 @@
                 android:layout_height="@dimen/_100sdp"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_18sdp"
-                android:layout_marginBottom="@dimen/_18sdp">
+                android:layout_marginTop="@dimen/_1sdp"
+                android:layout_marginBottom="@dimen/_10sdp">
 
                 <RelativeLayout
                     android:layout_width="@dimen/_95sdp"
@@ -91,7 +91,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_20sdp"
                 android:gravity="center"
-                android:textAllCaps="true"
+                android:textAllCaps="false"
                 android:textColor="@color/white_color"
                 android:textSize="@dimen/_11sdp"
                 android:visibility="gone" />
@@ -149,7 +149,7 @@
         <LinearLayout
             android:id="@+id/token_info_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:layout_below="@+id/top_header"
             android:gravity="center"
             android:orientation="vertical">
@@ -158,7 +158,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/top_header"
-                android:layout_margin="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
@@ -200,7 +201,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/top_header"
-                android:layout_margin="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
@@ -256,7 +259,7 @@
             android:background="@color/white_color"
             android:minHeight="?attr/actionBarSize"
             app:tabBackground="@color/white_color"
-            app:tabGravity="fill"
+            app:tabGravity="center"
             app:tabIndicatorColor="@color/black_color"
             app:tabIndicatorHeight="4dp"
             app:tabMode="scrollable"
