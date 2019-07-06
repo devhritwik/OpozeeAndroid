@@ -139,11 +139,12 @@ public class Beliefs extends Fragment implements UserBeliefView, DeleteQuestions
 
     @Override
     public void deletequestions(int id) {
-        final ACProgressFlower  progressDialog = new ACProgressFlower.Builder(context)
-                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
-                .themeColor(Color.WHITE)
-                .fadeColor(Color.DKGRAY).build();
-        progressDialog.show();
+//        final ACProgressFlower  progressDialog = new ACProgressFlower.Builder(context)
+//                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+//                .themeColor(Color.WHITE)
+//                .fadeColor(Color.DKGRAY).build();
+//        progressDialog.show();
+
 
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setCancelable(false);
@@ -151,9 +152,10 @@ public class Beliefs extends Fragment implements UserBeliefView, DeleteQuestions
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-               if(progressDialog!=null){
-                   progressDialog.show();
-               }
+                if (Utils.mProgressDialog == null)
+                    Utils.showProgresscontext(context);
+
+
                 String json = getjsondata(id, Utils.getLoggedInUserId(context));
                 deleteBeliefCall = webRequest.apiInterface.deletebelief("application/json", json);
                 deleteBeliefCall.enqueue(new Callback<DeleteBelief>() {
@@ -165,12 +167,8 @@ public class Beliefs extends Fragment implements UserBeliefView, DeleteQuestions
                             switch (code) {
                                 case 0:
                                     try {
-                                        if (progressDialog != null) {
-                                            if (progressDialog.isShowing()) {
-                                                progressDialog.dismiss();
-
-                                            }
-                                        }
+                                        if (Utils.mProgressDialog != null)
+                                            Utils.dismissProgress();
                                     } catch (Exception e) {
 
                                     }
@@ -178,12 +176,8 @@ public class Beliefs extends Fragment implements UserBeliefView, DeleteQuestions
                                     break;
                                     default:
                                         try {
-                                            if (progressDialog != null) {
-                                                if (progressDialog.isShowing()) {
-                                                    progressDialog.dismiss();
-
-                                                }
-                                            }
+                                            if (Utils.mProgressDialog != null)
+                                                Utils.dismissProgress();
                                         } catch (Exception e) {
 
                                         }
@@ -192,12 +186,8 @@ public class Beliefs extends Fragment implements UserBeliefView, DeleteQuestions
                             }
                         } else {
                             try {
-                                if (progressDialog != null) {
-                                    if (progressDialog.isShowing()) {
-                                        progressDialog.dismiss();
+                                Utils.dismissProgress();
 
-                                    }
-                                }
                             } catch (Exception e) {
 
                             }
@@ -208,12 +198,8 @@ public class Beliefs extends Fragment implements UserBeliefView, DeleteQuestions
                     public void onFailure(Call<DeleteBelief> call, Throwable t) {
 
                         try {
-                            if (progressDialog != null) {
-                                if (progressDialog.isShowing()) {
-                                    progressDialog.dismiss();
+                            Utils.dismissProgress();
 
-                                }
-                            }
                         } catch (Exception e) {
 
                         }

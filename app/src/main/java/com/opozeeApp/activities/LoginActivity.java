@@ -483,6 +483,7 @@ public class LoginActivity extends OpozeeActivity implements GoogleApiClient.OnC
     private String getjsonstring(String email, String password) {
         JSONObject obj = new JSONObject();
         String userdata = "";
+        Log.d(TAG,"Devicetoken="+deviceId);
         try {
 
             obj.put("email", email);

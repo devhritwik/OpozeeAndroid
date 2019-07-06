@@ -48,8 +48,8 @@ android {
         applicationId "com.opozeeApp"
         minSdkVersion 18
         targetSdkVersion 28
-        versionCode 10
-        versionName "6.6"
+        versionCode 13
+        versionName "6.8"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
@@ -140,9 +140,16 @@ dependencies {
     implementation 'com.github.andob:emojilike-android:beta2'
 
     implementation 'cc.cloudist.acplibrary:library:1.2.1'
+    implementation 'com.crashlytics.sdk.android:crashlytics-ndk:2.1.0'
 
 
 }
 
 
 apply plugin: 'com.google.gms.google-services'
+
+crashlytics {
+    enableNdk true
+    androidNdkOut 'src/main/obj'
+    androidNdkLibsOut 'src/main/libs'
+}

@@ -67,11 +67,14 @@ public class Followings extends Fragment implements TabClicked, LoadTabData {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv_followings.setLayoutManager(linearLayoutManager);
         webRequest = WebRequest.getSingleton(getActivity());
-        progressDialog = new ACProgressFlower.Builder(getActivity())
-                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
-                .themeColor(Color.WHITE)
-                .fadeColor(Color.DKGRAY).build();
+        try {
+            progressDialog = new ACProgressFlower.Builder(getActivity())
+                    .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                    .themeColor(Color.WHITE)
+                    .fadeColor(Color.DKGRAY).build();
+        }catch (Exception e){
 
+        }
         if (Utils.isNetworkAvail(getActivity())) {
             getfollowings();
         } else {
@@ -84,8 +87,12 @@ public class Followings extends Fragment implements TabClicked, LoadTabData {
 
     private void getfollowings() {
 
-        if (progressDialog != null) {
-            progressDialog.show();
+        try {
+            if (progressDialog != null) {
+                progressDialog.show();
+            }
+        }catch (Exception e){
+
         }
         String data = getjsonstring(Utils.idprofileget(getContext()));
         getFollowingCall = WebRequest.apiInterface.getallfollowing("application/json", data);
@@ -182,7 +189,11 @@ public class Followings extends Fragment implements TabClicked, LoadTabData {
     }
 
     public  void unfollowuser(String owneruserid, String aFalse, String userid) {
-        progressDialog.show();
+     try {
+         progressDialog.show();
+     }catch (Exception e){
+
+     }
         String data = followjsonString(owneruserid, aFalse, userid);
         unFollowCall = WebRequest.apiInterface.unfollowuser("application/json", data);
         unFollowCall.enqueue(new Callback<UnFollow>() {

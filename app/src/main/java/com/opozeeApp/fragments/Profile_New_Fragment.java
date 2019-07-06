@@ -200,11 +200,14 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
         tab_layout = rootView.findViewById(R.id.tab_layout);
         viewPager = rootView.findViewById(R.id.viewPager);
 
-        progressDialog = new ACProgressFlower.Builder(getActivity())
-                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
-                .themeColor(Color.WHITE)
-                .fadeColor(Color.DKGRAY).build();
+        try {
+            progressDialog = new ACProgressFlower.Builder(getActivity())
+                    .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                    .themeColor(Color.WHITE)
+                    .fadeColor(Color.DKGRAY).build();
+        }catch (Exception e){
 
+        }
 
 //        progressDialog = new ProgressDialog(getActivity());
 //        progressDialog.setCancelable(false);
@@ -504,9 +507,14 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
 
     private void getProfile() {
         if (Utils.isNetworkAvail(getActivity())) {
-            if(progressDialog!=null){
-                progressDialog.show();
+            try {
+                if(progressDialog!=null){
+                    progressDialog.show();
+                }
+            }catch (Exception e){
+
             }
+
             mProfilePresenter.profile(getParams());
         } else {
             Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));

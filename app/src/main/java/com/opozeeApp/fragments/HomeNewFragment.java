@@ -69,6 +69,7 @@ public class HomeNewFragment extends Fragment {
     ViewPager viewPager;
     private FragmentActivity myContext;
     public static String tabName = "";
+    public static ACProgressFlower progressDialog;
 
     @Nullable
     @Override
@@ -113,12 +114,16 @@ public class HomeNewFragment extends Fragment {
     }
 
     private ArrayList<GetTagsModel> getAllTags() {
-        final ACProgressFlower progressDialog = new ACProgressFlower.Builder(getActivity())
-                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
-                .themeColor(Color.WHITE)
-                .fadeColor(Color.DKGRAY).build();
-        progressDialog.show();
+        try {
+            progressDialog = new ACProgressFlower.Builder(getActivity())
+                    .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                    .themeColor(Color.WHITE)
+                    .fadeColor(Color.DKGRAY).build();
 
+            progressDialog.show();
+        } catch (Exception e) {
+
+        }
 
         getAllTagsCall = WebRequest.apiInterface.getalltags();
         getAllTagsCall.enqueue(new Callback<GetAllTags>() {
@@ -171,7 +176,7 @@ public class HomeNewFragment extends Fragment {
                                                 progressDialog.dismiss();
                                             }
                                         }
-                                    }catch (Exception e){
+                                    } catch (Exception e) {
 
                                     }
 
@@ -189,7 +194,7 @@ public class HomeNewFragment extends Fragment {
                                         progressDialog.dismiss();
                                     }
                                 }
-                            }catch (Exception e){
+                            } catch (Exception e) {
 
                             }
                             break;
@@ -205,7 +210,7 @@ public class HomeNewFragment extends Fragment {
                             progressDialog.dismiss();
                         }
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
 
                 }
             }
