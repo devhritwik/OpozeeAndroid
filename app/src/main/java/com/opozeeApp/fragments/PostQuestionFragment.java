@@ -183,7 +183,7 @@ public class PostQuestionFragment extends Fragment implements PostQuestionView, 
         PostQuestionParams params = new PostQuestionParams();
 //        id = 0 for posting & id != 0 for editing
         params.setId("0");
-        params.setHashTags(edit_hash_tags.getText().toString().trim());
+        params.setHashTags(edit_hash_tags.getText().toString().trim().replace("#","").replace(" ",","));
         params.setQuestion(StringEscapeUtils.escapeJava(edit_questions.getText().toString().trim()));
         params.setUserId(Utils.getLoggedInUserId(getActivity()));
         params.setTaggedUsers(getTagIds());

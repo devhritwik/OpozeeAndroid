@@ -389,7 +389,7 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
         adapter.addFragment(new Questions(), "Questions");
         adapter.addFragment(new Beliefs(),"Beliefs");
         adapter.addFragment(new Followers(), "Followers("+follow+")");
-        adapter.addFragment(new Followings(), "Followings("+followings+")");
+        adapter.addFragment(new Followings(), "Following("+followings+")");
 
 //       }
         viewPager.setAdapter(adapter);
