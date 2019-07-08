@@ -46,6 +46,7 @@ public class SplashActivity extends OpozeeActivity {
         super.onCreate(savedInstanceState);
         getStatusBarHeight();
         Fabric.with(this, new Crashlytics());
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
@@ -57,6 +58,10 @@ public class SplashActivity extends OpozeeActivity {
         mLogo.setImageDrawable(getResources().getDrawable(R.drawable.opozee_logo));
         checkDeviceID();
         showSplash();
+
+//        throw new RuntimeException("This is a test crash");
+
+
 //        main_relative.post(new Runnable() {
 //            @Override
 //            public void run() {
@@ -66,6 +71,8 @@ public class SplashActivity extends OpozeeActivity {
     }
 
     private void checkDeviceID() {
+
+
         appSP = AppSP.getInstance(SplashActivity.this);
 
         String deviceId = appSP.readString(AppGlobal.REGISTRATION_ID, "");

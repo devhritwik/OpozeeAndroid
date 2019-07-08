@@ -113,17 +113,18 @@ public class HomeActivity extends OpozeeActivity implements ProfileView {
         createNotificationChannel();
 //        mTokenCountView.setText("30");
 
-//        logUser();
+        logUser();
         handleData();
+
     }
 
-//    private void logUser() {
-//        // TODO: Use the current user's information
-//        // You can call any combination of these three methods
-//        Crashlytics.setUserIdentifier(Utils.getLoggedInUserId(HomeActivity.this));
-//        Crashlytics.setUserEmail(Utils.getLoggedInEmail(HomeActivity.this));
-//        Crashlytics.setUserName(Utils.getLoggedInUsername(HomeActivity.this));
-//    }
+    private void logUser() {
+        // TODO: Use the current user's information
+        // You can call any combination of these three methods
+        Crashlytics.setUserIdentifier(Utils.getLoggedInUserId(HomeActivity.this));
+        Crashlytics.setUserEmail(Utils.getLoggedInEmail(HomeActivity.this));
+        Crashlytics.setUserName(Utils.getLoggedInUsername(HomeActivity.this));
+    }
 
 
     public void refresh() {

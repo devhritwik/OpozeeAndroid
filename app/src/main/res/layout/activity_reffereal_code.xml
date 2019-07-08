@@ -136,6 +136,7 @@
         app:layout_constraintTop_toTopOf="@+id/et_referralcode"
         app:layout_constraintBottom_toBottomOf="@+id/et_referralcode"
         app:srcCompat="@drawable/ic_content_copy_black_24dp"
+        android:padding="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_30sdp"/>
 
         <View
@@ -195,9 +196,13 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_referrallink"
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/backgroiund_editext"
-        android:padding="@dimen/_10sdp"
+        android:paddingLeft="@dimen/_10sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:paddingRight="@dimen/_35sdp"
         android:enabled="false"
         android:clickable="false"
+        android:text="dcns"
         android:textColor="@color/black_color"/>
 
     <ImageView
@@ -208,6 +213,7 @@
         app:layout_constraintTop_toTopOf="@+id/et_referrallink"
         app:layout_constraintBottom_toBottomOf="@+id/et_referrallink"
         app:srcCompat="@drawable/ic_share_black"
+        android:padding="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_30sdp"/>
 
     </android.support.constraint.ConstraintLayout>

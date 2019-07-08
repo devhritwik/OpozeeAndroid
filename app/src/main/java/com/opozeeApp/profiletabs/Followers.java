@@ -64,11 +64,14 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv_followers.setLayoutManager(linearLayoutManager);
         webRequest = WebRequest.getSingleton(getActivity());
-        progressDialog = new ACProgressFlower.Builder(getActivity())
-                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
-                .themeColor(Color.WHITE)
-                .fadeColor(Color.DKGRAY).build();
+       try {
+           progressDialog = new ACProgressFlower.Builder(getActivity())
+                   .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                   .themeColor(Color.WHITE)
+                   .fadeColor(Color.DKGRAY).build();
+       }catch (Exception e){
 
+       }
         if (Utils.isNetworkAvail(getActivity())) {
             getfollowers();
         } else {
@@ -79,8 +82,12 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
     }
 
     private void getfollowers() {
-        if (progressDialog != null) {
-            progressDialog.show();
+        try {
+            if (progressDialog != null) {
+                progressDialog.show();
+            }
+        }catch (Exception e){
+
         }
         String data = getjsonstring(Utils.idprofileget(getContext()));
 
@@ -175,7 +182,11 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
     }
 
     public void unfollowuser(String userid, String status, String followingId) {
-        progressDialog.show();
+      try {
+          progressDialog.show();
+      }catch (Exception e){
+
+      }
         String data = followjsonString(userid, status, followingId);
         unFollowCall = WebRequest.apiInterface.unfollowuser("application/json", data);
         unFollowCall.enqueue(new Callback<UnFollow>() {
@@ -271,9 +282,13 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
     }
 
     public void followuser(String owneruserid, String aTrue, String userid) {
-        if(progressDialog!=null) {
-            progressDialog.show();
-        }
+       try {
+           if (progressDialog != null) {
+               progressDialog.show();
+           }
+       }catch (Exception e){
+
+       }
         String data = followjsonString(owneruserid, aTrue, userid);
         followingCall = WebRequest.apiInterface.followuser("application/json", data);
         followingCall.enqueue(new Callback<Following>() {

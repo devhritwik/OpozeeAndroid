@@ -278,6 +278,23 @@ public static String getreferralcode(Context context){
 //        mProgressDialog.show();
     }
 
+
+    public static void showProgresscontext(Context activity) {
+        try {
+            mProgressDialog = new ACProgressFlower.Builder(activity)
+                    .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                    .themeColor(Color.WHITE)
+                    .fadeColor(Color.DKGRAY).build();
+            mProgressDialog.show();
+        }catch (Exception e){
+
+        }
+//        mProgressDialog = new ProgressDialog(activity);
+//        mProgressDialog.setMessage("Loading...");
+//        mProgressDialog.setCancelable(false);
+//        mProgressDialog.show();
+    }
+
     public static void dismissProgress() {
         try {
             if (mProgressDialog != null) {
