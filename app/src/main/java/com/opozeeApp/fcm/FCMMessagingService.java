@@ -204,7 +204,7 @@ public class FCMMessagingService extends FirebaseMessagingService {
         NotificationCompat.Builder notificationBuilder =null;
 if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O) {
     notificationBuilder = new NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.mipmap.question_icon)
+            .setSmallIcon(R.mipmap.ic_launcher)
             .setPriority(Notification.PRIORITY_HIGH)
             .setContentTitle(getString(R.string.fcm_message))
             .setContentText(message)
@@ -214,7 +214,7 @@ if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O) {
             .setContentIntent(pendingIntent);
 }else{
     notificationBuilder = new NotificationCompat.Builder(this)
-            .setSmallIcon(R.mipmap.question_icon)
+            .setSmallIcon(R.mipmap.ic_launcher)
             .setContentTitle(getString(R.string.fcm_message))
             .setContentText(message)
             .setAutoCancel(true)
