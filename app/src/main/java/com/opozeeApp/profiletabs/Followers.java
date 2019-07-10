@@ -48,7 +48,7 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
     private static ArrayList<FollowesUsers> followerslist = new ArrayList<>();
     private static boolean isRefreshed = false;
     private static boolean isLastPage = false;
-    public static ACProgressFlower progressDialog;
+    public static com.opozeeApp.acprogressflower.ACProgressFlower progressDialog;
     public Button btn_followersProfile;
 
     private static WebRequest webRequest;
@@ -69,7 +69,7 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
         rv_followers.setLayoutManager(linearLayoutManager);
         webRequest = WebRequest.getSingleton(context);
        try {
-           progressDialog = new ACProgressFlower.Builder(context)
+           progressDialog = new com.opozeeApp.acprogressflower.ACProgressFlower.Builder(context)
                    .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                    .themeColor(Color.WHITE)
                    .fadeColor(Color.DKGRAY).build();
@@ -87,8 +87,10 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
 
     private void getfollowers() {
         try {
-            if (progressDialog != null) {
-                progressDialog.show();
+            if(!getActivity().isFinishing()) {
+                if (progressDialog != null) {
+                    progressDialog.show();
+                }
             }
         }catch (Exception e){
 

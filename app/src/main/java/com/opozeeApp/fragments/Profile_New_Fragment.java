@@ -178,9 +178,9 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
     private ArrayList<FollowesUsers> followerslist = new ArrayList<>();
     private ArrayList<FollowingUser> followingUserList = new ArrayList<>();
     public TabLayout tab_layout;
-    ViewPager viewPager;
+    public static ViewPager viewPager;
     public static NestedScrollView scrollView;
-    public static ACProgressFlower progressDialog;
+    public static com.opozeeApp.acprogressflower.ACProgressFlower progressDialog;
     public static Context context;
 
 
@@ -206,7 +206,7 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
         viewPager = rootView.findViewById(R.id.viewPager);
 
         try {
-            progressDialog = new ACProgressFlower.Builder(getActivity())
+            progressDialog = new com.opozeeApp.acprogressflower.ACProgressFlower.Builder(getActivity())
                     .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                     .themeColor(Color.WHITE)
                     .fadeColor(Color.DKGRAY).build();
@@ -392,6 +392,7 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
     }
 
     private void createViewPager(ViewPager viewPager) {
+        Log.d("VIEWPAGER_LOG=","ViewPagerCreated");
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
 //       for(int i=0;i<getTagsModelist.size();i++){
         adapter.addFragment(new Questions(), "Questions");
@@ -513,8 +514,10 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
     private void getProfile() {
         if (Utils.isNetworkAvail(getActivity())) {
             try {
-                if(progressDialog!=null){
-                    progressDialog.show();
+                if(!getActivity().isFinishing()) {
+                    if (progressDialog != null) {
+                        progressDialog.show();
+                    }
                 }
             }catch (Exception e){
 

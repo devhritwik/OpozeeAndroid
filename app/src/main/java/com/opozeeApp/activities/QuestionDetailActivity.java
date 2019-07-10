@@ -317,8 +317,10 @@ public class QuestionDetailActivity extends com.opozeeApp.newemojilikegif.Activi
     @Override
     public void onSuccess(ProfileResponse response) {
         if (response.getResponse().getType() == AppGlobal.TYPE_GET_PROFILE) {
-            //after getting data update the UI
-            tokens = response.getResponse().getUserProfile().getBalanceToken();
+           if(response.getResponse().getUserProfile().getBalanceToken()!=null) {
+               //after getting data update the UI
+               tokens = response.getResponse().getUserProfile().getBalanceToken();
+           }
         }
     }
 

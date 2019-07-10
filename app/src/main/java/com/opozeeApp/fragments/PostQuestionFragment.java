@@ -1,6 +1,7 @@
 package com.opozeeApp.fragments;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -61,6 +62,7 @@ public class PostQuestionFragment extends Fragment implements PostQuestionView, 
     @BindView(R.id.chips_input)
     ChipsInput chips_input;
     List<TagUsersResponse.GetAllUser> usersList = new ArrayList<>();
+public static Activity activity;
 
     public PostQuestionFragment() {
         // Required empty public constructor
@@ -72,7 +74,7 @@ public class PostQuestionFragment extends Fragment implements PostQuestionView, 
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_post_question, container, false);
-
+activity=getActivity();
         ButterKnife.bind(PostQuestionFragment.this, rootView);
         //set Presenter to attach the view with presenter
         setPresenter();
@@ -87,10 +89,10 @@ public class PostQuestionFragment extends Fragment implements PostQuestionView, 
     }
 
     private void getProfile() {
-        if (Utils.isNetworkAvail(getActivity())) {
+        if (Utils.isNetworkAvail(activity)) {
             mProfilePresenter.profile(getProfileParams());
         } else {
-            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+            Utils.showCustomToast(activity, getString(R.string.internet_alert));
         }
 
     }
@@ -98,8 +100,8 @@ public class PostQuestionFragment extends Fragment implements PostQuestionView, 
     private ProfileParams getProfileParams() {
         ProfileParams params = new ProfileParams();
         params.setType(AppGlobal.TYPE_GET_PROFILE);
-        params.setUser_id(Utils.getLoggedInUserId(getActivity()));
-        params.setViewuserid(Utils.getLoggedInUserId(getActivity()));
+        params.setUser_id(Utils.getLoggedInUserId(activity));
+        params.setViewuserid(Utils.getLoggedInUserId(activity));
         return params;
     }
 
@@ -125,7 +127,7 @@ public class PostQuestionFragment extends Fragment implements PostQuestionView, 
         }
         else
         {
-            Utils.showCustomToast(getActivity(),"Profile Updated Successfully");
+            Utils.showCustomToast(activity,"Profile Updated Successfully");
             //updateUI after the updation of the profile
             getProfile();
         }
@@ -148,11 +150,11 @@ public class PostQuestionFragment extends Fragment implements PostQuestionView, 
     @OnClick(R.id.btn_post)
     void onPostClick()
     {
-    if (Utils.isNetworkAvail(getActivity())) {
+    if (Utils.isNetworkAvail(activity)) {
         mPresenter.postQuestion(getParams());
         trackQuestionPosting();
     } else {
-        Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+        Utils.showCustomToast(activity, getString(R.string.internet_alert));
     }
 
     }
@@ -174,7 +176,7 @@ public class PostQuestionFragment extends Fragment implements PostQuestionView, 
             emailIntent.setData(Uri.parse(mailTo));
             startActivity(emailIntent);
         } else {
-            Toast.makeText(getActivity(), "Gmail App Is Not Installed In Your Phone", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, "Gmail App Is Not Installed In Your Phone", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -185,7 +187,7 @@ public class PostQuestionFragment extends Fragment implements PostQuestionView, 
         params.setId("0");
         params.setHashTags(edit_hash_tags.getText().toString().trim().replace("#","").replace(" ",","));
         params.setQuestion(StringEscapeUtils.escapeJava(edit_questions.getText().toString().trim()));
-        params.setUserId(Utils.getLoggedInUserId(getActivity()));
+        params.setUserId(Utils.getLoggedInUserId(activity));
         params.setTaggedUsers(getTagIds());
 
         return params;
@@ -203,7 +205,7 @@ public class PostQuestionFragment extends Fragment implements PostQuestionView, 
     @Override
     public void showProgress() {
         if(Utils.mProgressDialog == null)
-            Utils.showProgress(getActivity());
+            Utils.showProgress(activity);
     }
 
     @Override
@@ -214,11 +216,11 @@ public class PostQuestionFragment extends Fragment implements PostQuestionView, 
 
     @Override
     public void onSuccess(PostQuestionResponse response) {
-        Utils.showCustomToast(getActivity(), "Question posted successfully");
+        Utils.showCustomToast(activity, "Question posted successfully");
         if(getActivity() instanceof HomeActivity)
         {
 //            ((HomeActivity)getActivity()).getLastFragment(AppGlobal.HOMEFRAG);
-            ((HomeActivity)getActivity()).refresh();
+            ((HomeActivity)activity).refresh();
         }
         else
         {
@@ -246,7 +248,7 @@ public class PostQuestionFragment extends Fragment implements PostQuestionView, 
 
     @Override
     public void onFailure(String error) {
-        Utils.showCustomToast(getActivity(),error);
+        Utils.showCustomToast(activity,error);
     }
 
     private void trackQuestionPosting(){

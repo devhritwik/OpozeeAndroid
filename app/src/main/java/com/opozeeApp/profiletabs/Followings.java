@@ -47,7 +47,7 @@ public class Followings extends Fragment implements TabClicked, LoadTabData {
     private static ArrayList<FollowingUser> followingUserList = new ArrayList<>();
     private static boolean isRefreshed = false;
     private static boolean isLastPage = false;
-    public static ACProgressFlower progressDialog;
+    public static com.opozeeApp.acprogressflower.ACProgressFlower progressDialog;
 
 
     private static WebRequest webRequest;
@@ -56,7 +56,7 @@ public class Followings extends Fragment implements TabClicked, LoadTabData {
     private static retrofit2.Call<Following> followingCall;
     private static retrofit2.Call<UnFollow> unFollowCall;
 
-    retrofit2.Call<GetFollowing> getFollowingCall;
+    public static retrofit2.Call<GetFollowing> getFollowingCall;
     public static Followingadapter followingadapter;
     public static Activity activity;
 
@@ -71,7 +71,7 @@ public class Followings extends Fragment implements TabClicked, LoadTabData {
         rv_followings.setLayoutManager(linearLayoutManager);
         webRequest = WebRequest.getSingleton(activity);
         try {
-            progressDialog = new ACProgressFlower.Builder(activity)
+            progressDialog = new com.opozeeApp.acprogressflower.ACProgressFlower.Builder(activity)
                     .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                     .themeColor(Color.WHITE)
                     .fadeColor(Color.DKGRAY).build();
@@ -193,7 +193,18 @@ public class Followings extends Fragment implements TabClicked, LoadTabData {
 
     public  void unfollowuser(String owneruserid, String aFalse, String userid) {
      try {
-         progressDialog.show();
+         if(!getActivity().isFinishing()){
+         if(progressDialog!=null) {
+             progressDialog.show();
+         }else{
+             progressDialog = new com.opozeeApp.acprogressflower.ACProgressFlower.Builder(activity)
+                     .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                     .themeColor(Color.WHITE)
+                     .fadeColor(Color.DKGRAY).build();
+             progressDialog.show();
+         }
+         }
+
      }catch (Exception e){
 
      }

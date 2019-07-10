@@ -56,7 +56,7 @@ public class Utils {
     public static final String DEFAULT_PROFILE_PIC_URL = "https://opozee.com:81/Content/Upload/ProfileImage/oposee-profile.png";
 
 //    public static ProgressDialog mProgressDialog;
-    public static ACProgressFlower mProgressDialog;
+    public static com.opozeeApp.acprogressflower.ACProgressFlower mProgressDialog;
     private static String givenDate;
 
     /* formatting the likes counts and dislike counts*/
@@ -264,7 +264,7 @@ public static String getreferralcode(Context context){
 
     public static void showProgress(Activity activity) {
         try {
-            mProgressDialog = new ACProgressFlower.Builder(activity)
+            mProgressDialog = new com.opozeeApp.acprogressflower.ACProgressFlower.Builder(activity)
                     .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                     .themeColor(Color.WHITE)
                     .fadeColor(Color.DKGRAY).build();
@@ -281,7 +281,7 @@ public static String getreferralcode(Context context){
 
     public static void showProgresscontext(Context activity) {
         try {
-            mProgressDialog = new ACProgressFlower.Builder(activity)
+            mProgressDialog = new com.opozeeApp.acprogressflower.ACProgressFlower.Builder(activity)
                     .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                     .themeColor(Color.WHITE)
                     .fadeColor(Color.DKGRAY).build();

@@ -69,7 +69,7 @@ public class HomeNewFragment extends Fragment {
     ViewPager viewPager;
     private FragmentActivity myContext;
     public static String tabName = "";
-    public static ACProgressFlower progressDialog;
+    public static com.opozeeApp.acprogressflower.ACProgressFlower progressDialog;
 
     @Nullable
     @Override
@@ -115,7 +115,7 @@ public class HomeNewFragment extends Fragment {
 
     private ArrayList<GetTagsModel> getAllTags() {
         try {
-            progressDialog = new ACProgressFlower.Builder(getActivity())
+            progressDialog = new com.opozeeApp.acprogressflower.ACProgressFlower.Builder(getActivity())
                     .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                     .themeColor(Color.WHITE)
                     .fadeColor(Color.DKGRAY).build();

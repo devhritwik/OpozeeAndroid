@@ -264,7 +264,6 @@
             app:tabIndicatorHeight="4dp"
             app:tabMode="scrollable"
             app:tabPadding="5dp"
-
             app:tabTextAppearance="@style/CustomTextAppearanceTab"
             app:tabTextColor="@android:color/black" />
 
