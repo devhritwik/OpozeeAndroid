@@ -140,7 +140,7 @@ dependencies {
     implementation 'com.github.andob:emojilike-android:beta2'
 
     implementation 'cc.cloudist.acplibrary:library:1.2.1'
-
+    implementation 'com.ms-square:expandableTextView:0.1.4'
 
 }
 

@@ -1,5 +1,6 @@
 package com.opozeeApp.profiletabs;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -57,28 +58,30 @@ public class Followings extends Fragment implements TabClicked, LoadTabData {
 
     retrofit2.Call<GetFollowing> getFollowingCall;
     public static Followingadapter followingadapter;
+    public static Activity activity;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(inflater.getContext()).inflate(R.layout.fragment_followings, null);
+        activity=getActivity();
         rv_followings = view.findViewById(R.id.rv_followings);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv_followings.setLayoutManager(linearLayoutManager);
-        webRequest = WebRequest.getSingleton(getActivity());
+        webRequest = WebRequest.getSingleton(activity);
         try {
-            progressDialog = new ACProgressFlower.Builder(getActivity())
+            progressDialog = new ACProgressFlower.Builder(activity)
                     .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                     .themeColor(Color.WHITE)
                     .fadeColor(Color.DKGRAY).build();
         }catch (Exception e){
 
         }
-        if (Utils.isNetworkAvail(getActivity())) {
+        if (Utils.isNetworkAvail(activity)) {
             getfollowings();
         } else {
-            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+            Utils.showCustomToast(activity, getString(R.string.internet_alert));
         }
 
         return view;
@@ -115,7 +118,7 @@ public class Followings extends Fragment implements TabClicked, LoadTabData {
                                 followingUser.setIsfollowback(getFollowing.getResponse().getGetMyFollowing().get(i).getHasFollowBack());
                                 followingUserList.add(followingUser);
                             }
-                            followingadapter = new Followingadapter(getActivity(), followingUserList, Utils.getLoggedInUserId(getContext()));
+                            followingadapter = new Followingadapter(activity, followingUserList, Utils.getLoggedInUserId(getContext()));
                             rv_followings.setAdapter(followingadapter);
                             if(progressDialog!=null){
                                 if(progressDialog.isShowing()){
@@ -161,19 +164,19 @@ public class Followings extends Fragment implements TabClicked, LoadTabData {
     }
     @Override
     public void updatedata() {
-        if (Utils.isNetworkAvail(getActivity())) {
+        if (Utils.isNetworkAvail(activity)) {
             getfollowings();
         } else {
-            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+            Utils.showCustomToast(activity, getString(R.string.internet_alert));
         }
     }
 
     @Override
     public void LoadData(String owneruserid, String aFalse, String userid) {
-        if (Utils.isNetworkAvail(getActivity())) {
+        if (Utils.isNetworkAvail(activity)) {
             unfollowuser(owneruserid, aFalse, userid);
         } else {
-            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+            Utils.showCustomToast(activity, getString(R.string.internet_alert));
         }
 
     }
@@ -210,10 +213,10 @@ public class Followings extends Fragment implements TabClicked, LoadTabData {
                                 }
                             }
                             Followers.updatelist();
-                            if (Utils.isNetworkAvail(getActivity())) {
+                            if (Utils.isNetworkAvail(activity)) {
                                 getfollowings();
                             } else {
-                                Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+                                Utils.showCustomToast(activity, getString(R.string.internet_alert));
                             }
                             break;
                         default:

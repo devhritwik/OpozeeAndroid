@@ -54,7 +54,19 @@
         android:padding="10dp">
 
 
-        <TextView
+        <!--<com.opozeeApp.ExpandableTextView-->
+            <!--android:id="@+id/tv_belief_text"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="2dp"-->
+            <!--android:fontFamily="@font/renner"-->
+            <!--android:text="Is Todzcdaffdscfdsfs fsy's Climate good?"-->
+            <!--android:textColor="@color/grey"-->
+            <!--android:textSize="@dimen/_12sdp" />-->
+
+        <com.opozeeApp.ExpandableTextView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
             android:id="@+id/tv_belief_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,7 +74,27 @@
             android:fontFamily="@font/renner"
             android:text="Is Todzcdaffdscfdsfs fsy's Climate good?"
             android:textColor="@color/grey"
-            android:textSize="@dimen/_12sdp" />
+            android:textSize="@dimen/_12sdp"
+            expandableTextView:maxCollapsedLines="3"
+            expandableTextView:animDuration="200">
+            <TextView
+                android:id="@id/expandable_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_12sdp"
+                android:paddingRight="@dimen/_10sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/renner"
+                android:textColor="@color/grey" />
+            <ImageButton
+                android:id="@id/expand_collapse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:layout_gravity="right"
+                android:background="@android:color/transparent"/>
+        </com.opozeeApp.ExpandableTextView>
+
 
 
         <LinearLayout

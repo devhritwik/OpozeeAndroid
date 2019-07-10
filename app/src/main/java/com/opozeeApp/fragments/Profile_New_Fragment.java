@@ -1,6 +1,7 @@
 package com.opozeeApp.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -147,7 +148,7 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
     private UserPostsAdapter mAdapter;
     private UserBeliefAdapter mBeliefsAdapter;
     private boolean isRefreshed = false;
-    private int mUserId = Integer.valueOf(Utils.getLoggedInUserId(getContext()));
+    private int mUserId=0;
 
     private static WebRequest webRequest;
     private static WebRequest.APIInterface apiInterface;
@@ -180,6 +181,7 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
     ViewPager viewPager;
     public static NestedScrollView scrollView;
     public static ACProgressFlower progressDialog;
+    public static Context context;
 
 
     public Profile_New_Fragment() {
@@ -194,6 +196,9 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_new_profile, container, false);
         ButterKnife.bind(this, rootView);
+        context=getActivity();
+
+        mUserId=Integer.valueOf(Utils.getLoggedInUserId(context));
         scrollView= rootView.findViewById(R.id.profile_fragment_nested_scrollview);
         webRequest = WebRequest.getSingleton(getActivity());
         btn_followersProfile = rootView.findViewById(R.id.btn_followersProfile);

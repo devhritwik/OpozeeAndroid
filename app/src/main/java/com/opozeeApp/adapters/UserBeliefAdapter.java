@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.opozeeApp.ExpandableTextView;
 import com.opozeeApp.R;
 import com.opozeeApp.activities.QuestionDetailActivity;
 import com.opozeeApp.application.QuestionnaireApplication;
@@ -125,7 +126,8 @@ public class UserBeliefAdapter extends RecyclerView.Adapter<UserBeliefAdapter.Vi
          LinearLayout mBeliefContainer ;
 
         @BindView(R.id.tv_belief_text)
-        TextView mBeliefText;
+//        TextView mBeliefText;
+                ExpandableTextView mBeliefText;
 
         @BindView(R.id.num_likes_tv)
         TextView mNumLikes;

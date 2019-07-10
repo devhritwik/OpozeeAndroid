@@ -31,19 +31,24 @@ public class LoginInteractorImpl implements LoginInteractor {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 Log.d("Response=", response.body().toString());
                 if (response.isSuccessful()) {
-                    if (response.body().getResponse().getCode() == 0) {
-                        LoginResponse LoginSignupResponse = response.body();
-                        setMixpanelSuperProperties(LoginSignupResponse);
-                        if (LoginSignupResponse != null) {
+                    if(response.body().getResponse()!=null) {
+                        if (response.body().getResponse().getCode() == 0) {
+                            LoginResponse LoginSignupResponse = response.body();
+                            setMixpanelSuperProperties(LoginSignupResponse);
+                            if (LoginSignupResponse != null) {
 
 
 //                            Utils.saveDataInSharePreferences(LoginSignupResponse, null);
-                            mListener.onSuccess(response.body());
-                        }
-                    } else {
-                        mListener.onFailure(response.body().getResponse().getStatus());
+                                mListener.onSuccess(response.body());
+                            }
+                        } else {
+                            mListener.onFailure(response.body().getResponse().getStatus());
 
+                        }
+                    }else {
+                        mListener.onFailure("Error Occured");
                     }
+
                 } else {
                     mListener.onFailure(response.message());
                 }

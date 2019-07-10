@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.opozeeApp.ExpandableTextView;
 import com.opozeeApp.R;
 import com.opozeeApp.interfaces.TopBeliefs;
 import com.opozeeApp.pojo.PostedQuestionsResponse;
@@ -33,7 +34,9 @@ public class QuestionListTopBeliefView  extends CardView{
     LinearLayout mMainLinearLayout;
 
     @BindView(R.id.belief_view_opinion_tv)
-    TextView mOpinionTextView;
+//    TextView mOpinionTextView;
+    ExpandableTextView mOpinionTextView;
+
 
     @BindView(R.id.belief_view_upvotes)
     TextView mUpvotesView;

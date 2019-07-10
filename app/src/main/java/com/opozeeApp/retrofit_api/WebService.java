@@ -95,7 +95,7 @@ public interface WebService {
     @POST(WebUrl.UPDATE_PROFILE_URL)
     @Headers({WebUrl.AUTHORIZATION_HEADER})
 //    Call<ResponseBody> uploadImage(@Part MultipartBody.Part file, @Part("name") RequestBody requestBody);
-    Call<ProfileResponse> editProfile(@Part MultipartBody.Part part, @Part("UserID") RequestBody userIdBody, @Part("FirstName") RequestBody firstNameBody, @Part("LastName") RequestBody lastNameBody,@Part("UserName") RequestBody username);
+    Call<ProfileResponse> editProfile(@Part MultipartBody.Part part, @Part("UserID") RequestBody userIdBody, @Part("FirstName") RequestBody firstNameBody, @Part("LastName") RequestBody lastNameBody,@Part("UserName") RequestBody username,@Part("UserInfo") RequestBody userinfo);
 
 //    Image
 

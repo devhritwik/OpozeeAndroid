@@ -1,6 +1,8 @@
 package com.opozeeApp.profiletabs;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -54,28 +56,30 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
     private static retrofit2.Call<GetFollower> getFollowerCall;
     private static retrofit2.Call<Following> followingCall;
     private static retrofit2.Call<UnFollow> unFollowCall;
+    public static Activity context;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(inflater.getContext()).inflate(R.layout.fragment_followers, null);
+        context=getActivity();
         rv_followers = view.findViewById(R.id.rv_followers);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv_followers.setLayoutManager(linearLayoutManager);
-        webRequest = WebRequest.getSingleton(getActivity());
+        webRequest = WebRequest.getSingleton(context);
        try {
-           progressDialog = new ACProgressFlower.Builder(getActivity())
+           progressDialog = new ACProgressFlower.Builder(context)
                    .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                    .themeColor(Color.WHITE)
                    .fadeColor(Color.DKGRAY).build();
        }catch (Exception e){
 
        }
-        if (Utils.isNetworkAvail(getActivity())) {
+        if (Utils.isNetworkAvail(context)) {
             getfollowers();
         } else {
-            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+            Utils.showCustomToast(context, getString(R.string.internet_alert));
         }
 
         return view;
@@ -112,7 +116,7 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
                                 followerslist.add(followesUsers);
                             }
 //                            followerUsersadapter.notifyDataSetChanged();
-                            followerUsersadapter = new FollowerUsers(getActivity(), followerslist, Utils.getLoggedInUserId(getContext()));
+                            followerUsersadapter = new FollowerUsers(context, followerslist, Utils.getLoggedInUserId(getContext()));
                             rv_followers.setAdapter(followerUsersadapter);
                             if(progressDialog!=null){
                                 if(progressDialog.isShowing()){
@@ -205,10 +209,10 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
 //                            getProfile();
 //                            getFollowing();
 //                            getFollowers();
-                            if (Utils.isNetworkAvail(getActivity())) {
+                            if (Utils.isNetworkAvail(context)) {
                                 getfollowers();
                             } else {
-                                Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+                                Utils.showCustomToast(context, getString(R.string.internet_alert));
                             }
                             Followings.updatelist();
                             break;
@@ -249,30 +253,30 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
 
     @Override
     public void LoadData(String owneruserid, String aFalse, String userid) {
-        if (Utils.isNetworkAvail(getActivity())) {
+        if (Utils.isNetworkAvail(context)) {
             unfollowuser(owneruserid, aFalse, userid);
         } else {
-            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+            Utils.showCustomToast(context, getString(R.string.internet_alert));
         }
 
     }
 
     @Override
     public void followcall(String owneruserid, String aFalse, String userid) {
-        if (Utils.isNetworkAvail(getActivity())) {
+        if (Utils.isNetworkAvail(context)) {
             followuser(owneruserid, aFalse, userid);
         } else {
-            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+            Utils.showCustomToast(context, getString(R.string.internet_alert));
         }
 
     }
 
     @Override
     public void updatedata() {
-        if (Utils.isNetworkAvail(getActivity())) {
+        if (Utils.isNetworkAvail(context)) {
             getfollowers();
         } else {
-            Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+            Utils.showCustomToast(context, getString(R.string.internet_alert));
         }
     }
 
@@ -306,10 +310,10 @@ public class Followers extends Fragment implements LoadTabData, TabClicked {
                             }
 //                            getProfile();
 //                            getFollowing();
-                            if (Utils.isNetworkAvail(getActivity())) {
+                            if (Utils.isNetworkAvail(context)) {
                                 getfollowers();
                             } else {
-                                Utils.showCustomToast(getActivity(), getString(R.string.internet_alert));
+                                Utils.showCustomToast(context, getString(R.string.internet_alert));
                             }
                             Followings.updatelist();
                             break;

@@ -48,6 +48,7 @@ public class ProfileInteractorImpl implements ProfileInteractor {
         RequestBody userIdBody = RequestBody.create(MediaType.parse("text/plain"), params.getUser_id());
         RequestBody lastNameBody = RequestBody.create(MediaType.parse("text/plain"), params.getLastName());
         RequestBody UserName = RequestBody.create(MediaType.parse("text/plain"), params.getUserName());
+        RequestBody Userinfo = RequestBody.create(MediaType.parse("text/plain"), params.getUserinfo());
         WebService webService = ServiceGenerator.createService(WebService.class);
         if (params.getProfilePic() != null) {
 
@@ -58,11 +59,11 @@ public class ProfileInteractorImpl implements ProfileInteractor {
 //         Log.d("ImageBitmap=",part.toString());
 //         Log.d("ImageBitmap=",""+params.getProfilePic());
 //         Log.d("ImageBitmap=",""+params.getProfilePic().getName());
-//         Log.d("ImageBitmap=",""+params.getProfilePic());
+         Log.d("ImageBitmap=",""+params.getUserinfo());
 //            req = webService.editProfile(MultipartBody.Part.createFormData(AppGlobal.KEY_USER_PROFILE_PIC, params.getProfilePic().getName(), RequestBody.create(MediaType.parse("image/*"), params.getProfilePic())), userIdBody, firstNameBody, lastNameBody);
-            req = webService.editProfile(part, userIdBody, firstNameBody, lastNameBody,UserName);
+            req = webService.editProfile(part, userIdBody, firstNameBody, lastNameBody,UserName,Userinfo);
         } else {
-            req = webService.editProfile(null, userIdBody, firstNameBody, lastNameBody,UserName);
+            req = webService.editProfile(null, userIdBody, firstNameBody, lastNameBody,UserName,Userinfo);
         }
         req.enqueue(new Callback<ProfileResponse>() {
             @Override

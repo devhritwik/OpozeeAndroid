@@ -66,6 +66,7 @@
     <string name="refferalcode">Referral Code (Optional)</string>
     <string name="text_cancel">Cancel</string>
     <string name="asset_statements" translatable="false">[{ \"include\": \"https://opozee.com/.well-known/assetlinks.json\" }]</string>
+    <string name="text_userinfo">Profile Info</string>
 
 
 </resources>

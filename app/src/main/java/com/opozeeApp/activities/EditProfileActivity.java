@@ -65,7 +65,7 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
     private ProfilePresenterImpl mPresenter;
     private ImageLoaderFromDevice imageLoader;
     private File mSelectedImageFile;
-    EditText et_username;
+    private EditText et_username,et_edit_userinfo;
     private static final int PERMISSION_REQUEST_CODE = 200;
     String[] storagePermissions = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -83,6 +83,7 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
         ButterKnife.bind(this);
 
         et_username = findViewById(R.id.et_edit_username);
+        et_edit_userinfo = findViewById(R.id.et_edit_userinfo);
         //initialize the imageLoader class to make interface for getting the profile pic using camera or gallery
         imageLoader = new ImageLoaderFromDevice(EditProfileActivity.this);
 
@@ -151,7 +152,7 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
 
     @OnClick(R.id.btnSave)
     public void onSaveClick() {
-        if (et_username != null) {
+        if (et_username != null&&et_edit_userinfo!=null) {
             if (et_username.getText().toString().trim().length() > 0) {
                 editProfile();
             } else {
@@ -222,6 +223,7 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
 //        tv_user_name.setText(Utils.capitalize(response.getResponse().getUserProfile().getUserName()));
         tv_user_name.setText(response.getResponse().getUserProfile().getUserName());
         et_username.setText(response.getResponse().getUserProfile().getUserName());
+        et_edit_userinfo.setText(response.getResponse().getUserProfile().getUserinfo());
 //        etEmail.setText(Utils.capitalize(response.getResponse().getUserProfile().getEmail()));
 //        etFirstName.setText(Utils.capitalize(response.getResponse().getUserProfile().getFirstName()));
 //        etLastName.setText(response.getResponse().getUserProfile().getLastName());
@@ -336,6 +338,7 @@ public class EditProfileActivity extends ActivityManagePermission implements Pro
         params.setFirstName("");
         params.setLastName("");
         params.setProfilePic(mSelectedImageFile);
+        params.setUserinfo(et_edit_userinfo.getText().toString());
         params.setUser_id(Utils.getLoggedInUserId(EditProfileActivity.this));
         return params;
     }

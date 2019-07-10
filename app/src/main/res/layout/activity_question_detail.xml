@@ -313,7 +313,7 @@
                 android:layout_above="@id/send_message_layout"
                 android:layout_below="@id/linear"
                 android:layout_marginTop="@dimen/_1sdp"
-                android:layout_marginBottom="@dimen/_1sdp" />
+                android:layout_marginBottom="@dimen/_80sdp"/>
 
         </LinearLayout>
 

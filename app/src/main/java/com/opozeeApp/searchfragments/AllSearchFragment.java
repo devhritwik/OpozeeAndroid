@@ -112,6 +112,7 @@ public class AllSearchFragment extends Fragment implements PostedQuestionsView {
     }
 
     private void getQuestions() {
+
         PostedQuestionsParams params = new PostedQuestionsParams();
         params.setPageIndex(pageIndex);
         params.setPageSize(pageSize);

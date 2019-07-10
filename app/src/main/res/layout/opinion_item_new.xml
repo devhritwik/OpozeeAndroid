@@ -29,7 +29,31 @@
             android:layout_height="match_parent">
 
 
-            <TextView
+            <!--<TextView-->
+                <!--android:id="@+id/tv_opinion_yes"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/_10sdp"-->
+                <!--android:layout_marginRight="@dimen/_10sdp"-->
+                <!--android:layout_marginTop="@dimen/_17sdp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:autoLink="web"-->
+                <!--android:paddingRight="@dimen/_10sdp"-->
+                <!--android:fontFamily="@font/renner"-->
+                <!--android:text=""-->
+                <!--android:textColor="@color/grey"-->
+                <!--android:textSize="@dimen/_12sdp"-->
+                <!--android:maxLines="3"-->
+                <!--android:ellipsize="end"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+
+            <!-- sample xml -->
+            <com.opozeeApp.ExpandableTextView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/tv_opinion_yes"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -38,15 +62,46 @@
                 android:layout_marginTop="@dimen/_17sdp"
                 android:layout_weight="1"
                 android:autoLink="web"
+                android:paddingRight="@dimen/_12sdp"
                 android:fontFamily="@font/renner"
-                android:text=""
+                android:text="ngfnfdngfnfnfgnf"
                 android:textColor="@color/grey"
                 android:textSize="@dimen/_12sdp"
+                android:ellipsize="end"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                expandableTextView:maxCollapsedLines="3"
+                expandableTextView:animDuration="200">
+                <TextView
+                    android:id="@id/expandable_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_12sdp"
+                    android:paddingRight="@dimen/_10sdp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/renner"
+                    android:textColor="@color/grey" />
+                <ImageButton
+                    android:id="@id/expand_collapse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="0dp"
+                    android:layout_gravity="right"
+                    android:background="@android:color/transparent"/>
+            </com.opozeeApp.ExpandableTextView>
 
 
+            <ImageView
+                android:id="@+id/iv_showMoreYes"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_opinion_yes"
+                app:layout_constraintEnd_toEndOf="@+id/tv_opinion_yes"
+                android:src="@drawable/detail"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:layout_marginRight="10dp"/>
             <!--<LinearLayout-->
             <!--android:id="@+id/ll_subreation_dislike"-->
             <!--android:layout_width="match_parent"-->
@@ -325,7 +380,30 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
+            <!--<TextView-->
+                <!--android:id="@+id/tv_opinion_no"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/_10sdp"-->
+                <!--android:layout_marginTop="@dimen/_17sdp"-->
+                <!--android:layout_marginRight="@dimen/_10sdp"-->
+                <!--android:text=""-->
+                <!--android:maxLines="3"-->
+                <!--android:ellipsize="end"-->
+                <!--android:paddingRight="@dimen/_10sdp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:autoLink="web"-->
+                <!--android:fontFamily="@font/renner"-->
+                <!--android:textColor="@color/grey"-->
+                <!--android:textSize="@dimen/_12sdp"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+
+            <com.opozeeApp.ExpandableTextView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/tv_opinion_no"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -333,6 +411,9 @@
                 android:layout_marginTop="@dimen/_17sdp"
                 android:layout_marginRight="@dimen/_10sdp"
                 android:text=""
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:paddingRight="@dimen/_10sdp"
                 android:layout_weight="1"
                 android:autoLink="web"
                 android:fontFamily="@font/renner"
@@ -340,7 +421,38 @@
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                expandableTextView:maxCollapsedLines="3"
+                expandableTextView:animDuration="200">
+                <TextView
+                    android:id="@id/expandable_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_12sdp"
+                    android:paddingRight="@dimen/_10sdp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/renner"
+                    android:textColor="@color/grey" />
+                <ImageButton
+                    android:id="@id/expand_collapse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="0dp"
+                    android:layout_gravity="right"
+                    android:background="@android:color/transparent"/>
+            </com.opozeeApp.ExpandableTextView>
+
+
+            <ImageView
+                android:id="@+id/iv_showMoreNo"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_opinion_no"
+                app:layout_constraintEnd_toEndOf="@+id/tv_opinion_no"
+                android:src="@drawable/detail"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:layout_marginRight="10dp"/>
 
 
             <!--<LinearLayout-->

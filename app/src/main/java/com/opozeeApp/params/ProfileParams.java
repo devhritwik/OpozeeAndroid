@@ -8,7 +8,17 @@ public class ProfileParams {
     String lastName;
     String user_id;
     String userName;
+
+    public String getUserinfo() {
+        return userinfo;
+    }
+
+    public void setUserinfo(String userinfo) {
+        this.userinfo = userinfo;
+    }
+
     String viewuserid;
+    String userinfo;
 
     public String getViewuserid() {
         return viewuserid;
