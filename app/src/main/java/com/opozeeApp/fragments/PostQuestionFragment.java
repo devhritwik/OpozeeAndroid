@@ -186,7 +186,7 @@ activity=getActivity();
 //        id = 0 for posting & id != 0 for editing
         params.setId("0");
         params.setHashTags(edit_hash_tags.getText().toString().trim().replace("#","").replace(" ",","));
-        params.setQuestion(StringEscapeUtils.escapeJava(edit_questions.getText().toString().trim()));
+        params.setQuestion(StringEscapeUtils.escapeJava(edit_questions.getText().toString().trim().replace("\\n", "<br/>")));
         params.setUserId(Utils.getLoggedInUserId(activity));
         params.setTaggedUsers(getTagIds());
 
