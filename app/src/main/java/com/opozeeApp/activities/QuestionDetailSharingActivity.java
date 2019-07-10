@@ -260,10 +260,11 @@ public class QuestionDetailSharingActivity extends  com.opozeeApp.newemojilikegi
         Map<String, String> map = new HashMap<>();
         QuestionnaireApplication.getMixpanelApi().track("share clicked", new JSONObject(map));
         Intent sendIntent = new Intent();
-//        String url = "https://opozee.com/qid/" + mQuestionId;
-        String url = "http://test.opozee.com/questiondetail";
+        String url = "https://opozee.com/qid/" + mQuestionId;
+        //String url = "http://test.opozee.com/questiondetail";
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey I'd like to know your opinion on this question. " + url);
+
+        sendIntent.putExtra(Intent.EXTRA_TEXT,  this.mQuestionText +" | Share your views on " + url);
         sendIntent.setType("text/plain");
         startActivity(sendIntent);
 

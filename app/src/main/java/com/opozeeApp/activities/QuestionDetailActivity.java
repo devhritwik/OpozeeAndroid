@@ -184,7 +184,7 @@ public class QuestionDetailActivity extends com.opozeeApp.newemojilikegif.Activi
             setupAddingOpinionInterface();
         } else if (appLinkData.toString().trim().length() > 0) {
             String data = appLinkData.toString();
-            String split[] = data.split("/");
+            String[] split = data.split("/");
             Log.d("Status=", "length=" + split.length);
             int datas = 0;
 
@@ -407,10 +407,10 @@ public class QuestionDetailActivity extends com.opozeeApp.newemojilikegif.Activi
         Map<String, String> map = new HashMap<>();
         QuestionnaireApplication.getMixpanelApi().track("share clicked", new JSONObject(map));
         Intent sendIntent = new Intent();
-//        String url = "https://opozee.com/qid/" + mQuestionId;
-        String url = "https://opozee.com/questiondetail/" + mQuestionId;
+        String url = "https://opozee.com/qid/" + mQuestionId;
+        //String url = "https://opozee.com/questiondetail/" + mQuestionId;
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey I'd like to know your opinion on this question. " + url);
+        sendIntent.putExtra(Intent.EXTRA_TEXT,  this.mQuestionText +" | Share your views on " + url);
         sendIntent.setType("text/plain");
         startActivity(sendIntent);
 
