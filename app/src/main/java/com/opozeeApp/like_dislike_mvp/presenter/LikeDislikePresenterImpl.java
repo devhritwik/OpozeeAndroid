@@ -15,7 +15,7 @@ public class LikeDislikePresenterImpl implements LikeDislikePresenter, LikeDisli
 
     @Override
     public void onSuccess(LikeDislikeResponse response) {
-//        dView.hideProgress();
+        dView.hideProgress();
 //        Log.d(TAG, "onSuccess()");
         dView.onSuccess(response);
     }
@@ -23,7 +23,7 @@ public class LikeDislikePresenterImpl implements LikeDislikePresenter, LikeDisli
     @Override
     public void onFailure(String error) {
 //        Log.d(TAG, "inFailure()");
-//        dView.hideProgress();
+        dView.hideProgress();
         dView.onFailure(error);
     }
 
@@ -44,7 +44,7 @@ public class LikeDislikePresenterImpl implements LikeDislikePresenter, LikeDisli
     @Override
     public void dislike(LikeDislikeParams params) {
 //        Log.d(TAG, "dislike()");
-//        dView.showProgress();
+        dView.showProgress();
         dInteractor.dislike(params, this);
     }
 }

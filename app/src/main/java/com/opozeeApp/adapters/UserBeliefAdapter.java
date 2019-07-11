@@ -61,7 +61,19 @@ public class UserBeliefAdapter extends RecyclerView.Adapter<UserBeliefAdapter.Vi
 
 
         final Belief currBelief = mBeliefList.get(position);
-        viewHolder.mBeliefText.setText(Html.fromHtml(currBelief.getBeliefText()));
+        if (currBelief.getLongForm() == null) {
+            viewHolder.expandableTextView.setVisibility(View.GONE);
+            viewHolder.mBeliefText.setVisibility(View.VISIBLE);
+            viewHolder.mBeliefText.setText((Html.fromHtml(currBelief.getBeliefText())).toString().trim());
+        } else {
+            viewHolder.mBeliefText.setVisibility(View.VISIBLE);
+            viewHolder.expandableTextView.setVisibility(View.VISIBLE);
+            viewHolder.mBeliefText.setText((Html.fromHtml(currBelief.getBeliefText())).toString().trim());
+            viewHolder.expandableTextView.setText((Html.fromHtml(currBelief.getLongForm())).toString().trim());
+        }
+
+
+
         viewHolder.mNumDislikes.setText(Integer.toString(currBelief.getDislikesCount()));
         viewHolder.mNumLikes.setText(Integer.toString(currBelief.getLikesCount()));
         if(currBelief.getQuestionText()!=null){
@@ -126,8 +138,11 @@ public class UserBeliefAdapter extends RecyclerView.Adapter<UserBeliefAdapter.Vi
          LinearLayout mBeliefContainer ;
 
         @BindView(R.id.tv_belief_text)
-//        TextView mBeliefText;
-                ExpandableTextView mBeliefText;
+        TextView mBeliefText;
+//                ExpandableTextView mBeliefText;
+
+         @BindView(R.id.tv_belief_text_expand)
+         ExpandableTextView expandableTextView;
 
         @BindView(R.id.num_likes_tv)
         TextView mNumLikes;

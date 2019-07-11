@@ -79,8 +79,9 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
         @BindView(R.id.tv_time_yes)
         public TextView tv_time_yes;
         @BindView(R.id.tv_opinion_yes)
-//        TextView tv_opinion_yes;
-                ExpandableTextView tv_opinion_yes;
+        TextView tv_opinion_yes;
+        @BindView(R.id.tv_opinion_yes_expand)
+        ExpandableTextView tv_opinion_yes_expand;
         @BindView(R.id.tv_name_no)
         public TextView tv_name_no;
         @BindView(R.id.tv_user_name_no)
@@ -88,8 +89,11 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
         @BindView(R.id.tv_time_no)
         public TextView tv_time_no;
         @BindView(R.id.tv_opinion_no)
-//        TextView tv_opinion_no;
-                ExpandableTextView tv_opinion_no;
+        TextView tv_opinion_no;
+
+        @BindView(R.id.tv_opinion_no_expand)
+        ExpandableTextView tv_opinion_no_expand;
+
         @BindView(R.id.card_yes)
         CardView card_yes;
         @BindView(R.id.card_no)
@@ -500,6 +504,9 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
         boolean isYesNo = usersList.get(position).getIsAgree();
 
         if (isYesNo) {
+//            if(usersList.get(position).getLongform()==null){
+//                holder.tv_opinion_yes.setmCollap
+//            }
             holder.card_yes.setVisibility(View.VISIBLE);
             holder.card_yes.setBackground(mContext.getResources().getDrawable(R.drawable.top_belief_view_positive_bg));
             holder.card_no.setVisibility(View.GONE);
@@ -521,7 +528,19 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                     .error(R.drawable.user)
                     .into(holder.iv_user_yes);
             String fromServerUnicodeDecoded = StringEscapeUtils.unescapeJava(usersList.get(position).getComment());
-            holder.tv_opinion_yes.setText(Html.fromHtml(fromServerUnicodeDecoded.trim()));
+            String fromServerUnicodeDecoded1 = StringEscapeUtils.unescapeJava(usersList.get(position).getLongform());
+
+            if (usersList.get(position).getLongform() == null) {
+                holder.tv_opinion_yes_expand.setVisibility(View.GONE);
+                holder.tv_opinion_yes.setVisibility(View.VISIBLE);
+                holder.tv_opinion_yes.setText((Html.fromHtml(fromServerUnicodeDecoded.trim()).toString().trim()));
+            } else {
+                holder.tv_opinion_yes_expand.setVisibility(View.VISIBLE);
+                holder.tv_opinion_yes.setVisibility(View.VISIBLE);
+                holder.tv_opinion_yes.setText((Html.fromHtml(fromServerUnicodeDecoded.trim())).toString());
+                holder.tv_opinion_yes_expand.setText((Html.fromHtml(fromServerUnicodeDecoded1.trim())).toString());
+            }
+
 
 //            holder.tv_opinion_yes.setMaxLines(Integer.MAX_VALUE);
 //        DisLike = 0,
@@ -1351,7 +1370,22 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
                     .error(R.drawable.user)
                     .into(holder.iv_user_no);
             String fromServerUnicodeDecoded = StringEscapeUtils.unescapeJava(usersList.get(position).getComment());
-            holder.tv_opinion_no.setText(Html.fromHtml(fromServerUnicodeDecoded.trim()));
+            String fromServerUnicodeDecoded1 = StringEscapeUtils.unescapeJava(usersList.get(position).getLongform());
+
+
+            if (usersList.get(position).getLongform() == null) {
+
+                holder.tv_opinion_no_expand.setVisibility(View.GONE);
+                holder.tv_opinion_no.setVisibility(View.VISIBLE);
+                holder.tv_opinion_no.setText((Html.fromHtml(fromServerUnicodeDecoded.trim())).toString().trim());
+            } else {
+
+                holder.tv_opinion_no_expand.setVisibility(View.VISIBLE);
+                holder.tv_opinion_no.setVisibility(View.VISIBLE);
+                holder.tv_opinion_no.setText((Html.fromHtml(fromServerUnicodeDecoded.trim())).toString().trim());
+                holder.tv_opinion_no_expand.setText((Html.fromHtml(fromServerUnicodeDecoded1.trim())).toString().trim());
+            }
+
 //        DisLike = 0,
 //                Like = 1,
 //                RemoveLike = 2,
@@ -2004,6 +2038,10 @@ public class OpinionAdapter extends RecyclerView.Adapter<OpinionAdapter.ViewHold
             }
         }
         return false;
+    }
+
+    public String getEmojiByUnicode(int unicode) {
+        return new String(Character.toChars(unicode));
     }
 
 

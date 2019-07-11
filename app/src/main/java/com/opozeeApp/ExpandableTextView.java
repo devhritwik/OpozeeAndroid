@@ -270,7 +270,7 @@ public class ExpandableTextView extends LinearLayout implements View.OnClickList
         mTv.setOnClickListener(this);
         mButton = (ImageButton) findViewById(R.id.expand_collapse);
         mButton.setImageDrawable(mCollapsed ? mExpandDrawable : mCollapseDrawable);
-        mButton.setPadding(5,15,5,5);
+        mButton.setPadding(5,5,5,5);
         mTv.setPadding(0,0,15,0);
         mButton.getLayoutParams().height = LayoutParams.WRAP_CONTENT;//set appropriate sizes
         mButton.getLayoutParams().width= LayoutParams.WRAP_CONTENT;;

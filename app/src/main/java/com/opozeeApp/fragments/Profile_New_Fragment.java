@@ -705,9 +705,9 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
         tab_layout.setOnTabSelectedListener(onTabSelectedListener(viewPager));
 
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
                 try{
                     if(progressDialog!=null){
                         if(progressDialog.isShowing()){
@@ -718,12 +718,12 @@ public class Profile_New_Fragment extends Fragment implements ProfileView, Poste
 
                 }
             }
-        },3000);
+//        },1000);
+//
+////        mFollowersView.setText("Followers(" + response.getResponse().getUserProfile().getFollowers() + ")");
+////        mFollowingView.setText("Followings(" + response.getResponse().getUserProfile().getFollowings() + ")");
+//
 
-//        mFollowersView.setText("Followers(" + response.getResponse().getUserProfile().getFollowers() + ")");
-//        mFollowingView.setText("Followings(" + response.getResponse().getUserProfile().getFollowings() + ")");
-
-    }
 
 
     @Override

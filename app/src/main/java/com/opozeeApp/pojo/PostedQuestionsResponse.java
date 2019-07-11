@@ -110,7 +110,17 @@ public class PostedQuestionsResponse {
         @Expose
         private List<Comments> comments =null;
 
+        @SerializedName("LongForm")
+        @Expose
+        private String longform;
 
+        public String getLongform() {
+            return longform;
+        }
+
+        public void setLongform(String longform) {
+            this.longform = longform;
+        }
 
         @SerializedName("ReactionSum")
         @Expose
@@ -366,6 +376,18 @@ public class PostedQuestionsResponse {
         @Expose
         private Boolean disLikes;
 
+        @SerializedName("LongForm")
+        @Expose
+        private String longform;
+
+            public String getLongForm() {
+                return longform;
+            }
+
+            public void setLongform(String longform) {
+                this.longform = longform;
+            }
+
         public Integer getId() {
             return id;
         }
@@ -418,7 +440,9 @@ public class PostedQuestionsResponse {
             return userImage;
         }
 
-        public void setUserImage(String userImage) {
+
+
+            public void setUserImage(String userImage) {
             this.userImage = userImage;
         }
 
@@ -488,9 +512,15 @@ public class PostedQuestionsResponse {
         @SerializedName("Likes")
         @Expose
         private Boolean likes;
+
+
         @SerializedName("DisLikes")
         @Expose
         private Boolean disLikes;
+
+        @SerializedName("LongForm")
+        @Expose
+        private String LongForm;
 
         public Integer getId() {
             return id;
@@ -524,6 +554,15 @@ public class PostedQuestionsResponse {
             this.commentedUserName = commentedUserName;
         }
 
+        @Override
+        public String getLongForm() {
+            return LongForm;
+        }
+
+        public void setLongForm(String longForm) {
+            LongForm = longForm;
+        }
+
         public Integer getLikesCount() {
             return likesCount;
         }
@@ -543,6 +582,9 @@ public class PostedQuestionsResponse {
         public String getUserImage() {
             return userImage;
         }
+
+
+
 
         public void setUserImage(String userImage) {
             this.userImage = userImage;

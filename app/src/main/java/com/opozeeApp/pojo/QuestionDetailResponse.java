@@ -110,6 +110,12 @@ public class QuestionDetailResponse {
         @Expose
         private String dislikefakenewscount;
 
+
+
+        @SerializedName("LongForm")
+        @Expose
+        private String longform;
+
         @SerializedName("DislikesOffTopicCount")
         @Expose
         private String dislikebiasedcount;
@@ -125,6 +131,14 @@ public class QuestionDetailResponse {
         @SerializedName("SubReaction")
         @Expose
         private int subreation;
+
+        public String getLongform() {
+            return longform;
+        }
+
+        public void setLongform(String longform) {
+            this.longform = longform;
+        }
 
         public String getLikesthought() {
             return likesthought;

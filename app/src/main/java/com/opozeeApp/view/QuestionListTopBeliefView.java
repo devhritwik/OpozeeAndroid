@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.text.Html;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,10 @@ public class QuestionListTopBeliefView  extends CardView{
 
     @BindView(R.id.belief_view_opinion_tv)
 //    TextView mOpinionTextView;
-    ExpandableTextView mOpinionTextView;
+    TextView mOpinionTextView;
+
+    @BindView(R.id.belief_view_opinion_tv_expand)
+    ExpandableTextView expandableTextView;
 
 
     @BindView(R.id.belief_view_upvotes)
@@ -92,6 +96,19 @@ public class QuestionListTopBeliefView  extends CardView{
     public void setBelief(TopBeliefs belief) {
         mUserName.setText(String.format("@%s", belief.getCommentedUserName().replace(" ", "").toLowerCase()));
         mOpinionTextView.setText(Html.fromHtml(StringEscapeUtils.unescapeJava(belief.getComment())));//.trim()));
+
+        if (belief.getLongForm() == null) {
+            expandableTextView.setVisibility(View.GONE);
+            mOpinionTextView.setVisibility(View.VISIBLE);
+             mOpinionTextView.setText(Html.fromHtml(StringEscapeUtils.unescapeJava(belief.getComment())));//.trim()));
+        } else {
+            Log.d("HOMEQUESTION=",belief.getLongForm());
+            expandableTextView.setVisibility(View.VISIBLE);
+            mOpinionTextView.setVisibility(View.VISIBLE);
+            mOpinionTextView.setText(Html.fromHtml(StringEscapeUtils.unescapeJava(belief.getComment())));//.trim()));
+            expandableTextView.setText(Html.fromHtml(StringEscapeUtils.unescapeJava(belief.getLongForm())));//.trim()));
+        }
+
         //mUpvotesView.setText(Utils.format(belief.getLikesCount()));
         //mDownvotesView.setText(Utils.format(belief.getDislikesCount()));
         //String imageURL1 = belief.getUserImage();

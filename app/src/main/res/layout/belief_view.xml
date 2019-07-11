@@ -18,20 +18,12 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-        <!--<ExpandableListView-->
-            <!--android:id="@+id/belief_view_opinion_tv"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="@dimen/_2sdp"-->
-            <!--android:ellipsize="end"-->
-            <!--android:fontFamily="@font/renner"-->
-            <!--android:textColor="@color/grey"-->
-            <!--android:textSize="@dimen/_12sdp" />-->
 
-
-        <com.opozeeApp.ExpandableTextView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <TextView
             android:id="@+id/belief_view_opinion_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,8 +31,20 @@
             android:ellipsize="end"
             android:fontFamily="@font/renner"
             android:textColor="@color/grey"
+            android:textSize="@dimen/_12sdp" />
+
+
+        <com.opozeeApp.ExpandableTextView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/belief_view_opinion_tv_expand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/renner"
+            android:textColor="@color/grey"
             android:textSize="@dimen/_12sdp"
-            expandableTextView:maxCollapsedLines="3"
+            expandableTextView:maxCollapsedLines="0"
             expandableTextView:animDuration="200">
             <TextView
                 android:id="@id/expandable_text"
@@ -49,6 +53,7 @@
                 android:textSize="@dimen/_12sdp"
                 android:paddingRight="@dimen/_10sdp"
                 android:ellipsize="end"
+                android:text=""
                 android:fontFamily="@font/renner"
                 android:textColor="@color/grey" />
             <ImageButton
@@ -60,7 +65,7 @@
                 android:background="@android:color/transparent"/>
         </com.opozeeApp.ExpandableTextView>
 
-
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -156,7 +161,7 @@
                 android:fontFamily="@font/renner"
                 android:gravity="center_vertical"
                 android:singleLine="true"
-                android:text="@"
+                android:text=""
                 android:textColor="@color/grey_light"
                 android:textSize="@dimen/_12sdp" />
         </LinearLayout>

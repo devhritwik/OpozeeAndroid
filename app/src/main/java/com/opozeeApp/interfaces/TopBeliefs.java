@@ -6,5 +6,6 @@ public interface TopBeliefs {
     Integer getDislikesCount();
     String getCommentedUserName();
     String getUserImage();
+    String getLongForm();
 
 }

@@ -3,9 +3,12 @@ package com.opozeeApp.activities;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.text.emoji.EmojiCompat;
+import android.support.text.emoji.FontRequestEmojiCompatConfig;
 import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -153,6 +156,19 @@ public class QuestionDetailActivity extends com.opozeeApp.newemojilikegif.Activi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_detail);
 
+
+//        EmojiCompat.Config config = new FontRequestEmojiCompatConfig(QuestionDetailActivity.this,null)
+//        .setReplaceAll(true)
+//                .setEmojiSpanIndicatorEnabled(true)
+//                .setEmojiSpanIndicatorColor(Color.GREEN)
+//                .registerInitCallback(new EmojiCompat.InitCallback() {
+//                    @Override
+//                    public void onInitialized() {
+//                        super.onInitialized();
+//                    }
+//                });
+
+
         rl_questions = findViewById(R.id.rl_questions);
         view_reaction = findViewById(R.id.view_reaction);
         linear = findViewById(R.id.linear);
@@ -214,6 +230,7 @@ public class QuestionDetailActivity extends com.opozeeApp.newemojilikegif.Activi
                     getProfile();
                 }
             }
+
 
 
             //setupYesNoButtonMode();

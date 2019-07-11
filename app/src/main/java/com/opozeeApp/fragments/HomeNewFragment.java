@@ -181,7 +181,7 @@ public class HomeNewFragment extends Fragment {
                                     }
 
                                 }
-                            }, 3000);
+                            }, 1000);
 
 
 //                            getTagsAdapter = new GetTagsAdapter(getActivity(), getTagsModelist);

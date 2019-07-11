@@ -54,19 +54,7 @@
         android:padding="10dp">
 
 
-        <!--<com.opozeeApp.ExpandableTextView-->
-            <!--android:id="@+id/tv_belief_text"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="2dp"-->
-            <!--android:fontFamily="@font/renner"-->
-            <!--android:text="Is Todzcdaffdscfdsfs fsy's Climate good?"-->
-            <!--android:textColor="@color/grey"-->
-            <!--android:textSize="@dimen/_12sdp" />-->
-
-        <com.opozeeApp.ExpandableTextView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+        <TextView
             android:id="@+id/tv_belief_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,8 +62,21 @@
             android:fontFamily="@font/renner"
             android:text="Is Todzcdaffdscfdsfs fsy's Climate good?"
             android:textColor="@color/grey"
+            android:textSize="@dimen/_12sdp" />
+
+        <com.opozeeApp.ExpandableTextView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/tv_belief_text_expand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/renner"
+            android:text="Is Todzcdaffdscfdsfs fsy's Climate good?"
+            android:textColor="@color/grey"
             android:textSize="@dimen/_12sdp"
-            expandableTextView:maxCollapsedLines="3"
+            android:visibility="gone"
+            expandableTextView:maxCollapsedLines="0"
             expandableTextView:animDuration="200">
             <TextView
                 android:id="@id/expandable_text"

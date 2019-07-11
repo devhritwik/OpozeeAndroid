@@ -94,8 +94,8 @@ public class EmojiConfig
 //        backgroundViewMarginBottom=dpToPx(0);
 //        emojiAnimationSpeed=0.2f;
         this.target = target;
-        touchDownDelay=0;
-        touchUpDelay=0;
+        touchDownDelay=30;
+        touchUpDelay=30;
         backgroundImageResource =0;
         selectedEmojiHeight=dpToPx (85);
         selectedEmojiWeight=3;

@@ -12,9 +12,19 @@ public class Belief {
     private String UserImage;
     private int LikesCount;
     private int DislikesCount;
+
+    public String getLongForm() {
+        return LongForm;
+    }
+
+    public void setLongForm(String longForm) {
+        LongForm = longForm;
+    }
+
     private String CreationDate;
     private boolean IsAgree;
     private String questionText;
+    private String LongForm;
 
 
     public int getId() {
